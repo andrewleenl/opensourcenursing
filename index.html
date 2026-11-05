@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F3A3D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OpenNursing">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>OpenSourceNursing.ca — Canadian Open Nursing Textbooks, Lecture PowerPoints &amp; Clinical Tools</title>
 <style>
 /* ==========================================================================
@@ -733,6 +740,9 @@ table.booktabs tbody tr:hover {
         <span class="sub">Canadian Open Educational Resources for Nursing Education &bull; CC BY-NC-SA 4.0</span>
       </div>
     </button>
+    <div class="main-nav">
+      <button type="button" class="btn outline sm" id="pwaInstallBtn" hidden>&#11015; Install App</button>
+    </div>
   </div>
 </header>
 
@@ -1251,6 +1261,36 @@ table.booktabs tbody tr:hover {
   }
   window.addEventListener('hashchange', syncFromHash);
   syncFromHash();
+})();
+</script>
+<script>
+(function () {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    });
+  }
+  var deferredPrompt = null;
+  var installBtn = document.getElementById('pwaInstallBtn');
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.hidden = false;
+  });
+  if (installBtn) {
+    installBtn.addEventListener('click', function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
+    });
+  }
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    if (installBtn) installBtn.hidden = true;
+  });
 })();
 </script>
 </body>

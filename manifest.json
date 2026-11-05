@@ -1,0 +1,54 @@
+{
+  "name": "OpenSourceNursing.ca — Canadian Open Nursing OER & EHR Simulator",
+  "short_name": "OpenNursing",
+  "description": "Canadian Open Nursing Textbooks, 36 Lecture PowerPoints, SI Lab Reference, and Interactive Clinical EHR Simulator.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F8F7",
+  "theme_color": "#1F3A3D",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Launch EHR Simulator",
+      "short_name": "EHR Sim",
+      "description": "Open the 24-scenario Canadian clinical EHR & eMAR simulator",
+      "url": "./ehrsim.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "All 36 Chapters & PowerPoints",
+      "short_name": "Chapters",
+      "description": "Browse Medical-Surgical Nursing chapters and slide decks",
+      "url": "./index.html#medsurg",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Canadian SI Lab Reference",
+      "short_name": "SI Labs",
+      "description": "Adult Canadian SI Reference Laboratory Intervals",
+      "url": "./index.html#labs",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

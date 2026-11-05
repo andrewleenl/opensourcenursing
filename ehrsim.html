@@ -1,4 +1,10 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light dark}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style><title>EHR Simulator · Open Resource Nursing</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F3A3D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OpenNursing">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png"><style>:root{color-scheme:light dark}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style><title>EHR Simulator · Open Resource Nursing</title>
 <meta name="description" content="A free, open EHR simulator for nursing students: self-guided clinical scenarios with fictional patients, goals of care designations and a clinical judgment debrief.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,6 +357,7 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
   <button class="barbtn hot" id="refreshBtn" type="button" data-act="refresh" hidden>New updates — refresh</button>
   <button class="barbtn inshift" id="pauseBtn" type="button" data-act="pauseToggle" hidden>Pause</button>
   <button class="barbtn inshift" type="button" data-act="skipAhead" hidden title="Jump to the next scheduled event">Skip ahead</button>
+  <button class="barbtn" id="pwaInstallBtn" type="button" hidden title="Install as an offline app">&#11015; Install app</button>
 </div></header>
 <div id="noticeBar" aria-live="polite"></div>
 <main id="app"></main>
@@ -5183,7 +5190,37 @@ const ACT = {
   printReport() { L(null, 'report', 'Printed / saved shift report'); try { window.print(); } catch (e) { toast('Printing is not available here — use Download report.'); } },
   async downloadReport() {
     const name = `Shift report - ${S.student.replace(/[^\w\s-]/g, '')} - ${new Date(S.started).toISOString().slice(0, 10)}.html`;
-    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shift report — ${esc(S.student)}</title><style>body{margin:0;padding:24px;background:#F7F8F7}@media print{body{background:#fff;padding:0}.rp{border:0;padding:0;max-width:none}}${REPORT_CSS}</style></head><body>${reportHTML()}</body></html>`;
+    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shift report — ${esc(S.student)}</title><style>body{margin:0;padding:24px;background:#F7F8F7}@media print{body{background:#fff;padding:0}.rp{border:0;padding:0;max-width:none}}${REPORT_CSS}</style></head><body>${reportHTML()}<script>
+(function () {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    });
+  }
+  var deferredPrompt = null;
+  var installBtn = document.getElementById('pwaInstallBtn');
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.hidden = false;
+  });
+  if (installBtn) {
+    installBtn.addEventListener('click', function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
+    });
+  }
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    if (installBtn) installBtn.hidden = true;
+  });
+})();
+</script>
+</body></html>`;
     L(null, 'report', 'Downloaded shift report');
     try {
       const dl = inViewer() ? await window.claude.use('downloads') : null;
@@ -5305,4 +5342,34 @@ render(); setInterval(tick, 1000);
 
 </script>
 
+<script>
+(function () {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    });
+  }
+  var deferredPrompt = null;
+  var installBtn = document.getElementById('pwaInstallBtn');
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.hidden = false;
+  });
+  if (installBtn) {
+    installBtn.addEventListener('click', function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
+    });
+  }
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    if (installBtn) installBtn.hidden = true;
+  });
+})();
+</script>
 </body></html>

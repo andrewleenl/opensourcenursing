@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="68" fill="#1F3A3D"/>
+  <rect y="476" width="512" height="36" fill="#C75B39"/>
+  <text x="256" y="325" text-anchor="middle" font-family="Cambria, Georgia, serif" font-weight="700" font-size="230" fill="#FFFFFF">ON</text>
+</svg>
