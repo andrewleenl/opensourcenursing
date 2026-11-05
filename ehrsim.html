@@ -5321,21 +5321,48 @@ render(); setInterval(tick, 1000);
   }
   var deferredPrompt = null;
   var installBtn = document.getElementById('pwaInstallBtn');
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                     window.navigator.standalone === true;
+
+  if (isIOS && !isStandalone && installBtn) {
+    installBtn.hidden = false;
+  }
+
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferredPrompt = e;
-    if (installBtn) installBtn.hidden = false;
+    if (installBtn && !isStandalone) installBtn.hidden = false;
   });
+
   if (installBtn) {
     installBtn.addEventListener('click', function () {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function () {
-        deferredPrompt = null;
-        installBtn.hidden = true;
-      });
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () {
+          deferredPrompt = null;
+          installBtn.hidden = true;
+        });
+      } else if (isIOS) {
+        if (typeof modal === 'function') {
+          modal(
+            'Install on iPhone or iPad',
+            '<div style="font-size:14.5px;line-height:1.6">' +
+  '<p style="margin:0 0 12px">Apple iOS and iPadOS require manual installation from your browser toolbar:</p>' +
+  '<ol style="margin:0 0 14px;padding-left:22px">' +
+    '<li style="margin-bottom:8px">Tap the <strong>Share</strong> button <span style="display:inline-block;padding:1px 6px;border:1px solid #CBD6D2;border-radius:4px;font-family:monospace">&#9113;</span> (the square with an upward arrow) at the bottom of Safari on iPhone or top-right on iPad.</li>' +
+    '<li style="margin-bottom:8px">Scroll down the share menu and tap <strong>Add to Home Screen</strong>.</li>' +
+    '<li>Tap <strong>Add</strong> in the top-right corner to install <strong>OpenNursing</strong> as a full-screen offline app.</li>' +
+  '</ol>' +
+'</div>',
+            '<button class="btn" type="button" data-act="closeModal">Got it</button>'
+          );
+        }
+      }
     });
   }
+
   window.addEventListener('appinstalled', function () {
     deferredPrompt = null;
     if (installBtn) installBtn.hidden = true;
