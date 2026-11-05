@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en-CA" data-style="clinical">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenSourceNursing.ca — Canadian Open Nursing Textbooks, Lecture PowerPoints &amp; Clinical Tools</title>
+<style>
+/* ==========================================================================
+   OPENSOURCENURSING.CA — OPTION 2: MODERN CLINICAL SLATE & SAGE (PNUR2027)
+   ========================================================================== */
+:root {
+  --bg: #F7F8F7;
+  --surface: #FFFFFF;
+  --surface-alt: #EDF1EE;
+  --hero-bg: #1F3A3D;
+  --hero-ink: #FFFFFF;
+  --hero-sub: #D7E4E4;
+  --hero-border: #C75B39;
+  --ink: #1C2B2D;
+  --muted: #526568;
+  --line: #CBD6D2;
+  --line-strong: #4A7C7E;
+  --primary: #1F3A3D;
+  --primary-soft: #E3ECE9;
+  --accent: #C75B39;
+  --accent-soft: #FBF0EC;
+  --badge-active-bg: #2E6F40;
+  --badge-active-ink: #FFFFFF;
+  --badge-future-bg: #E3ECE9;
+  --badge-future-ink: #1F3A3D;
+  --card-radius: 8px;
+  --btn-radius: 6px;
+  --card-top-border: 4px solid #4A7C7E;
+  --stmt-border-top: 5px solid #C75B39;
+  --stmt-bg: #FFFFFF;
+  --font-display: Cambria, Georgia, "Times New Roman", serif;
+  --font-serif: Cambria, Georgia, serif;
+  --font-sans: Calibri, "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --shadow: 0 4px 16px rgba(31, 58, 61, 0.07);
+  --shadow-hover: 0 10px 28px rgba(31, 58, 61, 0.13);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+/* Site Header & Primary Navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: var(--surface);
+  border-bottom: 2.5px solid var(--line-strong);
+  box-shadow: 0 2px 12px rgba(31, 58, 61, 0.06);
+}
+.site-header-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+}
+.brand-crest {
+  width: 46px;
+  height: 46px;
+  background: var(--primary);
+  color: var(--surface);
+  border-radius: var(--btn-radius);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 3px solid var(--accent);
+  flex-shrink: 0;
+}
+.brand-titles .domain {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  display: block;
+  line-height: 1.15;
+}
+.brand-titles .sub {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  display: block;
+}
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.nav-tab {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid transparent;
+  padding: 8px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: all 0.14s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-tab:hover {
+  background: var(--surface-alt);
+  border-color: var(--line);
+}
+.nav-tab[aria-selected="true"] {
+  background: var(--primary);
+  color: var(--surface);
+  border-color: var(--primary);
+}
+.nav-tab .pill-count {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+/* Main Container */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+}
+
+/* Hero Banner (Clinical Slate & Sage) */
+.hero-banner {
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--hero-border);
+  border-radius: var(--card-radius);
+  padding: 34px 38px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .hero-banner {
+    grid-template-columns: 1fr;
+    padding: 26px 22px;
+  }
+}
+.hero-eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F4A287;
+  margin: 0 0 10px;
+  display: inline-block;
+}
+.hero-banner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.16;
+  margin: 0 0 14px;
+  color: var(--hero-ink);
+  letter-spacing: -0.015em;
+}
+.hero-lead {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--hero-sub);
+  margin: 0 0 18px;
+  max-width: 88ch;
+}
+.hero-byline {
+  font-size: 14px;
+  color: var(--hero-sub);
+  margin-bottom: 22px;
+  padding-left: 12px;
+  border-left: 3px solid var(--accent);
+}
+.hero-byline strong {
+  color: var(--hero-ink);
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  border: 1.5px solid var(--primary);
+  background: var(--primary);
+  color: var(--surface);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+.btn.accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+.btn.accent:hover {
+  opacity: 0.92;
+}
+.btn.outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.hero-banner .btn.outline {
+  color: #FFFFFF;
+  border-color: #89B4B6;
+}
+.hero-banner .btn.outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+.btn.outline:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.btn.sm {
+  padding: 7px 12px;
+  font-size: 12.5px;
+}
+
+/* Right-side Hero Telemetry Card */
+.hero-telemetry {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #C75B39;
+  color: #FFFFFF;
+  border-radius: var(--card-radius);
+  padding: 22px 24px;
+}
+.telemetry-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F4A287;
+  margin: 0 0 12px;
+}
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.t-stat {
+  background: rgba(15, 29, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 12px 14px;
+  border-radius: var(--btn-radius);
+}
+.t-stat b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 25px;
+  line-height: 1.1;
+  color: #F4A287;
+  font-variant-numeric: tabular-nums;
+}
+.t-stat span {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #D7E4E4;
+  display: block;
+  margin-top: 3px;
+}
+.telemetry-foot {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: #D7E4E4;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Two-Column Homepage Architecture: Open Statement + Projects Hub */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 28px;
+  align-items: start;
+  margin-bottom: 38px;
+}
+@media (max-width: 1024px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Open Education Statement Panel */
+.statement-card {
+  background: var(--stmt-bg);
+  border: 1px solid var(--line);
+  border-top: var(--stmt-border-top);
+  border-radius: var(--card-radius);
+  padding: 28px 30px;
+  box-shadow: var(--shadow);
+}
+.stmt-header {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.stmt-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 4px;
+}
+.stmt-title {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.5vw, 26px);
+  color: var(--primary);
+  margin: 0;
+  line-height: 1.24;
+}
+.stmt-prose p {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.stmt-signoff {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.stmt-author {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.stmt-author span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.stmt-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--btn-radius);
+}
+.badge.active {
+  background: var(--badge-active-bg);
+  color: var(--badge-active-ink);
+}
+.badge.future {
+  background: var(--badge-future-bg);
+  color: var(--badge-future-ink);
+  border: 1px solid var(--line);
+}
+.badge.pptx {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+/* Section Headers */
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--line-strong);
+}
+.sec-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: var(--primary);
+  margin: 0;
+}
+.sec-head p {
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* Projects Hub Cards */
+.projects-stack {
+  display: grid;
+  gap: 16px;
+}
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: var(--card-top-border);
+  border-radius: var(--card-radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.project-card.flagship {
+  border-top: 4px solid var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 95px);
+}
+.proj-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.proj-num {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 19.5px;
+  color: var(--primary);
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+.project-card p.desc {
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0 0 12px;
+  line-height: 1.52;
+}
+.proj-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.spec-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  background: var(--surface-alt);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--btn-radius);
+}
+.future-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 720px) {
+  .future-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Filter Toolbar */
+.filter-bar {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+  border-radius: var(--card-radius);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+.search-input-wrap {
+  flex: 1 1 280px;
+  position: relative;
+}
+.search-input-wrap input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--btn-radius);
+  background: var(--bg);
+  color: var(--ink);
+}
+.unit-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.unit-pill {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--surface-alt);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+}
+.unit-pill[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--surface);
+  border-color: var(--primary);
+}
+
+/* Compact Table for Book Chapters, 36 PowerPoints & SI Labs */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+table.booktabs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  border-top: 2.5px solid var(--primary);
+  border-bottom: 2.5px solid var(--primary);
+}
+table.booktabs th,
+table.booktabs td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+table.booktabs thead th {
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 1.5px solid var(--primary);
+  background: var(--surface-alt);
+}
+table.booktabs tbody tr:hover {
+  background: var(--surface-alt);
+}
+
+.ch-btn {
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  transition: all 0.12s ease;
+}
+.ch-btn:hover {
+  background: var(--primary);
+  color: var(--surface);
+}
+.ch-btn.pptx-dl {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+.ch-btn.pptx-dl:hover {
+  opacity: 0.9;
+  color: #FFFFFF;
+}
+
+/* Modal Dialog */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 20, 24, 0.72);
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal-backdrop[hidden] {
+  display: none;
+}
+.modal-card {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--card-radius);
+  max-width: 720px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 26px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+.modal-top h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--primary);
+  margin: 4px 0 0;
+}
+.close-btn {
+  background: var(--surface-alt);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: var(--btn-radius);
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 250;
+  background: #101D21;
+  color: #FFFFFF;
+  border-left: 4px solid #C75B39;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  max-width: 420px;
+}
+.toast[hidden] { display: none; }
+
+/* Footer */
+.site-footer {
+  background: var(--surface);
+  border-top: 2px solid var(--line-strong);
+  padding: 28px 20px;
+  margin-top: 48px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.site-footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <button type="button" class="brand-block" id="brandHomeBtn">
+      <div class="brand-crest">ON</div>
+      <div class="brand-titles">
+        <span class="domain">OpenSourceNursing.ca</span>
+        <span class="sub">Canadian Open Educational Resources for Nursing Education &bull; CC BY-NC-SA 4.0</span>
+      </div>
+    </button>
+  </div>
+</header>
+
+<!-- MAIN DYNAMIC VIEW CONTAINER -->
+<main class="container" id="mainContainer"></main>
+
+<!-- INTERACTIVE PREVIEW MODAL (Project Roadmaps, Sample Drills, Chapter & PPTX Inspector) -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <div>
+        <span class="stmt-kicker" id="modalKicker">PROJECT PREVIEW</span>
+        <h3 id="modalTitle">Project Overview</h3>
+      </div>
+      <button type="button" class="close-btn" id="modalCloseBtn">&#10005; Close</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST FEEDBACK -->
+<div class="toast" id="toastBox" hidden></div>
+
+<!-- SITE FOOTER -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>
+      <strong style="color:var(--primary)">OpenSourceNursing.ca</strong> &mdash; Authored &amp; Maintained by <strong>Andrew Lee, BEd, BN, MN, RN, CCN(C)</strong> &bull; Open Source Nursing.<br>
+      All textbooks, lecture presentations, and clinical tools are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:var(--accent)">Creative Commons CC BY-NC-SA 4.0</a> &bull; AODA &amp; WCAG 2.1 Level AA Accessible.
+    </div>
+    <div>
+      Contact &amp; Errata: <a href="mailto:andrew@opensourcenursing.ca" style="color:var(--primary);font-weight:700">andrew@opensourcenursing.ca</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var CH_DATA = [{"n": 1, "unit": "I", "title": "Medical-Surgical Nursing in Canada", "file": "Ch01_MedSurg_Nursing_in_Canada.html", "figs": 11, "tables": 6, "qs": 30, "terms": 60, "topics": "CNO RPN/RN scope (authority, competence, context), Health Canada, patient safety, ISMP Canada, SBAR, clinical judgment", "pptx": "Ch01_Medical_Surgical_Nursing_in_Canada_Lecture_Presentation.pptx", "slides": 35, "pptxSize": "4.7 MB"}, {"n": 2, "unit": "I", "title": "Equity, Cultural Safety and Indigenous Health in Adult Care", "file": "Ch02_Equity_Cultural_Safety_Indigenous_Health.html", "figs": 3, "tables": 5, "qs": 30, "terms": 58, "topics": "TRC Calls to Action 18\u201324, Joyce's Principle, Two-Eyed Seeing, trauma- and violence-informed care", "pptx": "Ch02_Equity_Cultural_Safety_Indigenous_Health_Lecture_Presentation.pptx", "slides": 35, "pptxSize": "1.3 MB"}, {"n": 3, "unit": "I", "title": "Fluids, Electrolytes and Acid\u2013Base Balance", "file": "Ch03_Fluids_Electrolytes_Acid_Base.html", "figs": 6, "tables": 4, "qs": 30, "terms": 63, "topics": "Osmolality, hyponatremia, hyperkalemia ECG changes, ABG interpretation, IV crystalloids", "pptx": "Ch03_Fluids_Electrolytes_and_Acid_Base_Balance_Lecture_Presentation.pptx", "slides": 32, "pptxSize": "2.0 MB"}, {"n": 4, "unit": "I", "title": "Inflammation, Infection and Sepsis", "file": "Ch04_Inflammation_Infection_Sepsis.html", "figs": 4, "tables": 4, "qs": 30, "terms": 51, "topics": "Chain of infection, IPAC routine practices, Sepsis-3, Hour-1 bundle, lactate (mmol/L)", "pptx": "Ch04_Inflammation_Infection_and_Sepsis_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "1.7 MB"}, {"n": 5, "unit": "I", "title": "Pain", "file": "Ch05_Pain.html", "figs": 2, "tables": 4, "qs": 30, "terms": 61, "topics": "Nociceptive vs neuropathic pain, OPQRSTUV, multimodal analgesia, opioid safety & POSS", "pptx": "Ch05_Pain_Assessment_and_Management_Lecture_Presentation.pptx", "slides": 25, "pptxSize": "1.7 MB"}, {"n": 6, "unit": "I", "title": "Recognizing Deterioration and Shock", "file": "Ch06_Deterioration_and_Shock.html", "figs": 4, "tables": 4, "qs": 30, "terms": 41, "topics": "NEWS2 early warning, hypovolemic, cardiogenic, septic, anaphylactic & neurogenic shock", "pptx": "Ch06_Recognizing_Deterioration_and_Shock_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "1.6 MB"}, {"n": 7, "unit": "II", "title": "Perioperative Nursing", "file": "Ch07_Perioperative_Nursing.html", "figs": 4, "tables": 4, "qs": 30, "terms": 50, "topics": "Preoperative screening, Surgical Safety Checklist, malignant hyperthermia, PACU Aldrete score", "pptx": "Ch07_Perioperative_Nursing_Lecture_Presentation.pptx", "slides": 30, "pptxSize": "1.7 MB"}, {"n": 8, "unit": "II", "title": "Older Adults in Acute Care", "file": "Ch08_Older_Adults_in_Acute_Care.html", "figs": 3, "tables": 4, "qs": 30, "terms": 43, "topics": "SPICES framework, 3 Ds (delirium, dementia, depression), CAM tool, Beers Criteria, falls", "pptx": "Ch08_Older_Adults_in_Acute_Care_Lecture_Presentation.pptx", "slides": 30, "pptxSize": "1.1 MB"}, {"n": 9, "unit": "II", "title": "Cancer Care", "file": "Ch09_Cancer_Care.html", "figs": 6, "tables": 3, "qs": 30, "terms": 59, "topics": "TNM staging, chemotherapy extravasation, febrile neutropenia (ANC < 0.5 \u00d7 10\u2079/L), TLS, SVC syndrome", "pptx": "Ch09_Cancer_Care_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "1.6 MB"}, {"n": 10, "unit": "II", "title": "Palliative and End-of-Life Care", "file": "Ch10_Palliative_and_End-of-Life_Care.html", "figs": 0, "tables": 3, "qs": 30, "terms": 50, "topics": "ESAS-r symptom assessment, palliative dyspnea & pain, MAID in Canada (CNO role), grief", "pptx": "Ch10_Palliative_and_End_of_Life_Care_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "137 KB"}, {"n": 11, "unit": "II", "title": "Substance Use in Acute Care", "file": "Ch11_Substance_Use_in_Acute_Care.html", "figs": 4, "tables": 3, "qs": 30, "terms": 43, "topics": "CIWA-Ar alcohol withdrawal, Wernicke encephalopathy (thiamine before glucose), COWS, naloxone", "pptx": "Ch11_Substance_Use_in_Acute_Care_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "0.9 MB"}, {"n": 12, "unit": "III", "title": "Respiratory Assessment and Oxygen Therapy", "file": "Ch12_Respiratory_Assessment_and_Oxygen_Therapy.html", "figs": 10, "tables": 4, "qs": 35, "terms": 80, "topics": "Auscultation, SpO2 targets, nasal cannula to HFNC/BiPAP, chest tube 3-chamber drainage", "pptx": "Ch12_Respiratory_Assessment_and_Oxygen_Therapy_Lecture_Presentation.pptx", "slides": 38, "pptxSize": "5.6 MB"}, {"n": 13, "unit": "III", "title": "Lower Respiratory Infections and Lung Cancer", "file": "Ch13_Lower_Respiratory_Infections_and_Lung_Cancer.html", "figs": 7, "tables": 4, "qs": 35, "terms": 52, "topics": "CAP (CURB-65), HAP/VAP, pulmonary tuberculosis airborne isolation & RIPE therapy, lung cancer", "pptx": "Ch13_Lower_Respiratory_Infections_and_Lung_Cancer_Lecture_Presentation.pptx", "slides": 31, "pptxSize": "4.7 MB"}, {"n": 14, "unit": "III", "title": "Obstructive and Restrictive Lung Disease", "file": "Ch14_Obstructive_and_Restrictive_Lung_Disease.html", "figs": 7, "tables": 4, "qs": 35, "terms": 70, "topics": "CTS asthma & COPD guidelines, silent chest, SpO2 88\u201392% in hypercapnic COPD, inhaler technique", "pptx": "Ch14_Obstructive_and_Restrictive_Lung_Disease_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "3.4 MB"}, {"n": 15, "unit": "III", "title": "Acute Respiratory Failure and Pulmonary Embolism", "file": "Ch15_Acute_Respiratory_Failure_and_Pulmonary_Embolism.html", "figs": 6, "tables": 4, "qs": 35, "terms": 83, "topics": "Type I vs II respiratory failure, ARDS prone positioning, Wells score, CTPA, heparin & DOACs", "pptx": "Ch15_Acute_Respiratory_Failure_and_Pulmonary_Embolism_Lecture_Presentation.pptx", "slides": 23, "pptxSize": "2.7 MB"}, {"n": 16, "unit": "IV", "title": "Cardiac Assessment and Dysrhythmias", "file": "Ch16_Cardiac_Assessment_and_Dysrhythmias.html", "figs": 22, "tables": 4, "qs": 40, "terms": 76, "topics": "6-step ECG analysis, atrial fibrillation (CHADS65), VT/VF defibrillation, heart blocks, pacemakers", "pptx": "Ch16_Cardiac_Assessment_and_Dysrhythmias_Lecture_Presentation.pptx", "slides": 34, "pptxSize": "14.7 MB"}, {"n": 17, "unit": "IV", "title": "Coronary Artery Disease and Acute Coronary Syndromes", "file": "Ch17_Coronary_Artery_Disease_and_Acute_Coronary_Syndromes.html", "figs": 5, "tables": 4, "qs": 40, "terms": 62, "topics": "Stable angina vs NSTE-ACS vs STEMI, high-sensitivity troponin, PCI radial/femoral care, CABG", "pptx": "Ch17_Coronary_Artery_Disease_and_Acute_Coronary_Syndromes_Lecture_Presentation.pptx", "slides": 32, "pptxSize": "3.3 MB"}, {"n": 18, "unit": "IV", "title": "Heart Failure, Valvular and Inflammatory Heart Disease", "file": "Ch18_Heart_Failure_Valvular_and_Inflammatory_Heart_Disease.html", "figs": 10, "tables": 4, "qs": 40, "terms": 70, "topics": "HFrEF quadruple therapy (CCS), acute pulmonary edema, endocarditis, pericarditis & tamponade (Beck's triad)", "pptx": "Ch18_Heart_Failure_Valvular_and_Inflammatory_Heart_Disease_Lecture_Presentation.pptx", "slides": 32, "pptxSize": "8.2 MB"}, {"n": 19, "unit": "IV", "title": "Hypertension and Vascular Disorders", "file": "Ch19_Hypertension_and_Vascular_Disorders.html", "figs": 8, "tables": 4, "qs": 40, "terms": 58, "topics": "Hypertension Canada guidelines, hypertensive emergencies, aortic dissection, AAA, PAD (6 Ps) vs CVI", "pptx": "Ch19_Hypertension_and_Vascular_Disorders_Lecture_Presentation.pptx", "slides": 30, "pptxSize": "3.1 MB"}, {"n": 20, "unit": "V", "title": "Hematologic Disorders and Transfusion", "file": "Ch20_Hematologic_Disorders_and_Transfusion.html", "figs": 8, "tables": 4, "qs": 40, "terms": 67, "topics": "Iron/B12/folate anemia, sickle cell crisis, HIT, DIC, CBS blood administration & transfusion reactions", "pptx": "Ch20_Hematologic_Disorders_and_Transfusion_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "3.2 MB"}, {"n": 21, "unit": "V", "title": "Immunity, Allergy and HIV", "file": "Ch21_Immunity_Allergy_and_HIV.html", "figs": 7, "tables": 4, "qs": 40, "terms": 58, "topics": "Hypersensitivity types I\u2013IV, anaphylaxis IM epinephrine (0.3\u20130.5 mg anterolateral thigh), HIV U=U, ART", "pptx": "Ch21_Immunity_Allergy_and_HIV_Lecture_Presentation.pptx", "slides": 30, "pptxSize": "4.1 MB"}, {"n": 22, "unit": "V", "title": "Diabetes", "file": "Ch22_Diabetes.html", "figs": 6, "tables": 4, "qs": 40, "terms": 55, "topics": "Diabetes Canada SI diagnostic cutoffs, insulins, Rule of 15 (BG < 4.0 mmol/L), DKA vs HHS & K+ safety", "pptx": "Ch22_Diabetes_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "2.0 MB"}, {"n": 23, "unit": "V", "title": "Thyroid, Parathyroid, Adrenal and Pituitary Disorders", "file": "Ch23_Thyroid_Parathyroid_Adrenal_and_Pituitary_Disorders.html", "figs": 5, "tables": 3, "qs": 40, "terms": 67, "topics": "Thyroid storm vs myxedema coma, hypocalcemia post-thyroidectomy, Addisonian crisis vs Cushing, SIADH vs DI", "pptx": "Ch23_Thyroid_Parathyroid_Adrenal_and_Pituitary_Disorders_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "3.0 MB"}, {"n": 24, "unit": "VI", "title": "Upper Gastrointestinal Disorders and Nutrition", "file": "Ch24_Upper_Gastrointestinal_Disorders_and_Nutrition.html", "figs": 6, "tables": 4, "qs": 40, "terms": 60, "topics": "Dysphagia, GERD, PUD & H. pylori, acute UGIB & Rockall/Blatchford, enteral NG/PEG vs TPN & refeeding syndrome", "pptx": "Ch24_Upper_Gastrointestinal_Disorders_and_Nutrition_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "2.8 MB"}, {"n": 25, "unit": "VI", "title": "Lower Gastrointestinal Disorders", "file": "Ch25_Lower_Gastrointestinal_Disorders.html", "figs": 6, "tables": 4, "qs": 40, "terms": 68, "topics": "Appendicitis, peritonitis, bowel obstruction, Crohn's vs ulcerative colitis, diverticulitis, ostomy care", "pptx": "Ch25_Lower_Gastrointestinal_Disorders_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "3.9 MB"}, {"n": 26, "unit": "VI", "title": "Liver, Biliary and Pancreatic Disorders", "file": "Ch26_Liver_Biliary_and_Pancreatic_Disorders.html", "figs": 9, "tables": 4, "qs": 40, "terms": 60, "topics": "Viral hepatitis, cirrhosis, portal HTN, esophageal varices (octreotide), hepatic encephalopathy (lactulose), pancreatitis", "pptx": "Ch26_Liver_Biliary_and_Pancreatic_Disorders_Lecture_Presentation.pptx", "slides": 31, "pptxSize": "6.2 MB"}, {"n": 27, "unit": "VII", "title": "Acute Kidney Injury and Chronic Kidney Disease", "file": "Ch27_Acute_Kidney_Injury_and_Chronic_Kidney_Disease.html", "figs": 6, "tables": 3, "qs": 40, "terms": 49, "topics": "KDIGO AKI stages, prerenal/intrarenal/postrenal, CKD G1\u2013G5, AV fistula thrill/bruit, HD vs PD peritonitis", "pptx": "Ch27_Acute_Kidney_Injury_and_Chronic_Kidney_Disease_Lecture_Presentation.pptx", "slides": 28, "pptxSize": "3.9 MB"}, {"n": 28, "unit": "VII", "title": "Urinary Tract and Prostate Disorders", "file": "Ch28_Urinary_Tract_and_Prostate_Disorders.html", "figs": 5, "tables": 4, "qs": 40, "terms": 73, "topics": "Lower UTI vs pyelonephritis, CAUTI prevention, urolithiasis, BPH, TURP continuous bladder irrigation (CBI)", "pptx": "Ch28_Urinary_Tract_and_Prostate_Disorders_Lecture_Presentation.pptx", "slides": 27, "pptxSize": "2.0 MB"}, {"n": 29, "unit": "VII", "title": "Reproductive and Breast Health in Adult Care", "file": "Ch29_Reproductive_and_Breast_Health_in_Adult_Care.html", "figs": 6, "tables": 3, "qs": 40, "terms": 54, "topics": "Gender-affirming care, breast cancer & mastectomy lymphedema precautions, PID, testicular torsion (6-h window)", "pptx": "Ch29_Reproductive_and_Breast_Health_in_Adult_Care_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "138 KB"}, {"n": 30, "unit": "VIII", "title": "Neurologic Assessment and Increased Intracranial Pressure", "file": "Ch30_Neurologic_Assessment_and_Increased_Intracranial_Pressure.html", "figs": 6, "tables": 4, "qs": 40, "terms": 50, "topics": "Glasgow Coma Scale (GCS), CPP = MAP \u2212 ICP, Cushing triad, mannitol & hypertonic saline, status epilepticus, meningitis", "pptx": "Ch30_Neurologic_Assessment_and_Increased_Intracranial_Pressure_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "130 KB"}, {"n": 31, "unit": "VIII", "title": "Stroke", "file": "Ch31_Stroke.html", "figs": 6, "tables": 4, "qs": 40, "terms": 48, "topics": "Canadian Stroke Best Practices, FAST, non-contrast CT, tenecteplase/alteplase (4.5 h) & EVT, dysphagia NPO screen", "pptx": "Ch31_Stroke_Lecture_Presentation.pptx", "slides": 25, "pptxSize": "126 KB"}, {"n": 32, "unit": "VIII", "title": "Traumatic Brain and Spinal Cord Injury and Chronic Neurologic Disorders", "file": "Ch32_Traumatic_Brain_and_Spinal_Cord_Injury_and_Chronic_Neurologic_Disorders.html", "figs": 6, "tables": 4, "qs": 40, "terms": 65, "topics": "Epidural vs subdural hematoma, neurogenic vs spinal shock, autonomic dysreflexia (T6+), MS, Parkinson's, MG", "pptx": "Ch32_Traumatic_Brain_and_Spinal_Cord_Injury_and_Chronic_Neurologic_Disorders_Lecture_Presentation.pptx", "slides": 24, "pptxSize": "126 KB"}, {"n": 33, "unit": "IX", "title": "Musculoskeletal Trauma and Orthopedic Surgery", "file": "Ch33_Musculoskeletal_Trauma_and_Orthopedic_Surgery.html", "figs": 9, "tables": 4, "qs": 40, "terms": 50, "topics": "6 Ps neurovascular check, acute compartment syndrome (bivalve cast), fat embolism, hip/knee arthroplasty & VTE", "pptx": "Ch33_Musculoskeletal_Trauma_and_Orthopedic_Surgery_Lecture_Presentation.pptx", "slides": 25, "pptxSize": "126 KB"}, {"n": 34, "unit": "IX", "title": "Arthritis and Connective Tissue Disorders", "file": "Ch34_Arthritis_and_Connective_Tissue_Disorders.html", "figs": 7, "tables": 4, "qs": 40, "terms": 54, "topics": "Osteoarthritis vs rheumatoid arthritis, methotrexate & biologic TB screening, SLE lupus nephritis, gout & urate (< 360 \u00b5mol/L)", "pptx": "Ch34_Arthritis_and_Connective_Tissue_Disorders_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "131 KB"}, {"n": 35, "unit": "IX", "title": "Skin, Wounds and Burns", "file": "Ch35_Skin_Wounds_and_Burns.html", "figs": 14, "tables": 4, "qs": 40, "terms": 72, "topics": "Braden Scale, NPIAP pressure injury stages 1\u20134, TIME wound bed, Rule of Nines, Parkland formula & inhalation injury", "pptx": "Ch35_Skin_Wounds_and_Burns_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "142 KB"}, {"n": 36, "unit": "IX", "title": "Eye and Ear Disorders", "file": "Ch36_Eye_and_Ear_Disorders.html", "figs": 12, "tables": 4, "qs": 40, "terms": 64, "topics": "POAG vs acute angle-closure glaucoma emergency, cataracts, retinal detachment, AMD, Meniere disease & sudden SNHL", "pptx": "Ch36_Eye_and_Ear_Disorders_Lecture_Presentation.pptx", "slides": 26, "pptxSize": "144 KB"}];
+
+  var UNITS = [
+    ["I", "Unit I", "Foundations of Canadian Medical-Surgical Practice", [1,2,3,4,5,6]],
+    ["II", "Unit II", "Cross-Cutting Clinical Priorities in Adult Care", [7,8,9,10,11]],
+    ["III", "Unit III", "Respiratory Nursing Care", [12,13,14,15]],
+    ["IV", "Unit IV", "Cardiovascular & Vascular Nursing Care", [16,17,18,19]],
+    ["V", "Unit V", "Hematologic, Immunologic & Endocrine Care", [20,21,22,23]],
+    ["VI", "Unit VI", "Gastrointestinal, Hepatic, Biliary & Pancreatic Care", [24,25,26]],
+    ["VII", "Unit VII", "Renal, Urologic & Reproductive Health Care", [27,28,29]],
+    ["VIII", "Unit VIII", "Neurologic & Cerebrovascular Nursing Care", [30,31,32]],
+    ["IX", "Unit IX", "Musculoskeletal, Integumentary & Sensory Care", [33,34,35,36]]
+  ];
+
+  var FUTURE_PROJECTS = {
+    ehr: {
+      kicker: "PROJECT 02 • INTERACTIVE CLINICAL SIMULATION PLATFORM",
+      title: "Open Clinical EHR Simulator",
+      status: "Published & Live",
+      summary: "A zero-cost, browser-based Canadian hospital Electronic Health Record (EHR) and electronic Medication Administration Record (eMAR) simulation environment built for nursing skills labs, OSCE stations, and classroom case studies.",
+      highlights: [
+        "Canadian SI Laboratory Flowsheets (mmol/L, µmol/L, g/L, × 10⁹/L) with critical panic-value flagging",
+        "Simulated Barcode Medication Administration (BCMA) with ISMP Canada high-alert independent double-check workflows (insulin, IV heparin, opioids, concentrated electrolytes)",
+        "Automated NEWS2 & Sepsis-3 Bedside Deterioration Scoring with SBAR escalation note templates",
+        "Pre-built Patient Chart Scenarios linked directly to the 36 chapters of Medical-Surgical Nursing: A Canadian Open Text",
+        "Instructor Case Builder: exportable JSON patient charts that run 100% in the browser with no student login or server required (PHIPA-safe)"
+      ],
+      demoHtml: '<div style="background:var(--surface-alt);border:1px solid var(--line);padding:14px;margin-top:12px;border-radius:4px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Live Component Mockup • Bedside eMAR &amp; Vitals Banner</div>' +
+        '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px">' +
+        '<span><strong>Patient:</strong> Tremblay, Marc (68M) &bull; MRN-40921</span>' +
+        '<span><strong>Dx:</strong> Acute Decompensated HFrEF / Atrial Fibrillation</span>' +
+        '<span style="color:var(--accent);font-weight:700">Allergies: Penicillin (Anaphylaxis)</span>' +
+        '</div>' +
+        '<div style="font-size:12.5px"><strong>Latest Labs (SI):</strong> K⁺ 3.2 mmol/L (LOW) &bull; Cr 148 µmol/L &bull; INR 2.4 &bull; BNP 1,420 pg/mL &bull; <strong>Scheduled 09:00 Meds:</strong> Furosemide 40 mg IV Push, Apixaban 5 mg PO</div>' +
+        '</div>'
+    },
+    skills: {
+      kicker: "FUTURE PROJECT 03 • OPEN TEXTBOOK & OSCE RUBRICS",
+      title: "Clinical Nursing Skills: A Canadian Open Text",
+      status: "Planned Open Textbook",
+      summary: "A comprehensive psychomotor clinical skills textbook and OSCE checklist repository aligned with Canadian provincial nursing regulators (CNO, BCCNM, CRNA, CLPNA) and entry-to-practice competencies.",
+      highlights: [
+        "Step-by-step procedural tables pairing each Nursing Action with its Physiological & Safety Rationale",
+        "Explicit CNO Controlled Acts & Authorizing Mechanisms boxes for RPN and RN learners in Ontario and across Canada",
+        "Core Units: IPAC & PPE, Head-to-Toe Physical Assessment, Sterile Technique & Complex Wound Care, Enteral Tubes, Urinary Catheterization, Peripheral & Central IV Therapy (PICC/CVC), Tracheostomy Care & Suctioning",
+        "Downloadable 1-Page Printable OSCE & Skills Lab Peer-Checklists (.pdf & .docx) for every procedure",
+        "Red-Flag Complications & Unexpected Outcomes decision trees at the end of every skill chapter"
+      ],
+      demoHtml: '<div style="background:var(--surface-alt);border:1px solid var(--line);padding:14px;margin-top:12px;border-radius:4px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Sample OSCE Skill Step • Sterile Tracheostomy Suctioning</div>' +
+        '<div style="font-size:13px"><strong>Step 4:</strong> Hyperoxygenate the patient for 30–60 seconds and limit each suction pass to <strong>&le; 10–15 seconds</strong> with continuous negative pressure (100–120 mm Hg) applied <em>only</em> during catheter withdrawal.<br><em>Rationale:</em> Prevents suction-induced hypoxemia, vagal bradycardia, and tracheal mucosal trauma.</div>' +
+        '</div>'
+    },
+    cardiac: {
+      kicker: "FUTURE PROJECT 04 • SPECIALTY OPEN TEXTBOOK",
+      title: "Cardiac & ECG Nursing: A Canadian Open Text",
+      status: "Planned Open Textbook",
+      summary: "An in-depth cardiovascular nursing and rhythm-strip interpretation textbook designed for undergraduate nursing students, telemetry nurses, and critical care transition programs across Canada.",
+      highlights: [
+        "Systematic 6-Step ECG Rhythm Analysis & 12-Lead Contiguous Lead Localization (Inferior II/III/aVF, Anterior V1–V4, Lateral I/aVL/V5–V6)",
+        "High-Resolution Vector ECG Strip Bank covering Sinus, Atrial, Junctional, Ventricular, and AV Conduction Blocks",
+        "Canadian Cardiovascular Society (CCS) Guidelines for Atrial Fibrillation (CHADS65), ACS/STEMI Reperfusion, and HFrEF Quadruple Therapy",
+        "Temporary & Permanent Pacemaker Troubleshooting (Failure to Capture, Failure to Sense, Oversensing) & ICD Nursing Care",
+        "Invasive Hemodynamic Monitoring Primer (Arterial Lines, CVP, Pulmonary Artery Catheters, and Vasoactive Titration)"
+      ],
+      demoHtml: '<div style="background:var(--surface-alt);border:1px solid var(--line);padding:14px;margin-top:12px;border-radius:4px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Sample Clinical Pearl • Contiguous 12-Lead STEMI Localization</div>' +
+        '<div style="font-size:13px"><strong>Inferior Wall STEMI (Leads II, III, aVF — Right Coronary Artery):</strong> Always obtain right-sided precordial leads (<strong>V4R</strong>) to screen for right ventricular infarction before administering sublingual nitroglycerin, as preload reduction can precipitate profound hypotension.</div>' +
+        '</div>'
+    },
+    math: {
+      kicker: "FUTURE PROJECT 05 • OPEN WORKBOOK & PRACTICE ENGINE",
+      title: "Clinical Math & Dosage Calculations for Nurses",
+      status: "Planned Open Textbook & Drill Bank",
+      summary: "A practical, anxiety-reducing clinical calculations textbook and interactive drill bank built exclusively around Canadian SI units, Health Canada drug labels, and ISMP Canada error-prevention standards.",
+      highlights: [
+        "Side-by-side Dimensional Analysis and Ratio-Proportion worked solutions for every calculation type",
+        "ISMP Canada 'Do Not Use' Abbreviations, Trailing Zero / Leading Zero rules (0.5 mg, never .5 mg or 5.0 mg), and Rounding Standards",
+        "Oral Tablets/Liquids, Parenteral Injections, and Powdered Vial Reconstitution using authentic Canadian DIN labels",
+        "Pediatric & Adult Weight-Based Safe Dose Verification (mg/kg/day and mg/kg/dose)",
+        "IV Flow Rates (mL/hr, gtt/min gravity drop factors), Heparin Protocols, and Critical Care Titration (mcg/kg/min, units/hr)"
+      ],
+      demoHtml: '<div style="background:var(--surface-alt);border:1px solid var(--line);padding:14px;margin-top:12px;border-radius:4px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Sample Worked Calculation • IV Heparin Infusion (Units/hr to mL/hr)</div>' +
+        '<div style="font-size:13px"><strong>Order:</strong> Infuse Heparin at <strong>1,200 units/hr</strong>. Pharmacy supplies premixed bag of <strong>25,000 units in 250 mL 0.45% NaCl</strong> (100 units/mL).<br><strong>Calculation:</strong> (1,200 units/hr) &divide; (100 units/mL) = <strong>12 mL/hr</strong> via smart infusion pump with independent RN double-check.</div>' +
+        '</div>'
+    }
+  };
+
+  var SI_LABS = [["Sodium (Na⁺)", "Serum / Plasma", "135–145 mmol/L", "< 120 or > 160 mmol/L", "Ch. 3, 27, 30"], ["Potassium (K⁺)", "Serum / Plasma", "3.5–5.0 mmol/L", "< 2.8 or > 6.0 mmol/L", "Ch. 3, 16, 27"], ["Chloride (Cl⁻)", "Serum / Plasma", "98–107 mmol/L", "< 80 or > 115 mmol/L", "Ch. 3"], ["Bicarbonate (HCO₃⁻ / Total CO₂)", "Serum / Venous", "22–26 mmol/L", "< 15 or > 40 mmol/L", "Ch. 3, 15, 27"], ["Calcium, Total (Ca²⁺)", "Serum", "2.15–2.55 mmol/L", "< 1.75 or > 3.25 mmol/L", "Ch. 3, 23, 27"], ["Calcium, Ionized", "Whole Blood", "1.15–1.30 mmol/L", "< 0.80 or > 1.60 mmol/L", "Ch. 3, 20, 23"], ["Magnesium (Mg²⁺)", "Serum", "0.70–1.05 mmol/L", "< 0.50 or > 2.00 mmol/L", "Ch. 3, 16"], ["Phosphate (PO₄³⁻)", "Serum", "0.80–1.45 mmol/L", "< 0.32 mmol/L", "Ch. 3, 27"], ["Glucose (Fasting)", "Plasma", "4.0–6.0 mmol/L", "< 2.8 or > 25.0 mmol/L", "Ch. 22"], ["HbA1c", "Whole Blood", "4.5%–5.9% (Target ≤ 7.0%)", "—", "Ch. 22"], ["Urea (BUN equivalent)", "Serum / Plasma", "2.5–7.1 mmol/L", "> 35.0 mmol/L", "Ch. 27"], ["Creatinine", "Serum / Plasma", "50–110 µmol/L", "> 400 µmol/L (acute)", "Ch. 27"], ["eGFR", "Calculated", "≥ 90 mL/min/1.73 m²", "< 15 mL/min/1.73 m² (G5)", "Ch. 27"], ["Lactate (Arterial / Venous)", "Plasma", "0.5–2.0 mmol/L", "≥ 4.0 mmol/L (septic shock)", "Ch. 4, 6"], ["Serum Osmolality", "Serum", "275–295 mOsm/kg", "< 250 or > 325 mOsm/kg", "Ch. 3, 22, 30"], ["Hemoglobin (Hb)", "Whole Blood", "120–160 g/L (F) / 135–175 g/L (M)", "< 70 g/L (inpatient critical / transfusion threshold)", "Ch. 20, 24"], ["Hematocrit (Hct)", "Whole Blood", "0.36–0.46 L/L (F) / 0.40–0.50 L/L (M)", "< 0.21 L/L", "Ch. 20"], ["Ferritin", "Serum", "30–300 µg/L (< 30 iron deficiency; < 45 in anemia)", "< 15 µg/L (depleted stores) or > 1,000 µg/L", "Ch. 20"], ["White Blood Cell Count (WBC)", "Whole Blood", "4.0–11.0 × 10⁹/L", "< 1.5 or > 30.0 × 10⁹/L", "Ch. 4, 9, 20"], ["Absolute Neutrophil Count (ANC)", "Whole Blood", "2.0–7.5 × 10⁹/L", "< 0.5 × 10⁹/L (febrile neutropenia)", "Ch. 9, 20"], ["Platelets", "Whole Blood", "150–400 × 10⁹/L", "< 10 × 10⁹/L (inpatient critical; < 20 febrile) or > 1,000 × 10⁹/L", "Ch. 20, 26"], ["INR (International Normalized Ratio)", "Citrated Plasma", "0.9–1.2 (Warfarin target 2.0–3.0)", "> 4.5 (major bleeding risk)", "Ch. 16, 19, 20"], ["aPTT", "Citrated Plasma", "25–35 seconds", "> 100 seconds", "Ch. 15, 19, 20"], ["D-Dimer", "Plasma", "< 500 µg/L FEU", "Age-adjusted cutoff over 50 yr", "Ch. 15, 19, 20"], ["Troponin I / T (High-Sensitivity)", "Plasma", "< 99th percentile URL (ng/L)", "Dynamic rise/fall (ACS)", "Ch. 17"], ["BNP / NT-proBNP", "Plasma", "BNP < 100 pg/mL; NT-proBNP < 300 pg/mL", "Acute decompensated HF", "Ch. 18"], ["Total Bilirubin", "Serum", "3–21 µmol/L", "> 250 µmol/L", "Ch. 20, 26"], ["ALT / AST", "Serum", "ALT 7–40 U/L; AST 10–40 U/L", "> 1,000 U/L (acute hepatic injury)", "Ch. 26"], ["Albumin", "Serum", "35–50 g/L", "< 20 g/L", "Ch. 24, 26, 27"], ["Ammonia (NH₃)", "Plasma", "15–45 µmol/L", "> 100 µmol/L (encephalopathy)", "Ch. 26"], ["Lipase", "Serum", "10–140 U/L", "> 3 × ULN (acute pancreatitis)", "Ch. 26"], ["TSH (Thyroid-Stimulating Hormone)", "Serum", "0.40–4.50 mIU/L", "< 0.01 or > 20.0 mIU/L", "Ch. 23"], ["Uric Acid (Urate)", "Serum", "180–420 µmol/L (Target < 360 µmol/L)", "> 540 µmol/L", "Ch. 34"], ["Arterial pH", "Arterial Blood", "7.35–7.45", "< 7.20 or > 7.60", "Ch. 3, 15"], ["PaCO₂", "Arterial Blood", "35–45 mm Hg", "< 20 or > 65 mm Hg", "Ch. 3, 12, 15"], ["PaO₂", "Arterial Blood", "80–100 mm Hg", "< 60 mm Hg (hypoxemic failure)", "Ch. 12, 15"]];
+
+  var state = {
+    view: 'home',
+    search: '',
+    unitFilter: 'ALL'
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c];
+    });
+  }
+
+  var toastTimer = null;
+  function showToast(msg) {
+    var box = $('toastBox');
+    box.innerHTML = msg;
+    box.hidden = false;
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { box.hidden = true; }, 4500);
+  }
+
+  function openModal(kicker, title, bodyHtml) {
+    $('modalKicker').textContent = kicker;
+    $('modalTitle').textContent = title;
+    $('modalBody').innerHTML = bodyHtml;
+    $('modalBackdrop').hidden = false;
+  }
+
+  function closeModal() {
+    $('modalBackdrop').hidden = true;
+  }
+
+  $('modalCloseBtn').addEventListener('click', closeModal);
+  $('modalBackdrop').addEventListener('click', function (e) {
+    if (e.target === $('modalBackdrop')) closeModal();
+  });
+
+  function renderStatementHtml() {
+    return '<section class="statement-card" aria-labelledby="stmtHeading">' +
+      '<div class="stmt-header">' +
+        '<p class="stmt-kicker">Statement on Open Education &bull; Why This Book Is Open</p>' +
+        '<h2 class="stmt-title" id="stmtHeading">Knowledge That Heals Belongs to Everyone It Might Help</h2>' +
+      '</div>' +
+      '<div class="stmt-prose">' +
+        '<p>Knowledge that heals belongs to everyone it might help, and a barrier between a nursing student and that knowledge is ultimately a barrier to safe patient care. For that reason, <em>Medical-Surgical Nursing: A Canadian Open Text</em> and every resource on <strong>OpenSourceNursing.ca</strong> are freely available to read, print, and adapt under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">CC BY-NC-SA 4.0 licence</a> (AODA / WCAG 2.1 AA accessible). Please send any corrections or suggestions to <a href="mailto:andrew@opensourcenursing.ca" style="color:var(--accent);font-weight:600">andrew@opensourcenursing.ca</a>.</p>' +
+      '</div>' +
+      '<div class="stmt-signoff">' +
+        '<div class="stmt-author">' +
+          'For instructors' +
+          '<span>Faculty resources are available on request. Please email <a href="mailto:andrew@opensourcenursing.ca?subject=Faculty%20Resources%20Request" style="color:var(--accent)">andrew@opensourcenursing.ca</a> to ask for access.</span>' +
+        '</div>' +
+        '<div class="stmt-badges">' +
+          '<span class="badge active">CC BY-NC-SA 4.0</span>' +
+          '<span class="badge future">AODA &amp; WCAG 2.1 AA</span>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function renderProjectsHubHtml() {
+    return '<section aria-labelledby="projHeading">' +
+      '<div class="sec-head">' +
+        '<div>' +
+          '<h2 id="projHeading">Open Nursing Projects &amp; Curriculum Ecosystem</h2>' +
+          '<p>Flagship published open textbook, 36 lecture slide decks, and upcoming open clinical resources</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="projects-stack">' +
+        /* Flagship Project 01 */
+        '<article class="project-card flagship">' +
+          '<div class="proj-top">' +
+            '<span class="proj-num">Project 01 &bull; Flagship Open Textbook &amp; Lecture Suite</span>' +
+            '<span class="badge active">&#10003; Published &amp; Live (1st Edition)</span>' +
+          '</div>' +
+          '<h3>Medical-Surgical Nursing: A Canadian Open Text</h3>' +
+          '<p class="desc">Comprehensive 36-chapter, 9-unit Canadian adult medical-surgical nursing textbook with Canadian SI laboratory values, CNO RPN/RN entry-to-practice scope comparisons, 246 clinical illustrations, 1,310 interactive NCLEX-RN/REx-PN review questions, and <strong>all 36 accompanying PowerPoint lecture presentations</strong>.</p>' +
+          '<div class="proj-specs">' +
+            '<span class="spec-chip">36 Interactive Chapters</span>' +
+            '<span class="spec-chip">36 PowerPoint Decks (1,025 Slides)</span>' +
+            '<span class="spec-chip">1,179-Page Complete PDF (20.5 MB)</span>' +
+            '<span class="spec-chip">1,310 Licensure Questions</span>' +
+            '<span class="spec-chip">2,144 Key Terms &amp; Flashcards</span>' +
+          '</div>' +
+          '<div class="btn-row">' +
+            '<button type="button" class="btn accent" data-action="go-view" data-target="medsurg">Browse All 36 Chapters &amp; PowerPoints &rarr;</button>' +
+            '<button type="button" class="btn outline" data-action="dl-file" data-file="Medical_Surgical_Nursing_Complete_Book.pdf">&#11015; Download Full Book PDF (1,179 pp.)</button>' +
+            '<button type="button" class="btn outline" data-action="go-view" data-target="labs">Canadian SI Lab Reference (Appendix A) &rarr;</button>' +
+          '</div>' +
+        '</article>' +
+
+        /* Future Projects 2x2 Grid */
+        '<div class="future-grid">' +
+          '<article class="project-card">' +
+            '<div class="proj-top">' +
+              '<span class="proj-num">Project 02 &bull; Clinical Simulation</span>' +
+              '<span class="badge active">&#10003; Published &amp; Live</span>' +
+            '</div>' +
+            '<h3>Open Clinical EHR Simulator</h3>' +
+            '<p class="desc">Browser-based Canadian bedside Electronic Health Record (EHR) and eMAR simulator with SI lab flowsheets, barcode med administration, high-alert double checks, and NEWS2 alerts.</p>' +
+            '<div class="proj-specs">' +
+              '<span class="spec-chip">Bedside eMAR &amp; BCMA</span>' +
+              '<span class="spec-chip">SI Lab Flowsheets</span>' +
+              '<span class="spec-chip">OSCE Case Builder</span>' +
+            '</div>' +
+            '<div class="btn-row"><a class="btn accent sm" href="ehrsim.html">Launch EHR Simulator &rarr;</a><button type="button" class="btn outline sm" data-action="preview-proj" data-proj="ehr">Preview Architecture &amp; Sample &rarr;</button></div>' +
+          '</article>' +
+
+          '<article class="project-card">' +
+            '<div class="proj-top">' +
+              '<span class="proj-num">Project 03 &bull; Psychomotor Text</span>' +
+              '<span class="badge future">Future Project</span>' +
+            '</div>' +
+            '<h3>Clinical Nursing Skills: A Canadian Open Text</h3>' +
+            '<p class="desc">Evidence-based procedural textbook and printable OSCE checklist library aligned with Canadian provincial regulators, controlled acts, sterile technique, IV therapy, and wound care.</p>' +
+            '<div class="proj-specs">' +
+              '<span class="spec-chip">Step-by-Step Rationales</span>' +
+              '<span class="spec-chip">CNO Controlled Acts</span>' +
+              '<span class="spec-chip">Printable OSCE Checklists</span>' +
+            '</div>' +
+            '<div class="btn-row"><button type="button" class="btn outline sm" data-action="preview-proj" data-proj="skills">Preview Architecture &amp; Sample &rarr;</button></div>' +
+          '</article>' +
+
+          '<article class="project-card">' +
+            '<div class="proj-top">' +
+              '<span class="proj-num">Project 04 &bull; Specialty Text</span>' +
+              '<span class="badge future">Future Project</span>' +
+            '</div>' +
+            '<h3>Cardiac &amp; ECG Nursing: A Canadian Open Text</h3>' +
+            '<p class="desc">Dedicated cardiovascular nursing and rhythm-strip interpretation text covering 6-step ECG analysis, 12-lead STEMI localization, CCS guidelines, pacing, and hemodynamics.</p>' +
+            '<div class="proj-specs">' +
+              '<span class="spec-chip">6-Step Rhythm Drills</span>' +
+              '<span class="spec-chip">12-Lead STEMI Localization</span>' +
+              '<span class="spec-chip">CCS Guidelines</span>' +
+            '</div>' +
+            '<div class="btn-row"><button type="button" class="btn outline sm" data-action="preview-proj" data-proj="cardiac">Preview Architecture &amp; Sample &rarr;</button></div>' +
+          '</article>' +
+
+          '<article class="project-card">' +
+            '<div class="proj-top">' +
+              '<span class="proj-num">Project 05 &bull; Calculations Text</span>' +
+              '<span class="badge future">Future Project</span>' +
+            '</div>' +
+            '<h3>Clinical Math &amp; Dosage Calculations for Nurses</h3>' +
+            '<p class="desc">Canadian SI dosage calculation workbook and interactive drill bank covering dimensional analysis, reconstitution, weight-based mg/kg dosing, and IV pump titration.</p>' +
+            '<div class="proj-specs">' +
+              '<span class="spec-chip">Canadian SI &amp; DIN Labels</span>' +
+              '<span class="spec-chip">ISMP Safety Rules</span>' +
+              '<span class="spec-chip">IV Titration Drills</span>' +
+            '</div>' +
+            '<div class="btn-row"><button type="button" class="btn outline sm" data-action="preview-proj" data-proj="math">Preview Architecture &amp; Sample &rarr;</button></div>' +
+          '</article>' +
+        '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function renderCompactBookTable() {
+    var term = (state.search || '').trim().toLowerCase();
+    var uFilter = state.unitFilter;
+
+    var filterControls = '<div class="filter-bar">' +
+      '<div class="search-input-wrap">' +
+        '<input type="search" id="chSearchInput" placeholder="Filter 36 chapters &amp; PowerPoints by number, title, or clinical topic (e.g., sepsis, ECG, diabetes, stroke)..." value="' + esc(state.search) + '" aria-label="Filter chapters and PowerPoints">' +
+      '</div>' +
+      '<div class="unit-filter-pills">' +
+        '<button type="button" class="unit-pill" data-action="unit-filter" data-unit="ALL" aria-pressed="' + (uFilter === 'ALL') + '">All 9 Units (36)</button>' +
+        UNITS.map(function (u) {
+          return '<button type="button" class="unit-pill" data-action="unit-filter" data-unit="' + u[0] + '" aria-pressed="' + (uFilter === u[0]) + '">Unit ' + u[0] + '</button>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+
+    var rows = '';
+    var matchedCount = 0;
+    CH_DATA.forEach(function (c) {
+      if (uFilter !== 'ALL' && c.unit !== uFilter) return;
+      var hay = ('ch ' + c.n + ' chapter ' + c.n + ' ' + c.title + ' ' + c.topics).toLowerCase();
+      if (term && hay.indexOf(term) < 0) return;
+      matchedCount++;
+      var numStr = c.n < 10 ? '0' + c.n : String(c.n);
+      rows += '<tr>' +
+        '<td><strong style="color:var(--accent);font-family:var(--font-display);font-size:15px">Ch. ' + numStr + '</strong><br><span style="font-size:11px;color:var(--muted)">Unit ' + c.unit + '</span></td>' +
+        '<td><strong style="color:var(--primary);font-size:14.5px">' + esc(c.title) + '</strong><br><span style="font-size:12px;color:var(--muted)">' + esc(c.topics) + '</span></td>' +
+        '<td><span class="badge pptx">' + c.slides + ' Slides</span><br><span style="font-size:11.5px;color:var(--muted)">' + esc(c.pptxSize) + ' &bull; 16:9 Widescreen</span></td>' +
+        '<td><span style="font-size:12px">' + c.figs + ' Figs &bull; ' + c.tables + ' Tbls<br>' + c.qs + ' Qs &bull; ' + c.terms + ' Terms</span></td>' +
+        '<td>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+            '<button type="button" class="ch-btn" data-action="open-ch" data-ch="' + c.n + '">Read Chapter &rarr;</button>' +
+            '<button type="button" class="ch-btn pptx-dl" data-action="dl-pptx" data-ch="' + c.n + '">&#11015; Download .PPTX</button>' +
+          '</div>' +
+        '</td>' +
+      '</tr>';
+    });
+
+    return filterControls +
+      '<div class="table-wrap">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:12.5px;color:var(--muted)">' +
+          '<span>Showing <strong>' + matchedCount + '</strong> of 36 chapters &bull; 1,025 total PowerPoint lecture slides &bull; 2,144 key terms &bull; 1,310 licensure questions</span>' +
+          '<button type="button" class="ch-btn" data-action="dl-file" data-file="Medical_Surgical_Nursing_Complete_Book.pdf">&#11015; Download Complete Textbook (.PDF)</button>' +
+        '</div>' +
+        '<table class="booktabs">' +
+          '<thead><tr><th style="width:85px">Chapter</th><th>Chapter Title &amp; Core Clinical Topics</th><th style="width:155px">PowerPoint Deck</th><th style="width:140px">Chapter Assets</th><th style="width:245px">Read / Download Slides</th></tr></thead>' +
+          '<tbody>' + (rows || '<tr><td colspan="5">No matching chapters found.</td></tr>') + '</tbody>' +
+        '</table>' +
+      '</div>';
+  }
+
+  function renderHomeView() {
+    var heroHtml = '<section class="hero-banner" id="stmtHeading" aria-label="Statement on Open Education">' +
+      '<div>' +
+        '<span class="hero-eyebrow">STATEMENT ON OPEN EDUCATION &bull; WHY THIS PROJECT IS OPEN</span>' +
+        '<p class="hero-lead">Knowledge that heals belongs to everyone it might help, and a barrier between a nursing student and that knowledge is ultimately a barrier to safe patient care. For that reason, <em>Medical-Surgical Nursing: A Canadian Open Text</em> and every resource on <strong>OpenSourceNursing.ca</strong> are freely available to read, print, and adapt under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#F4A287;font-weight:700;text-decoration:underline">CC BY-NC-SA 4.0 licence</a> (AODA / WCAG 2.1 AA accessible). Please send any corrections or suggestions to <a href="mailto:andrew@opensourcenursing.ca" style="color:#F4A287;font-weight:700;text-decoration:underline">andrew@opensourcenursing.ca</a>.</p>' +
+        '<div class="hero-byline" style="margin-bottom:0">' +
+          '<strong>For instructors:</strong> Faculty resources are available on request. Please email <a href="mailto:andrew@opensourcenursing.ca?subject=Faculty%20Resources%20Request" style="color:#F4A287;font-weight:700;text-decoration:underline">andrew@opensourcenursing.ca</a> to ask for access.' +
+        '</div>' +
+      '</div>' +
+      '<aside class="hero-telemetry" aria-label="Published Curriculum Telemetry">' +
+        '<p class="telemetry-title">Verified 1st Edition Telemetry (Oct 2026)</p>' +
+        '<div class="telemetry-grid">' +
+          '<div class="t-stat"><b>36 / 36</b><span>Interactive Chapters &amp; PPTX Decks</span></div>' +
+          '<div class="t-stat"><b>1,025</b><span>Widescreen Lecture Slides</span></div>' +
+          '<div class="t-stat"><b>1,310</b><span>NCLEX-RN / REx-PN / CPNRE Items</span></div>' +
+          '<div class="t-stat"><b>2,144</b><span>Capitalized Key Terms &amp; Flashcards</span></div>' +
+        '</div>' +
+        '<div class="telemetry-foot">' +
+          '<span>246 Clinical Figures &bull; 141 Tables &bull; 1,179 Book Pages</span>' +
+          '<span style="color:#F4A287;font-weight:700">100% Canadian SI</span>' +
+        '</div>' +
+      '</aside>' +
+    '</section>';
+
+    return heroHtml +
+      '<div>' +
+        renderProjectsHubHtml() +
+      '</div>';
+  }
+
+  function renderMedSurgView() {
+    return '<section id="medsurgTableSection" aria-labelledby="homeMedSurgDirHeading">' +
+        '<div class="sec-head">' +
+          '<div>' +
+            '<h2 id="homeMedSurgDirHeading">Medical-Surgical Nursing: All 36 Chapters &amp; Lecture PowerPoints</h2>' +
+            '<p>Compact directory of all 36 interactive chapters and downloadable widescreen PowerPoint lecture presentations (.pptx)</p>' +
+          '</div>' +
+          '<button type="button" class="btn outline sm" data-action="go-view" data-target="home">&larr; Back to Home &amp; Projects</button>' +
+        '</div>' +
+        renderCompactBookTable() +
+      '</section>';
+  }
+
+  function renderLabsView() {
+    var rows = SI_LABS.map(function (r) {
+      return '<tr>' +
+        '<td><strong style="color:var(--primary)">' + esc(r[0]) + '</strong></td>' +
+        '<td>' + esc(r[1]) + '</td>' +
+        '<td><strong style="color:var(--accent)">' + esc(r[2]) + '</strong></td>' +
+        '<td>' + esc(r[3]) + '</td>' +
+        '<td>' + esc(r[4]) + '</td>' +
+      '</tr>';
+    }).join('');
+    return '<div class="sec-head">' +
+        '<div>' +
+          '<h2>Appendix A &bull; Adult Canadian SI Reference Laboratory Intervals (36 Analytes)</h2>' +
+          '<p>Harmonized with Canadian Society of Clinical Chemists (CSCC), Alberta Precision Laboratories, and Medical Council of Canada SI intervals (mmol/L, µmol/L, g/L, × 10⁹/L)</p>' +
+        '</div>' +
+        '<button type="button" class="btn outline sm" data-action="go-view" data-target="home">&larr; Back to Home &amp; Projects</button>' +
+      '</div>' +
+      '<div class="table-wrap">' +
+        '<table class="booktabs">' +
+          '<thead><tr><th>Analyte</th><th>Specimen</th><th>Adult Canadian SI Reference Interval</th><th>Critical / Escalation Threshold</th><th>Textbook Chapters</th></tr></thead>' +
+          '<tbody>' + rows + '</tbody>' +
+        '</table>' +
+      '</div>';
+  }
+
+  function render() {
+    var tabs = document.querySelectorAll('.nav-tab');
+    for (var j = 0; j < tabs.length; j++) {
+      tabs[j].setAttribute('aria-selected', String(tabs[j].getAttribute('data-view') === state.view));
+    }
+
+    var container = $('mainContainer');
+    if (state.view === 'home') container.innerHTML = renderHomeView();
+    else if (state.view === 'medsurg') container.innerHTML = renderMedSurgView();
+    else if (state.view === 'labs') container.innerHTML = renderLabsView();
+
+    var sInput = $('chSearchInput');
+    if (sInput) {
+      sInput.addEventListener('input', function () {
+        state.search = this.value;
+        var pos = this.selectionStart;
+        render();
+        var nextInput = $('chSearchInput');
+        if (nextInput) {
+          nextInput.focus();
+          try { nextInput.setSelectionRange(pos, pos); } catch (e) {}
+        }
+      });
+    }
+  }
+
+  /* Event Delegation for All Interactive Controls */
+  document.addEventListener('click', function (e) {
+    var navTab = e.target.closest('[data-view]');
+    if (navTab) {
+      state.view = navTab.getAttribute('data-view');
+      try { history.pushState(null, '', '#' + state.view); } catch (err) {}
+      window.scrollTo(0, 0);
+      render();
+      return;
+    }
+
+    var actEl = e.target.closest('[data-action]');
+    if (!actEl) return;
+    var act = actEl.getAttribute('data-action');
+
+    if (act === 'go-view') {
+      state.view = actEl.getAttribute('data-target') || 'home';
+      try { history.pushState(null, '', '#' + state.view); } catch (e) {}
+      window.scrollTo(0, 0);
+      render();
+    } else if (act === 'unit-filter') {
+      state.unitFilter = actEl.getAttribute('data-unit') || 'ALL';
+      render();
+    } else if (act === 'preview-proj') {
+      var pk = actEl.getAttribute('data-proj');
+      var p = FUTURE_PROJECTS[pk];
+      if (p) {
+        var ul = p.highlights.map(function (h) { return '<li style="margin-bottom:6px">' + esc(h) + '</li>'; }).join('');
+        openModal(
+          p.kicker,
+          p.title,
+          '<p style="font-size:15px;line-height:1.6">' + esc(p.summary) + '</p>' +
+          '<h4 style="color:var(--primary);margin:14px 0 8px">' + (pk === 'ehr' ? '' : 'Planned ') + 'Architecture &amp; Canadian Nursing Features</h4>' +
+          '<ul style="padding-left:20px;font-size:14px;line-height:1.55">' + ul + '</ul>' +
+          p.demoHtml
+        );
+      }
+    } else if (act === 'dl-pptx') {
+      var chNum = parseInt(actEl.getAttribute('data-ch'), 10);
+      var c = CH_DATA[chNum - 1];
+      if (c) {
+        var aPpt = document.createElement('a');
+        aPpt.href = c.pptx;
+        aPpt.download = c.pptx;
+        document.body.appendChild(aPpt);
+        aPpt.click();
+        document.body.removeChild(aPpt);
+        showToast('Downloading <strong>' + esc(c.pptx) + '</strong> (' + c.slides + ' slides, ' + esc(c.pptxSize) + ')...');
+      }
+    } else if (act === 'open-ch') {
+      var chN = parseInt(actEl.getAttribute('data-ch'), 10);
+      var chObj = CH_DATA[chN - 1];
+      if (chObj) {
+        window.location.href = chObj.file;
+      }
+    } else if (act === 'dl-file') {
+      var fName = actEl.getAttribute('data-file');
+      if (fName) {
+        var aFile = document.createElement('a');
+        aFile.href = fName;
+        aFile.download = fName;
+        document.body.appendChild(aFile);
+        aFile.click();
+        document.body.removeChild(aFile);
+        showToast('Downloading <strong>' + esc(fName) + '</strong> (Complete 1,179-page Canadian Open Textbook)...');
+      }
+    }
+  });
+
+  $('brandHomeBtn').addEventListener('click', function () {
+    state.view = 'home';
+    try { history.replaceState(null, '', '#home'); } catch (e) {}
+    window.scrollTo(0, 0);
+    render();
+  });
+
+  function syncFromHash() {
+    if (window.location.hash === '#medsurg') state.view = 'medsurg';
+    else if (window.location.hash === '#labs') state.view = 'labs';
+    else if (window.location.hash === '#home') state.view = 'home';
+    render();
+  }
+  window.addEventListener('hashchange', syncFromHash);
+  syncFromHash();
+})();
+</script>
+</body>
+</html>

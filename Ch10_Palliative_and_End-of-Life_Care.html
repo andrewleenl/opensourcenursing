@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chapter 10: Palliative and End-of-Life Care</title>
+<style>
+/* Warm Editorial / Booktabs University-Press Interactive Reader */
+:root {
+  --bg: #FAF8F5;
+  --surface: #FFFFFF;
+  --sand: #F4F1EA;
+  --ink: #1E242B;
+  --muted: #5C6670;
+  --line: #D6D3CD;
+  --accent: #1A434E;
+  --accent-soft: #EBF2F2;
+  --terracotta: #B85D3B;
+  --ok: #2F6F4E;
+  --ok-soft: #EAF4EE;
+  --bad: #A63A2B;
+  --bad-soft: #FBECE9;
+  --grid: #E6D5CE;
+  --grid-bg: #FCF9F7;
+  --mark: #FFE58A;
+  --c-deeper: #5A4B81;
+  --c-scope: #1A434E;
+  --c-canada: #B85D3B;
+  --c-judgment: #2B547E;
+  --c-safety: #B45309;
+  --c-education: #2F6F4E;
+  --c-lifespan: #8C5A32;
+  --c-meds: #4A5568;
+  --c-story: #3D5A6C;
+  --font-body: "Segoe UI", system-ui, -apple-system, "Liberation Sans", sans-serif;
+  --font-serif: Georgia, "Liberation Serif", "Times New Roman", serif;
+  --font-display: Georgia, "Liberation Serif", "Times New Roman", serif;
+  --radius: 2px;
+  --side: 310px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171A;
+    --surface: #182024;
+    --sand: #1E272C;
+    --ink: #E6EAEF;
+    --muted: #9BA7B2;
+    --line: #2C373E;
+    --accent: #78B3B8;
+    --accent-soft: #1D3136;
+    --terracotta: #E08A68;
+    --ok: #68C496;
+    --ok-soft: #153022;
+    --bad: #F08A80;
+    --bad-soft: #381A18;
+    --grid: rgba(224,138,104,.18);
+    --grid-bg: #1A1D20;
+    --mark: #6B5A12;
+    --c-deeper: #B9A4F0;
+    --c-scope: #78B3B8;
+    --c-canada: #E08A68;
+    --c-judgment: #84B6EA;
+    --c-safety: #F0A660;
+    --c-education: #68C496;
+    --c-lifespan: #D4A57C;
+    --c-meds: #9FA8F0;
+    --c-story: #A9B7C2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171A;
+  --surface: #182024;
+  --sand: #1E272C;
+  --ink: #E6EAEF;
+  --muted: #9BA7B2;
+  --line: #2C373E;
+  --accent: #78B3B8;
+  --accent-soft: #1D3136;
+  --terracotta: #E08A68;
+  --ok: #68C496;
+  --ok-soft: #153022;
+  --bad: #F08A80;
+  --bad-soft: #381A18;
+  --grid: rgba(224,138,104,.18);
+  --grid-bg: #1A1D20;
+  --mark: #6B5A12;
+  --c-deeper: #B9A4F0;
+  --c-scope: #78B3B8;
+  --c-canada: #E08A68;
+  --c-judgment: #84B6EA;
+  --c-safety: #F0A660;
+  --c-education: #68C496;
+  --c-lifespan: #D4A57C;
+  --c-meds: #9FA8F0;
+  --c-story: #A9B7C2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.62;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a.xref { text-decoration-style: dotted; color: var(--terracotta); font-weight: 600; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+[tabindex="-1"]:focus { outline: none; }
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--surface); padding: 8px 12px; z-index: 50; border: 1px solid var(--accent); }
+.skip:focus { left: 8px; }
+
+/* Layout */
+.app { display: grid; grid-template-columns: var(--side) minmax(0, 1fr); min-height: 100vh; }
+.side {
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  padding: 20px 18px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.portal-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--terracotta); text-decoration: none;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.portal-back:hover { color: var(--accent); }
+.brand { display: grid; gap: 4px; padding-bottom: 8px; border-bottom: 1.5px solid var(--accent); }
+.brand .book { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.brand .ch { font-family: var(--font-display); font-size: 19px; line-height: 1.22; font-weight: 700; color: var(--accent); }
+.meter { display: grid; gap: 5px; font-size: 12.5px; color: var(--muted); }
+.bar { height: 5px; background: var(--sand); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--terracotta); width: 0; transition: width .3s; }
+.search input {
+  width: 100%; font: inherit; font-size: 14px; padding: 8px 11px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+}
+.toc { display: grid; gap: 14px; }
+.toc h2 {
+  font-family: var(--font-body); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--terracotta); margin: 0 0 4px; font-weight: 700;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.toc a {
+  display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline;
+  padding: 6px 10px; border-left: 2px solid transparent;
+  color: var(--ink); text-decoration: none; font-size: 14px; line-height: 1.35;
+}
+.toc a:hover { background: var(--bg); border-left-color: var(--line); }
+.toc a[aria-current="page"] {
+  background: var(--sand); color: var(--accent); font-weight: 700;
+  border-left: 3px solid var(--terracotta);
+}
+.toc .st { font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.toc .st.done { color: var(--ok); font-weight: 700; }
+.results { display: grid; gap: 4px; grid-template-columns: minmax(0, 1fr); }
+.results a { min-width: 0; overflow-wrap: anywhere; display: grid; gap: 2px; padding: 8px 10px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); background: var(--bg); font-size: 13.5px; }
+.results a b { color: var(--accent); font-family: var(--font-display); }
+.results .none { font-size: 13.5px; color: var(--muted); }
+mark { background: var(--mark); color: inherit; padding: 0 2px; }
+.side-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); display: flex; gap: 8px; flex-wrap: wrap; }
+.chipbtn { border: 1px solid var(--line); background: var(--bg); padding: 5px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.chipbtn:hover { border-color: var(--accent); color: var(--accent); }
+.topbar { display: none; }
+
+/* Editorial Reading Surface */
+main {
+  min-width: 0;
+  padding: 40px max(24px, env(safe-area-inset-right)) 80px max(24px, env(safe-area-inset-left));
+}
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  padding: 42px 48px 48px;
+  box-shadow: 0 2px 12px rgba(26, 67, 78, 0.04);
+  display: grid; gap: 4px;
+}
+.eyebrow {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--terracotta); margin: 0 0 4px;
+}
+h1, .page > h2.title {
+  font-family: var(--font-display); font-weight: 700; line-height: 1.16;
+  color: var(--accent); margin: 0 0 16px;
+  padding-bottom: 12px; border-bottom: 1.5px solid var(--accent);
+  text-wrap: balance;
+}
+h1 { font-size: clamp(28px, 4.2vw, 38px); }
+.page > h2.title { font-size: clamp(24px, 3.6vw, 31px); }
+.page h3 {
+  font-family: var(--font-display); font-size: 20px; line-height: 1.3;
+  color: var(--accent); margin: 26px 0 6px;
+  padding-top: 8px; border-top: 1px solid var(--line);
+}
+.page > p, .page > ul, .page > ol {
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  line-height: 1.68;
+}
+.page p { margin: 9px 0; }
+.page ul, .page ol { margin: 8px 0; padding-left: 1.4em; }
+.page li { margin: 5px 0; }
+.page li::marker { color: var(--terracotta); }
+
+/* Borderless Soft-Tinted Editorial Callout Boxes */
+.box {
+  --c: var(--accent);
+  margin: 22px 0;
+  padding: 16px 22px 15px;
+  border: none;
+  border-left: 3.5px solid var(--c);
+  background: var(--bg);
+  background: color-mix(in srgb, var(--c) 5%, var(--bg));
+  font-family: var(--font-body);
+}
+.box h3 {
+  font-family: var(--font-display);
+  margin: 3px 0 8px;
+  padding-top: 0;
+  border-top: none;
+  font-size: 18.5px;
+  color: var(--ink);
+}
+.box p, .box ul, .box ol {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.56;
+}
+.box-type {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c);
+}
+.box-going-deeper { --c: var(--c-deeper); }
+.box-scope-in-practice { --c: var(--c-scope); }
+.box-canadian-context { --c: var(--c-canada); }
+.box-clinical-judgment { --c: var(--c-judgment); }
+.box-clinical-safety { --c: var(--c-safety); }
+.box-patient-education { --c: var(--c-education); }
+.box-lifespan-considerations { --c: var(--c-lifespan); }
+.box-medications { --c: var(--c-meds); }
+.box-practice-story { --c: var(--c-story); }
+.box-going-deeper .box-type::after {
+  content: " · RN required, PN optional";
+  font-weight: 400; letter-spacing: .03em; text-transform: none; color: var(--muted);
+}
+
+/* Three-Line Booktabs Academic Tables */
+.tbl {
+  margin: 24px 0;
+  overflow-x: auto;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+}
+.tbl table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 540px;
+  font-size: 14.5px;
+  line-height: 1.48;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.tbl caption {
+  text-align: left;
+  padding: 0 0 8px 0;
+  font-size: 15px;
+  color: var(--ink);
+  caption-side: top;
+}
+.tbl caption strong {
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-right: 4px;
+}
+.tbl th, .tbl td {
+  text-align: left;
+  vertical-align: top;
+  padding: 9px 11px;
+  border-top: 1px solid var(--line);
+}
+.tbl thead th {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  border-top: none;
+  border-bottom: 1.5px solid var(--accent);
+}
+.tbl tbody th { font-weight: 700; color: var(--ink); }
+
+/* Frameless Editorial Figures */
+.fig {
+  margin: 26px auto;
+  max-width: var(--w, 100%);
+  display: grid;
+  gap: 8px;
+  font-family: var(--font-body);
+}
+.fig .zoom {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+.fig img { display: block; width: 100%; height: auto; margin: 0 auto; }
+.fig figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.48;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.fig figcaption strong { color: var(--accent); }
+dialog.zoomer { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+dialog.zoomer::backdrop { background: rgba(18,23,26,.86); }
+dialog.zoomer img { max-width: 96vw; max-height: 88vh; display: block; background: #fff; }
+dialog.zoomer .close { position: fixed; top: 14px; right: 14px; background: var(--surface); border: 1px solid var(--line); padding: 8px 16px; font-weight: 700; cursor: pointer; }
+.refs p { font-family: var(--font-body); padding-left: 2em; text-indent: -2em; font-size: 14px; line-height: 1.48; color: var(--muted); overflow-wrap: anywhere; }
+
+/* Chapter Home Page */
+.hero { display: grid; gap: 8px; padding-bottom: 8px; }
+.byline { color: var(--muted); margin: 0; font-family: var(--font-serif); font-style: italic; font-size: 16px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0 10px; }
+.stat {
+  background: var(--bg);
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 14px;
+  display: grid; gap: 2px;
+  font-family: var(--font-body);
+}
+.stat b { font-family: var(--font-display); font-size: 28px; color: var(--terracotta); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stat span { font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; font-family: var(--font-body); }
+.btn {
+  font-weight: 700; font-size: 14.5px; padding: 10px 18px;
+  border: 1.5px solid var(--accent); background: var(--accent); color: var(--surface);
+  cursor: pointer; text-decoration: none; display: inline-block;
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover:not(:disabled) { border-color: var(--terracotta); background: var(--terracotta); color: #fff; }
+.btn.ghost:hover:not(:disabled) { background: var(--sand); color: var(--terracotta); border-color: var(--terracotta); }
+.btn:disabled { opacity: .45; cursor: default; }
+.note { background: var(--bg); border-left: 3px solid var(--terracotta); padding: 14px 18px; margin: 14px 0; font-family: var(--font-body); }
+.note h3 { margin-top: 0 !important; border-top: none !important; padding-top: 0 !important; }
+.version { font-size: 13.5px; color: var(--muted); font-family: var(--font-body); }
+
+/* Licensure Review Questions */
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; font-family: var(--font-body); }
+.score { font-size: 14.5px; color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 600; }
+.q {
+  background: var(--bg);
+  border-top: 1.5px solid var(--accent);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 20px;
+  margin: 16px 0;
+  display: grid; gap: 12px;
+  font-family: var(--font-body);
+}
+.q .qn { display: flex; gap: 8px; align-items: center; font-size: 13.5px; color: var(--muted); font-weight: 600; }
+.tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; background: var(--accent-soft); color: var(--accent); }
+.tag.rn { background: var(--terracotta); color: #fff; }
+.q .stem { margin: 0; font-family: var(--font-serif); font-size: 17px; line-height: 1.55; font-weight: 700; color: var(--ink); }
+.q .hint { font-size: 13.5px; color: var(--muted); margin: -4px 0 0; font-style: italic; }
+.opts { display: grid; gap: 8px; }
+.opt {
+  text-align: left; display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: start;
+  padding: 10px 14px; border: 1px solid var(--line); background: var(--surface);
+  cursor: pointer; line-height: 1.48; font-size: 15px;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt .k { font-weight: 700; width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); font-size: 12.5px; color: var(--accent); }
+.opt.multi .k { border-radius: 3px; }
+.opt[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.opt[aria-pressed="true"] .k { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.opt .mk { font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; align-self: center; }
+.opt.correct { border-color: var(--ok); background: var(--ok-soft); }
+.opt.correct .k { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.opt.correct .mk { color: var(--ok); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.wrong .k { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.opt.wrong .mk { color: var(--bad); }
+.opt:disabled { cursor: default; color: var(--ink); }
+.qact { display: flex; gap: 10px; flex-wrap: wrap; }
+.fb { padding: 12px 16px; border-left: 3.5px solid var(--ok); font-size: 15px; line-height: 1.52; }
+.fb.ok { background: var(--ok-soft); border-left-color: var(--ok); }
+.fb.no { background: var(--bad-soft); border-left-color: var(--bad); }
+.fb strong.v { display: block; font-family: var(--font-display); font-size: 16px; }
+.fb.ok strong.v { color: var(--ok); }
+.fb.no strong.v { color: var(--bad); }
+.fb p { margin: 6px 0 0; font-family: var(--font-body); font-size: 15px; }
+.casegrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+.chart {
+  border-top: 2px solid var(--terracotta);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px; margin: 8px 0 6px;
+  background-color: var(--grid-bg);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.chart .lbl { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--terracotta); font-weight: 700; }
+.chart p { background: var(--surface); border: 1px solid var(--line); padding: 12px 14px; margin: 8px 0 0; font-family: var(--font-serif); font-size: 16.5px; line-height: 1.6; }
+.chart .fict { font-size: 12.5px; color: var(--muted); font-style: italic; border: 0; background: none; padding: 0; font-family: var(--font-body); }
+
+/* Key Term Flashcards */
+.deckbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 12px; font-family: var(--font-body); }
+.seg { display: inline-flex; border: 1px solid var(--line); overflow: hidden; }
+.seg button { border: 0; background: var(--surface); padding: 6px 14px; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.flash {
+  width: 100%; min-height: 240px; display: grid; place-items: center; text-align: center;
+  padding: 32px; border-top: 3px solid var(--accent); border-bottom: 1.5px solid var(--accent);
+  border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+  background: var(--bg); cursor: pointer;
+}
+.flash .term { font-family: var(--font-display); font-size: clamp(24px, 4vw, 32px); font-weight: 700; color: var(--accent); text-wrap: balance; }
+.flash .def { font-family: var(--font-serif); font-size: 18px; line-height: 1.58; max-width: 56ch; color: var(--ink); }
+.flash .tip { font-family: var(--font-body); font-size: 12.5px; color: var(--terracotta); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; margin-top: 14px; display: block; }
+.flash.back { border-top-color: var(--terracotta); }
+.deckact { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; font-family: var(--font-body); }
+.btn.okb { background: var(--ok); border-color: var(--ok); }
+details.all { margin-top: 20px; font-family: var(--font-body); }
+details.all summary { cursor: pointer; font-weight: 700; color: var(--accent); font-size: 15px; }
+details.all dt { font-family: var(--font-display); font-weight: 700; color: var(--accent); margin-top: 12px; font-size: 16px; }
+details.all dd { margin: 2px 0 0; color: var(--ink); font-size: 14.5px; }
+details.all dt .ok { color: var(--ok); font-family: var(--font-body); font-size: 12.5px; font-weight: 600; margin-left: 6px; }
+
+/* Pager */
+.pager { max-width: 780px; margin: 28px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-family: var(--font-body); }
+.pager a {
+  display: grid; gap: 3px; padding: 14px 18px;
+  border: 1px solid var(--line); border-top: 2px solid var(--accent);
+  text-decoration: none; color: var(--ink); background: var(--surface);
+}
+.pager a:hover { border-top-color: var(--terracotta); background: var(--sand); }
+.pager a span { font-size: 11.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--terracotta); font-weight: 700; }
+.pager a.next { text-align: right; grid-column: 2; }
+.pager a b { font-family: var(--font-display); font-size: 16px; color: var(--accent); }
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .topbar { display: flex; position: sticky; top: 0; z-index: 20; align-items: center; gap: 10px; padding: 10px max(16px, env(safe-area-inset-left)); background: var(--surface); border-bottom: 1.5px solid var(--accent); }
+  .topbar .t { font-family: var(--font-display); font-weight: 700; font-size: 15.5px; color: var(--accent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .side { position: fixed; inset: 0 auto 0 0; width: min(88vw, 340px); z-index: 40; transform: translateX(-105%); transition: transform .2s; box-shadow: 0 0 40px rgba(0,0,0,.25); }
+  .side.open { transform: none; }
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 30; }
+  main { padding: 16px 12px 48px; }
+  .page { padding: 24px 20px 32px; }
+  .stats { grid-template-columns: 1fr; }
+  .fig { max-width: 100%; }
+  .pager { grid-template-columns: 1fr; } .pager a.next { grid-column: 1; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media print {
+  .side, .topbar, .pager, .scrim, .qact, .deckact, .skip { display: none !important; }
+  .app { display: block; } body { background: #fff; font-size: 10.5pt; } .page { border: none; box-shadow: none; padding: 0; max-width: 100%; } .box, .tbl, .q, .fig { break-inside: avoid; }
+}
+
+/* ==========================================================================
+   UNIFIED OPTION 2 AESTHETIC: MODERN CLINICAL SLATE & SAGE (PNUR2027)
+   Shared across index.html and all 36 interactive chapter pages
+   ========================================================================== */
+:root {
+  --bg: #F7F8F7;
+  --surface: #FFFFFF;
+  --sand: #EDF1EE;
+  --ink: #1C2B2D;
+  --muted: #526568;
+  --line: #CBD6D2;
+  --line-strong: #4A7C7E;
+  --accent: #1F3A3D;
+  --accent-soft: #E3ECE9;
+  --terracotta: #C75B39;
+  --ok: #2E6F40;
+  --ok-soft: #E8F4EC;
+  --bad: #A63A2B;
+  --bad-soft: #FBECE9;
+  --grid: #CBD6D2;
+  --grid-bg: #F7F8F7;
+  --mark: #FFE58A;
+  --c-deeper: #5A4B81;
+  --c-scope: #1F3A3D;
+  --c-canada: #C75B39;
+  --c-judgment: #2B547E;
+  --c-safety: #B45309;
+  --c-education: #2E6F40;
+  --c-lifespan: #8C5A32;
+  --c-meds: #4A5568;
+  --c-story: #3D5A6C;
+  --font-body: Calibri, "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --font-serif: Cambria, Georgia, "Times New Roman", serif;
+  --font-display: Cambria, Georgia, "Times New Roman", serif;
+  --radius: 8px;
+  --side: 320px;
+}
+
+.side {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  border-top: 4px solid var(--terracotta);
+  box-shadow: 2px 0 14px rgba(31, 58, 61, 0.05);
+}
+
+.osn-side-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--line-strong);
+}
+.osn-crest {
+  width: 38px;
+  height: 38px;
+  background: var(--accent);
+  color: #FFFFFF;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  border-bottom: 3px solid var(--terracotta);
+  flex-shrink: 0;
+}
+.osn-brand-txt strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  color: var(--accent);
+  line-height: 1.15;
+}
+.osn-brand-txt span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.portal-nav-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.portal-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: var(--accent);
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 8px;
+  text-decoration: none;
+  transition: all 0.14s ease;
+}
+.portal-back:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+}
+.portal-back.primary-back {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+}
+.portal-back.primary-back:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.search input {
+  border-radius: 6px;
+  border: 1.5px solid var(--line-strong);
+}
+.toc a {
+  border-radius: 0 6px 6px 0;
+}
+.chipbtn {
+  border-radius: 6px;
+}
+
+.page {
+  max-width: 840px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 40px 46px 46px;
+  box-shadow: 0 4px 16px rgba(31, 58, 61, 0.07);
+}
+
+/* Dark Green Clinical Slate Hero Banner on Every Chapter Home Page */
+.hero {
+  background: #1F3A3D;
+  color: #FFFFFF;
+  border: 1px solid var(--line);
+  border-top: 4px solid #C75B39;
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(31, 58, 61, 0.08);
+}
+.hero .eyebrow {
+  color: #F4A287;
+  margin-bottom: 6px;
+}
+.hero h1 {
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: 12px;
+  margin-bottom: 10px;
+}
+.hero .byline {
+  color: #D7E4E4;
+  font-style: normal;
+  font-size: 14.5px;
+  padding-left: 10px;
+  border-left: 3px solid #C75B39;
+}
+.hero .version {
+  color: #A9C4C4;
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+
+.stat {
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.btn {
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 10px 18px;
+  transition: all 0.14s ease;
+}
+.btn.pptx-btn {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #FFFFFF;
+}
+.btn.pptx-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.note {
+  background: var(--sand);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--terracotta);
+  border-radius: 8px;
+}
+.box {
+  border-radius: 0 8px 8px 0;
+}
+.tbl table {
+  border-top: 2.5px solid var(--accent);
+  border-bottom: 2.5px solid var(--accent);
+}
+.tbl thead th {
+  background: var(--sand);
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+}
+.q {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(31, 58, 61, 0.04);
+}
+.opt {
+  border-radius: 6px;
+}
+.flash {
+  border-radius: 8px;
+  background: var(--sand);
+}
+.pager a {
+  border-radius: 8px;
+  border-top: 3px solid var(--line-strong);
+  box-shadow: 0 2px 8px rgba(31, 58, 61, 0.05);
+}
+
+
+/* ==========================================================================
+   SITE SHELL — header, footer and dark mode matched to index.html (Nov 2026)
+   ========================================================================== */
+:root { --hdr: 76px; }
+.osn-header {
+  position: sticky; top: 0; z-index: 25;
+  background: var(--surface);
+  border-bottom: 2.5px solid var(--line-strong);
+  box-shadow: 0 2px 12px rgba(31, 58, 61, 0.06);
+}
+.osn-header-inner {
+  max-width: 1320px; margin: 0; height: calc(var(--hdr) - 2.5px);
+  padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.osn-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; min-width: 0; }
+.osn-h-crest {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: #1F3A3D; color: #FFFFFF; border-radius: 6px;
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 20px;
+  border-bottom: 3px solid #C75B39;
+}
+.osn-h-txt { min-width: 0; }
+.osn-h-txt strong { display: block; font-family: var(--font-display); font-size: 21px; font-weight: 700; color: var(--accent); letter-spacing: -0.01em; line-height: 1.15; }
+.osn-h-txt span { display: block; font-family: var(--font-body); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+.osn-h-book { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--muted); text-align: right; }
+.app { min-height: calc(100vh - var(--hdr)); }
+.side { top: var(--hdr); height: calc(100vh - var(--hdr)); border-top: none; }
+.osn-footer {
+  max-width: 840px; margin: 40px auto 0; padding: 22px 4px 0;
+  border-top: 2px solid var(--line-strong);
+  font-family: var(--font-body); font-size: 13px; color: var(--muted);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 16px;
+}
+.osn-footer strong { color: var(--accent); }
+.osn-footer a { color: var(--terracotta); }
+.osn-footer a.mail { color: var(--accent); font-weight: 700; }
+@media (max-width: 900px) {
+  .osn-header { position: static; }
+  .osn-header-inner { height: auto; padding: 12px 16px; }
+  .osn-h-crest { width: 40px; height: 40px; font-size: 18px; }
+  .osn-h-txt strong { font-size: 18px; }
+  .osn-h-book { display: none; }
+  .app { min-height: 0; }
+  .side { top: 0; height: auto; }
+}
+@media (max-width: 520px) { .osn-h-txt span { display: none; } }
+@media print { .osn-header, .osn-footer { display: none !important; } }
+
+/* Dark mode in the site's slate palette */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1A1C;
+    --surface: #152628;
+    --sand: #1B3033;
+    --ink: #E4EDEB;
+    --muted: #9DB2B0;
+    --line: #29403F;
+    --line-strong: #5E9496;
+    --accent: #89B4B6;
+    --accent-soft: #1B3335;
+    --terracotta: #F4A287;
+    --ok: #74CF83;
+    --ok-soft: #16301B;
+    --bad: #FF8A7A;
+    --bad-soft: #3A1A18;
+    --grid: rgba(137, 180, 182, .14);
+    --grid-bg: #122224;
+    --mark: #6B5A12;
+    --c-deeper: #B9A4F0;
+    --c-scope: #89B4B6;
+    --c-canada: #F4A287;
+    --c-judgment: #84B6EA;
+    --c-safety: #F0A660;
+    --c-education: #74CF83;
+    --c-lifespan: #D4A57C;
+    --c-meds: #9FA8F0;
+    --c-story: #A9C4C4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg: #0E1A1C;
+    --surface: #152628;
+    --sand: #1B3033;
+    --ink: #E4EDEB;
+    --muted: #9DB2B0;
+    --line: #29403F;
+    --line-strong: #5E9496;
+    --accent: #89B4B6;
+    --accent-soft: #1B3335;
+    --terracotta: #F4A287;
+    --ok: #74CF83;
+    --ok-soft: #16301B;
+    --bad: #FF8A7A;
+    --bad-soft: #3A1A18;
+    --grid: rgba(137, 180, 182, .14);
+    --grid-bg: #122224;
+    --mark: #6B5A12;
+    --c-deeper: #B9A4F0;
+    --c-scope: #89B4B6;
+    --c-canada: #F4A287;
+    --c-judgment: #84B6EA;
+    --c-safety: #F0A660;
+    --c-education: #74CF83;
+    --c-lifespan: #D4A57C;
+    --c-meds: #9FA8F0;
+    --c-story: #A9C4C4;
+    color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .portal-back.primary-back,
+  :root:not([data-theme="light"]) .btn.pptx-btn,
+  :root:not([data-theme="light"]) .tag.rn,
+  :root:not([data-theme="light"]) .btn:not(.ghost):hover:not(:disabled) { color: var(--bg); }
+  :root:not([data-theme="light"]) .portal-back:hover { color: var(--bg); }
+}
+:root[data-theme="dark"] .portal-back.primary-back,
+:root[data-theme="dark"] .btn.pptx-btn,
+:root[data-theme="dark"] .tag.rn,
+:root[data-theme="dark"] .btn:not(.ghost):hover:not(:disabled),
+:root[data-theme="dark"] .portal-back:hover { color: var(--bg); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="osn-header"><div class="osn-header-inner"><a class="osn-brand" href="index.html"><div class="osn-h-crest">ON</div><div class="osn-h-txt"><strong>OpenSourceNursing.ca</strong><span>Canadian Open Educational Resources for Nursing Education &bull; CC BY-NC-SA 4.0</span></div></a><span class="osn-h-book">Medical-Surgical Nursing: A Canadian Open Text</span></div></header>
+<div class="topbar">
+  <button class="chipbtn" id="menuBtn" aria-controls="side" aria-expanded="false">☰ Contents</button>
+  <span class="t" id="topTitle"></span>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="app">
+  <nav class="side" id="side" aria-label="Chapter contents">
+    <div class="portal-nav-row"><a class="portal-back primary-back" href="index.html#medsurg">&larr; All 36 Chapters</a><a class="portal-back" href="index.html#home">Platform Home</a></div>
+    <div class="brand"><span class="book" id="bookName"></span><span class="ch" id="chName"></span></div>
+    <div class="meter"><span id="meterText"></span><div class="bar"><span id="meterBar"></span></div></div>
+    <div class="search" role="search"><label for="q" class="eyebrow" style="display:block;margin-bottom:4px">Search this chapter</label><input id="q" type="search" placeholder="e.g. BNP, tamponade" autocomplete="off"></div>
+    <div class="results" id="results" hidden aria-live="polite"></div>
+    <div class="toc" id="toc"></div>
+    <div class="side-foot"><button class="chipbtn" id="themeBtn" type="button"></button></div>
+  </nav>
+  <main id="main" tabindex="-1"><div class="page" id="page"></div><nav class="pager" id="pager" aria-label="Page navigation"></nav><footer class="osn-footer"><div><strong>OpenSourceNursing.ca</strong> &mdash; Authored &amp; Maintained by <strong>Andrew Lee, BEd, BN, MN, RN, CCN(C)</strong> &bull; Open Source Nursing.<br>All textbooks, lecture presentations, and clinical tools are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons CC BY-NC-SA 4.0</a> &bull; AODA &amp; WCAG 2.1 Level AA Accessible.</div><div>Contact &amp; Errata: <a class="mail" href="mailto:andrew@opensourcenursing.ca">andrew@opensourcenursing.ca</a></div></footer></main>
+</div>
+<dialog class="zoomer" id="zoomer" aria-label="Enlarged figure"><button class="close" type="button" id="zoomClose">Close ✕</button><img id="zoomImg" alt=""></dialog>
+<script id="data" type="application/json">{"meta": {"book": "Medical-Surgical Nursing: A Canadian Open Text", "chapter": "10", "title": "Palliative and End-of-Life Care", "author": "Andrew Lee, BEd, BN, MN, RN, CCN(C)", "org": "Open Source Nursing", "licence": "CC BY-NC-SA 4.0", "version": "First Edition, October 2026", "latest": "", "store": "msn-open-text-ch10-v1"}, "pages": [{"id": "home", "title": "Start here", "kind": "home", "html": ""}, {"id": "outcomes", "title": "Learning Outcomes", "kind": "text", "html": "<p>By the end of this chapter, you will be able to:<\/p><ol class=\"outcomes\"><li>Explain the palliative approach to care and how it differs from specialist palliative care and end-of-life care.<\/li><li>Support advance care planning and goals-of-care conversations, applying Ontario law on substitute decision-makers and noting how other provinces differ.<\/li><li>Assess and manage common symptoms in serious illness: pain, dyspnea, nausea, constipation, delirium, fatigue and respiratory secretions.<\/li><li>Describe Canada's medical assistance in dying law, its eligibility criteria and safeguards, and nurses' roles and rights, including conscientious objection.<\/li><li>Recognize the signs that death is approaching and provide comfort care to the patient and family.<\/li><li>Provide culturally safe care after death, including coroner notification and tissue and organ donation requirements.<\/li><li>Support grieving families and care for one's own wellbeing.<\/li><li>Distinguish RN, RPN and NP roles in palliative care and medical assistance in dying using CNO's authority, competence and context.<\/li><\/ol><div class=\"tbl\" tabindex=\"0\" role=\"region\" aria-label=\"Competency mapping\"><table><caption>How the outcomes map to the CNO entry-to-practice competencies<\/caption><thead><tr><th scope=\"col\">Outcome<\/th><th scope=\"col\">RN competency role (CNO, 2019a)<\/th><th scope=\"col\">RPN competency category (CNO, 2019b)<\/th><\/tr><\/thead><tbody><tr><td>1, 3, 5<\/td><td>Clinician; Scholar<\/td><td>Foundations of Practice<\/td><\/tr><tr><td>2, 4, 8<\/td><td>Advocate; Professional; Communicator<\/td><td>Legal Practice; Ethical Practice<\/td><\/tr><tr><td>6, 7<\/td><td>Advocate; Collaborator<\/td><td>Ethical Practice; Collaborative Practice<\/td><\/tr><\/tbody><\/table><\/div>"}, {"id": "introduction", "title": "Introduction", "kind": "text", "html": "<p>For most people, death now comes at the end of a progressive illness, such as cancer, heart failure, chronic lung disease or dementia, rather than suddenly (Murray et al., 2005). The Canadian Institute for Health Information (CIHI) reported that 58% of people who died in 2021–2022 in Ontario, Alberta, British Columbia and Yukon were identified in CIHI's data as receiving palliative care; of those who received some form of palliative care, 61% received it in hospital only (CIHI, 2023). Medical-surgical nurses therefore care for dying patients and their families on every adult unit, not only on palliative care units.<\/p><p>Every nurse gives palliative care: easing breathlessness, asking a family what matters most and making sure a patient's wishes reach the team are all palliative care. Section 10.1 explains palliative care and how it is organized in Canada. Section 10.2 covers advance care planning and goals of care, and section <a href=\"#s10-3\">10.3<\/a> the common symptoms of serious illness. Sections 10.4 to 10.6 address medical assistance in dying (MAID), care in the last days and after death, and grief and nurse self-care. Related topics live elsewhere: consent and substitute decision-makers (Chapter 1), pain and opioids (Chapter 5), delirium and dementia (Chapter 8), cancer (Chapter 9), chronic obstructive pulmonary disease (COPD) (Chapter 14) and heart failure (Chapter 18).<\/p>"}, {"id": "s10-1", "title": "10.1 The Palliative Approach", "kind": "text", "html": "<h3>What Palliative Care Is<\/h3><p>The World Health Organization (WHO) describes palliative care as an approach that aims to raise the quality of life of patients and their families facing a life-threatening illness. It works by identifying problems early, assessing them carefully and treating pain and other physical, psychosocial and spiritual concerns (WHO, 2020). Health Canada's <em>Framework on Palliative Care in Canada<\/em> adopts this definition and applies it to people of all ages (Health Canada, 2018). In this book, <strong>palliative care<\/strong> means care that aims to relieve suffering and improve quality of life for people who have a life-limiting illness and for those close to them.<\/p><p>The patient and family together are the unit of care, and care can begin at diagnosis, alongside treatments meant to control the disease. The Canadian Hospice Palliative Care Association (CHPCA) model places the patient and family at the centre of eight domains of possible suffering: disease management, physical, psychological, social, spiritual, practical, end-of-life care and death management, and loss and grief (CHPCA, 2013). The domains work as an assessment checklist: a patient whose pain is controlled may still be worried about money or struggling with questions of meaning.<\/p><p><strong>End-of-life care<\/strong> is the part of palliative care given when death is expected in the near future. In Canada, \"hospice care\" and \"palliative care\" refer to the same thing; <strong>hospice<\/strong> is often used for care given in the community, and a hospice residence is one setting for care near the end of life (CHPCA, n.d.).<\/p><p>The <em>Framework<\/em> also describes a <strong>palliative approach<\/strong> to care: the core elements of palliative care are built into everyday care by providers who are not palliative specialists, early in the illness and in every setting. All providers, regulated or not, are expected to have foundational palliative skills, with specialists supporting them as needed (Health Canada, 2018). <strong>Specialist palliative care<\/strong> is given by interprofessional teams with advanced training, such as consult teams, palliative care units and hospice programs. The medical-surgical nurse provides the palliative approach and asks for a specialist consult when symptoms or distress remain hard to control.<\/p><h3>Illness Trajectories<\/h3><p>An <strong>illness trajectory<\/strong> is the usual pattern of a person's function over time as a serious illness progresses. Lynn and Adamson (2003) described three common patterns, and Murray et al. (2005) linked them to palliative care planning:<\/p><ul><li><strong>Short period of evident decline (typical of cancer):<\/strong> Function stays fairly good for a long time, then falls steeply over the final weeks.<\/li><li><strong>Long-term limitation with intermittent exacerbations (typical of heart failure and COPD):<\/strong> Serious flare-ups bring the person to hospital over years, each may leave them weaker, and death can come suddenly during one.<\/li><li><strong>Prolonged dwindling (typical of frailty and dementia):<\/strong> Function declines slowly from a low level, often over many years.<\/li><\/ul><p>The trajectories matter for timing. In cancer, the decline is fairly predictable but fast, so conversations should not wait for it. In organ failure, any exacerbation might be the last, so goals of care are discussed early and revisited after each admission. In frailty and dementia, the person may lose capacity long before death, so advance care planning happens while they can still share their wishes, and caregivers need support over many years (Lynn &amp; Adamson, 2003). Trajectories give patients and families a broad sense of what lies ahead, which can help them feel more in control (Murray et al., 2005).<\/p><h3>Access in Canada<\/h3><p>CIHI's 2023 report used data from Ontario, Alberta, British Columbia and Yukon (CIHI, 2023):<\/p><ul><li>In 2021–2022, 58% of people who died (about 89,000) were identified in CIHI's data as receiving palliative care, up from 52% in 2016–2017 (Ontario and Alberta only).<\/li><li>Of those, 61% received it in hospital only and 36% received palliative home care. Overall, 13% of all deaths took place at home with the support of palliative home care.<\/li><li>Half of patients died within 22 days after CIHI's data first identified them as palliative, so identification often comes late.<\/li><li>People with palliative home care spent fewer days in hospital in their last year (an average of 18 versus 28 days).<\/li><li>77% of people with cancer were identified as palliative, while people with dementia were the least likely to receive palliative care in their last year of life (39%); people aged 85 and older were less likely than younger people to receive it.<\/li><\/ul><p>Palliative needs are often recognized too late, especially in people without cancer. Noticing them earlier is part of the palliative approach.<\/p><aside class=\"box box-canadian-context\" aria-label=\"Canadian Context: A National Framework for Palliative Care\"><div class=\"box-type\">Canadian Context<\/div><h3>A National Framework for Palliative Care<\/h3><p>In December 2017, Parliament passed the <em>Framework on Palliative Care in Canada Act<\/em>, which required the federal Minister of Health to develop a national framework in consultation with the provinces, territories and palliative care providers (Health Canada, 2023). The <em>Framework on Palliative Care in Canada<\/em> was tabled on December 4, 2018. Its vision is that everyone in Canada who has a life-limiting illness can live well right up to the end of life, and it sets four priority areas: education and training for providers and caregivers, support for providers and caregivers, research and data, and equitable access (Health Canada, 2018).<\/p><p>The <em>Action Plan on Palliative Care<\/em> (2019) followed, with five goals: public awareness of palliative care and advance care planning; better skills and supports for providers, families and communities; better data and research; better access for underserved populations; and better access to culturally sensitive palliative care in Indigenous communities (Health Canada, 2019).<\/p><p>For nurses, the most direct effects are educational. The <em>Framework<\/em> supports developing mandatory palliative care courses in undergraduate health provider programs and expects every provider to have skills in the palliative approach, and the <em>Action Plan<\/em> called for a national interdisciplinary competency framework (Health Canada, 2018, 2019).<\/p><\/aside><h3>Equity and Culturally Safe Palliative Care<\/h3><p>Access to palliative care is not equal, and the causes are mostly structural. CIHI (2023) cites Canadian research suggesting that people of colour and recent immigrants may have poorer access and that many First Nations people lack access to palliative care programs. Because CIHI's data lack details such as race, religion and language, these gaps cannot be fully measured.<\/p><p><strong>First Nations, Inuit and Métis peoples.<\/strong> For many Indigenous Peoples, dying and death are a social and spiritual event honoured collectively, with roles for family, Elders, Knowledge Carriers and healers (Canadian Partnership Against Cancer [CPAC], 2022). Colonization and the residential school system continue to shape health and trust in health care (CPAC, 2022). Receiving care, and dying, at home is a central part of culturally safe end-of-life care, yet high transportation costs and inflexible travel policies can keep many Inuit from being with their families at the end of life (CPAC, 2024). The nurse uses a distinctions-based approach, asks the patient and family what they need, and supports Indigenous-led and community-based care. In Ontario, for example, Indigenous Navigators support and advocate for First Nations, Inuit, Métis and urban Indigenous patients with cancer and their families, including coordinating access to palliative and supportive care and attending to cultural and spiritual needs (Ontario Health, n.d.). Elders and Knowledge Carriers can be involved where available and when the patient wishes (Chapter 2).<\/p><p><strong>Rural and remote communities.<\/strong> Rural palliative patients were more often admitted to hospital mainly for palliative care than urban patients (36% versus 29%) (CIHI, 2023). Early planning for home supports, medications and after-hours crises can help a person stay home if they wish.<\/p><p><strong>People experiencing homelessness.<\/strong> A Canadian study described barriers to end-of-life care for people who are poor or unhoused: the daily struggle to survive, the normalizing of early death, lack of identification, providers' risk concerns and siloed services (Stajduhar et al., 2019). CIHI (2023) found that palliative patients experiencing homelessness were more likely to have longer hospital stays and to wait longer for discharge to a more suitable setting.<\/p><p><strong>2SLGBTQI+ people and chosen family.<\/strong> Many people rely on partners, friends or chosen family. In Ontario, these people can act as substitute decision-makers only if they rank highest in the legal hierarchy or are named in a power of attorney for personal care (Hospice Palliative Care Ontario [HPCO], n.d.). The nurse asks every patient who they consider family and encourages planning that names the right person.<\/p><p><strong>Newcomers and language.<\/strong> Serious news needs a professional interpreter, not a family member (Chapter 1, section 1.7), and the nurse asks how the patient prefers to receive information.<\/p>"}, {"id": "s10-2", "title": "10.2 Advance Care Planning and Goals of Care", "kind": "text", "html": "<h3>Three Different Conversations<\/h3><p>Ontario's guidance separates three conversations that are often blurred together (HPCO, n.d.):<\/p><ul><li><strong>Advance care planning (ACP):<\/strong> a voluntary process in which a capable person confirms or chooses their future substitute decision-maker and shares their wishes, values and beliefs about future care. It can happen at any age and in any state of health.<\/li><li><strong>Goals of care:<\/strong> a discussion, when a person is seriously ill, about their current illness, its likely course and what matters most to them, so that treatment options can be matched to their goals. It involves the patient or, if the patient is incapable, the substitute decision-maker, and it often takes more than one conversation.<\/li><li><strong>Informed consent:<\/strong> a decision about a specific treatment, made at the time it is proposed, by the capable patient or, if the patient is incapable of that decision, by the substitute decision-maker.<\/li><\/ul><p>The distinction matters because, in Ontario, wishes are not consent. Wishes guide the substitute decision-maker but cannot replace a decision by a person; a written form alone is not consent, apart from limited emergencies under the <em>Health Care Consent Act, 1996<\/em> (HPCO, n.d.). Wishes apply only if the person becomes incapable and should be reviewed after any major change in health. Chapter 1, section 1.5, explains capacity, the hierarchy and the emergency exception.<\/p><h3>Substitute Decision-Makers and Powers of Attorney<\/h3><p>A <strong>substitute decision-maker (SDM)<\/strong> is the person who makes health care decisions for a patient who is incapable of making a particular decision. In Ontario, a person who wants someone other than the highest-ranked relative to be their SDM prepares a <strong>power of attorney for personal care<\/strong>, a legal document under the <em>Substitute Decisions Act, 1992<\/em> that names an attorney to make personal care decisions, including health care, if the person becomes incapable (HPCO, n.d.). To make one, the person must be at least 16 years old and mentally capable, and it must be signed in front of two eligible witnesses (Government of Ontario, 2025; Ontario Ministry of the Attorney General, 2020). It is used only while the person is incapable, and for treatment decisions a health practitioner must first find the person incapable of that decision. The term \"living will\" is not used in Ontario law, although people may write down their wishes, including inside the power of attorney (Ontario Ministry of the Attorney General, 2020).<\/p><p>An SDM does not decide on the basis of their own preferences. They must follow the wishes the person expressed while capable that apply to the situation, unless following them is impossible. If no applicable wish is known, the SDM decides in the person's best interests, considering their values, beliefs and well-being (HPCO, n.d.; Ontario Ministry of the Attorney General, 2020). The <strong>Consent and Capacity Board<\/strong> is an independent Ontario tribunal that hears disputes about capacity and substitute decisions, including disputes about withdrawing life-sustaining treatment (College of Physicians and Surgeons of Ontario [CPSO], 2023a).<\/p><p>Other provinces and territories use different laws and terms. In Alberta, a <strong>personal directive<\/strong> names an agent who will make personal decisions that are not financial, and it takes effect only after the person is found to lack capacity (Government of Alberta, 2025). In British Columbia, a representation agreement names a representative, and an advance directive gives health care instructions that providers must follow when they address the care needed (Government of British Columbia, 2025). The nurse learns the law and employer policy where they practise.<\/p><h3>Serious Illness Conversations<\/h3><p>A <strong>serious illness conversation<\/strong> is a planned discussion with a seriously ill person about their understanding of the illness, their prognosis, their goals and fears, and the trade-offs they would or would not accept. The Serious Illness Conversation Guide, developed by Ariadne Labs and adopted by the BC Centre for Palliative Care, gives a structure that many Canadian teams use (Ariadne Labs, 2017). In plain terms, the clinician:<\/p><ul><li><strong>Sets up the conversation:<\/strong> explains its purpose and asks permission to talk.<\/li><li><strong>Explores understanding:<\/strong> asks what the person knows about their illness and how much information they want.<\/li><li><strong>Shares information:<\/strong> gives an honest outlook that holds both hope and worry, then pauses to let the person react.<\/li><li><strong>Explores what matters:<\/strong> goals, worries and fears, what gives the person strength, abilities so important that life without them would be unacceptable, trade-offs they would make for more time, and how much their family knows.<\/li><li><strong>Closes and documents:<\/strong> summarizes, recommends a plan that fits the person's priorities, affirms ongoing support, and records the conversation where other providers can find it.<\/li><\/ul><p>Nurses often hear the first cues: a patient who says \"I never want to go back to intensive care\" or a daughter who asks \"Is he dying?\" The nurse responds with curiosity, starts or invites a conversation about values, prepares the patient and family for a team meeting, sits in to clarify and support, and follows up. In Ontario, physicians are expected to begin goals-of-care discussions for patients with a significant illness who are at risk of deterioration, including explaining prognosis and treatment options (CPSO, 2023b); nurses support that discussion within their scope (Chapter 1, section 1.3). A professional interpreter is used whenever language is a barrier. Cultural safety means asking, not assuming: some patients want every detail, while others prefer that information go through family (Chapter 2). The nurse documents what was discussed, the patient's own words where helpful, and who took part.<\/p><h3>Resuscitation Decisions<\/h3><p>Cardiopulmonary resuscitation (CPR) is far less successful than many people expect. Only about 12% to 25% of patients who have a cardiac arrest in hospital survive to discharge, even with prompt CPR and defibrillation (Ottawa Hospital Research Institute, 2019). A Canadian-led systematic review and meta-analysis found that active cancer and chronic kidney disease (high-certainty evidence) and age 60 or older (low-certainty evidence) were associated with lower odds of survival (Fernando et al., 2019).<\/p><p>In Ontario, the CPSO policy <em>Decision-Making for End-of-Life Care<\/em> states that a physician may write an order not to provide CPR when they judge that its risk of harm outweighs its potential benefit. Because the decision is not considered a treatment, the patient's or SDM's consent is not required (CPSO, 2023b); the CPSO's companion <em>Advice to the Profession<\/em> links this position to a 2019 Ontario Superior Court decision, <em>Wawrzyniak v. Livingstone<\/em> (CPSO, 2023a). The physician must still consider the patient's wishes and values, tell the patient or SDM that the order will be written, explain the diagnosis, prognosis and reasons, and describe the care that will continue. If the patient or SDM disagrees, the physician may still write the order but must make reasonable efforts to support them, for example by identifying the reason for the disagreement, offering supportive services and, where available, a second opinion or an ethics consultation (CPSO, 2023b). Withdrawing other life-sustaining treatments is handled differently: the CPSO notes that in <em>Cuthbertson v. Rasouli<\/em> (2013), the Supreme Court of Canada affirmed that the Consent and Capacity Board is the appropriate body to decide disagreements between physicians and SDMs about withdrawing such treatment (CPSO, 2023a).<\/p><p>The nurse's role is practical and protective:<\/p><ul><li>Know each patient's code status at the start of every shift, and confirm that the written order matches what was discussed.<\/li><li>Clarify at once with the physician or nurse practitioner (NP) when the order is missing, unclear or conflicts with what the patient or family says.<\/li><li>Explain that a no-CPR order does not mean \"no care\": assessment, symptom relief and treatments that fit the goals continue.<\/li><li>Include code status in every handover and transfer.<\/li><\/ul>"}, {"id": "s10-3", "title": "10.3 Managing Symptoms", "kind": "text", "html": "<h3>Assessing Symptoms<\/h3><p>Symptoms are best assessed regularly and systematically, using the patient's own report whenever possible (Hui et al., 2021). The revised Edmonton Symptom Assessment System (ESAS-r), described in Chapter 9, rates common symptoms on a 0 to 10 scale. The Palliative Performance Scale (PPS) is often used alongside it to describe function. When a patient cannot self-report, the nurse uses an observational tool, such as the Pain Assessment in Advanced Dementia (PAINAD) scale for pain (Chapter 5) or the Respiratory Distress Observation Scale for breathlessness (Hui et al., 2021). Skin colour changes such as cyanosis or pallor are harder to see on darker skin, so the nurse also checks the lips, oral mucosa and nail beds and relies on the patient's report and breathing pattern (Chapter 12).<\/p><p>Cicely Saunders, who trained as a nurse, social worker and physician, observed that dying patients' pain often opened onto other kinds of suffering. She called this <strong>total pain<\/strong>: suffering with physical, psychological, social, emotional and spiritual parts (Clark, 1999). A patient whose pain \"won't settle\" may also be afraid, grieving or worried about their family. The nurse assesses all these parts and involves social work, spiritual care and other team members.<\/p><h3>Pain<\/h3><p>Pain is one of the most feared symptoms of serious illness. Its assessment and its treatment with non-opioids, opioids and adjuvant analgesics are covered in Chapter 5. WHO (2020) describes opioids as essential for managing pain and notes that they can also ease breathlessness. Started at a low dose, adjusted to the patient's response and monitored, opioids are a safe, standard treatment. Patients and families often worry about addiction, about \"saving\" opioids for later or about opioids hastening death; the Going Deeper box in section <a href=\"#s10-5\">10.5<\/a> examines these fears. Whenever an opioid is started, a laxative plan is started too (Chapter 5). The nurse reassesses pain after each dose, reports pain that stays uncontrolled, and remembers that unrelieved pain may also be total pain, needing more than an analgesic.<\/p><h3>Dyspnea<\/h3><p><strong>Dyspnea<\/strong> is the subjective experience of breathing discomfort. In serious illness it may come from the disease itself (lung tumour, pleural effusion, advanced COPD or heart failure), from a new problem such as pneumonia, anemia or pulmonary embolism, or from anxiety, which both causes and worsens breathlessness. Reversible causes are treated when treatment fits the patient's goals (Hui et al., 2021). Because breathlessness is subjective, the nurse asks the patient to rate it, for example on a 0 to 10 scale, and asks what triggers it and what it stops them from doing; oxygen saturation and respiratory rate alone do not show how distressing it is (Hui et al., 2021).<\/p><p>Non-drug measures come first and continue throughout:<\/p><ul><li><strong>Airflow:<\/strong> A fan directed at the face, specifically the cheek, is recommended by the American Society of Clinical Oncology (ASCO) guideline, based on evidence of intermediate quality (Hui et al., 2021).<\/li><li><strong>Position:<\/strong> Sitting upright or leaning forward on a table.<\/li><li><strong>Breathing and relaxation:<\/strong> Pursed-lip breathing, relaxation and distraction may help, although the evidence is weaker (Hui et al., 2021).<\/li><li><strong>Presence:<\/strong> A calm nurse who stays, speaks slowly and explains each step can ease the fear that feeds breathlessness.<\/li><\/ul><p>When these are not enough, systemic opioids are the drug class that the ASCO guideline recommends for dyspnea in advanced cancer, with close monitoring (Hui et al., 2021). Oxygen should be available for breathless patients who are hypoxemic (oxygen saturation of 90% or less on room air); when saturation is above 90%, the same guideline does not recommend oxygen, and a fan is offered instead. Benzodiazepines are not first-line treatment for dyspnea; they may be considered for anxiety related to breathlessness when opioids and non-drug measures are not enough (Hui et al., 2021). COPD and heart failure are discussed in Chapters 14 and 18.<\/p><h3>Nausea, Vomiting and Constipation<\/h3><p>Nausea and vomiting in advanced illness usually have identifiable causes, and several can occur together. Causes can be grouped as chemical or metabolic (drugs such as opioids, hypercalcemia, kidney or liver failure, infection), gastrointestinal (slow gastric emptying, bowel obstruction, constipation), cerebral (raised intracranial pressure, anxiety) and vestibular (nausea triggered by movement) (Cancer Care Ontario, 2010). The prescriber chooses an antiemetic that matches the likely cause; for example, a prokinetic drug for slow gastric emptying or a corticosteroid for raised intracranial pressure (<a href=\"#tbl-10-1\" class=\"xref\">Table 10.1<\/a>). For persistent nausea, the antiemetic is usually given regularly rather than only as needed, and a second drug acting on a different receptor may be added (Cancer Care Ontario, 2010). Bowel obstruction must be ruled out. Nursing measures include small, frequent, bland meals; cool or room-temperature foods; removing strong smells; fresh air; and mouth care after vomiting (Cancer Care Ontario, 2010).<\/p><p>Constipation is defined largely by the patient's experience, and it can cause pain, nausea, delirium and great distress (Larkin et al., 2008, 2018). Causes include opioids and many other drugs, immobility, weakness, low food and fluid intake, metabolic problems and lack of privacy. Because almost every patient taking an opioid needs a laxative, laxatives are started preventively, usually a softening agent with a stimulant; bulk-forming fibre is generally avoided in frail, seriously ill patients because it can worsen obstruction when fluid intake is low (Larkin et al., 2008). A peripherally acting opioid-receptor antagonist may be used when opioid-induced constipation does not respond to laxatives (Larkin et al., 2018). The nurse assesses bowel patterns every day, offers privacy and a commode rather than a bedpan where possible, and reports no bowel movement for more than 3 days, or as the unit's bowel protocol directs.<\/p><h3>Delirium, Fatigue, Anorexia and Cachexia<\/h3><p>Delirium is common in serious illness and is covered in Chapter 8. Its causes are sought and treated when that fits the patient's goals. In the last days of life, delirium may be part of dying and not reversible; this <strong>terminal delirium<\/strong> is managed for comfort and safety, as described in section <a href=\"#s10-5\">10.5<\/a>. Fatigue is also nearly universal. The nurse looks for treatable contributors, such as anemia, poor sleep, depression or medications, and helps the patient spend limited energy on what matters most to them (Chapter 9 discusses cancer-related fatigue).<\/p><p>Loss of appetite (anorexia) distresses families as much as patients. <strong>Cachexia<\/strong> is a syndrome of ongoing loss of skeletal muscle, with or without loss of fat, driven by reduced intake and abnormal metabolism; it cannot be fully reversed by usual nutritional support and leads to steadily worsening function (Fearon et al., 2011). An ASCO guideline suggests dietitian counselling, does not recommend routine tube feeding or parenteral nutrition in advanced cancer, and supports a brief trial of a corticosteroid or a progesterone analogue for patients with loss of appetite or weight (Roeland et al., 2020). The nurse offers small portions of preferred foods without pressure and helps families find other ways to show care.<\/p><p><strong>Artificial nutrition and hydration<\/strong> (tube feeding and intravenous or subcutaneous fluids) near the end of life is a medical treatment. Starting, continuing or stopping it is a values-based decision made through goals-of-care discussions and informed consent from the patient or SDM. Thirst and hunger near death are often brief, and mouth care eases dryness (Lam &amp; Lam, 2014).<\/p><h3>Respiratory Secretions<\/h3><p>In the last hours or days of life, some patients develop <strong>respiratory secretions<\/strong> that cause a noisy, rattling sound with each breath, often called the \"death rattle.\" It occurs when saliva and secretions pool in the upper airway because the person can no longer swallow or cough effectively; it is reported in about half of dying patients (Moons et al., 2024). In an observational study of 71 dying patients, those with a rattle showed no more signs of respiratory distress than those without it (Campbell &amp; Yarandi, 2013). Families, however, often find the sound very distressing (Moons et al., 2024).<\/p><p>Care focuses on comfort and on the family:<\/p><ul><li>Reposition the patient on their side, with the head raised slightly, to help secretions drain.<\/li><li>Give gentle mouth care. Deep suctioning is generally avoided because it can cause discomfort and rarely helps for long.<\/li><li>Explain to the family that the sound is a natural part of dying and that, based on current evidence, it does not appear to cause the patient distress. Invite them to sit close, hold the person's hand and keep talking to them.<\/li><li>Watch for true respiratory distress, such as grimacing, restlessness or laboured breathing, and treat it.<\/li><\/ul><p>Anticholinergic (antisecretory) drugs may be ordered. They seem to work best when started early, and they often do not quiet breathing once the rattle is established (Campbell &amp; Yarandi, 2013; Moons et al., 2024).<\/p><div class=\"tbl\" id=\"tbl-10-1\" tabindex=\"0\" role=\"region\" aria-label=\"Table 10.1\"><table><caption><strong>Table 10.1<\/strong> Common symptoms in serious illness: causes, comfort measures and drug classes (Cancer Care Ontario, 2010; Hui et al., 2021; Larkin et al., 2008; Moons et al., 2024; Roeland et al., 2020)<\/caption><thead><tr><th scope=\"col\">Symptom<\/th><th scope=\"col\">Common causes<\/th><th scope=\"col\">Comfort measures<\/th><th scope=\"col\">Drug classes the team may use<\/th><\/tr><\/thead><tbody><tr><th scope=\"row\">Pain<\/th><td>Tumour growth, bone or nerve involvement, procedures, immobility, constipation; psychological, social and spiritual distress (total pain)<\/td><td>Repositioning, supportive surfaces, relaxation, presence; attention to fears and spiritual needs<\/td><td>Non-opioid analgesics, opioids and adjuvant analgesics (Chapter 5)<\/td><\/tr><tr><th scope=\"row\">Dyspnea<\/th><td>Lung tumour, pleural effusion, advanced COPD or heart failure, pneumonia, anemia, pulmonary embolism, anxiety<\/td><td>Fan directed at the face, upright or forward-leaning position, pursed-lip breathing, relaxation, calm presence<\/td><td>Opioids; oxygen if hypoxemic; a benzodiazepine for related anxiety when other measures fail; treatment of reversible causes<\/td><\/tr><tr><th scope=\"row\">Nausea and vomiting<\/th><td>Opioids and other drugs, hypercalcemia, kidney or liver failure, slow gastric emptying, bowel obstruction, constipation, raised intracranial pressure, anxiety, motion<\/td><td>Small frequent bland meals, cool foods, no strong odours, fresh air, mouth care after vomiting<\/td><td>Chosen by cause: dopamine antagonists (including prokinetics), antihistamines, corticosteroids, serotonin (5-HT3) antagonists, benzodiazepines for anticipatory nausea<\/td><\/tr><tr><th scope=\"row\">Constipation<\/th><td>Opioids and other drugs, immobility, weakness, low intake, metabolic problems, lack of privacy<\/td><td>Daily bowel assessment, privacy, commode rather than bedpan, fluids and activity as tolerated<\/td><td>Softening (osmotic) and stimulant laxatives, often together; rectal measures if needed; peripherally acting opioid-receptor antagonists for opioid-induced constipation that does not respond<\/td><\/tr><tr><th scope=\"row\">Delirium<\/th><td>Drugs, infection, dehydration, metabolic changes, hypoxia, urinary retention, constipation, the dying process<\/td><td>Calm, well-lit room by day, reorientation, family presence, glasses and hearing aids, safety measures (Chapter 8)<\/td><td>Treatment of reversible causes when it fits the goals; antipsychotics for distressing symptoms in selected patients (Chapter 8)<\/td><\/tr><tr><th scope=\"row\">Fatigue<\/th><td>Disease progression, anemia, poor sleep, depression, drugs, cachexia<\/td><td>Energy conservation, rest periods, planning activities that matter most<\/td><td>Treatment of contributing causes, such as anemia or depression (Chapter 9)<\/td><\/tr><tr><th scope=\"row\">Anorexia and cachexia<\/th><td>Tumour-related metabolic change, nausea, mouth problems, taste changes, constipation, low mood<\/td><td>Small portions of preferred foods, no pressure to eat, mouth care, dietitian referral, family teaching<\/td><td>Brief trial of a corticosteroid or a progesterone analogue in some patients with advanced cancer<\/td><\/tr><tr><th scope=\"row\">Respiratory secretions<\/th><td>Saliva and secretions pooling in the upper airway when the person can no longer swallow or cough<\/td><td>Side-lying position, gentle mouth care, explanation and support for the family; deep suctioning generally avoided<\/td><td>Anticholinergic (antisecretory) drugs, which seem to work best when started early<\/td><\/tr><\/tbody><\/table><\/div><aside class=\"box box-clinical-judgment\" aria-label=\"Clinical Judgment: Breathless at Night\"><div class=\"box-type\">Clinical Judgment<\/div><h3>Breathless at Night<\/h3><p><em>Names and details are fictional; this is a composite story.<\/em><\/p><p>Gerald Bouchard, 78, has advanced COPD and is on a medical unit after his third admission this year. With his wife present, he has agreed with the team on goals of care focused on comfort, and he has a no-CPR order. At 0200, he presses the call bell, sitting slumped low in bed.<\/p><ul><li><strong>Recognize cues:<\/strong> He speaks in three-word phrases, uses his neck muscles to breathe and rates his breathlessness 8 out of 10. His respiratory rate is 30, he is afebrile and his oxygen saturation is within the range ordered for him. He says, \"I'm scared I'll suffocate.\"<\/li><li><strong>Analyze cues:<\/strong> His breathlessness is being worsened by his position and by panic. Nothing points to a new cause such as fever, chest pain or a sudden change in his chest sounds.<\/li><li><strong>Prioritize hypotheses:<\/strong> Relieving distressing dyspnea comes first, while watching for any new, reversible problem.<\/li><li><strong>Generate solutions:<\/strong> Sit him upright and leaning forward, direct a handheld fan at his face, coach pursed-lip breathing and stay with him. Give the as-needed opioid ordered for breathlessness.<\/li><li><strong>Take action:<\/strong> The nurse does all of this, speaking slowly and calmly, and dims the lights.<\/li><li><strong>Evaluate outcomes:<\/strong> After 30 minutes, he rates his breathlessness 4 out of 10, his respiratory rate is 22 and he is easy to rouse. The nurse continues to monitor his sedation and breathing (Chapter 5). If his symptoms had not eased, or if new signs had appeared, the nurse would notify the physician or NP at once; comfort-focused goals do not remove the duty to escalate (Chapter 6). He asks the nurse to call his wife in the morning. The nurse documents the episode and the response and adds a fan to his care plan.<\/li><\/ul><\/aside><aside class=\"box box-lifespan-considerations\" aria-label=\"Lifespan Considerations: Palliative Care for Older Adults and People Living With Dementia\"><div class=\"box-type\">Lifespan Considerations<\/div><h3>Palliative Care for Older Adults and People Living With Dementia<\/h3><p>Older adults, and people with dementia in particular, are less likely to receive palliative care. CIHI found that people aged 85 and older were less likely than younger adults to receive palliative care in their last year of life, and that people with dementia were the least likely to receive palliative care (39%), whereas 77% of people with cancer were identified as palliative (CIHI, 2023). Pain is often missed in people who cannot describe it, so the nurse uses an observational tool such as PAINAD (Chapter 5). Eating difficulties are part of the natural course of advanced dementia. In one large cohort, 85% of people with advanced dementia had them. Choosing Wisely Canada advises against recommending feeding tubes in advanced dementia and suggests offering oral feeding instead; careful hand-feeding appears to be as good as tube feeding for complications and survival (Lam &amp; Lam, 2014). These choices are best discussed with the person while they can still take part, and with their SDM well before a crisis admission; in one trial, a video decision aid gave SDMs more knowledge and less distress about feeding choices (Lam &amp; Lam, 2014). Chapter 8 covers dementia, delirium and frailty.<\/p><\/aside>"}, {"id": "s10-4", "title": "10.4 Medical Assistance in Dying", "kind": "text", "html": "<p><strong>Medical assistance in dying (MAID)<\/strong> is legal across Canada. Under the Criminal Code, it takes one of two forms, both at the person's request: a physician or NP gives the person a substance that causes death (<strong>clinician-administered MAID<\/strong>), or a physician or NP prescribes or provides a substance that the person takes themselves (<strong>self-administered MAID<\/strong>) (College of Nurses of Ontario [CNO], 2025). This book does not describe methods, drugs or doses. This section describes the law as of October 25, 2026. Because the law is changing, the nurse checks the current Criminal Code and CNO guidance before relying on any detail here.<\/p><h3>The Law in Canada<\/h3><p>In February 2015, the Supreme Court of Canada's decision in <em>Carter v. Canada<\/em> required Parliament to change the Criminal Code's prohibition on assisted dying (Department of Justice Canada, 2026). Bill C-14 received royal assent in June 2016 and placed the rules for MAID in sections 241.1 to 241.4 of the Criminal Code. After a Quebec court ruled in 2019 (<em>Truchon<\/em>) that limiting MAID to people whose natural death was reasonably foreseeable was unconstitutional, Bill C-7, in force in March 2021, removed that limit and created two sets of safeguards (CNO, 2025; Department of Justice Canada, 2026).<\/p><p>Aiding a person to die by suicide remains an offence. Physicians and NPs who provide MAID, and anyone who helps them, are exempt only when they act in accordance with section 241.2 (Criminal Code, 1985, s. 241). Ontario follows the federal eligibility rules and safeguards (Government of Ontario, 2024). Quebec also has its own statute, the <em>Act respecting end-of-life care<\/em> (CQLR, c. S-32.0001), which adds provincial rules.<\/p><h3>Eligibility<\/h3><p>A person must meet every one of these criteria (Criminal Code, 1985, s. 241.2(1)):<\/p><ul><li>qualify for publicly funded health services in Canada, or would qualify apart from a minimum period of residence or waiting period;<\/li><li>be 18 or older and capable of making decisions about their own health;<\/li><li>have a grievous and irremediable medical condition;<\/li><li>make a voluntary request that is not the result of outside pressure;<\/li><li>give informed consent after learning about the ways their suffering could be relieved, including palliative care.<\/li><\/ul><p>A <strong>grievous and irremediable medical condition<\/strong> has three parts, all of which must be present: an illness, disease or disability that is serious and incurable; an advanced, irreversible decline in capability; and enduring physical or psychological suffering that the person finds intolerable and that cannot be relieved in a way they consider acceptable (Criminal Code, 1985, s. 241.2(2)). Since 2021, a <strong>reasonably foreseeable natural death<\/strong> is no longer an eligibility criterion; it decides which safeguards apply. The request and consent must come from the person. A substitute decision-maker cannot request or consent to MAID for someone else (see Chapter 1, section 1.5).<\/p><p>Under section 241.2(2.1), a mental illness does not count as an illness, disease or disability for eligibility, so a person whose mental illness is their only underlying medical condition is not eligible. The exclusion does not cover neurocognitive or neurodevelopmental disorders (Department of Justice Canada, 2026). Bill C-62 (S.C. 2024, c. 1), which received royal assent on February 29, 2024, extended the exclusion until March 17, 2027. On October 7, 2026, Justice Minister Sean Fraser said that the government would not go ahead with the expansion and intends to introduce legislation later in the fall of 2026 to keep the exclusion in place indefinitely (Rana, 2026). As of October 25, 2026, no such bill had been introduced. Students should check the current law, because this part may change soon.<\/p><h3>Safeguards<\/h3><p>Health Canada's reports call the two pathways <strong>Track 1<\/strong> (natural death is reasonably foreseeable) and <strong>Track 2<\/strong> (natural death is not reasonably foreseeable). Both require a written request signed before an independent witness, two independent assessments and the chance to withdraw; Track 2 adds further steps (<a href=\"#tbl-10-2\" class=\"xref\">Table 10.2<\/a>). The witness must be an adult who understands the request and does not benefit from the death or run the facility. A paid health or personal care worker, including a nurse, may act as witness unless they are assessing or providing MAID (Criminal Code, 1985, s. 241.2(5), (5.1); CNO, 2025).<\/p><p>In Track 2, at least 90 clear days must pass between the start of the first assessment and the day MAID is provided. The period may be shortened only when both assessments are complete and both practitioners consider the person's loss of capacity imminent (Criminal Code, 1985, s. 241.2(3.1)). If neither assessor has expertise in the condition causing the suffering, they must consult someone who does. The person must also be told about counselling, mental health and disability supports, community services and palliative care.<\/p><p>Just before MAID is provided, the person must have the chance to withdraw and must confirm consent. In Track 1 only, a person at risk of losing capacity before the chosen date may arrange in writing for a <strong>waiver of final consent<\/strong>, often called Audrey's Amendment. The arrangement no longer applies if the person, after losing capacity, shows refusal or resistance through words, sounds or gestures; reflexes and other involuntary movements do not count (Department of Justice Canada, 2026).<\/p><p>Practitioners report MAID requests and assessments under federal monitoring regulations, which since January 1, 2023, also collect data on race, Indigenous identity and disability so that inequality can be studied (Department of Justice Canada, 2026). In Ontario, NPs also report every MAID death to the Office of the Chief Coroner (CNO, 2025).<\/p><div class=\"tbl\" id=\"tbl-10-2\" tabindex=\"0\" role=\"region\" aria-label=\"Table 10.2\"><table><caption><strong>Table 10.2<\/strong> MAID eligibility and safeguards: Track 1 and Track 2 compared (Department of Justice Canada, 2026; Criminal Code, 1985)<\/caption><thead><tr><th scope=\"col\">Element<\/th><th scope=\"col\">Track 1: natural death reasonably foreseeable<\/th><th scope=\"col\">Track 2: natural death not reasonably foreseeable<\/th><\/tr><\/thead><tbody><tr><th scope=\"row\">Eligibility criteria<\/th><td>Same five criteria for both tracks: government-funded health services; 18 or older and capable; grievous and irremediable condition; voluntary request; informed consent. Mental illness as the sole underlying condition is excluded until March 17, 2027 (check for changes)<\/td><td>Same as Track 1<\/td><\/tr><tr><th scope=\"row\">Written request and witness<\/th><td>Signed and dated request before one independent witness; the person is told they may withdraw at any time<\/td><td>Same as Track 1<\/td><\/tr><tr><th scope=\"row\">Assessments<\/th><td>Two independent physicians or NPs each confirm in writing that the criteria are met<\/td><td>Two independent physicians or NPs; added discussion of means to relieve suffering and agreement that the person has seriously considered them<\/td><\/tr><tr><th scope=\"row\">Minimum assessment period<\/th><td>None (the former 10-day reflection period was removed in 2021)<\/td><td>At least 90 clear days from the start of the first assessment to the day MAID is provided; shorter only if both assessments are complete and loss of capacity is imminent<\/td><\/tr><tr><th scope=\"row\">Expertise consultation<\/th><td>Not required<\/td><td>Required if neither assessor has expertise in the condition causing the suffering<\/td><\/tr><tr><th scope=\"row\">Final consent and waiver<\/th><td>Express consent just before provision; may be waived by written arrangement if loss of capacity is a risk<\/td><td>Express consent just before provision; no waiver<\/td><\/tr><tr><th scope=\"row\">Reporting<\/th><td>Practitioners report under federal monitoring regulations; in Ontario, MAID deaths are reported to the Office of the Chief Coroner<\/td><td>Same as Track 1<\/td><\/tr><\/tbody><\/table><\/div><h3>MAID in Numbers<\/h3><p>Health Canada's <em>Sixth Annual Report on Medical Assistance in Dying in Canada<\/em> describes 2024 (Health Canada, 2025). That year, 16,499 people received MAID, which was 5.1% of all deaths in Canada and 6.9% more than in 2023. Of these, 15,767 (95.6%) were Track 1 and 732 (4.4%) were Track 2. Cancer was the most common underlying condition in Track 1 (63.6%), while neurological and \"other\" conditions were cited most often in Track 2. In both tracks, the most commonly reported source of suffering was loss of the ability to take part in meaningful activities. NPs made up 6.8% of the 2,266 practitioners who provided MAID.<\/p><h3>Nurses and MAID<\/h3><p>Only physicians and NPs may assess eligibility and provide MAID. An NP who provides MAID also reports it and ensures that unused medication is safely disposed of (CNO, 2025). RNs and RPNs may not assess eligibility or give the substance. They may help the physician or NP, for example by inserting an intravenous line when ordered, and they teach, comfort and support the patient and family before, during and after MAID. The Criminal Code protects anyone who helps a physician or NP provide MAID lawfully (Criminal Code, 1985, s. 241(3)).<\/p><p>Counselling a person to die by suicide remains a criminal offence. However, a health care professional who gives information about the lawful provision of MAID commits no offence (Criminal Code, 1985, s. 241(5.1)). Nurses who give information must not encourage or pressure a patient to choose MAID (CNO, 2025). When a patient raises MAID, the nurse listens, explores what lies behind the question, answers factually and tells the NP or physician so that all options, including palliative care, can be offered. In Ontario, the provincial <strong>Care Coordination Service<\/strong> gives information about MAID and other options at the end of life and accepts self-referrals as well as referrals from clinicians (Government of Ontario, 2024).<\/p><p>No one can be compelled to provide or assist with MAID (Criminal Code, 1985, s. 241.2(9)). A nurse who declines for reasons of conscience is making a <strong>conscientious objection<\/strong>. CNO (2025) expects the nurse not to share the objection with the patient or express moral judgments, to transfer the patient's care to another nurse or provider (the employer can help find one), and to keep giving all other nursing care until a replacement takes over. The patient is never abandoned. Physicians and NPs who object must refer the patient in a timely manner to another physician or NP who provides MAID (CNO, 2025; Government of Ontario, 2024).<\/p><p>The nurse documents care, teaching and the patient's own words about any request (Chapter 1, section 1.5). The nurse uses neutral terms such as \"MAID\", avoids language that judges the person's choice and respects every patient and family, whatever they decide. MAID can affect nurses deeply, whatever their views; debriefing and peer support help (section <a href=\"#s10-6\">10.6<\/a>).<\/p><aside class=\"box box-scope-in-practice\" aria-label=\"Scope in Practice: Nurses&#x27; Roles in MAID and Pronouncing Death\"><div class=\"box-type\">Scope in Practice<\/div><h3>Nurses' Roles in MAID and Pronouncing Death<\/h3><p>CNO's Scope of Practice standard asks every nurse to consider authority, competence and context (Chapter 1, section 1.3).<\/p><ul><li><strong>Authority:<\/strong> The Criminal Code allows only physicians and NPs to assess eligibility and provide MAID. RNs and RPNs may aid them, give information and give care, and may act as an independent witness, but may never give the substance (CNO, 2025).<\/li><li><strong>Competence:<\/strong> The nurse takes part only in activities they have the knowledge, skill and judgment to do safely, such as intravenous (IV) insertion, family support and teaching.<\/li><li><strong>Context:<\/strong> Employer policy may narrow these roles, and the law and regulator guidance differ by province and territory.<\/li><li><strong>Conscientious objection:<\/strong> Hand care over to another nurse or provider (the employer can help), say nothing judgmental, and keep giving other care until a replacement takes over.<\/li><li><strong>Pronouncing death:<\/strong> In Ontario, no legal requirement bars RNs or RPNs from pronouncing death; the nurse checks the employer's policy on who may do it (CNO, n.d.-a). <strong>Pronouncement of death<\/strong> is different from certifying death.<\/li><li><strong>Certifying death:<\/strong> NPs may complete the medical certificate of death in broad circumstances, including in hospitals. Since July 1, 2025, RNs (General Class) may certify certain expected deaths, but not in public hospitals and never after MAID (CNO, n.d.-b). Physicians also certify death.<\/li><\/ul><\/aside>"}, {"id": "s10-5", "title": "10.5 The Last Days and Care After Death", "kind": "text", "html": "<p>In the last days of life, care focuses fully on comfort, dignity and the people at the bedside. This section builds on the goals-of-care conversations in section <a href=\"#s10-2\">10.2<\/a> and the symptom management in section <a href=\"#s10-3\">10.3<\/a>. It describes how the nurse recognizes that death is near, gives comfort care, and acts when death occurs.<\/p><h3>Recognizing That Death Is Near<\/h3><p>Some signs appear days or weeks before death, and others usually appear only in the last few days. The Registered Nurses' Association of Ontario (RNAO, 2011) lists common signs of imminent death. They include:<\/p><ul><li>sleeping much of the time, and a lower level of consciousness not explained by another cause;<\/li><li>progressive weakness and being bedbound;<\/li><li>difficulty swallowing and taking little food or fluid;<\/li><li>changes in breathing pattern, including pauses (<strong>apnea<\/strong>) and <strong>Cheyne-Stokes respiration<\/strong>, a cycle of deepening and then shallower breaths followed by a pause;<\/li><li>noisy breathing from secretions in the throat;<\/li><li>cooling and mottling of the extremities;<\/li><li>less urine, or darker urine;<\/li><li><strong>delirium<\/strong> with no reversible cause.<\/li><\/ul><p>In a study of 357 people with advanced cancer in two palliative care units, reduced consciousness, low function and trouble swallowing liquids appeared early but did not predict the timing of death well. Five signs mostly appeared in the final 3 days of life and strongly predicted death within that time: no radial pulse, breathing with movement of the jaw, reduced urine output, Cheyne-Stokes breathing and noisy breathing from secretions, often called the \"death rattle\" (Hui et al., 2014). Noisy breathing affects about one in three dying people; across studies, death followed its onset after a median of 11 to 28 hours (Lokker et al., 2014).<\/p><p><strong>Mottling<\/strong> is a patchy, lace-like discolouration of the skin caused by poor blood flow, often first seen over the knees. It can be hard to see on darker skin; one study of mottling excluded patients with dark skin because it could not be scored (Bourcier et al., 2017). The nurse does not rely on colour alone: they feel the hands, feet and knees for coolness and compare them with the trunk, look at the nail beds and lips, and ask the family what they have noticed (see Chapter 4, section 4.6).<\/p><p>Restlessness near death has many causes. <strong>Terminal restlessness<\/strong> is agitation or delirium in the last days that has no reversible cause. Before using that label, the nurse looks for causes that can be treated, such as pain, a full bladder, constipation or a medication effect (see section <a href=\"#s10-3\">10.3<\/a> and Chapter 8).<\/p><p>When these signs appear, the nurse tells the physician or NP and the family. The team then reviews orders so that they match the patient's goals.<\/p><h3>Comfort Care<\/h3><p>Comfort care keeps what helps and stops what does not. With the physician or NP, and as policy and orders allow, the team stops interventions that no longer serve the patient's goals. Examples include routine vital signs, blood tests, repositioning schedules designed to prevent problems in the future rather than to give comfort, and medications that no longer give a benefit. Interventions that relieve symptoms continue (<a href=\"#tbl-10-3\" class=\"xref\">Table 10.3<\/a>).<\/p><ul><li><strong>Mouth care:<\/strong> Moisten and clean the mouth and lips often; a dry mouth is common when a person breathes through the mouth and takes little fluid.<\/li><li><strong>Positioning:<\/strong> Turn the person for comfort, and place them on their side with the head slightly raised to help secretions drain.<\/li><li><strong>Skin and eyes:<\/strong> Keep skin clean and dry and use pressure-relieving surfaces; moisten dry eyes.<\/li><li><strong>Medications:<\/strong> Give them by a route the person can tolerate. When swallowing fails, the team often uses the <strong>subcutaneous<\/strong> route, as single doses or a continuous subcutaneous infusion, through a small indwelling needle or catheter.<\/li><li><strong>Presence and privacy:<\/strong> Offer a private room if possible, flexible visiting and a chair or bed for family.<\/li><li><strong>Spiritual care:<\/strong> Ask what matters to the patient and family, offer the chaplain or the family's own spiritual leader, and respect cultural and religious practices (RNAO, 2011; see Chapter 2).<\/li><li><strong>Family teaching:<\/strong> Explain what is happening and what to expect, and check what the family has understood (RNAO, 2011).<\/li><\/ul><p>No studies have tested suctioning, repositioning or explanation for noisy breathing in the dying person (Lokker et al., 2014). Deep suctioning is invasive and is generally avoided. Gentle suction of the mouth only, repositioning and calm explanation are reasonable comfort measures.<\/p><div class=\"tbl\" id=\"tbl-10-3\" tabindex=\"0\" role=\"region\" aria-label=\"Table 10.3\"><table><caption><strong>Table 10.3<\/strong> Signs that death is approaching and comfort actions (Hui et al., 2014; Lokker et al., 2014; RNAO, 2011)<\/caption><thead><tr><th scope=\"col\">Sign<\/th><th scope=\"col\">What the family may notice<\/th><th scope=\"col\">Comfort actions<\/th><\/tr><\/thead><tbody><tr><th scope=\"row\">More sleep, less response<\/th><td>Hard to wake; may not open eyes or speak<\/td><td>Keep talking to the person gently; encourage the family to sit close, hold hands and speak to them<\/td><\/tr><tr><th scope=\"row\">Little or no intake; trouble swallowing<\/th><td>Stops eating and drinking; coughs with sips<\/td><td>Stop oral intake that causes coughing; frequent mouth and lip care; explain that loss of appetite is part of dying<\/td><\/tr><tr><th scope=\"row\">Breathing changes<\/th><td>Pauses in breathing; deep then shallow breaths; jaw moves with each breath<\/td><td>Raise head of bed; explain the pattern to the family; give opioid for distressing breathlessness as ordered<\/td><\/tr><tr><th scope=\"row\">Noisy breathing from secretions<\/th><td>Gurgling or rattling sound with each breath<\/td><td>Turn onto side; gentle mouth suction only; give anticholinergic as ordered; explain that the sound probably does not distress the person<\/td><\/tr><tr><th scope=\"row\">Cool, mottled skin<\/th><td>Hands, feet and knees cool, blotchy or darker; harder to see on dark skin<\/td><td>Light covers; avoid heating pads; check nail beds, lips and limb temperature<\/td><\/tr><tr><th scope=\"row\">Less urine<\/th><td>Little urine; dark urine<\/td><td>Check for a full bladder; keep skin clean and dry; use pads or a catheter if more comfortable<\/td><\/tr><tr><th scope=\"row\">Restlessness or agitation<\/th><td>Picking at covers, moaning, trying to get up<\/td><td>Look for pain or a full bladder; calm, quiet room; familiar voices; medication as ordered; tell the prescriber<\/td><\/tr><\/tbody><\/table><\/div><aside class=\"box box-medications\" aria-label=\"Medications: Anticipatory Medications at End of Life\"><div class=\"box-type\">Medications<\/div><h3>Anticipatory Medications at End of Life<\/h3><p><strong>Anticipatory medications<\/strong> are drugs ordered in advance, before symptoms arise, so that a dying person can get relief at any hour without waiting for a new order. Professionals believe the practice gives reassurance, controls symptoms and prevents crisis transfers to hospital, but a systematic review found the research evidence for these benefits inadequate (Bowers et al., 2019). They are typically ordered for five common symptoms: pain, breathlessness, nausea and vomiting, agitation, and noisy respiratory secretions (Bowers et al., 2023). The prescriber chooses a drug class for each (see section <a href=\"#s10-3\">10.3<\/a>):<\/p><ul><li>an opioid for pain and for breathlessness;<\/li><li>an antiemetic for nausea and vomiting;<\/li><li>an antipsychotic, or sometimes a benzodiazepine, for terminal delirium or agitation, as the prescriber decides;<\/li><li>an anticholinergic (antimuscarinic) for respiratory secretions; evidence that these drugs reduce noisy breathing is weak (Lokker et al., 2014).<\/li><\/ul><p>Most are given subcutaneously. The nurse:<\/p><ul><li>assesses the symptom and looks for reversible causes first;<\/li><li>gives the drug as ordered;<\/li><li>evaluates and documents the effect;<\/li><li>tells the prescriber if relief is inadequate;<\/li><li>teaches the family what each drug is for.<\/li><\/ul><\/aside><h3>When Death Occurs<\/h3><p>When the patient dies, the nurse notes the time of death and follows policy on who pronounces death (see the Scope in Practice box in section <a href=\"#s10-4\">10.4<\/a>). The nurse informs the physician or NP and the family, if they are not present, using the contact plan agreed on earlier (RNAO, 2011). Family members need time with the person. The nurse offers privacy, a chair and the chance to touch, hold or pray.<\/p><p>Some deaths must be reported to the coroner. In Ontario, these include deaths that occur suddenly and unexpectedly and deaths that appear to result from an accident, suicide or homicide (Government of Ontario, 2026). A coroner may also become involved when there are concerns about the care a person received before death. A death that appears to result from a fall, which is an accident, is reported even when the patient was receiving palliative care. If a family member raises concerns about the care or treatment the person received, CNO advises nurses not to certify the death, and the threshold for involving the coroner is low (CNO, n.d.-b). The nurse escalates any doubt to the physician or NP and follows hospital policy.<\/p><p>Ontario hospitals designated under the <em>Gift of Life Act<\/em> (1990) must notify Ontario Health (Trillium Gift of Life Network) of patient deaths, and of patients who meet referral indicators before death. For patients who are not on a ventilator, these indicators include a planned discussion about withdrawing or limiting life-sustaining therapy, planned palliation and expected death within an hour. For these patients, notification after death is due within 1 hour. Some patients who cannot donate organs may still be able to donate tissue (Trillium Gift of Life Network, n.d.). Staff do not raise donation with the family before Trillium has checked eligibility and registered consent. If the family asks, the nurse offers to connect them with a donation specialist.<\/p><p>The care of the body follows hospital policy and the wishes of the patient and family. Practices differ widely, so the nurse asks rather than assumes. Some families want to wash or dress the body themselves or with members of their faith community. Some want a spiritual leader present, prayers said, or the body moved quickly so that burial can take place soon. Others want the body left undisturbed for a time. The nurse removes lines and tubes as policy allows; if the death is reportable to the coroner, the nurse checks policy first, because lines and tubes may need to stay in place. The nurse gently closes the eyes and mouth, and labels and documents the body and belongings carefully.<\/p><aside class=\"box box-patient-education\" aria-label=\"Patient Education: What Families Can Expect in the Last Days\"><div class=\"box-type\">Patient Education<\/div><h3>What Families Can Expect in the Last Days<\/h3><ul><li>Your family member will sleep more and may be hard to wake. Keep talking to them gently; your voice and touch can still bring comfort.<\/li><li>They will eat and drink very little. This is part of dying, not starvation. Small sips or mouth swabs keep the mouth moist.<\/li><li>Breathing may change. There may be pauses, or deep breaths followed by shallow ones.<\/li><li>A gurgling sound may come from saliva in the throat. Experts doubt that this sound distresses the dying person (Lokker et al., 2014), but it can upset those who hear it. Turning them onto their side may help.<\/li><li>Hands and feet may feel cool and change colour. A light blanket is enough.<\/li><li>They may become restless. Tell the nurse; there are things that help.<\/li><li>Call the nurse at any time if you are worried. At home, keep the palliative team's 24-hour number close by.<\/li><li>It is all right to rest, eat and step out. Some people die when their family has left the room for a moment, and that is no one's failure.<\/li><\/ul><\/aside><aside class=\"box box-going-deeper\" aria-label=\"Going Deeper: Palliative Sedation and the &quot;Double Effect&quot; Myth\"><div class=\"box-type\">Going Deeper<\/div><h3>Palliative Sedation and the \"Double Effect\" Myth<\/h3><p><em>Required for RN students; optional for PN students.<\/em><\/p><p><strong>Palliative sedation<\/strong> is the closely monitored use of medications to reduce consciousness, in proportion to need, so as to relieve refractory suffering in a person with a life-limiting disease (Surges et al., 2024). Refractory means it cannot be relieved by other means or is intolerable to the patient. Canadian palliative care physicians published a consensus framework for continuous palliative sedation (Dean et al., 2012); the revised European framework stresses these points:<\/p><ul><li><strong>Proportionality:<\/strong> Drugs are titrated to the lowest dose that gives adequate relief, and lighter or intermittent sedation comes first where possible.<\/li><li><strong>Monitoring:<\/strong> Comfort and sedation are assessed with tools such as the Richmond Agitation-Sedation Scale–Palliative version, and the rationale and planned depth are documented.<\/li><li><strong>Aim:<\/strong> To ease suffering that nothing else relieves, never to end life sooner. This sets it apart from MAID, which ends life at a capable person's request.<\/li><\/ul><p>Many people believe that end-of-life opioids or sedation hasten death. A systematic review found that palliative sedation, when properly indicated and used, was not associated with shorter survival (Maltoni et al., 2012). A review of opioids given to control symptoms in advanced cancer and the last days of life likewise found no link with survival (López-Saca et al., 2013). No randomized trials exist, so this evidence has limits.<\/p><p>The <strong>principle of double effect<\/strong> holds that an act aimed at a good effect can be acceptable despite a foreseen but unintended harmful effect. The harm must not be the means to the good, and the act must be proportionate. Some authors argue that the principle does not fit palliative sedation, because properly used sedation has not been shown to hasten death and intentions are often mixed (Faris et al., 2021; Maltoni et al., 2012). Fear of hastening death should not stop a nurse from giving ordered symptom relief.<\/p><\/aside>"}, {"id": "s10-6", "title": "10.6 Grief and Caring for Ourselves", "kind": "text", "html": "<p>Death ends one person's life and changes many others. Families grieve, and so do nurses. This section describes grief and bereavement, and how nurses care for themselves and one another.<\/p><h3>Grief and Bereavement<\/h3><p><strong>Grief<\/strong> is the emotional, physical and spiritual response to loss. <strong>Bereavement<\/strong> is the state of having lost someone through death. <strong>Anticipatory grief<\/strong> begins before the death, as the patient and family face losses that are coming: abilities, roles, plans and, finally, life. Families may feel sadness, guilt, relief and exhaustion all at once. The nurse acknowledges these feelings as normal.<\/p><p>Grief usually brings intense sadness, longing, disturbed sleep and trouble concentrating for a time, and it eases gradually. Typical grief is not a disorder, and most people's grief lessens without treatment (American Psychiatric Association [APA], n.d.). In 2022, the APA added <strong>prolonged grief disorder<\/strong> to the <em>Diagnostic and Statistical Manual of Mental Disorders<\/em>, fifth edition, text revision (DSM-5-TR). It describes grief that stays intense and disabling long after a death: at least 12 months for adults (6 months for children and adolescents). Along with intense longing for, or preoccupation with, the person who died, the person has at least three of these symptoms nearly every day for at least the last month:<\/p><ul><li>a sense that part of themselves has died;<\/li><li>strong disbelief about the death;<\/li><li>avoiding reminders that the person has died;<\/li><li>intense emotional pain;<\/li><li>difficulty re-engaging with people and activities;<\/li><li>emotional numbness;<\/li><li>a sense that life is meaningless;<\/li><li>intense loneliness.<\/li><\/ul><p>The grief causes significant distress or impairment and lasts longer than the person's cultural, religious or social norms would lead others to expect. An estimated 4% to 15% of adults who are bereaved have persistent symptoms (APA, n.d.). Grief-focused psychotherapy can help. The nurse does not diagnose the disorder but can recognize grief that is not easing and suggest the person speak with their primary care provider.<\/p><p>Grief is expressed in many ways. Mourning rituals, the expression of emotion and beliefs about what happens after death vary across cultures, faiths and families, and suffering takes its meaning from these traditions (RNAO, 2011; see Chapter 2). Some families grieve openly and loudly; others grieve quietly or in private. Neither pattern shows more or less love, and the nurse asks rather than assumes.<\/p><p>At the bedside, the nurse supports families by explaining what is happening, inviting them to take part in care if they wish, and allowing time after the death. Before the family leaves, the nurse gives practical information on next steps and on bereavement resources, such as hospital or hospice bereavement programs and the Canadian Virtual Hospice (virtualhospice.ca).<\/p><h3>Nurses' Wellbeing<\/h3><p>Caring for dying patients is meaningful work, and it is also demanding. Nurses grieve patients they have known, especially after long admissions, sudden deaths or deaths that did not go as hoped. A death at work can also stir up a nurse's own past losses. RNAO (2011) encourages nurses to reflect on their own attitudes and feelings about death, because this self-awareness supports both their care and their own coping.<\/p><p><strong>Moral distress<\/strong> was first described as knowing the right thing to do while institutional constraints make acting on it nearly impossible (Jameton, as cited in Morley et al., 2020). Researchers now describe it more broadly. It is psychological distress, such as anger, frustration, guilt or powerlessness, caused by a moral event: a constraint, a conflict, a dilemma, uncertainty or tension (Morley et al., 2020). In end-of-life care, it can arise when treatment seems to prolong suffering, when symptoms are poorly controlled, or when staffing prevents a nurse from being present. Unaddressed, it is linked to withdrawal from patients and to nurses leaving their jobs or the profession (Morley et al., 2020).<\/p><p><strong>Compassion fatigue<\/strong> describes the emotions and behaviours that can result from repeatedly learning about, and caring for, other people's suffering and trauma. It overlaps with burnout and secondary traumatic stress. Heavy workloads, low resilience and long, intense stress raise the risk. Supportive colleagues, adequate staffing and a positive practice environment lower it (Noor et al., 2025).<\/p><p>RNAO (2011) recommends that nurses' education include self-care and coping strategies and reflection on death and dying, and that organizations recognize nurses' wellbeing as a critical part of quality end-of-life care. Helpful supports include:<\/p><ul><li>a brief team debrief or pause after a death;<\/li><li>peer support and mentorship;<\/li><li>the employer's employee and family assistance program;<\/li><li>spiritual care staff;<\/li><li>clear ethics consultation for moral questions;<\/li><li>sleep, rest, exercise and time away from work.<\/li><\/ul><p>A nurse who notices lasting sadness, numbness, irritability or dread about going to work is encouraged to speak with a manager, colleague or health professional.<\/p><aside class=\"box box-practice-story\" aria-label=\"Practice Story: &quot;We Sat With Her&quot;\"><div class=\"box-type\">Practice Story<\/div><h3>\"We Sat With Her\"<\/h3><p><em>Names and details are fictional; this is a composite story.<\/em><\/p><p>Nurse: Priya Raman, RN. Years in practice: 6. Setting: medical unit, community hospital, Ontario.<\/p><p>Mrs. Halina Sobczak was 91, and her goals were comfort only. At 0200 her breathing became wet and noisy, and she began pulling at her blanket and calling out in Polish. Her only son lived in Calgary.<\/p><p>I checked her first: no full bladder, no grimace when I moved her, a mouth that was very dry. I turned her onto her side, cleaned her mouth and gave the anticholinergic and the antipsychotic from her anticipatory orders. I paged the NP to say that she was now actively dying and that her son needed to know.<\/p><p>Martin, the RPN on my team, stayed with her while I called her son. He asked if he could see her. Our unit had a tablet for video calls, and I booked a Polish interpreter by phone so that he could understand everything I said and ask his own questions. On the screen he said goodbye to her in Polish. Her hand moved on the sheet when she heard his voice. Afterward, he asked for one thing: that a rosary from her bag be placed in her hands and that someone pray with her. Martin found the rosary. The night chaplain came and prayed with her, and the interpreter stayed on the line so that her son could pray too.<\/p><p>By 0400 she was calm and quiet. Martin and I took turns sitting with her between our other patients. She died at 0520 with my hand on her shoulder. I phoned her son, and the interpreter helped us through that call.<\/p><p>Driving home, I cried. I had only known her for one night. At our huddle the next evening, our manager asked how the night had gone, and Martin said, \"We sat with her.\" It helped to say it out loud.<\/p><p>Reflect: How did the RN and the RPN share this patient's care, and which tasks fell within each nurse's scope? What supports would help you after a night like this?<\/p><\/aside>"}, {"id": "summary", "title": "Summary", "kind": "text", "html": "<h3>Introduction<\/h3><ul><li>For most people in Canada, death follows a progressive illness, and many receive palliative care in hospital only (CIHI, 2023).<\/li><li>Every nurse gives palliative care; this chapter covers the palliative approach, planning, symptoms, MAID, the last days and grief.<\/li><\/ul><h3><a href=\"#s10-1\">10.1 The Palliative Approach<\/a><\/h3><ul><li>Palliative care relieves physical, psychological, social and spiritual suffering for patients and families, from diagnosis onward, not only at the end of life.<\/li><li>The palliative approach builds palliative principles into everyday care by all providers, with specialists for complex needs.<\/li><li>Three illness trajectories (cancer, organ failure, frailty and dementia) guide when to start and revisit conversations.<\/li><li>CIHI found that 58% of people who died in 2021–2022 in four jurisdictions were identified as receiving palliative care, often late and, for most, in hospital only; people with dementia and those aged 85 and older were less likely to receive it.<\/li><li>Equitable care is distinctions-based for First Nations, Inuit and Métis peoples and attends to rural residents, people experiencing homelessness, chosen family and language.<\/li><\/ul><h3><a href=\"#s10-2\">10.2 Advance Care Planning and Goals of Care<\/a><\/h3><ul><li>In Ontario, advance care planning, goals-of-care discussions and informed consent are separate conversations; wishes are not consent.<\/li><li>SDMs follow applicable wishes the person expressed while capable, otherwise the person's best interests; a power of attorney for personal care names a chosen SDM.<\/li><li>Other provinces use instruments such as Alberta's personal directive and British Columbia's advance directive and representation agreement.<\/li><li>Nurses notice cues, start and support serious illness conversations, use professional interpreters and document what matters to the patient.<\/li><li>Under CPSO policy, a no-CPR order does not require consent, but the physician must inform, explain and support; the nurse confirms and clarifies code status.<\/li><\/ul><h3><a href=\"#s10-3\">10.3 Managing Symptoms<\/a><\/h3><ul><li>Symptoms are assessed regularly with self-report tools such as ESAS-r, or observational tools when the patient cannot report, and with attention to total pain.<\/li><li>For dyspnea, a fan to the face, positioning, breathing techniques and calm presence come first; opioids are the main drug class, and oxygen is for hypoxemia.<\/li><li>Antiemetics are matched to the cause of nausea, and laxatives are started whenever an opioid is started.<\/li><li>Cachexia cannot be fully reversed by feeding; artificial nutrition and hydration is a values-based treatment decision.<\/li><li>Noisy respiratory secretions near death do not appear to distress the patient; repositioning, mouth care and family explanation are the core of care.<\/li><\/ul><h3><a href=\"#s10-4\">10.4 Medical Assistance in Dying<\/a><\/h3><ul><li>MAID is legal across Canada under the Criminal Code (Bill C-14, 2016; Bill C-7, 2021). It may be clinician-administered or self-administered, and only physicians and NPs may assess and provide it.<\/li><li>Eligibility: government-funded health services; 18 or older and capable; a grievous and irremediable condition; a voluntary request; and informed consent. Mental illness as the sole underlying condition is excluded until March 17, 2027, and the government announced on October 7, 2026, that it intends to extend the exclusion indefinitely. Check the current law.<\/li><li>Track 1 (natural death reasonably foreseeable) and Track 2 (not reasonably foreseeable) both need a witnessed written request and two independent assessments. Track 2 adds expert consultation when needed, discussion of other means of relief and at least 90 clear days. Final consent may be waived only in Track 1.<\/li><li>In 2024, MAID was provided to 16,499 people (5.1% of deaths in Canada); 4.4% were Track 2.<\/li><li>RNs and RPNs may aid, inform and care, but never counsel or encourage MAID or give the substance. Nurses who object transfer care through the employer without abandoning the patient. Ontario's Care Coordination Service accepts self-referrals.<\/li><\/ul><h3><a href=\"#s10-5\">10.5 The Last Days and Care After Death<\/a><\/h3><ul><li>Signs that death is near include more sleep, little intake, breathing pauses, noisy secretions, cool mottled skin, less urine and restlessness. Reduced urine output, Cheyne-Stokes breathing and noisy breathing strongly suggest death within about 3 days.<\/li><li>Mottling is hard to see on darker skin, so check temperature, nail beds and lips as well.<\/li><li>Comfort care stops interventions that no longer help and focuses on mouth care, positioning, subcutaneous medications, presence and teaching. Anticipatory medications are ordered in advance so that relief can be given at any hour.<\/li><li>In Ontario, reportable deaths (for example, sudden, unexpected or accidental deaths) go to the coroner, and designated hospitals notify Trillium Gift of Life Network of deaths and of referral indicators. Ask the family about cultural and religious practices for care of the body.<\/li><li>Palliative sedation is proportional and monitored, and it differs from MAID. Properly used opioids and sedation have not been shown to shorten life (Going Deeper).<\/li><\/ul><h3><a href=\"#s10-6\">10.6 Grief and Caring for Ourselves<\/a><\/h3><ul><li>Anticipatory grief begins before death. Typical grief is not a disorder, and its expression varies across cultures and families.<\/li><li>Prolonged grief disorder (DSM-5-TR) is disabling grief lasting at least 12 months in adults and exceeding cultural norms.<\/li><li>Nurses experience grief, moral distress and compassion fatigue. Debriefing, peer support, employee assistance and self-care help, and organizations share responsibility for nurses' wellbeing.<\/li><\/ul>"}, {"id": "terms", "title": "Key Terms", "kind": "terms", "html": ""}, {"id": "case-1", "title": "Case: Tomas Reyes", "kind": "case", "html": "", "qids": ["q1", "q2", "q3", "q4"], "case": "Tomas Reyes, 84, has advanced heart failure and lives alone in Kingston, Ontario. He was admitted to a medical unit 5 days ago and has become drowsy and confused; the physician has found him incapable of making treatment decisions. Two years ago, Mr. Reyes made a power of attorney for personal care naming his niece, Lena, as his attorney. He also has a son who lives in another province. The team has arranged a goals-of-care meeting with Lena."}, {"id": "practice-2", "title": "Practice Questions 10.1–10.3", "kind": "questions", "html": "", "qids": ["q5", "q6", "q7", "q8", "q9"], "case": ""}, {"id": "case-3", "title": "Case: Mrs. Evelyn Baptiste", "kind": "case", "html": "", "qids": ["q10", "q11", "q12", "q13", "q14", "q15"], "case": "Mrs. Evelyn Baptiste, 88, has advanced lung cancer and is on a medical unit. Her goals of care are comfort only, and there is a do-not-resuscitate order. Anticipatory subcutaneous orders include an opioid, an antipsychotic and an anticholinergic, as needed. At 0300 her breathing is noisy and gurgling, with pauses of up to 20 seconds. She is moaning, picking at her sheets and trying to climb out of bed. She has taken nothing by mouth for 2 days and has not voided for 9 hours. Her feet and knees are cool. Her daughter, at the bedside, is crying and says, \"She's choking. Please do something.\""}, {"id": "practice-4", "title": "Practice Questions 10.4–10.6", "kind": "questions", "html": "", "qids": ["q16", "q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24", "q25", "q26", "q27", "q28", "q29", "q30"], "case": ""}, {"id": "references", "title": "References", "kind": "text", "html": "<div class=\"refs\"><p>Act respecting end-of-life care, CQLR, c. S-32.0001. <a href=\"https://www.legisquebec.gouv.qc.ca/en/document/cs/S-32.0001\" target=\"_blank\" rel=\"noopener\">https://www.legisquebec.gouv.qc.ca/en/document/cs/S-32.0001<\/a><\/p><p>An Act to amend the Criminal Code and to make related amendments to other Acts (medical assistance in dying), S.C. 2016, c. 3 (Bill C-14). <a href=\"https://laws-lois.justice.gc.ca/eng/annualstatutes/2016_3/\" target=\"_blank\" rel=\"noopener\">https://laws-lois.justice.gc.ca/eng/annualstatutes/2016_3/<\/a><\/p><p>An Act to amend the Criminal Code (medical assistance in dying), S.C. 2021, c. 2 (Bill C-7). <a href=\"https://laws-lois.justice.gc.ca/eng/annualstatutes/2021_2/\" target=\"_blank\" rel=\"noopener\">https://laws-lois.justice.gc.ca/eng/annualstatutes/2021_2/<\/a><\/p><p>An Act to amend An Act to amend the Criminal Code (medical assistance in dying), No. 2, S.C. 2024, c. 1 (Bill C-62). <a href=\"https://laws-lois.justice.gc.ca/eng/annualstatutes/2024_1/\" target=\"_blank\" rel=\"noopener\">https://laws-lois.justice.gc.ca/eng/annualstatutes/2024_1/<\/a><\/p><p>American Psychiatric Association. (n.d.). <em>Prolonged grief disorder<\/em>. Retrieved October 25, 2026, from <a href=\"https://www.psychiatry.org/patients-families/prolonged-grief-disorder\" target=\"_blank\" rel=\"noopener\">https://www.psychiatry.org/patients-families/prolonged-grief-disorder<\/a><\/p><p>Ariadne Labs. (2017). <em>Serious illness conversation guide<\/em> [Adapted for use by the BC Centre for Palliative Care; trifold for health care providers]. <a href=\"https://divisionsbc.ca/sites/default/files/54759/SIC-Trifold-for-Health-Care-Providers.pdf\" target=\"_blank\" rel=\"noopener\">https://divisionsbc.ca/sites/default/files/54759/SIC-Trifold-for-Health-Care-Providers.pdf<\/a><\/p><p>Bourcier, S., Joffre, J., Dubée, V., Preda, G., Baudel, J.-L., Bigé, N., Leblanc, G., Levy, B. I., Guidet, B., Maury, E., &amp; Ait-Oufella, H. (2017). Marked regional endothelial dysfunction in mottled skin area in patients with severe infections. <em>Critical Care, 21<\/em>(1), Article 155. <a href=\"https://doi.org/10.1186/s13054-017-1742-x\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1186/s13054-017-1742-x<\/a><\/p><p>Bowers, B., Howard, P., Madden, B., Pollock, K., &amp; Barclay, S. (2023). Is end-of-life anticipatory prescribing always enough? <em>BMJ, 381<\/em>, Article p1106. <a href=\"https://doi.org/10.1136/bmj.p1106\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1136/bmj.p1106<\/a><\/p><p>Bowers, B., Ryan, R., Kuhn, I., &amp; Barclay, S. (2019). Anticipatory prescribing of injectable medications for adults at the end of life in the community: A systematic literature review and narrative synthesis. <em>Palliative Medicine, 33<\/em>(2), 160–177. <a href=\"https://doi.org/10.1177/0269216318815796\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1177/0269216318815796<\/a><\/p><p>Campbell, M. L., &amp; Yarandi, H. N. (2013). Death rattle is not associated with patient respiratory distress: Is pharmacologic treatment indicated? <em>Journal of Palliative Medicine<\/em>, <em>16<\/em>(10), 1255–1259. <a href=\"https://doi.org/10.1089/jpm.2013.0122\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1089/jpm.2013.0122<\/a><\/p><p>Canadian Hospice Palliative Care Association. (2013). <em>A model to guide hospice palliative care: Based on national principles and norms of practice<\/em> (Rev. and condensed ed.). <a href=\"https://chpca.ca/wp-content/uploads/2024/07/norms-of-practice-eng-web.pdf\" target=\"_blank\" rel=\"noopener\">https://chpca.ca/wp-content/uploads/2024/07/norms-of-practice-eng-web.pdf<\/a><\/p><p>Canadian Hospice Palliative Care Association. (n.d.). <em>About hospice palliative care<\/em>. <a href=\"https://www.chpca.ca/about-hpc/\" target=\"_blank\" rel=\"noopener\">https://www.chpca.ca/about-hpc/<\/a><\/p><p>Canadian Institute for Health Information. (2023). <em>Access to palliative care in Canada, 2023<\/em>. <a href=\"https://secure.cihi.ca/free_products/access-to-palliative-care-in-canada-2023-report-en.pdf\" target=\"_blank\" rel=\"noopener\">https://secure.cihi.ca/free_products/access-to-palliative-care-in-canada-2023-report-en.pdf<\/a><\/p><p>Canadian Partnership Against Cancer. (2022). <em>Beginning the journey into the spirit world: First Nations, Inuit and Métis approaches to palliative and end-of-life care in Canada<\/em>. <a href=\"https://www.partnershipagainstcancer.ca/topics/indigenous-palliative-care-approaches/\" target=\"_blank\" rel=\"noopener\">https://www.partnershipagainstcancer.ca/topics/indigenous-palliative-care-approaches/<\/a><\/p><p>Canadian Partnership Against Cancer. (2024). <em>Did your loved one receive culturally appropriate palliative and end-of-life care?<\/em> <a href=\"https://www.partnershipagainstcancer.ca/cancer-strategy/strategic-priorities/priorities-and-indicators/culturally-appropriate-end-of-life-care/\" target=\"_blank\" rel=\"noopener\">https://www.partnershipagainstcancer.ca/cancer-strategy/strategic-priorities/priorities-and-indicators/culturally-appropriate-end-of-life-care/<\/a><\/p><p>Cancer Care Ontario. (2010). <em>Symptom management guide-to-practice: Nausea and vomiting<\/em>. <a href=\"https://cancercareontario.ca/system/files_force/symptoms/CCONauseaVomitFull.pdf?download=1\" target=\"_blank\" rel=\"noopener\">https://cancercareontario.ca/system/files_force/symptoms/CCONauseaVomitFull.pdf?download=1<\/a><\/p><p>Clark, D. (1999). \"Total pain,\" disciplinary power and the body in the work of Cicely Saunders, 1958–1967. <em>Social Science &amp; Medicine<\/em>, <em>49<\/em>(6), 727–736. <a href=\"https://doi.org/10.1016/S0277-9536(99)00098-2\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1016/S0277-9536(99)00098-2<\/a><\/p><p>College of Nurses of Ontario. (2019a). <em>Entry-to-practice competencies for registered nurses<\/em> (Pub. No. 41037). <a href=\"https://cno.org/Assets/CNO/Documents/Become-a-Nurse/41037-entry-to-practice-competencies-2020.pdf\" target=\"_blank\" rel=\"noopener\">https://cno.org/Assets/CNO/Documents/Become-a-Nurse/41037-entry-to-practice-competencies-2020.pdf<\/a><\/p><p>College of Nurses of Ontario. (2019b). <em>Entry-to-practice competencies for registered practical nurses<\/em> (Pub. No. 41042). <a href=\"https://www.cno.org/Assets/CNO/Documents/Become-a-Nurse/41042_entrypracrpn-2020.pdf\" target=\"_blank\" rel=\"noopener\">https://www.cno.org/Assets/CNO/Documents/Become-a-Nurse/41042_entrypracrpn-2020.pdf<\/a><\/p><p>College of Nurses of Ontario. (2025). <em>Guidance on nurses' roles in medical assistance in dying<\/em> (Pub. No. 41056). <a href=\"https://cno.org/Assets/CNO/Documents/Standard-and-Learning/Practice-Standards/41056-guidance-on-nurses-roles-in-maid.pdf\" target=\"_blank\" rel=\"noopener\">https://cno.org/Assets/CNO/Documents/Standard-and-Learning/Practice-Standards/41056-guidance-on-nurses-roles-in-maid.pdf<\/a><\/p><p>College of Nurses of Ontario. (n.d.-a). <em>Can an RN or RPN pronounce death when death has occurred?<\/em> Retrieved October 25, 2026, from <a href=\"https://cno.org/standards-learning/ask-practice/can-an-rn-or-rpn-pronounce-death-when-death-has-occurred\" target=\"_blank\" rel=\"noopener\">https://cno.org/standards-learning/ask-practice/can-an-rn-or-rpn-pronounce-death-when-death-has-occurred<\/a><\/p><p>College of Nurses of Ontario. (n.d.-b). <em>Certifying death<\/em>. Retrieved October 25, 2026, from <a href=\"https://cno.org/standards-learning/certifying-death\" target=\"_blank\" rel=\"noopener\">https://cno.org/standards-learning/certifying-death<\/a><\/p><p>College of Physicians and Surgeons of Ontario. (2023a). <em>Advice to the profession: End-of-life care<\/em>. <a href=\"https://www.cpso.on.ca/physicians/policies-guidance/policies/decision-making-for-end-of-life-care/advice-to-the-profession-end-of-life-care\" target=\"_blank\" rel=\"noopener\">https://www.cpso.on.ca/physicians/policies-guidance/policies/decision-making-for-end-of-life-care/advice-to-the-profession-end-of-life-care<\/a><\/p><p>College of Physicians and Surgeons of Ontario. (2023b). <em>Decision-making for end-of-life care<\/em> [Policy]. <a href=\"https://www.cpso.on.ca/en/physicians/policies-guidance/policies/decision-making-for-end-of-life-care\" target=\"_blank\" rel=\"noopener\">https://www.cpso.on.ca/en/physicians/policies-guidance/policies/decision-making-for-end-of-life-care<\/a><\/p><p>Criminal Code, R.S.C. 1985, c. C-46. <a href=\"https://laws-lois.justice.gc.ca/eng/acts/c-46/\" target=\"_blank\" rel=\"noopener\">https://laws-lois.justice.gc.ca/eng/acts/c-46/<\/a><\/p><p>Dean, M. M., Cellarius, V., Henry, B., Oneschuk, D., &amp; Librach, S. L. (2012). Framework for continuous palliative sedation therapy in Canada. <em>Journal of Palliative Medicine, 15<\/em>(8), 870–879. <a href=\"https://doi.org/10.1089/jpm.2011.0498\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1089/jpm.2011.0498<\/a><\/p><p>Department of Justice Canada. (2026). <em>Canada's medical assistance in dying (MAID) law<\/em>. <a href=\"https://www.justice.gc.ca/eng/cj-jp/ad-am/bk-di.html\" target=\"_blank\" rel=\"noopener\">https://www.justice.gc.ca/eng/cj-jp/ad-am/bk-di.html<\/a><\/p><p>Faris, H., Dewar, B., Dyason, C., Dick, D. G., Matthewson, A., Lamb, S., &amp; Shamy, M. C. F. (2021). Goods, causes and intentions: Problems with applying the doctrine of double effect to palliative sedation. <em>BMC Medical Ethics, 22<\/em>(1), Article 141. <a href=\"https://doi.org/10.1186/s12910-021-00709-0\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1186/s12910-021-00709-0<\/a><\/p><p>Fearon, K., Strasser, F., Anker, S. D., Bosaeus, I., Bruera, E., Fainsinger, R. L., Jatoi, A., Loprinzi, C., MacDonald, N., Mantovani, G., Davis, M., Muscaritoli, M., Ottery, F., Radbruch, L., Ravasco, P., Walsh, D., Wilcock, A., Kaasa, S., &amp; Baracos, V. E. (2011). Definition and classification of cancer cachexia: An international consensus. <em>The Lancet Oncology<\/em>, <em>12<\/em>(5), 489–495. <a href=\"https://doi.org/10.1016/S1470-2045(10)70218-7\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1016/S1470-2045(10)70218-7<\/a><\/p><p>Fernando, S. M., Tran, A., Cheng, W., Rochwerg, B., Taljaard, M., Vaillancourt, C., Rowan, K. M., Harrison, D. A., Nolan, J. P., Kyeremanteng, K., McIsaac, D. I., Guyatt, G. H., &amp; Perry, J. J. (2019). Pre-arrest and intra-arrest prognostic factors associated with survival after in-hospital cardiac arrest: Systematic review and meta-analysis. <em>BMJ<\/em>, <em>367<\/em>, Article l6373. <a href=\"https://doi.org/10.1136/bmj.l6373\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1136/bmj.l6373<\/a><\/p><p>Gift of Life Act, R.S.O. 1990, c. H.20. <a href=\"https://www.ontario.ca/laws/statute/90h20\" target=\"_blank\" rel=\"noopener\">https://www.ontario.ca/laws/statute/90h20<\/a><\/p><p>Government of Alberta. (2025). <em>Personal directive<\/em>. <a href=\"https://www.alberta.ca/personal-directive\" target=\"_blank\" rel=\"noopener\">https://www.alberta.ca/personal-directive<\/a><\/p><p>Government of British Columbia. (2025). <em>Advance care planning<\/em>. <a href=\"https://www2.gov.bc.ca/gov/content/family-social-supports/seniors/health-safety/advance-care-planning\" target=\"_blank\" rel=\"noopener\">https://www2.gov.bc.ca/gov/content/family-social-supports/seniors/health-safety/advance-care-planning<\/a><\/p><p>Government of Ontario. (2024). <em>Medical assistance in dying and end-of-life decisions<\/em>. <a href=\"https://www.ontario.ca/page/medical-assistance-dying-and-end-life-decisions\" target=\"_blank\" rel=\"noopener\">https://www.ontario.ca/page/medical-assistance-dying-and-end-life-decisions<\/a><\/p><p>Government of Ontario. (2025). <em>Make a power of attorney<\/em>. <a href=\"https://www.ontario.ca/page/make-power-attorney\" target=\"_blank\" rel=\"noopener\">https://www.ontario.ca/page/make-power-attorney<\/a><\/p><p>Government of Ontario. (2026). <em>Death investigations<\/em>. <a href=\"https://www.ontario.ca/page/death-investigations\" target=\"_blank\" rel=\"noopener\">https://www.ontario.ca/page/death-investigations<\/a><\/p><p>Health Canada. (2018). <em>Framework on palliative care in Canada<\/em>. <a href=\"https://www.canada.ca/en/health-canada/services/health-care-system/reports-publications/palliative-care/framework-palliative-care-canada.html\" target=\"_blank\" rel=\"noopener\">https://www.canada.ca/en/health-canada/services/health-care-system/reports-publications/palliative-care/framework-palliative-care-canada.html<\/a><\/p><p>Health Canada. (2019). <em>Action plan on palliative care<\/em>. <a href=\"https://www.canada.ca/en/health-canada/services/health-care-system/reports-publications/palliative-care/action-plan-palliative-care.html\" target=\"_blank\" rel=\"noopener\">https://www.canada.ca/en/health-canada/services/health-care-system/reports-publications/palliative-care/action-plan-palliative-care.html<\/a><\/p><p>Health Canada. (2023). <em>Palliative care: What we're doing<\/em>. <a href=\"https://www.canada.ca/en/health-canada/services/health-services-benefits/palliative-care/what-we-re-doing.html\" target=\"_blank\" rel=\"noopener\">https://www.canada.ca/en/health-canada/services/health-services-benefits/palliative-care/what-we-re-doing.html<\/a><\/p><p>Health Canada. (2025). <em>Sixth annual report on medical assistance in dying in Canada, 2024<\/em>. <a href=\"https://www.canada.ca/en/health-canada/services/publications/health-system-services/annual-report-medical-assistance-dying-2024.html\" target=\"_blank\" rel=\"noopener\">https://www.canada.ca/en/health-canada/services/publications/health-system-services/annual-report-medical-assistance-dying-2024.html<\/a><\/p><p>Hospice Palliative Care Ontario. (n.d.). <em>What are advance care planning, goals of care discussions and health care consent?<\/em> (Caregiver Support Education, Topic 7). <a href=\"https://caregiversupport.hpco.ca/ocp/what-are-advance-care-planning-goals-of-care-discussions-and-health-care-consent/\" target=\"_blank\" rel=\"noopener\">https://caregiversupport.hpco.ca/ocp/what-are-advance-care-planning-goals-of-care-discussions-and-health-care-consent/<\/a><\/p><p>Hui, D., Bohlke, K., Bao, T., Campbell, T. C., Coyne, P. J., Currow, D. C., Gupta, A., Leiser, A. L., Mori, M., Nava, S., Reinke, L. F., Roeland, E. J., Seigel, C., Walsh, D., &amp; Campbell, M. L. (2021). Management of dyspnea in advanced cancer: ASCO guideline. <em>Journal of Clinical Oncology<\/em>, <em>39<\/em>(12), 1389–1411. <a href=\"https://doi.org/10.1200/JCO.20.03465\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1200/JCO.20.03465<\/a><\/p><p>Hui, D., dos Santos, R., Chisholm, G., Bansal, S., Silva, T. B., Kilgore, K., Crovador, C. S., Yu, X., Swartz, M. D., Perez-Cruz, P. E., Leite, R. de A., Nascimento, M. S. de A., Reddy, S., Seriaco, F., Yennu, S., Paiva, C. E., Dev, R., Hall, S., Fajardo, J., &amp; Bruera, E. (2014). Clinical signs of impending death in cancer patients. <em>The Oncologist, 19<\/em>(6), 681–687. <a href=\"https://doi.org/10.1634/theoncologist.2013-0457\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1634/theoncologist.2013-0457<\/a><\/p><p>Lam, R. E., &amp; Lam, P. J. (2014). Nutrition in dementia. <em>CMAJ<\/em>, <em>186<\/em>(17), 1319. <a href=\"https://doi.org/10.1503/cmaj.141217\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1503/cmaj.141217<\/a><\/p><p>Larkin, P. J., Cherny, N. I., La Carpia, D., Guglielmo, M., Ostgathe, C., Scotté, F., &amp; Ripamonti, C. I. (2018). Diagnosis, assessment and management of constipation in advanced cancer: ESMO clinical practice guidelines. <em>Annals of Oncology<\/em>, <em>29<\/em>(Suppl. 4), iv111–iv125. <a href=\"https://doi.org/10.1093/annonc/mdy148\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1093/annonc/mdy148<\/a><\/p><p>Larkin, P. J., Sykes, N. P., Centeno, C., Ellershaw, J. E., Elsner, F., Eugene, B., Gootjes, J. R. G., Nabal, M., Noguera, A., Ripamonti, C., Zucco, F., &amp; Zuurmond, W. W. A. (2008). The management of constipation in palliative care: Clinical practice recommendations. <em>Palliative Medicine<\/em>, <em>22<\/em>(7), 796–807. <a href=\"https://doi.org/10.1177/0269216308096908\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1177/0269216308096908<\/a><\/p><p>Lokker, M. E., van Zuylen, L., van der Rijt, C. C. D., &amp; van der Heide, A. (2014). Prevalence, impact, and treatment of death rattle: A systematic review. <em>Journal of Pain and Symptom Management, 47<\/em>(1), 105–122. <a href=\"https://doi.org/10.1016/j.jpainsymman.2013.03.011\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1016/j.jpainsymman.2013.03.011<\/a><\/p><p>Lynn, J., &amp; Adamson, D. M. (2003). <em>Living well at the end of life: Adapting health care to serious chronic illness in old age<\/em> (WP-137). RAND Corporation. <a href=\"https://doi.org/10.7249/WP137\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.7249/WP137<\/a><\/p><p>López-Saca, J. M., Guzmán, J. L., &amp; Centeno, C. (2013). A systematic review of the influence of opioids on advanced cancer patient survival. <em>Current Opinion in Supportive and Palliative Care, 7<\/em>(4), 424–430. <a href=\"https://doi.org/10.1097/SPC.0b013e328365763a\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1097/SPC.0b013e328365763a<\/a><\/p><p>Maltoni, M., Scarpi, E., Rosati, M., Derni, S., Fabbri, L., Martini, F., Amadori, D., &amp; Nanni, O. (2012). Palliative sedation in end-of-life care and survival: A systematic review. <em>Journal of Clinical Oncology, 30<\/em>(12), 1378–1383. <a href=\"https://doi.org/10.1200/JCO.2011.37.3795\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1200/JCO.2011.37.3795<\/a><\/p><p>Moons, L., De Roo, M. L., Deschodt, M., &amp; Oldenburger, E. (2024). Death rattle: Current experiences and non-pharmacological management—A narrative review. <em>Annals of Palliative Medicine<\/em>, <em>13<\/em>(1), 150–161. <a href=\"https://doi.org/10.21037/apm-23-507\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.21037/apm-23-507<\/a><\/p><p>Morley, G., Bradbury-Jones, C., &amp; Ives, J. (2020). What is 'moral distress' in nursing? A feminist empirical bioethics study. <em>Nursing Ethics, 27<\/em>(5), 1297–1314. <a href=\"https://doi.org/10.1177/0969733019874492\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1177/0969733019874492<\/a><\/p><p>Murray, S. A., Kendall, M., Boyd, K., &amp; Sheikh, A. (2005). Illness trajectories and palliative care. <em>BMJ<\/em>, <em>330<\/em>(7498), 1007–1011. <a href=\"https://doi.org/10.1136/bmj.330.7498.1007\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1136/bmj.330.7498.1007<\/a><\/p><p>Noor, A. M., Suryana, D., Kamarudin, E. M. E., Naidu, N. B. M., Kamsani, S. R., . . . Govindasamy, P. (2025). Compassion fatigue in helping professions: A scoping literature review. <em>BMC Psychology, 13<\/em>, Article 349. <a href=\"https://doi.org/10.1186/s40359-024-01869-5\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1186/s40359-024-01869-5<\/a><\/p><p>Ontario Health. (n.d.). <em>Indigenous navigators<\/em> [Cancer Care Ontario]. <a href=\"https://cancercareontario.ca/node/33676\" target=\"_blank\" rel=\"noopener\">https://cancercareontario.ca/node/33676<\/a><\/p><p>Ontario Ministry of the Attorney General, Office of the Public Guardian and Trustee. (2020). <em>Powers of attorney Q&amp;As<\/em> (Original work published 2007). <a href=\"https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/300629.pdf\" target=\"_blank\" rel=\"noopener\">https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/300629.pdf<\/a><\/p><p>Ottawa Hospital Research Institute. (2019, December 4). <em>How likely are you to survive a hospital cardiac arrest? Newly identified risk factors can help<\/em> [News release]. <a href=\"https://ohri.ca/en/newsroom/how-likely-are-you-survive-hospital-cardiac-arrest-newly-identified-risk-factors-can-help\" target=\"_blank\" rel=\"noopener\">https://ohri.ca/en/newsroom/how-likely-are-you-survive-hospital-cardiac-arrest-newly-identified-risk-factors-can-help<\/a><\/p><p>Rana, U. (2026, October 7). <em>Canada won't expand MAID for mental illness alone, minister says<\/em>. Global News. <a href=\"https://globalnews.ca/news/12091165/canada-maid-mental-illness/\" target=\"_blank\" rel=\"noopener\">https://globalnews.ca/news/12091165/canada-maid-mental-illness/<\/a><\/p><p>Registered Nurses' Association of Ontario. (2011). <em>End-of-life care during the last days and hours<\/em>. <a href=\"https://rnao.ca/media/6023/download\" target=\"_blank\" rel=\"noopener\">https://rnao.ca/media/6023/download<\/a><\/p><p>Roeland, E. J., Bohlke, K., Baracos, V. E., Bruera, E., del Fabbro, E., Dixon, S., Fallon, M., Herrstedt, J., Lau, H., Platek, M., Rugo, H. S., Schnipper, H. H., Smith, T. J., Tan, W., &amp; Loprinzi, C. L. (2020). Management of cancer cachexia: ASCO guideline. <em>Journal of Clinical Oncology<\/em>, <em>38<\/em>(21), 2438–2453. <a href=\"https://doi.org/10.1200/JCO.20.00611\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1200/JCO.20.00611<\/a><\/p><p>Stajduhar, K. I., Mollison, A., Giesbrecht, M., McNeil, R., Pauly, B., Reimer-Kirkham, S., Dosani, N., Wallace, B., Showler, G., Meagher, C., Kvakic, K., Gleave, D., Teal, T., Rose, C., Showler, C., &amp; Rounds, K. (2019). \"Just too busy living in the moment and surviving\": Barriers to accessing health care for structurally vulnerable populations at end-of-life. <em>BMC Palliative Care<\/em>, <em>18<\/em>(1), Article 11. <a href=\"https://doi.org/10.1186/s12904-019-0396-7\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1186/s12904-019-0396-7<\/a><\/p><p>Surges, S. M., Brunsch, H., Jaspers, B., Apostolidis, K., Cardone, A., Centeno, C., Cherny, N., Csikós, Á., Fainsinger, R., Garralda, E., Ling, J., Menten, J., Mercadante, S., Mosoiu, D., Payne, S., Preston, N., Van den Block, L., Hasselaar, J., &amp; Radbruch, L. (2024). Revised European Association for Palliative Care (EAPC) recommended framework on palliative sedation: An international Delphi study. <em>Palliative Medicine, 38<\/em>(2), 213–228. <a href=\"https://doi.org/10.1177/02692163231220225\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1177/02692163231220225<\/a><\/p><p>Trillium Gift of Life Network. (n.d.). <em>Routine notification for designated hospitals: Frequently asked questions for healthcare professionals<\/em>. Ontario Health. <a href=\"https://www.giftoflife.on.ca/resources/pdf/Routine%20Notification.pdf\" target=\"_blank\" rel=\"noopener\">https://www.giftoflife.on.ca/resources/pdf/Routine%20Notification.pdf<\/a><\/p><p>World Health Organization. (2020, August 5). <em>Palliative care<\/em> [Fact sheet]. <a href=\"https://www.who.int/news-room/fact-sheets/detail/palliative-care\" target=\"_blank\" rel=\"noopener\">https://www.who.int/news-room/fact-sheets/detail/palliative-care<\/a><\/p><\/div>"}, {"id": "about", "title": "About This Book", "kind": "about", "html": ""}], "questions": [{"tag": "Core", "stem": "The physician proposes inserting a feeding tube for Mr. Reyes. From whom must the team obtain consent?", "opts": ["Mr. Reyes's son, because he is Mr. Reyes's closest living relative", "No one, because Mr. Reyes wrote down his wishes when he was capable", "Lena, because she is named as his attorney for personal care", "The physician, who may decide in an incapable patient's best interests"], "ans": ["c"], "rat": "In Ontario, consent for a treatment proposed for an incapable patient comes from the substitute decision-maker at the time of the decision, and a person named in a power of attorney for personal care ranks above relatives (section <a href=\"#s10-2\">10.2<\/a>; Chapter 1, section 1.5). The son (a) ranks below the named attorney. Written wishes (b) guide the SDM but are not consent. The physician (d) proposes treatment but does not consent on the patient's behalf outside the limited emergency exception.", "multi": false, "n": 1, "id": "q1"}, {"tag": "Core", "stem": "At the meeting, Lena says, \"I can't lose him. I want everything done, even a breathing machine.\" Last year Mr. Reyes told her he would not want to be kept alive on machines if he could no longer recognize his family. Which response by the nurse is most appropriate?", "opts": ["\"This is hard. What do you think your uncle would want, based on what he told you when he was well?\"", "\"As his attorney, you should decide based on what feels right to you as his closest family member.\"", "\"Because he told you his wishes, the team will make the decision and you will not have to choose.\"", "\"Perhaps his son should make this decision, since you are finding it too difficult to decide.\""], "ans": ["a"], "rat": "An SDM must follow wishes the person expressed while capable that apply to the situation, and decide in the person's best interests only when no applicable wish is known (section <a href=\"#s10-2\">10.2<\/a>). Acknowledging her distress and asking what he would want guides Lena toward that duty (a). Her own preferences (b) are not the standard. The team does not take over the decision (c); wishes guide the SDM, who still gives or refuses consent. The son (d) does not replace the named attorney simply because the decision is difficult.", "multi": false, "n": 2, "id": "q2"}, {"tag": "Core", "stem": "Which action best reflects the nurse's role in Mr. Reyes's goals-of-care meeting?", "opts": ["Telling Lena how many weeks Mr. Reyes is likely to live before the physician joins the meeting", "Asking Lena to sign a form agreeing to the no-CPR order so the team has her consent", "Leaving the meeting to the physician because goals-of-care discussions are outside nursing practice", "Sharing what the nurse has observed, checking Lena's understanding and exploring Mr. Reyes's values with her"], "ans": ["d"], "rat": "Nurses support goals-of-care discussions by contributing observations, clarifying understanding, exploring values and following up (section <a href=\"#s10-2\">10.2<\/a>). Prognosis and treatment options are explained by the physician or NP, so the nurse does not give a time estimate alone (a). Under the CPSO policy, a no-CPR order does not require consent, although the physician must inform and discuss it, so a consent form is not the nurse's task (b). Nurses have a central role in these conversations, so stepping away (c) is not appropriate.", "multi": false, "n": 3, "id": "q3"}, {"tag": "Core", "stem": "After the meeting, the physician's progress note says that a no-CPR order was discussed with Lena, but there is no order in the chart, and the unit board lists Mr. Reyes as \"full code.\" What should the nurse do first?", "opts": ["Change the board to \"no CPR,\" because the progress note documents the discussion", "Contact the physician now to clarify and confirm the code status order", "Wait until morning rounds to raise it, because Mr. Reyes is stable at the moment", "Ask Lena to put Mr. Reyes's wishes about resuscitation in writing so the nurse can update the board"], "ans": ["b"], "rat": "A missing or conflicting code-status order must be clarified at once with the physician or NP (b); the nurse then documents the clarification and includes code status in handover (section <a href=\"#s10-2\">10.2<\/a>). The nurse cannot act on a progress note in place of an order (a). Waiting (c) leaves a mismatch that could lead to the wrong response in an arrest. A written statement from the SDM (d) is not an order and does not resolve the conflict.", "multi": false, "n": 4, "id": "q4"}, {"tag": "Core", "stem": "A patient with advanced lung cancer is short of breath at rest. Her oxygen saturation is 95% on room air. Which non-drug measures should the nurse include in her care? Select all that apply.", "opts": ["Direct a handheld fan toward her face.", "Start oxygen at a high flow rate to relieve her breathlessness.", "Help her sit upright, leaning forward on an over-bed table.", "Coach her in pursed-lip breathing and relaxation.", "Stay with her and speak in a calm, slow voice.", "Lower the head of the bed so that she can rest flat.", "Keep the room door closed and turn up the heat."], "ans": ["a", "c", "d", "e"], "rat": "Airflow from a fan to the face, an upright or forward-leaning position, breathing and relaxation techniques and a calm presence are recommended comfort measures for dyspnea (section <a href=\"#s10-3\">10.3<\/a>). Oxygen (b) is not recommended for breathlessness when saturation is above 90% on room air, and oxygen is a drug, not a non-drug measure. Lying flat (f) usually worsens breathlessness. A warm, closed room (g) reduces airflow and often worsens the sensation.", "multi": true, "n": 5, "id": "q5"}, {"tag": "Core", "stem": "Which statement best describes the palliative approach to care?", "opts": ["Transferring a patient to a palliative care unit once curative treatment has stopped", "Building palliative care principles into everyday care by all providers, early in a serious illness", "Caring for a patient during the last days of life, when death is expected within hours to days", "Referring every patient with a life-limiting illness to a specialist palliative care team at diagnosis"], "ans": ["b"], "rat": "The palliative approach brings the core elements of palliative care into care given by all providers, early and in every setting, with specialists supporting them as needed (section <a href=\"#s10-1\">10.1<\/a>). Waiting until curative treatment stops (a) delays care the patient could already benefit from. Care in the last days (c) describes end-of-life care, only one part of palliative care. Referring everyone to specialists (d) is neither necessary nor possible; generalists provide most of the palliative approach.", "multi": false, "n": 6, "id": "q6"}, {"tag": "Core", "stem": "A patient with severe COPD has just been discharged after his third hospital admission this year. He has not talked with anyone about his future care. Based on his likely illness trajectory, which plan is most appropriate?", "opts": ["Delay advance care planning until his function declines steadily, because the timing of death in COPD is predictable.", "Wait until he loses the capacity to make decisions, then hold a goals-of-care meeting with his family.", "Focus on goals-of-care discussions only if he is diagnosed with lung cancer, because COPD is not a life-limiting illness.", "Start advance care planning now and revisit it after each exacerbation, because any flare-up could be life-threatening."], "ans": ["d"], "rat": "Organ failure such as COPD typically follows long-term limitation with intermittent exacerbations, and death can come suddenly during one of them, so planning starts early and is revisited after each admission (section <a href=\"#s10-1\">10.1<\/a>). The timing of death in COPD is hard to predict (a). Waiting until he loses capacity (b) removes his own voice from the planning. Advanced COPD is a life-limiting illness that warrants a palliative approach (c).", "multi": false, "n": 7, "id": "q7"}, {"tag": "Core", "stem": "A patient with advanced heart failure has an order for a low-dose opioid as needed for breathlessness. His daughter says, \"I don't want him to have morphine. I'm afraid he'll get addicted, or that it will kill him.\" Which response by the nurse is best?", "opts": ["\"Many families worry about that. With a low starting dose and careful monitoring, it is a safe, standard treatment. What worries you most?\"", "\"There is no chance of any side effects at the low dose he has been ordered, so you do not need to worry about it.\"", "\"We will save the morphine until he is very close to death, because that is when it will help him the most.\"", "\"If you are worried, I will stop the morphine order right away, and we will use oxygen for his breathing instead.\""], "ans": ["a"], "rat": "The nurse acknowledges the fear, explains that low-dose opioids adjusted to the response and monitored are a safe, standard treatment for dyspnea, and invites further discussion (section <a href=\"#s10-3\">10.3<\/a>). Claiming no side effects (b) is false; opioids cause effects such as constipation and need monitoring. Saving opioids for the end (c) leaves him breathless now and feeds a common myth. The nurse cannot cancel an order (d), and oxygen helps only if he is hypoxemic.", "multi": false, "n": 8, "id": "q8"}, {"tag": "Core", "stem": "An RPN in Ontario is caring for a patient with advanced cancer whose goals of care focus on comfort. The patient has been settled for 2 days. Now the patient has a new fever, a respiratory rate of 32 and sudden pain in one leg, and the family is upset. What is the RPN's best action?", "opts": ["Continue the current plan, because comfort-focused goals mean new findings do not need to be reported", "Ask the family to decide whether the changes should be reported to the physician", "Provide immediate comfort, consult the RN about the change in condition and notify the physician or NP according to policy", "Transfer care of the patient to another RPN, because a palliative patient whose condition changes is outside RPN scope"], "ans": ["c"], "rat": "Every nurse who notices a change acts at once and escalates, and the RPN consults the RN when a patient's needs change; employer policy sets how the physician or NP is notified (section <a href=\"#s10-3\">10.3<\/a>; Chapter 1, section 1.3). Comfort-focused goals (a) do not remove the duty to report new findings, which may have a treatable or symptom-relieving response. The decision to report (b) belongs to the nurse, not the family. Caring for palliative patients is within RPN practice (d); what changes is the need to consult the RN as the patient's needs change.", "multi": false, "n": 9, "id": "q9"}, {"tag": "Core", "stem": "Which findings are cues that Mrs. Baptiste may be in the last hours to days of life? Select all that apply.", "opts": ["Pauses in breathing of up to 20 seconds", "Her daughter crying at the bedside", "Cool feet and knees", "No oral intake for 2 days", "Noisy, gurgling breathing", "A do-not-resuscitate order on the chart"], "ans": ["a", "c", "d", "e"], "rat": "Apnea, cool extremities, very low intake and noisy breathing from secretions are common signs that death is near (section <a href=\"#s10-5\">10.5<\/a>; <a href=\"#tbl-10-3\" class=\"xref\">Table 10.3<\/a>). The daughter's distress (b) is an important cue for family support, but it is not a sign of the patient's dying. A do-not-resuscitate order (f) reflects a decision about care, not a physical sign.", "multi": true, "n": 10, "id": "q10"}, {"tag": "Core", "stem": "The nurse analyzes Mrs. Baptiste's restlessness. Which finding most needs follow-up before the restlessness is attributed to the dying process?", "opts": ["Her age of 88 years", "Pauses in her breathing", "No urine output for 9 hours", "Her lung cancer diagnosis"], "ans": ["c"], "rat": "Terminal restlessness is a label used only after reversible causes are ruled out; a full bladder from urinary retention is a common, treatable cause of agitation (section <a href=\"#s10-5\">10.5<\/a>). Less urine is also expected near death, but the nurse checks the bladder before deciding. Age (a) and diagnosis (d) do not explain new agitation. Breathing pauses (b) are a sign of dying, not a cause of restlessness.", "multi": false, "n": 11, "id": "q11"}, {"tag": "Core", "stem": "The nurse finds no distended bladder. Which concern has the highest priority now?", "opts": ["Distress from agitation that may include pain", "Dehydration needing intravenous fluids", "Aspiration pneumonia needing antibiotics", "Low oxygen saturation needing frequent monitoring"], "ans": ["a"], "rat": "Her goals are comfort, so relieving distress from agitation, which may include pain, comes first (sections <a href=\"#s10-3\">10.3<\/a> and <a href=\"#s10-5\">10.5<\/a>). Intravenous fluids (b), antibiotics (c) and frequent oxygen monitoring (d) aim to treat or measure problems rather than relieve suffering. They do not match her goals, and some could add to her burden.", "multi": false, "n": 12, "id": "q12"}, {"tag": "Core", "stem": "Which interventions fit Mrs. Baptiste's goals of care? Select all that apply.", "opts": ["Deep suctioning through the nose every hour", "Turning her onto her side with the head slightly raised", "Giving the ordered anticholinergic for secretions", "Checking vital signs every hour", "Mouth care and moistening her lips", "Starting a bolus of intravenous fluids"], "ans": ["b", "c", "e"], "rat": "Side-lying, the ordered anticholinergic and mouth care are comfort measures for noisy breathing and a dry mouth (section <a href=\"#s10-5\">10.5<\/a>; <a href=\"#tbl-10-3\" class=\"xref\">Table 10.3<\/a>). Deep suctioning (a) is invasive, and no studies show that it helps. Hourly vital signs (d) and intravenous fluids (f) do not serve comfort-only goals, and fluids may add to secretions.", "multi": true, "n": 13, "id": "q13"}, {"tag": "Core", "stem": "The daughter says again, \"She's choking.\" Which response by the nurse is best?", "opts": ["\"Don't worry. She can't hear you or feel anything now, so there's no need to talk to her.\"", "\"I'll call the physician to come and suction her lungs so that she can breathe more easily.\"", "\"This sound means she is in pain, so I'll give her more of her medicine right away.\"", "\"The sound comes from saliva she can no longer clear. It probably doesn't distress her. Let's turn her onto her side together.\""], "ans": ["d"], "rat": "Explaining the cause and involving the family in comfort care eases distress, and evidence suggests the sound is unlikely to distress the dying person (section <a href=\"#s10-5\">10.5<\/a>; Lokker et al., 2014). Option a is false reassurance and discourages the daughter from speaking to her mother. Deep suction (b) is invasive and has no evidence of benefit. Noisy breathing is not a sign of pain (c).", "multi": false, "n": 14, "id": "q14"}, {"tag": "Core", "stem": "One hour after the nurse's actions, which finding shows that the plan is working?", "opts": ["Her breathing is still gurgling, and she is still pulling at the sheets.", "She is lying still with a relaxed face, and her daughter is holding her hand.", "Her respiratory rate has risen to 28 breaths/min.", "She has started to take sips of water."], "ans": ["b"], "rat": "Relief of agitation, a relaxed face and a family able to stay close show that the comfort goals are met (section <a href=\"#s10-5\">10.5<\/a>). Continued agitation (a) and rapid breathing (c) show distress that calls for reassessment and a call to the prescriber. Sips of water (d) are not the goal and may cause coughing in a person who can no longer swallow safely.", "multi": false, "n": 15, "id": "q15"}, {"tag": "Core", "stem": "Under the Criminal Code as of October 25, 2026, which person meets one of the eligibility criteria for MAID?", "opts": ["A capable 17-year-old with a serious, incurable illness who asks for MAID", "An adult whose substitute decision-maker requests MAID on the adult's behalf", "An adult whose only underlying medical condition is major depression that has not improved with treatment", "A capable adult with an incurable disease who is in an advanced state of irreversible decline"], "ans": ["d"], "rat": "A grievous and irremediable condition includes an illness, disease or disability that is serious and incurable, with an advanced state of irreversible decline (section <a href=\"#s10-4\">10.4<\/a>). The person must be at least 18 (a). The request must come from the person, not a substitute decision-maker (b). Mental illness as the sole underlying condition is excluded until at least March 17, 2027, and the government plans to extend that exclusion (c).", "multi": false, "n": 16, "id": "q16"}, {"tag": "Core", "stem": "A patient whose natural death is not reasonably foreseeable has made a written request for MAID. Which safeguard applies to this patient but not to a patient whose death is reasonably foreseeable?", "opts": ["A minimum of 90 clear days between the start of the first assessment and provision", "A written request signed and dated in front of an independent witness", "Two independent written assessments by physicians or NPs", "A chance to withdraw consent immediately before MAID is provided"], "ans": ["a"], "rat": "Track 2 requires at least 90 clear days for assessments, unless loss of capacity is imminent and both assessments are complete (section <a href=\"#s10-4\">10.4<\/a>; <a href=\"#tbl-10-2\" class=\"xref\">Table 10.2<\/a>). A witnessed written request (b), two independent assessments (c) and the chance to withdraw (d) apply in both tracks.", "multi": false, "n": 17, "id": "q17"}, {"tag": "Core", "stem": "A patient asks the RPN, \"What is MAID, and could I get it?\" Which response is most appropriate?", "opts": ["\"You should think about MAID, given how much you are suffering.\"", "\"Nurses aren't allowed to talk about MAID. Please ask your doctor.\"", "\"I can tell you what MAID is. Can you tell me what's making you ask? I'll also let your NP know so that you can talk about all your options.\"", "\"You don't qualify, because your illness is not terminal.\""], "ans": ["c"], "rat": "Nurses may give factual information about lawful MAID, explore the question and inform the prescriber, without encouraging the patient (section <a href=\"#s10-4\">10.4<\/a>). Option a encourages MAID, which CNO forbids and which may amount to counselling. Option b is inaccurate, because the Criminal Code allows health care professionals to give information. Only physicians and NPs assess eligibility, and a terminal illness is not required (d).", "multi": false, "n": 18, "id": "q18"}, {"tag": "Core", "stem": "An RN with a conscientious objection to MAID is assigned to a patient who is scheduled to receive MAID tomorrow. What should the RN do?", "opts": ["Tell the patient about the objection so that they understand why a different nurse will be caring for them.", "Ask the charge nurse or manager to transfer the patient's care, and keep giving other care until another nurse takes over.", "Refuse the assignment and leave the unit until a replacement is found.", "Arrange for the patient to be assessed by a second NP."], "ans": ["b"], "rat": "CNO expects the nurse to hand care over to another nurse or provider, working with the employer as needed, and to keep giving all other care until a replacement takes over, without abandoning the patient (section <a href=\"#s10-4\">10.4<\/a>). The objection must not be shared with the patient (a). Leaving the unit (c) abandons the patient. Ordering assessments (d) is not the RN's role.", "multi": false, "n": 19, "id": "q19"}, {"tag": "Core", "stem": "Which sign most strongly suggests that a patient with advanced cancer may die within the next 3 days?", "opts": ["Sleeping more during the day", "Eating less than usual", "Needing help to walk", "Greatly reduced urine output"], "ans": ["d"], "rat": "Reduced urine output was one of five signs that appeared mostly in the final 3 days of life and were highly specific for death within that time (section <a href=\"#s10-5\">10.5<\/a>; Hui et al., 2014). More sleep (a), less eating (b) and weakness (c) often appear earlier, so they predict timing poorly.", "multi": false, "n": 20, "id": "q20"}, {"tag": "Core", "stem": "The nurse is assessing perfusion in a dying patient with dark skin. Which approach is best?", "opts": ["Feel the hands, feet and knees for coolness, compare them with the trunk, and check the nail beds and lips.", "Document \"no mottling\" if no purple pattern is visible on the knees.", "Use the pulse oximeter reading alone to judge perfusion.", "Skip perfusion assessment, because colour changes cannot be seen on dark skin."], "ans": ["a"], "rat": "Mottling can be hard to see on darker skin, so the nurse adds temperature, comparison with the trunk, nail beds, lips and the family's observations (section <a href=\"#s10-5\">10.5<\/a>). Relying on colour (b) may miss changes. Oximetry (c) does not show skin perfusion, and readings may be unreliable when perfusion is poor. Skipping the assessment (d) leaves the family without preparation.", "multi": false, "n": 21, "id": "q21"}, {"tag": "Core", "stem": "A palliative patient in an Ontario hospital dies 1 day after an unwitnessed fall in which she fractured her hip. What should the nurse do?", "opts": ["Remove all lines and tubes and prepare the body for the family.", "Ask the family whether they would like an autopsy.", "Notify the physician or NP so that the death can be reported to the coroner, and leave lines and tubes in place as policy directs.", "Complete the medical certificate of death, because the death was expected."], "ans": ["c"], "rat": "A death that may have resulted from an accident is reportable to the coroner, even when the patient was receiving palliative care (section <a href=\"#s10-5\">10.5<\/a>). Removing lines (a) may interfere with an investigation. Autopsy decisions (b) rest with the coroner in a reportable death. RNs cannot certify deaths in Ontario hospitals, and an RN may certify only expected deaths without unexpected events, so this death is not one a nurse may certify (d).", "multi": false, "n": 22, "id": "q22"}, {"tag": "Core", "stem": "An Ontario hospital patient who is not on a ventilator has a planned family meeting to discuss stopping life-sustaining treatment. The family has not mentioned donation. What is the nurse's responsibility?", "opts": ["Tell the family that their relative is too ill to donate organs or tissue.", "Make sure the team notifies Trillium Gift of Life Network according to hospital policy before donation is discussed.", "Ask the family to decide about donation before the meeting.", "Wait to notify Trillium until the family raises the subject of donation."], "ans": ["b"], "rat": "Designated Ontario hospitals must notify Trillium Gift of Life Network when a patient meets one of its referral indicators, such as a planned discussion to withdraw life-sustaining therapy. Trillium checks eligibility before anyone raises donation with the family (section <a href=\"#s10-5\">10.5<\/a>). Nurses do not decide eligibility (a) or raise donation first (c). Notification does not depend on the family raising it (d).", "multi": false, "n": 23, "id": "q23"}, {"tag": "Core", "stem": "A patient has just died. The family tells the nurse that their faith community has customs for the care of the body. What should the nurse do first?", "opts": ["Prepare the body according to the hospital's standard procedure.", "Call the chaplain to explain the hospital's routines to the family.", "Tell the family that customs can take place only at the funeral home.", "Ask the family what they would like done and how the team can help."], "ans": ["d"], "rat": "Practices after death vary, so the nurse asks the family about their wishes and then works within policy to support them (section <a href=\"#s10-5\">10.5<\/a>). Using standard procedure first (a) may break an important practice. A chaplain may help, but should not be there to explain routines in place of asking (b). Option c refuses requests that can often be met.", "multi": false, "n": 24, "id": "q24"}, {"tag": "Core", "stem": "Which statement about prolonged grief disorder is accurate?", "opts": ["In adults, it is diagnosed only when at least 12 months have passed since the death.", "It is the expected response to the death of a spouse.", "It is diagnosed when grief includes crying in the first month.", "It is treated first with medications that target grief."], "ans": ["a"], "rat": "DSM-5-TR requires at least 12 months since the death for adults (6 months for children and adolescents), with disabling symptoms beyond cultural norms (section <a href=\"#s10-6\">10.6<\/a>). Typical grief, even after a spouse's death, is not a disorder (b), and crying soon after a loss is normal (c). No medication specifically treats grief symptoms; grief-focused psychotherapy is used (d).", "multi": false, "n": 25, "id": "q25"}, {"tag": "Core", "stem": "After three patient deaths in one week, a nurse says she feels guilty and powerless because staffing kept her from being with a dying patient. Which response by the charge nurse is most helpful?", "opts": ["\"You'll get used to it. Deaths are part of the job.\"", "\"Try not to think about it at work.\"", "\"That sounds like moral distress. Let's hold a team debrief, and here is the number for our employee assistance program.\"", "\"You should consider transferring to a unit with fewer deaths.\""], "ans": ["c"], "rat": "Guilt and powerlessness when constraints block what a nurse believes is right describe moral distress, and debriefing and employee assistance are recommended supports (section <a href=\"#s10-6\">10.6<\/a>). Options a and b dismiss the distress, which, unaddressed, is linked to leaving the profession. A transfer (d) does not address what happened.", "multi": false, "n": 26, "id": "q26"}, {"tag": "RN", "stem": "Which statement best distinguishes palliative sedation from MAID?", "opts": ["Palliative sedation is used only for psychological suffering.", "Palliative sedation is intended to ease refractory suffering, not to shorten life.", "Palliative sedation requires a 90-day assessment period.", "Palliative sedation can be provided only by an NP."], "ans": ["b"], "rat": "Palliative sedation is the monitored, proportional lowering of consciousness to relieve refractory suffering, while MAID aims to end life at a capable person's request (section <a href=\"#s10-5\">10.5<\/a>, Going Deeper). Refractory suffering may be physical, psychological or existential, and delirium is the most common reason for sedation (a). The 90-day period is a Track 2 MAID safeguard (c). Palliative sedation is not limited to NPs; the prescriber orders it, and nurses give it and monitor the patient (d).", "multi": false, "n": 27, "id": "q27"}, {"tag": "RN", "stem": "A patient receiving palliative sedation for refractory delirium is calm and comfortable at a light level of sedation. Which action reflects the principle of proportionality?", "opts": ["Increase the infusion to reach deep sedation as soon as possible so that the delirium cannot return.", "Stop all sedation to assess whether the delirium has resolved.", "Hold the next dose until the patient is unresponsive.", "Keep the current level of sedation, and keep monitoring comfort and sedation with a validated tool."], "ans": ["d"], "rat": "Proportionality means using the lowest level of sedation that gives adequate relief, with ongoing monitoring (section <a href=\"#s10-5\">10.5<\/a>, Going Deeper). Deepening sedation without need (a) is not proportional. Abruptly stopping sedation (b) risks a return of suffering unless a planned interruption has been agreed on. Waiting for unresponsiveness (c) wrongly treats deep sedation as the goal.", "multi": false, "n": 28, "id": "q28"}, {"tag": "RN", "stem": "A family member asks, \"Will the morphine you're giving her speed up her death?\" Which reply is consistent with the evidence?", "opts": ["\"Studies of opioids used for symptoms at the end of life have not shown that they shorten life.\"", "\"Yes, it may shorten her life a little, but that is acceptable because it keeps her comfortable.\"", "\"Only if we give it more often than every 4 hours.\"", "\"We can stop it if you're worried, even though she is breathless.\""], "ans": ["a"], "rat": "Systematic reviews have found no link between opioids used for symptom control and shorter survival (section <a href=\"#s10-5\">10.5<\/a>, Going Deeper). Option b repeats the myth. Option c invents a rule. Stopping effective symptom relief (d) leaves the patient suffering and does not follow her goals.", "multi": false, "n": 29, "id": "q29"}, {"tag": "RN", "stem": "Which statement about the principle of double effect in end-of-life care is accurate?", "opts": ["It permits a nurse to give medication with the intent of ending the life of a patient who is suffering.", "It is the legal basis for MAID in Canada.", "It holds that an act aimed at a good effect may be acceptable even if a harmful effect is foreseen but not intended.", "It requires the nurse to withhold opioids whenever any harmful effect, such as drowsiness, is possible."], "ans": ["c"], "rat": "Double effect distinguishes intended good effects from foreseen but unintended harms, and the harm must not be the means to the good (section <a href=\"#s10-5\">10.5<\/a>, Going Deeper). It never permits intending death (a). MAID rests on the Criminal Code, not on double effect (b). The principle does not require withholding needed opioids (d), and properly titrated opioids have not been shown to hasten death.", "multi": false, "n": 30, "id": "q30"}], "terms": [{"t": "advance care planning (ACP)", "d": "A voluntary process in which a capable person confirms or chooses a substitute decision-maker and shares wishes, values and beliefs about future care; in Ontario it is not consent."}, {"t": "anticipatory grief", "d": "Grief that begins before a death, as the patient and family face coming losses."}, {"t": "anticipatory medications", "d": "Drugs ordered in advance for expected end-of-life symptoms so that relief can be given at any hour."}, {"t": "apnea", "d": "A pause in breathing."}, {"t": "artificial nutrition and hydration", "d": "Nutrition and fluids given by tube or by the intravenous or subcutaneous route; a medical treatment that requires a values-based decision and consent."}, {"t": "bereavement", "d": "The state of having lost someone through death."}, {"t": "cachexia", "d": "A syndrome of continuing skeletal muscle loss (with or without loss of fat) that usual nutritional support cannot fully reverse and that steadily worsens function."}, {"t": "Care Coordination Service", "d": "Ontario's provincial service that gives information about MAID and other options at the end of life and connects people, including those who refer themselves, with physicians and NPs who provide MAID."}, {"t": "Cheyne-Stokes respiration", "d": "A cyclic breathing pattern of deepening and then shallower breaths followed by a pause."}, {"t": "clinician-administered MAID", "d": "The form of MAID in which a physician or NP gives the substance."}, {"t": "compassion fatigue", "d": "The emotions and behaviours that can result from repeatedly learning about, and caring for, other people's suffering and trauma."}, {"t": "conscientious objection", "d": "A health professional's refusal, for reasons of conscience or religion, to take part in a lawful service such as MAID; nurses must transfer care without abandoning the patient."}, {"t": "Consent and Capacity Board", "d": "An independent Ontario tribunal that hears disputes about capacity findings, substitute decision-making and withdrawal of life-sustaining treatment."}, {"t": "dyspnea", "d": "The subjective experience of breathing discomfort."}, {"t": "end-of-life care", "d": "The part of palliative care given when death is expected in the near future, focused on comfort, dignity and family support."}, {"t": "goals of care", "d": "A discussion during a serious illness about the illness, its likely course and what matters most to the person, used to match treatment options to the person's goals."}, {"t": "grief", "d": "The emotional, physical and spiritual response to loss."}, {"t": "grievous and irremediable medical condition", "d": "An illness, disease or disability that is serious and incurable, with an advanced, irreversible decline in capability and enduring, intolerable suffering that cannot be relieved under conditions the person considers acceptable."}, {"t": "hospice", "d": "In Canada, a term used interchangeably with palliative care and often applied to community-based care; a hospice residence is one setting for care near the end of life."}, {"t": "illness trajectory", "d": "The typical pattern of a person's function over time as a serious illness progresses, such as the patterns seen in cancer, organ failure and frailty or dementia."}, {"t": "medical assistance in dying (MAID)", "d": "Under the Criminal Code, a physician or NP either giving a person, at their request, a substance that causes death, or prescribing or providing one that the person takes themselves."}, {"t": "moral distress", "d": "Psychological distress, such as guilt, anger or powerlessness, caused by a moral event such as a constraint, conflict, dilemma or uncertainty."}, {"t": "mottling", "d": "Patchy, lace-like discolouration of the skin caused by poor perfusion, often seen first around the knees; hard to see on darker skin."}, {"t": "palliative approach", "d": "The integration of core palliative care principles into everyday care by all providers, early in a serious illness and in every setting, with specialists supporting complex needs."}, {"t": "palliative care", "d": "Care that aims to prevent and relieve suffering and improve quality of life for people who have a life-limiting illness and for those close to them, from diagnosis onward."}, {"t": "palliative sedation", "d": "The closely monitored use of medications to reduce consciousness, in proportion to need, so as to relieve refractory suffering in a person with a life-limiting disease."}, {"t": "personal directive", "d": "In Alberta, a legal document naming an agent who will make personal decisions that are not financial; it takes effect only after the person is found to lack capacity."}, {"t": "power of attorney for personal care", "d": "In Ontario, a legal document under the Substitute Decisions Act, 1992 that names an attorney to make personal care decisions, including health care, if the person becomes incapable."}, {"t": "principle of double effect", "d": "The ethical principle that an act aimed at a good effect may be acceptable even if a harmful effect is foreseen but not intended, provided the harm is not how the good is achieved and the act is proportionate."}, {"t": "prolonged grief disorder", "d": "A DSM-5-TR diagnosis of intense, disabling grief lasting at least 12 months after a death in adults (6 months in children and adolescents) and exceeding cultural norms."}, {"t": "pronouncement of death", "d": "Determining and recording that a person has died; distinct from certifying the cause of death on the medical certificate of death."}, {"t": "reasonably foreseeable natural death", "d": "The test that decides which set of MAID safeguards applies; it is no longer an eligibility criterion."}, {"t": "respiratory secretions", "d": "Saliva and secretions that pool in the upper airway near death, causing noisy breathing (the \"death rattle\") when the person can no longer swallow or cough effectively."}, {"t": "self-administered MAID", "d": "The form of MAID in which the person takes a substance prescribed or provided by a physician or NP."}, {"t": "serious illness conversation", "d": "A structured discussion with a seriously ill person about understanding, prognosis, goals, fears, sources of strength and acceptable trade-offs, used to guide future care."}, {"t": "specialist palliative care", "d": "Care given by interprofessional teams with advanced palliative training, usually for patients with complex needs."}, {"t": "substitute decision-maker (SDM)", "d": "The person who makes health care decisions for a patient who is incapable of making a particular decision."}, {"t": "terminal delirium", "d": "Delirium in the last days of life that is part of the dying process and usually not reversible; care focuses on comfort and safety."}, {"t": "terminal restlessness", "d": "Agitation or delirium in the last days of life that has no reversible cause."}, {"t": "total pain", "d": "Cicely Saunders's concept of suffering with physical, psychological, social, emotional and spiritual parts."}, {"t": "Track 1", "d": "The MAID pathway for a person whose natural death is reasonably foreseeable."}, {"t": "Track 2", "d": "The MAID pathway for a person whose natural death is not reasonably foreseeable; it adds consultation with an expert when neither assessor has expertise in the condition, discussion of other means of relief and at least 90 clear days from the first assessment to provision."}, {"t": "waiver of final consent", "d": "A written arrangement, available only in Track 1, that allows MAID to proceed on a set date if the person loses capacity, unless they refuse or resist by words, sounds or gestures; also called Audrey's Amendment."}]}</script>
+<script>
+(function () {
+  'use strict';
+  var DATA = JSON.parse(document.getElementById('data').textContent);
+  var M = DATA.meta, PAGES = DATA.pages, Q = {}, TERMS = DATA.terms;
+  DATA.questions.forEach(function (q) { Q[q.id] = q; });
+  var byId = {}; PAGES.forEach(function (p, i) { p.i = i; byId[p.id] = p; });
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+
+  // ---------- saved progress (this browser only; never required) ----------
+  var KEY = M.store, S = { visited: {}, q: {}, known: {}, last: null, theme: 'auto' };
+  try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); for (var k in o) S[k] = o[k]; } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  // ---------- theme ----------
+  function applyTheme() {
+    if (S.theme === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', S.theme);
+    $('themeBtn').textContent = 'Theme: ' + {auto: 'Auto', light: 'Light', dark: 'Dark'}[S.theme];
+  }
+  $('themeBtn').addEventListener('click', function () { S.theme = {auto: 'light', light: 'dark', dark: 'auto'}[S.theme] || 'auto'; applyTheme(); save(); });
+  applyTheme();
+
+  // ---------- contents ----------
+  $('bookName').textContent = M.book;
+  $('chName').textContent = 'Chapter ' + M.chapter + ': ' + M.title;
+  var GROUPS = [['Chapter', ['home', 'text']], ['Study', ['terms', 'case', 'questions']], ['Back matter', ['refs', 'about']]];
+  function group(p) {
+    if (p.id === 'references') return 'Back matter';
+    if (p.kind === 'about') return 'Back matter';
+    if (p.kind === 'terms' || p.kind === 'case' || p.kind === 'questions') return 'Study';
+    return 'Chapter';
+  }
+  function qStats(ids) { var a = 0, c = 0; ids.forEach(function (id) { var s = S.q[id]; if (s && s.done) { a++; if (s.ok) c++; } }); return {a: a, c: c, n: ids.length}; }
+  function status(p) {
+    if (p.qids) { var s = qStats(p.qids); return {t: s.c + '/' + s.n, done: s.c === s.n}; }
+    if (p.kind === 'terms') { var k = Object.keys(S.known).length; return {t: k + '/' + TERMS.length, done: k === TERMS.length}; }
+    if (p.kind === 'text' && S.visited[p.id]) return {t: '✓', done: true};
+    return {t: '', done: false};
+  }
+  function drawToc(cur) {
+    var h = '';
+    ['Chapter', 'Study', 'Back matter'].forEach(function (g) {
+      h += '<div><h2>' + g + '</h2><ol>';
+      PAGES.forEach(function (p) {
+        if (group(p) !== g) return;
+        var st = status(p);
+        h += '<li><a href="#' + p.id + '"' + (p.id === cur ? ' aria-current="page"' : '') + '><span>' + esc(p.title) + '</span><span class="st' + (st.done ? ' done' : '') + '">' + st.t + '</span></a></li>';
+      });
+      h += '</ol></div>';
+    });
+    $('toc').innerHTML = h;
+    var textPages = PAGES.filter(function (p) { return p.kind === 'text'; });
+    var read = textPages.filter(function (p) { return S.visited[p.id]; }).length;
+    var qs = qStats(Object.keys(Q));
+    var pct = Math.round(100 * (read / textPages.length * 0.5 + qs.c / qs.n * 0.5));
+    $('meterText').textContent = read + ' of ' + textPages.length + ' pages read · ' + qs.c + ' of ' + qs.n + ' questions correct';
+    $('meterBar').style.width = pct + '%';
+  }
+
+  // ---------- page renderers ----------
+  function home() {
+    var textPages = PAGES.filter(function (p) { return p.kind === 'text'; });
+    var read = textPages.filter(function (p) { return S.visited[p.id]; }).length;
+    var qs = qStats(Object.keys(Q)), known = Object.keys(S.known).length;
+    var cont = S.last && byId[S.last] && S.last !== 'home' ? byId[S.last] : null;
+    var latest = M.latest ? '<p>Check that you have the newest version: <a href="' + esc(M.latest) + '" target="_blank" rel="noopener">' + esc(M.latest) + '</a>. The online version is always the most current.</p>'
+      : '<p>When the book is published, a link to the latest online version will appear here. Corrections are made online first, so check it from time to time if you keep this file.</p>';
+    return '<div class="hero"><p class="eyebrow">' + esc(M.book) + '</p><h1>Chapter ' + esc(M.chapter) + ': ' + esc(M.title) + '</h1>' +
+      '<p class="byline">' + esc(M.author) + ' · ' + esc(M.org) + ' · ' + esc(M.licence) + '</p><p class="version">Version: ' + esc(M.version) + '</p></div>' +
+      '<div class="stats"><div class="stat"><b>' + read + '/' + textPages.length + '</b><span>pages read</span></div>' +
+      '<div class="stat"><b>' + qs.c + '/' + qs.n + '</b><span>questions correct</span></div>' +
+      '<div class="stat"><b>' + known + '/' + TERMS.length + '</b><span>key terms known</span></div></div>' +
+      '<div class="actions">' + (cont ? '<a class="btn" href="#' + cont.id + '">Continue: ' + esc(cont.title) + '</a><a class="btn ghost" href="#outcomes">Start from the beginning</a>'
+        : '<a class="btn" href="#outcomes">Start reading</a><a class="btn ghost" href="#terms">Study key terms</a><a class="btn pptx-btn" href="Ch10_Palliative_and_End_of_Life_Care_Lecture_Presentation.pptx" download="Ch10_Palliative_and_End_of_Life_Care_Lecture_Presentation.pptx">&#11015; Lecture Slides (.PPTX &bull; 28 Slides)</a>') + '</div>' +
+      '<div class="note"><h3>How to use this interactive textbook</h3><ul>' +
+      '' +
+      '<li>Read the chapter page by page, then try the case studies and practice questions. Each answer comes with a rationale that links back to the section that teaches it.</li>' +
+      '<li><b>Going Deeper</b> boxes are required for RN students and optional for practical nursing students. Questions tagged <span class="tag rn">RN</span> are written at RN level; <span class="tag">Core</span> questions are for everyone.</li>' +
+      '<li>Your progress is saved in this browser on this device only. It may not be kept in a private window, and it is never sent anywhere.</li>' +
+      '</ul></div>' +
+      '';
+  }
+  function optKey(i) { return String.fromCharCode(97 + i); }
+  function qHtml(q) {
+    var s = S.q[q.id] || {sel: [], done: false};
+    var h = '<article class="q" id="' + q.id + '" aria-labelledby="' + q.id + '-n"><div class="qn"><span id="' + q.id + '-n">Question ' + q.n + '</span><span class="tag' + (q.tag === 'RN' ? ' rn' : '') + '">' + q.tag + '</span></div>' +
+      '<p class="stem">' + q.stem + '</p>' + (q.multi && !/select all/i.test(q.stem) ? '<p class="hint">Select all that apply.</p>' : '') + '<div class="opts" role="group" aria-label="Answer options">';
+    q.opts.forEach(function (o, i) {
+      var k = optKey(i), sel = s.sel.indexOf(k) > -1, cls = 'opt' + (q.multi ? ' multi' : ''), mk = '';
+      if (s.done) {
+        var right = q.ans.indexOf(k) > -1;
+        if (right) { cls += ' correct'; mk = sel ? 'Correct' : 'Answer'; }
+        else if (sel) { cls += ' wrong'; mk = 'Incorrect'; }
+      }
+      h += '<button type="button" class="' + cls + '" data-q="' + q.id + '" data-k="' + k + '" aria-pressed="' + sel + '"' + (s.done ? ' disabled' : '') + '><span class="k" aria-hidden="true">' + k + '</span><span>' + o + '</span><span class="mk">' + mk + '</span></button>';
+    });
+    h += '</div><div class="qact">' + (s.done ? '<button type="button" class="btn ghost" data-retry="' + q.id + '">Try again</button>'
+      : '<button type="button" class="btn" data-check="' + q.id + '"' + (s.sel.length ? '' : ' disabled') + '>Check answer</button>') + '</div><div aria-live="polite">';
+    if (s.done) {
+      h += '<div class="fb ' + (s.ok ? 'ok' : 'no') + '"><strong class="v">' + (s.ok ? 'Correct.' : 'Not quite. The answer is ' + q.ans.join(', ') + '.') + '</strong><p>' + q.rat + '</p></div>';
+    }
+    return h + '</div></article>';
+  }
+  function scoreLine(ids) { var s = qStats(ids); return '<span class="score" id="score">' + s.c + ' of ' + s.n + ' correct · ' + s.a + ' answered</span>'; }
+  function questionsPage(p) {
+    var h = '<p class="eyebrow">Practice</p><h2 class="title" tabindex="-1">' + esc(p.title) + '</h2>';
+    if (p.kind === 'case') {
+      h += '<div class="chart"><div class="lbl">Case study</div><p>' + p.case + '</p><p class="fict">Names and details are fictional; this is a composite story.</p></div>';
+    }
+    h += '<div class="qhead">' + scoreLine(p.qids) + '<button type="button" class="chipbtn" data-reset="' + p.id + '">Reset these questions</button></div>';
+    p.qids.forEach(function (id) { h += qHtml(Q[id]); });
+    return h;
+  }
+  var deck = {mode: 'all', i: 0, back: false, order: null};
+  function deckList() {
+    var list = (deck.order || TERMS.map(function (_, i) { return i; }));
+    return deck.mode === 'learning' ? list.filter(function (i) { return !S.known[i]; }) : list;
+  }
+  function termsPage() {
+    var list = deckList(); if (deck.i >= list.length) deck.i = 0;
+    var t = list.length ? TERMS[list[deck.i]] : null, known = Object.keys(S.known).length;
+    var h = '<p class="eyebrow">Study</p><h2 class="title" tabindex="-1">Key Terms</h2><p>Say the definition to yourself, then turn the card to check.</p>' +
+      '<div class="deckbar"><div class="seg" role="group" aria-label="Which cards"><button type="button" data-mode="all" aria-pressed="' + (deck.mode === 'all') + '">All ' + TERMS.length + '</button>' +
+      '<button type="button" data-mode="learning" aria-pressed="' + (deck.mode === 'learning') + '">Still learning ' + (TERMS.length - known) + '</button></div>' +
+      '<span class="score">' + (list.length ? 'Card ' + (deck.i + 1) + ' of ' + list.length : '') + ' · ' + known + ' known</span></div>';
+    if (!t) h += '<div class="note"><p>You have marked every term as known. Switch to “All” to review them again.</p></div>';
+    else {
+      h += '<button type="button" class="flash' + (deck.back ? ' back' : '') + '" id="card" aria-live="polite">' + (deck.back
+        ? '<span><span class="def">' + t.d + '</span><span class="tip">' + t.t + '</span></span>'
+        : '<span><span class="term">' + t.t + '</span><span class="tip">Tap or press Space to turn the card</span></span>') + '</button>' +
+        '<div class="deckact"><button type="button" class="btn ghost" data-deck="prev">← Back</button><button type="button" class="btn ghost" data-deck="again">Still learning</button>' +
+        '<button type="button" class="btn okb" data-deck="know">I know this</button><button type="button" class="btn ghost" data-deck="shuffle">Shuffle</button></div>';
+    }
+    h += '<details class="all"><summary>See all ' + TERMS.length + ' terms</summary><dl>';
+    TERMS.forEach(function (x, i) { h += '<dt>' + x.t + (S.known[i] ? '<span class="ok">✓ known</span>' : '') + '</dt><dd>' + x.d + '</dd>'; });
+    return h + '</dl></details>';
+  }
+  function aboutPage() {
+    return '<p class="eyebrow">Back matter</p><h2 class="title" tabindex="-1">About This Book</h2>' +
+      '<p>This is the interactive online edition of Chapter ' + esc(M.chapter) + ' of <em>' + esc(M.book) + '</em> by ' + esc(M.author) + ', ' + esc(M.org) + '. Version: ' + esc(M.version) + '.</p>' +
+      '<h3>Licence</h3><p>The text, cases, questions and tables are original and licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International licence (CC BY-NC-SA 4.0)</a>. You may share and adapt them for non-commercial purposes if you credit the author and share your adaptation under the same licence.</p>' +
+      '<p>Figures are third-party works that keep their own licences; each caption gives its credit line. Figures with no credit line are in the public domain or CC0.</p>' +
+      '<p>The typeface is Atkinson Hyperlegible by the Braille Institute of America, used under the SIL Open Font License 1.1.</p>' +
+      '<h3>Suggested attribution</h3><p>Lee, A. (2026). Chapter ' + esc(M.chapter) + ': ' + esc(M.title) + '. In <em>' + esc(M.book) + '</em>. https://opensourcenursing.ca (CC BY-NC-SA 4.0).</p>' +
+      '<h3>A note on clinical use</h3><p>This chapter is for learning. Follow your agency’s policies, current product monographs and the orders and guidelines that apply where you practise. Reference ranges vary by laboratory.</p>' +
+      '<h3>Your progress</h3><p>Progress is saved only in this browser on this device.</p><p><button type="button" class="btn ghost" id="resetAll">Clear all saved progress</button></p>';
+  }
+  function render(id, anchor) {
+    var p = byId[id] || byId.home, h;
+    if (p.kind === 'home') h = home();
+    else if (p.kind === 'text') h = '<p class="eyebrow">Chapter ' + esc(M.chapter) + '</p><h2 class="title" tabindex="-1">' + esc(p.title) + '</h2>' + p.html;
+    else if (p.kind === 'terms') h = termsPage();
+    else if (p.kind === 'case' || p.kind === 'questions') h = questionsPage(p);
+    else h = aboutPage();
+    $('page').innerHTML = h;
+    var prev = PAGES[p.i - 1], next = PAGES[p.i + 1];
+    $('pager').innerHTML = (prev ? '<a href="#' + prev.id + '"><span>Previous</span><b>← ' + esc(prev.title) + '</b></a>' : '') +
+      (next ? '<a class="next" href="#' + next.id + '"><span>Next</span><b>' + esc(next.title) + ' →</b></a>' : '');
+    $('topTitle').textContent = p.title;
+    document.title = p.title + ' · Chapter ' + M.chapter + ': ' + M.title;
+    if (p.kind === 'text') S.visited[p.id] = true;
+    S.last = p.id; save(); drawToc(p.id); closeMenu();
+    var el = anchor && document.getElementById(anchor);
+    if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+    var t = el || document.querySelector('#page .title') || document.querySelector('#page h1');
+    if (t && !el) { t.setAttribute('tabindex', '-1'); t.focus({preventScroll: true}); }
+  }
+  var current = null;
+  function route() {
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (byId[h]) { current = h; render(h); return; }
+    if (h) {  // an anchor inside a page (figure, table, question)
+      var owner = PAGES.filter(function (p) { return p.html && p.html.indexOf('id="' + h + '"') > -1; })[0] ||
+                  PAGES.filter(function (p) { return p.qids && p.qids.indexOf(h) > -1; })[0];
+      if (owner) {
+        if (owner.id === current) { var el = document.getElementById(h); if (el) { el.scrollIntoView(); return; } }
+        current = owner.id; render(owner.id, h); return;
+      }
+    }
+    current = 'home'; render('home');
+  }
+  window.addEventListener('hashchange', route);
+
+  // ---------- interactions ----------
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var d = b.dataset;
+    if (d.q && d.k) {
+      var q = Q[d.q], s = S.q[q.id] || (S.q[q.id] = {sel: [], done: false});
+      if (s.done) return;
+      if (q.multi) { var i = s.sel.indexOf(d.k); if (i > -1) s.sel.splice(i, 1); else s.sel.push(d.k); }
+      else s.sel = [d.k];
+      save(); refreshQ(q.id); return;
+    }
+    if (d.check) {
+      var q2 = Q[d.check], s2 = S.q[q2.id];
+      s2.done = true; s2.ok = s2.sel.slice().sort().join() === q2.ans.slice().sort().join();
+      save(); refreshQ(q2.id, true); drawToc(current); return;
+    }
+    if (d.retry) { S.q[d.retry] = {sel: [], done: false}; save(); refreshQ(d.retry); drawToc(current); return; }
+    if (d.reset) { byId[d.reset].qids.forEach(function (id) { delete S.q[id]; }); save(); render(d.reset); return; }
+    if (d.mode) { deck.mode = d.mode; deck.i = 0; deck.back = false; render('terms'); return; }
+    if (b.id === 'card') { deck.back = !deck.back; render('terms'); var c = $('card'); if (c) c.focus(); return; }
+    if (d.deck) {
+      var list = deckList();
+      if (d.deck === 'know' && list.length) S.known[list[deck.i]] = true;
+      if (d.deck === 'again' && list.length) delete S.known[list[deck.i]];
+      if (d.deck === 'prev') deck.i = Math.max(0, deck.i - 1);
+      else if (d.deck === 'shuffle') { var o = TERMS.map(function (_, i) { return i; }); for (var j = o.length - 1; j > 0; j--) { var r = Math.floor(Math.random() * (j + 1)); var tmp = o[j]; o[j] = o[r]; o[r] = tmp; } deck.order = o; deck.i = 0; }
+      else if (d.deck === 'know' && deck.mode === 'learning') { /* the known card leaves the list; stay at the same index */ }
+      else deck.i = (deck.i + 1) % Math.max(1, list.length);
+      deck.back = false; save(); render('terms'); var c2 = $('card'); if (c2) c2.focus(); return;
+    }
+    if (b.id === 'resetAll') { S.visited = {}; S.q = {}; S.known = {}; S.last = null; save(); render('about'); return; }
+    if (b.classList.contains('zoom')) { var img = b.querySelector('img'); $('zoomImg').src = img.src; $('zoomImg').alt = img.alt; $('zoomer').showModal(); return; }
+    if (b.id === 'zoomClose') { $('zoomer').close(); return; }
+  });
+  $('zoomer').addEventListener('click', function (e) { if (e.target === this) this.close(); });
+  function refreshQ(id, announce) {
+    var el = document.getElementById(id); if (!el) return;
+    var tmp = document.createElement('div'); tmp.innerHTML = qHtml(Q[id]);
+    el.replaceWith(tmp.firstChild);
+    var sc = $('score'); if (sc) sc.outerHTML = scoreLine(byId[current].qids);
+    var f = document.querySelector('#' + id + ' .qact button'); if (announce && f) f.focus({preventScroll: true});
+  }
+
+  // ---------- menu (small screens) ----------
+  function closeMenu() { $('side').classList.remove('open'); $('scrim').hidden = true; $('menuBtn').setAttribute('aria-expanded', 'false'); }
+  $('menuBtn').addEventListener('click', function () { var o = !$('side').classList.contains('open'); $('side').classList.toggle('open', o); $('scrim').hidden = !o; this.setAttribute('aria-expanded', String(o)); });
+  $('scrim').addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+  // ---------- search ----------
+  var IDX = PAGES.map(function (p) {
+    var d = document.createElement('div'), h = p.html || '';
+    if (p.qids) h = (p.case || '') + p.qids.map(function (id) { var q = Q[id]; return q.stem + ' ' + q.opts.join(' ') + ' ' + q.rat; }).join(' ');
+    if (p.kind === 'terms') h = TERMS.map(function (t) { return t.t + ': ' + t.d; }).join(' ');
+    d.innerHTML = h.replace(/<img[^>]*>/g, '').replace(/<\/(p|li|h3|td|th|caption|div|dt|dd|figcaption)>/g, ' $&');
+    return {p: p, text: (d.textContent || '').replace(/\s+/g, ' ')};
+  });
+  $('q').addEventListener('input', function () {
+    var v = this.value.trim(), box = $('results');
+    if (v.length < 2) { box.hidden = true; $('toc').hidden = false; return; }
+    var lv = v.toLowerCase(), out = [];
+    IDX.forEach(function (x) {
+      var lt = x.text.toLowerCase(), i = lt.indexOf(lv); if (i < 0) return;
+      var n = lt.split(lv).length - 1, a = Math.max(0, i - 50), snip = x.text.slice(a, i + v.length + 70);
+      var hi = esc(snip).replace(new RegExp(esc(v).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig'), function (m) { return '<mark>' + m + '</mark>'; });
+      out.push('<a href="#' + x.p.id + '"><b>' + esc(x.p.title) + '</b><span>' + (a ? '…' : '') + hi + '…</span><span class="eyebrow">' + n + (n === 1 ? ' match' : ' matches') + '</span></a>');
+    });
+    box.innerHTML = out.length ? out.join('') : '<p class="none">No matches in this chapter.</p>';
+    box.hidden = false; $('toc').hidden = true;
+  });
+  $('results').addEventListener('click', function (e) { if (e.target.closest('a')) { $('q').value = ''; $('results').hidden = true; $('toc').hidden = false; } });
+
+  route();
+})();
+</script>
+</body>
+</html>
