@@ -5190,37 +5190,7 @@ const ACT = {
   printReport() { L(null, 'report', 'Printed / saved shift report'); try { window.print(); } catch (e) { toast('Printing is not available here — use Download report.'); } },
   async downloadReport() {
     const name = `Shift report - ${S.student.replace(/[^\w\s-]/g, '')} - ${new Date(S.started).toISOString().slice(0, 10)}.html`;
-    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shift report — ${esc(S.student)}</title><style>body{margin:0;padding:24px;background:#F7F8F7}@media print{body{background:#fff;padding:0}.rp{border:0;padding:0;max-width:none}}${REPORT_CSS}</style></head><body>${reportHTML()}<script>
-(function () {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('./sw.js').catch(function () {});
-    });
-  }
-  var deferredPrompt = null;
-  var installBtn = document.getElementById('pwaInstallBtn');
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) installBtn.hidden = false;
-  });
-  if (installBtn) {
-    installBtn.addEventListener('click', function () {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function () {
-        deferredPrompt = null;
-        installBtn.hidden = true;
-      });
-    });
-  }
-  window.addEventListener('appinstalled', function () {
-    deferredPrompt = null;
-    if (installBtn) installBtn.hidden = true;
-  });
-})();
-</script>
-</body></html>`;
+    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shift report — ${esc(S.student)}</title><style>body{margin:0;padding:24px;background:#F7F8F7}@media print{body{background:#fff;padding:0}.rp{border:0;padding:0;max-width:none}}${REPORT_CSS}</style></head><body>${reportHTML()}</body></html>`;
     L(null, 'report', 'Downloaded shift report');
     try {
       const dl = inViewer() ? await window.claude.use('downloads') : null;
