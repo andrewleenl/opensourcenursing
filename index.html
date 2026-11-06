@@ -171,7 +171,7 @@ body {
   margin-bottom: 30px;
   box-shadow: var(--shadow);
   display: grid;
-  grid-template-columns: 1.55fr 1fr;
+  grid-template-columns: 1fr;
   gap: 28px;
   align-items: center;
 }
@@ -272,61 +272,6 @@ body {
   font-size: 12.5px;
 }
 
-/* Right-side Hero Telemetry Card */
-.hero-telemetry {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 3px solid #C75B39;
-  color: #FFFFFF;
-  border-radius: var(--card-radius);
-  padding: 22px 24px;
-}
-.telemetry-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #F4A287;
-  margin: 0 0 12px;
-}
-.telemetry-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.t-stat {
-  background: rgba(15, 29, 32, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 12px 14px;
-  border-radius: var(--btn-radius);
-}
-.t-stat b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 25px;
-  line-height: 1.1;
-  color: #F4A287;
-  font-variant-numeric: tabular-nums;
-}
-.t-stat span {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #D7E4E4;
-  display: block;
-  margin-top: 3px;
-}
-.telemetry-foot {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  color: #D7E4E4;
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
 /* Two-Column Homepage Architecture: Open Statement + Projects Hub */
 .home-grid {
@@ -955,13 +900,11 @@ table.booktabs tbody tr:hover {
           '<div class="proj-specs">' +
             '<span class="spec-chip">36 Interactive Chapters</span>' +
             '<span class="spec-chip">36 PowerPoint Decks (1,025 Slides)</span>' +
-            '<span class="spec-chip">1,179-Page Complete PDF (20.5 MB)</span>' +
             '<span class="spec-chip">1,310 Licensure Questions</span>' +
             '<span class="spec-chip">2,144 Key Terms &amp; Flashcards</span>' +
           '</div>' +
           '<div class="btn-row">' +
             '<button type="button" class="btn accent" data-action="go-view" data-target="medsurg">Browse All 36 Chapters &amp; PowerPoints &rarr;</button>' +
-            '<button type="button" class="btn outline" data-action="dl-file" data-file="Medical_Surgical_Nursing_Complete_Book.pdf">&#11015; Download Full Book PDF (1,179 pp.)</button>' +
             '<button type="button" class="btn outline" data-action="go-view" data-target="labs">Canadian SI Lab Reference (Appendix A) &rarr;</button>' +
           '</div>' +
         '</article>' +
@@ -1074,7 +1017,6 @@ table.booktabs tbody tr:hover {
       '<div class="table-wrap">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:12.5px;color:var(--muted)">' +
           '<span>Showing <strong>' + matchedCount + '</strong> of 36 chapters &bull; 1,025 total PowerPoint lecture slides &bull; 2,144 key terms &bull; 1,310 licensure questions</span>' +
-          '<button type="button" class="ch-btn" data-action="dl-file" data-file="Medical_Surgical_Nursing_Complete_Book.pdf">&#11015; Download Complete Textbook (.PDF)</button>' +
         '</div>' +
         '<table class="booktabs">' +
           '<thead><tr><th style="width:85px">Chapter</th><th>Chapter Title &amp; Core Clinical Topics</th><th style="width:155px">PowerPoint Deck</th><th style="width:140px">Chapter Assets</th><th style="width:245px">Read / Download Slides</th></tr></thead>' +
@@ -1087,24 +1029,11 @@ table.booktabs tbody tr:hover {
     var heroHtml = '<section class="hero-banner" id="stmtHeading" aria-label="Statement on Open Education">' +
       '<div>' +
         '<span class="hero-eyebrow">STATEMENT ON OPEN EDUCATION &bull; WHY THIS PROJECT IS OPEN</span>' +
-        '<p class="hero-lead">Knowledge that heals belongs to everyone it might help, and a barrier between a nursing student and that knowledge is ultimately a barrier to safe patient care. For that reason, <em>Medical-Surgical Nursing: A Canadian Open Text</em> and every resource on <strong>OpenSourceNursing.ca</strong> are freely available to read, print, and adapt under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#F4A287;font-weight:700;text-decoration:underline">CC BY-NC-SA 4.0 licence</a> (AODA / WCAG 2.1 AA accessible). Please send any corrections or suggestions to <a href="mailto:andrew@opensourcenursing.ca" style="color:#F4A287;font-weight:700;text-decoration:underline">andrew@opensourcenursing.ca</a>.</p>' +
+        '<p class="hero-lead">Knowledge that heals belongs to everyone it might help, and a barrier between a nursing student and that knowledge is ultimately a barrier to safe patient care. For that reason, <em>Medical-Surgical Nursing: A Canadian Open Text</em> and every resource on <strong>OpenSourceNursing.ca</strong> are freely available to read and adapt online under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#F4A287;font-weight:700;text-decoration:underline">CC BY-NC-SA 4.0 licence</a> (AODA / WCAG 2.1 AA accessible). Please send any corrections or suggestions to <a href="mailto:andrew@opensourcenursing.ca" style="color:#F4A287;font-weight:700;text-decoration:underline">andrew@opensourcenursing.ca</a>.</p>' +
         '<div class="hero-byline" style="margin-bottom:0">' +
           '<strong>For instructors:</strong> Faculty resources are available on request. Please email <a href="mailto:andrew@opensourcenursing.ca?subject=Faculty%20Resources%20Request" style="color:#F4A287;font-weight:700;text-decoration:underline">andrew@opensourcenursing.ca</a> to ask for access.' +
         '</div>' +
       '</div>' +
-      '<aside class="hero-telemetry" aria-label="Published Curriculum Telemetry">' +
-        '<p class="telemetry-title">Verified 1st Edition Telemetry (Oct 2026)</p>' +
-        '<div class="telemetry-grid">' +
-          '<div class="t-stat"><b>36 / 36</b><span>Interactive Chapters &amp; PPTX Decks</span></div>' +
-          '<div class="t-stat"><b>1,025</b><span>Widescreen Lecture Slides</span></div>' +
-          '<div class="t-stat"><b>1,310</b><span>NCLEX-RN / REx-PN / CPNRE Items</span></div>' +
-          '<div class="t-stat"><b>2,144</b><span>Capitalized Key Terms &amp; Flashcards</span></div>' +
-        '</div>' +
-        '<div class="telemetry-foot">' +
-          '<span>246 Clinical Figures &bull; 141 Tables &bull; 1,179 Book Pages</span>' +
-          '<span style="color:#F4A287;font-weight:700">100% Canadian SI</span>' +
-        '</div>' +
-      '</aside>' +
     '</section>';
 
     return heroHtml +
@@ -1232,17 +1161,6 @@ table.booktabs tbody tr:hover {
       if (chObj) {
         window.location.href = chObj.file;
       }
-    } else if (act === 'dl-file') {
-      var fName = actEl.getAttribute('data-file');
-      if (fName) {
-        var aFile = document.createElement('a');
-        aFile.href = fName;
-        aFile.download = fName;
-        document.body.appendChild(aFile);
-        aFile.click();
-        document.body.removeChild(aFile);
-        showToast('Downloading <strong>' + esc(fName) + '</strong> (Complete 1,179-page Canadian Open Textbook)...');
-      }
     }
   });
 
@@ -1272,51 +1190,21 @@ table.booktabs tbody tr:hover {
   }
   var deferredPrompt = null;
   var installBtn = document.getElementById('pwaInstallBtn');
-  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                     window.navigator.standalone === true;
-
-  if (isIOS && !isStandalone && installBtn) {
-    installBtn.hidden = false;
-  }
-
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferredPrompt = e;
-    if (installBtn && !isStandalone) installBtn.hidden = false;
+    if (installBtn) installBtn.hidden = false;
   });
-
   if (installBtn) {
     installBtn.addEventListener('click', function () {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function () {
-          deferredPrompt = null;
-          installBtn.hidden = true;
-        });
-      } else if (isIOS) {
-        var kicker = document.getElementById('modalKicker');
-        var title = document.getElementById('modalTitle');
-        var body = document.getElementById('modalBody');
-        var backdrop = document.getElementById('modalBackdrop');
-        if (kicker && title && body && backdrop) {
-          kicker.textContent = 'INSTALL OFFLINE WEB APP (iOS & iPadOS)';
-          title.textContent = 'Add OpenSourceNursing.ca to Your Home Screen';
-          body.innerHTML = '<div style="font-size:14.5px;line-height:1.6">' +
-  '<p style="margin:0 0 12px">Apple iOS and iPadOS require manual installation from your browser toolbar:</p>' +
-  '<ol style="margin:0 0 14px;padding-left:22px">' +
-    '<li style="margin-bottom:8px">Tap the <strong>Share</strong> button <span style="display:inline-block;padding:1px 6px;border:1px solid #CBD6D2;border-radius:4px;font-family:monospace">&#9113;</span> (the square with an upward arrow) at the bottom of Safari on iPhone or top-right on iPad.</li>' +
-    '<li style="margin-bottom:8px">Scroll down the share menu and tap <strong>Add to Home Screen</strong>.</li>' +
-    '<li>Tap <strong>Add</strong> in the top-right corner to install <strong>OpenNursing</strong> as a full-screen offline app.</li>' +
-  '</ol>' +
-'</div>';
-          backdrop.hidden = false;
-        }
-      }
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        installBtn.hidden = true;
+      });
     });
   }
-
   window.addEventListener('appinstalled', function () {
     deferredPrompt = null;
     if (installBtn) installBtn.hidden = true;
