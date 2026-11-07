@@ -899,7 +899,6 @@ table.booktabs tbody tr:hover {
           '<p class="desc">Comprehensive 36-chapter, 9-unit Canadian adult medical-surgical nursing textbook with Canadian SI laboratory values, CNO RPN/RN entry-to-practice scope comparisons, clinical illustrations, interactive NCLEX-RN/REx-PN review questions, and <strong>all 36 accompanying PowerPoint lecture presentations</strong>.</p>' +
           '<div class="btn-row">' +
             '<button type="button" class="btn accent" data-action="go-view" data-target="medsurg">Browse All 36 Chapters &amp; PowerPoints &rarr;</button>' +
-            '<button type="button" class="btn outline" data-action="go-view" data-target="labs">Canadian SI Lab Reference (Appendix A) &rarr;</button>' +
           '</div>' +
         '</article>' +
 
@@ -1001,6 +1000,17 @@ table.booktabs tbody tr:hover {
       '</tr>';
     });
 
+    /* Appendix A row: listed after the last chapter */
+    var appxHay = 'appendix a canadian si reference laboratory lab values intervals critical thresholds mmol/l analytes';
+    if (uFilter === 'ALL' && (!term || appxHay.indexOf(term) >= 0)) {
+      rows += '<tr>' +
+        '<td><strong style="color:var(--accent);font-family:var(--font-display);font-size:15px">App. A</strong><br><span style="font-size:11px;color:var(--muted)">Appendix</span></td>' +
+        '<td><strong style="color:var(--primary);font-size:14.5px">Adult Canadian SI Reference Laboratory Intervals</strong><br><span style="font-size:12px;color:var(--muted)">36 analytes with SI reference intervals, critical/escalation thresholds, and related textbook chapters</span></td>' +
+        '<td><button type="button" class="ch-btn" data-action="go-view" data-target="labs">View Appendix &rarr;</button></td>' +
+        '<td><span style="font-size:12px;color:var(--muted)">&mdash;</span></td>' +
+      '</tr>';
+    }
+
     return filterControls +
       '<div class="table-wrap">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:12.5px;color:var(--muted)">' +
@@ -1035,7 +1045,7 @@ table.booktabs tbody tr:hover {
         '<div class="sec-head">' +
           '<div>' +
             '<h2 id="homeMedSurgDirHeading">Medical-Surgical Nursing: All 36 Chapters &amp; Lecture PowerPoints</h2>' +
-            '<p>Compact directory of all 36 interactive chapters and downloadable widescreen PowerPoint lecture presentations (.pptx)</p>' +
+            '<p>Compact directory of all 36 interactive chapters and downloadable widescreen PowerPoint lecture presentations (.pptx), plus Appendix A: Canadian SI Lab Reference</p>' +
           '</div>' +
           '<button type="button" class="btn outline sm" data-action="go-view" data-target="home">&larr; Back to Home &amp; Projects</button>' +
         '</div>' +
@@ -1058,7 +1068,7 @@ table.booktabs tbody tr:hover {
           '<h2>Appendix A &bull; Adult Canadian SI Reference Laboratory Intervals (36 Analytes)</h2>' +
           '<p>Harmonized with Canadian Society of Clinical Chemists (CSCC), Alberta Precision Laboratories, and Medical Council of Canada SI intervals (mmol/L, µmol/L, g/L, × 10⁹/L)</p>' +
         '</div>' +
-        '<button type="button" class="btn outline sm" data-action="go-view" data-target="home">&larr; Back to Home &amp; Projects</button>' +
+        '<button type="button" class="btn outline sm" data-action="go-view" data-target="medsurg">&larr; Back to All Chapters</button>' +
       '</div>' +
       '<div class="table-wrap">' +
         '<table class="booktabs">' +
