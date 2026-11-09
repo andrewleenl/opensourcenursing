@@ -957,10 +957,10 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 3: The deteriorating patient ---------------- */
+/* ---------------- Scenario 13: The deteriorating patient ---------------- */
 const s3Treated = p => p.orders.some(o => o.id === 'rt-x4') && Object.entries(p.mar).some(([k, d]) => k.startsWith('rt-x4@') && d.given);
 defineScenario({
-  id: 's3', n: 3, title: 'The deteriorating patient', minutes: 50,
+  id: 's3', n: 13, title: 'The deteriorating patient', minutes: 50,
   blurb: 'Three medical patients become unwell during one morning. Recognize it early, escalate clearly, and let each patient’s goals of care shape what you do.',
   skills: 'NEWS2 (including SpO₂ scale 2), sepsis recognition, SBAR escalation, rapid response, goals of care, comfort care for breathlessness',
   unit: { name: '4 North Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -1158,9 +1158,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 4: Admission from emergency (night shift) ---------------- */
+/* ---------------- Scenario 3: Admission from emergency (night shift) ---------------- */
 defineScenario({
-  id: 's4', n: 4, title: 'Night admission from emergency', minutes: 50,
+  id: 's4', n: 3, title: 'Night admission from emergency', minutes: 50,
   blurb: 'One older adult arrives from emergency at 03:00. Complete the admission, reconcile her medications with the bottles from home, and find out what she wants.',
   skills: 'admission assessment, Braden and Morse, pressure injury, best possible medication history, allergy vs intolerance, goals of care conversation, falls prevention, handoff',
   unit: { name: '4 West Medicine', shiftStart: T(3), shiftEnd: T(7, 30) },
@@ -1296,9 +1296,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 5: Discharge day ---------------- */
+/* ---------------- Scenario 7: Discharge day ---------------- */
 defineScenario({
-  id: 's5', n: 5, title: 'Discharge day', minutes: 45,
+  id: 's5', n: 7, title: 'Discharge day', minutes: 45,
   blurb: 'Three patients are due to leave today, to home, long-term care and rehab. Teach, reconcile and hand over safely, and notice when someone isn’t ready to go.',
   skills: 'discharge medication reconciliation, teach-back, anticoagulant teaching, transfer report, delirium (CAM), urinary retention, stopping an unsafe discharge',
   unit: { name: '6 East Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -1492,10 +1492,10 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 6: Prioritizing four patients ---------------- */
+/* ---------------- Scenario 14: Prioritizing four patients ---------------- */
 const s6FirstPid = (S, from) => (S.log.find(l => l.t >= from && l.pid && !['event', 'reply', 'result', 'view', 'report'].includes(l.type)) || {}).pid;
 defineScenario({
-  id: 's6', n: 6, title: 'Four patients, one nurse: prioritizing', minutes: 40,
+  id: 's6', n: 14, title: 'Four patients, one nurse: prioritizing', minutes: 40,
   blurb: 'Four problems arrive within five minutes. Decide who you see first, what to delegate, and what each patient’s goals of care ask of you.',
   skills: 'prioritization (ABCs, Maslow, acute vs chronic), delegation to care providers, GI bleed, hypoglycemia protocol, end-of-life comfort care, PN/RN scope and collaboration',
   unit: { name: '3 West Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -1700,11 +1700,11 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 7: Blood transfusion and reaction ---------------- */
+/* ---------------- Scenario 15: Blood transfusion and reaction ---------------- */
 const s7Start = (p, oid) => { const d = marDose(p, oid, p.orders.find(o => o.id === oid)?.med.times[0]); return d?.given ? d.t : null; };
 const s7RxText = 'Rm 612 Frank says: “I feel so cold, and my lower back really hurts.” He is shivering under two blankets';
 defineScenario({
-  id: 's7', n: 7, title: 'Blood transfusion and reaction', minutes: 45,
+  id: 's7', n: 15, title: 'Blood transfusion and reaction', minutes: 45,
   blurb: 'Two patients receive red blood cells this morning. Do the checks, watch closely, and recognize two very different reactions.',
   skills: 'pre-transfusion checks, two-person bedside verification, timed vital signs, acute hemolytic reaction, transfusion-associated circulatory overload (TACO), incident reporting',
   unit: { name: '6 West Medicine', shiftStart: T(8), shiftEnd: T(16) },
@@ -2257,11 +2257,11 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 11: PCA and opioid-induced sedation (night shift) ---------------- */
+/* ---------------- Scenario 19: PCA and opioid-induced sedation (night shift) ---------------- */
 const s11Nal = p => prnGiven(p, 'kd-m2', T(1, 30))[0] || null;
 const s11Paused = p => p.infusionLog.find(l => l.student && /^kd-pca/.test(l.orderId) && /Paused/.test(l.action) && l.t >= T(1, 30));
 defineScenario({
-  id: 's11', n: 11, title: 'PCA and opioid sedation (night shift)', minutes: 40,
+  id: 's11', n: 19, title: 'PCA and opioid sedation (night shift)', minutes: 40,
   blurb: 'A patient with sleep apnea is on a hydromorphone PCA with a basal rate. Spot the risks early, and act fast when he becomes hard to wake.',
   skills: 'PCA safety, sleep apnea and opioids, family teaching (PCA by proxy), POSS sedation scale, respiratory depression, naloxone titration, re-sedation, prioritizing a second patient',
   unit: { name: '5 East Surgery', shiftStart: T(23) - 1440, shiftEnd: T(7) },
@@ -2401,11 +2401,11 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 12: Alcohol withdrawal ---------------- */
+/* ---------------- Scenario 16: Alcohol withdrawal ---------------- */
 const s12Ciwa = (p, a, b = 1e9) => p.assess.filter(x => x.kind === 'ciwa' && x.t >= a && x.t <= b);
 const s12Lzp = (p, after) => prnGiven(p, 'rl-m1', after);
 defineScenario({
-  id: 's12', n: 12, title: 'Alcohol withdrawal', minutes: 45,
+  id: 's12', n: 16, title: 'Alcohol withdrawal', minutes: 45,
   blurb: 'A man admitted with pancreatitis is in his first day without alcohol. Score his withdrawal, treat it by protocol, protect his brain, and be ready for a seizure.',
   skills: 'CIWA-Ar scoring, symptom-triggered benzodiazepines, thiamine before glucose, magnesium, seizure precautions and seizure care, escalation for severe withdrawal',
   unit: { name: '4 West Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -2529,10 +2529,10 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 13: Diabetic ketoacidosis ---------------- */
+/* ---------------- Scenario 17: Diabetic ketoacidosis ---------------- */
 const s13Rate = p => { const l = p.infusionLog.filter(x => x.orderId === 'jo-m1' && x.student).pop(); return l ? (/Paused/.test(l.action) ? 0 : parseFloat(l.rate)) : 5.8; };
 defineScenario({
-  id: 's13', n: 13, title: 'Diabetic ketoacidosis', minutes: 45,
+  id: 's13', n: 17, title: 'Diabetic ketoacidosis', minutes: 45,
   blurb: 'A young woman with type 1 diabetes is on an insulin infusion for DKA. Follow the protocol hour by hour: glucose, potassium, fluids and the switch to dextrose.',
   skills: 'insulin infusion (units/kg/h), hourly glucose, potassium replacement before insulin, anion gap, switching to dextrose, DKA teaching and the reason it happened',
   unit: { name: '4 West Medicine (monitored bed)', shiftStart: T(7), shiftEnd: T(15) },
@@ -2651,9 +2651,9 @@ defineScenario({
 });
 NURSING_ACTIONS.bgHourly = { label: 'Check capillary blood glucose (protocol)', desc: 'Hourly glucose check while on the insulin infusion.' };
 
-/* ---------------- Scenario 14: Hyperkalemia in a dialysis patient ---------------- */
+/* ---------------- Scenario 18: Hyperkalemia in a dialysis patient ---------------- */
 defineScenario({
-  id: 's14', n: 14, title: 'Hyperkalemia and the dialysis patient', minutes: 40,
+  id: 's14', n: 18, title: 'Hyperkalemia and the dialysis patient', minutes: 40,
   blurb: 'A man who missed dialysis arrives overloaded, and his potassium is dangerously high. Protect the heart first, then lower the potassium, and protect his fistula all shift.',
   skills: 'critical results, ECG changes of hyperkalemia, calcium gluconate, insulin with dextrose, holding potassium sources, fistula care, fluid restriction, urgent dialysis',
   unit: { name: '3 East Medicine (monitored bed)', shiftStart: T(7), shiftEnd: T(15) },
@@ -2775,10 +2775,10 @@ defineScenario({
 });
 SCN.s14.patients.sa.handoffTo = ['Dialysis nurse', 'Oncoming nurse'];
 
-/* ---------------- Scenario 15: Chest pain on the unit and transfer to critical care ---------------- */
+/* ---------------- Scenario 20: Chest pain on the unit and transfer to critical care ---------------- */
 const s15Given = (p, pre) => Object.entries(p.mar).find(([k, d]) => k.startsWith(pre + '@') && d.given)?.[1] || null;
 defineScenario({
-  id: 's15', n: 15, title: 'Chest pain on the unit, then transfer to critical care', minutes: 40,
+  id: 's15', n: 20, title: 'Chest pain on the unit, then transfer to critical care', minutes: 40,
   blurb: 'A man two days after knee surgery gets crushing chest pain. Work the chest pain protocol, call the team, and give a complete report when he leaves for the cardiac unit.',
   skills: 'chest pain assessment (PQRST), nurse-initiated chest pain protocol, 12-lead ECG, ASA and nitroglycerin, troponin, rapid response, heparin infusion start, transfer report to critical care',
   unit: { name: '5 East Surgery', shiftStart: T(7), shiftEnd: T(15) },
@@ -2920,9 +2920,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 16: Questioning an unsafe order ---------------- */
+/* ---------------- Scenario 21: Questioning an unsafe order ---------------- */
 defineScenario({
-  id: 's16', n: 16, title: 'Questioning an unsafe order', minutes: 35,
+  id: 's16', n: 21, title: 'Questioning an unsafe order', minutes: 35,
   blurb: 'Three orders arrive this morning that shouldn’t be carried out as written. Spot them, say why, and get them fixed without a confrontation.',
   skills: 'dose checking against age, weight and kidney function, dangerous abbreviations, read-back and clarification, speaking up with SBAR, documenting a clarified order',
   unit: { name: '5 East Surgery', shiftStart: T(7), shiftEnd: T(15) },
@@ -3044,9 +3044,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 17: Documentation: a fall, a late entry, an amendment and a near miss ---------------- */
+/* ---------------- Scenario 4: Documentation: a fall, a late entry, an amendment and a near miss ---------------- */
 defineScenario({
-  id: 's17', n: 17, title: 'Documentation: fall, late entry, amendment, near miss', minutes: 40,
+  id: 's17', n: 4, title: 'Documentation: fall, late entry, amendment, near miss', minutes: 40,
   blurb: 'Nothing dramatic happens to the patients today, but a lot happens to the chart. Record a fall accurately, catch up a missed entry properly, fix your own error the right way, and report a near miss.',
   skills: 'objective charting after a fall, incident reporting, disclosure to family, late entries, amending a note, reporting a near miss, what not to write',
   unit: { name: '4 West Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -3153,9 +3153,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 18: Postpartum hemorrhage ---------------- */
+/* ---------------- Scenario 22: Postpartum hemorrhage ---------------- */
 defineScenario({
-  id: 's18', n: 18, title: 'Postpartum hemorrhage', minutes: 40,
+  id: 's18', n: 22, title: 'Postpartum hemorrhage', minutes: 40,
   blurb: 'A mother three hours after a long labour and a big baby. Find the boggy uterus before the bleeding becomes obvious, and act fast when it does.',
   skills: 'postpartum assessment (BUBBLE), fundal checks, full bladder as a cause of atony, quantified blood loss, fundal massage, uterotonics, escalation, early signs of hypovolemia in a young healthy woman',
   unit: { name: '4 South Birthing Unit', shiftStart: T(7), shiftEnd: T(15) },
@@ -3269,10 +3269,10 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 19: Pediatric dehydration ---------------- */
+/* ---------------- Scenario 11: Pediatric dehydration ---------------- */
 const s19Amt = (p, oid, re) => prnGiven(p, oid).some(d => re.test(d.amount || '')) || Object.entries(p.mar).some(([k, d]) => k.startsWith(oid + '@') && d.given && re.test(d.amount || ''));
 defineScenario({
-  id: 's19', n: 19, title: 'A dehydrated toddler', minutes: 40,
+  id: 's19', n: 11, title: 'A dehydrated toddler', minutes: 40,
   blurb: 'A two-year-old with gastroenteritis. Every dose and every volume is calculated from his weight, and the signs of dehydration look different in a child.',
   skills: 'weight-based dosing (mg/kg, mL/kg), oral rehydration, pediatric vital signs and dehydration assessment, diaper weights, IV bolus calculation, talking with a worried parent',
   unit: { name: '2 North Pediatrics', shiftStart: T(7), shiftEnd: T(15) },
@@ -3372,9 +3372,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 20: Palliative symptom management, C1 to C2 ---------------- */
+/* ---------------- Scenario 23: Palliative symptom management, C1 to C2 ---------------- */
 defineScenario({
-  id: 's20', n: 20, title: 'Palliative care: from C1 to C2', minutes: 45,
+  id: 's20', n: 23, title: 'Palliative care: from C1 to C2', minutes: 45,
   blurb: 'A man with advanced cancer has a pain crisis, then begins to die. Manage symptoms by the numbers, recognize the change, and help his family through the day.',
   skills: 'breakthrough dosing (10% of the daily opioid), reassessment, opioid-induced constipation, recognizing the last days of life, goals of care conversation (C1 → C2), stopping non-essential medications, family support',
   unit: { name: '6 West Medicine (palliative beds)', shiftStart: T(7), shiftEnd: T(15) },
@@ -3496,9 +3496,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 21: Isolation precautions: C. difficile and MRSA ---------------- */
+/* ---------------- Scenario 5: Isolation precautions: C. difficile and MRSA ---------------- */
 defineScenario({
-  id: 's21', n: 21, title: 'Isolation: C. difficile and MRSA', minutes: 40,
+  id: 's21', n: 5, title: 'Isolation: C. difficile and MRSA', minutes: 40,
   blurb: 'Two patients on contact precautions, for different reasons. Keep the organisms where they are, treat the diarrhea without making it worse, and manage a high vancomycin level.',
   skills: 'contact precautions, soap-and-water hand hygiene for spores, antimotility drugs in C. difficile, stool charting, dehydration, vancomycin troughs, dedicated equipment, isolation’s effect on patients',
   unit: { name: '4 West Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -3628,9 +3628,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 22: Anaphylaxis and allergic reactions ---------------- */
+/* ---------------- Scenario 24: Anaphylaxis and allergic reactions ---------------- */
 defineScenario({
-  id: 's22', n: 22, title: 'Anaphylaxis and a drug rash', minutes: 35,
+  id: 's22', n: 24, title: 'Anaphylaxis and a drug rash', minutes: 35,
   blurb: 'Two patients react to an IV antibiotic on the same morning: one with a rash, one with anaphylaxis. Tell them apart in seconds and act before the call is answered.',
   skills: 'recognizing anaphylaxis, stopping the infusion, epinephrine IM by protocol, airway and positioning, rapid response, biphasic reactions, mild reactions, recording a new allergy',
   unit: { name: '4 North Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -3777,9 +3777,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 23: A fall on an anticoagulant, and a wandering patient ---------------- */
+/* ---------------- Scenario 12: A fall on an anticoagulant, and a wandering patient ---------------- */
 defineScenario({
-  id: 's23', n: 23, title: 'A fall on a blood thinner, and a patient who wanders', minutes: 40,
+  id: 's23', n: 12, title: 'A fall on a blood thinner, and a patient who wanders', minutes: 40,
   blurb: 'An anticoagulated man is found on the floor. A woman with dementia keeps trying to leave. Head injury rules, neuro checks, and alternatives to restraints.',
   skills: 'post-fall assessment, head injury on anticoagulants, neuro checks and GCS, holding anticoagulants, CT head, responsive behaviours in dementia, least-restraint policy, family teaching',
   unit: { name: '4 West Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -3908,9 +3908,9 @@ defineScenario({
   ],
 });
 
-/* ---------------- Scenario 24: Tube feeding and medications by tube ---------------- */
+/* ---------------- Scenario 6: Tube feeding and medications by tube ---------------- */
 defineScenario({
-  id: 's24', n: 24, title: 'Tube feeding and medications by tube', minutes: 40,
+  id: 's24', n: 6, title: 'Tube feeding and medications by tube', minutes: 40,
   blurb: 'A man with a nasogastric tube after a stroke. Check the tube, give the medications the right way, keep the head up, and act when the feed isn’t going well.',
   skills: 'NG tube placement checks, giving medications by tube (what can’t be crushed), drug–feed interactions, aspiration prevention, gastric residuals, sliding-scale insulin, hyperglycemia on feeds',
   unit: { name: '4 North Medicine', shiftStart: T(7), shiftEnd: T(15) },
@@ -4721,6 +4721,8 @@ function viewStart() {
       <p class="lead">Practise charting in an electronic health record with fictional patients. Each scenario is a short shift on a hospital unit that runs on a real clock. Patients change, results come back and prescribers reply to your calls. When you finish, a debrief shows what you caught and what you missed, step by step.</p></div>
     <div class="card${tourSeen() ? '' : ' tourcard'}"><div class="body row between"><div><b>New to the simulator?</b> <span class="muted">Take the three-minute guided tour before your first shift. Nothing in it is saved or graded.</span></div>
       <div class="row-s"><button class="btn${tourSeen() ? ' ghost' : ''}" type="button" data-act="tourStart">Take the tour</button><button class="btn ghost" type="button" data-act="showGuide">Instructor guide</button></div></div></div>
+    <div class="card"><div class="body row between"><div><b>Instructors:</b> <span class="muted">check that a shift report a student handed in has not been edited.</span></div>
+      <button class="btn ghost" type="button" data-act="showVerify">Verify a student’s report</button></div></div>
     <div class="card"><h3>Before you start</h3><div class="body stack">
       <div class="field" style="max-width:360px"><label for="stuName">Your name <span class="muted small">(shown on your shift report)</span></label><input class="input" id="stuName" autocomplete="off" placeholder="First and last name" value="${esc(ui.name || '')}"></div>
       <div class="optgrid">
@@ -4730,18 +4732,8 @@ function viewStart() {
           <div class="small muted">Some debrief items depend on scope of practice, such as when to bring in an RN.</div></div>
       </div></div></div>
     <div class="row between"><h2 class="h2">Choose a scenario</h2><button type="button" class="linkbtn" data-act="showGcdPage">What do R1, M1 and C1 mean?</button></div>
-    <p class="small muted">${BENNER_NOTE}</p>
     ${LEVELS.map(([lv, desc]) => { const list = scList().filter(sc => (LEVEL[sc.id] || 'Foundations') === lv); return list.length ? `<div class="lvhead"><h3 class="h3">${lv}</h3><span class="small muted">${desc}</span></div>
     <div class="scgrid">${list.map(sc => scCard(sc)).join('')}</div>` : ''; }).join('')}
-    <div class="card"><h3>How the simulator works</h3><div class="body"><ul class="tips">
-      <li><b>The clock runs in real time</b> from the start of the shift. Use <b>Pause</b> when you need to stop, and <b>Skip ahead</b> to jump to the next event instead of waiting for it. Skipping passes time: finish your reassessments first, because the debrief checks <i>when</i> you did things.</li>
-      <li><b>The unit list</b> shows your patients, their goals of care, NEWS2 and tasks due. Select a patient to open their chart.</li>
-      <li><b>The chart menu</b> holds every section: orders, MAR, vital signs, assessment, interventions, notes, results, SBAR and handoff.</li>
-      <li><b>The yellow banner</b> announces events, like a call bell or a new result. Select <b>Open</b> to go there.</li>
-      <li><b>Interventions</b> is where you do things that aren’t charting elsewhere: a bladder scan, calling the rapid response team, delegating a task.</li>
-      <li><b>End shift and debrief</b> when you’re done. Your work is saved in this browser only; nothing is sent anywhere.</li>
-    </ul></div></div>
-    <p class="small muted">All patients, prescribers and the hospital are fictional. For education only; not clinical guidance. Instructors: <button type="button" class="linkbtn" data-act="showGuide">read the instructor guide</button> or <button type="button" class="linkbtn" data-act="showVerify">verify a student’s report</button>.</p>
   </section>`;
 }
 
@@ -5277,8 +5269,7 @@ const ACT = {
   toStart() { ui.view = 'start'; render(); window.scrollTo({ top: 0 }); },
   showGcdPage() { ui.view = 'gcdinfo'; render(); window.scrollTo({ top: 0 }); },
   showVerify() { ui.view = 'verify'; render(); window.scrollTo({ top: 0 }); },
-  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', ui.role || 'RN'); ui.view = 'census'; render(); window.scrollTo({ top: 0 });
-    modal(esc(SC.title), briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Start working</button>`, true); },
+  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', ui.role || 'RN'); ui.view = 'census'; render(); window.scrollTo({ top: 0 }); },
   showBrief() { modal(esc(SC.title) + ' — directions', briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
   toggleStrip() { S.flags.briefHidden = !S.flags.briefHidden; save(); render(); },
   gcdInfo(el) { const g = el.dataset.g; if (S && ui.view === 'chart' && ui.pid && S.flags[ui.pid + '-gcd'] == null) { S.flags[ui.pid + '-gcd'] = now(); L(ui.pid, 'view', 'Checked goals of care designation'); } modal(g ? `Goals of care: ${g}` : 'Goals of care not documented', `${g ? `<div class="alertbox"><b>${g} — ${GCD[g].approach} care.</b> ${esc(GCD[g].text)}</div>` : '<div class="alertbox warn">No goals of care designation has been ordered. Find out what the patient wants and make sure the prescriber has the conversation.</div>'}<p class="small">${GCD_INTRO}</p>${gcdTable(g)}<p class="small muted">${GCD_SOURCE}</p>`, `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
