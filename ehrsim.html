@@ -311,8 +311,7 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 .actrow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
 .actrow:last-child{border-bottom:0}
 .drawer{border:1px dashed var(--line);border-radius:var(--radius);padding:10px;display:grid;gap:8px;background:var(--sunk)}
-.pkgbtn{display:grid;text-align:left;gap:1px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 10px;font-size:13px;font-weight:600}
-.pkgbtn:hover{border-color:var(--accent)}
+.pkg{display:grid;text-align:left;gap:1px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 10px;font-size:13px;font-weight:600}
 .meter{height:10px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);overflow:hidden}
 .meter span{display:block;height:100%;background:var(--brand)}
 .cjgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
@@ -552,7 +551,7 @@ defineScenario({
       'Open each chart. Read the night nurse’s note, the active orders and the goals of care in the banner.',
       'Take and file a set of vital signs for each patient (<b>Vitals &amp; I&amp;O</b> → <b>Fill from monitor and patient</b> → <b>File vital signs</b>).',
       'Do Donald’s neurovascular check of his right leg before 08:00 (<b>Assessment</b>), and a head-to-toe on each patient this morning.',
-      'Give medications as they come due on the <b>MAR</b>. Scan the wristband and the package, and reassess every PRN within an hour.',
+      'Give medications as they come due on the <b>MAR</b>. Enter the barcodes from the wristband and the package, and reassess every PRN within an hour.',
       'When the yellow banner announces a change, assess first, then act: use <b>Interventions</b> for bedside actions and <b>SBAR &amp; messages</b> to call the surgeon.',
       'Keep Walter’s intake and output, and write a DAR note for any patient whose condition changed.',
     ],
@@ -753,7 +752,7 @@ defineScenario({
     situation: 'It’s 07:30 on 4 West Medicine. You have three patients and a busy morning medication pass. Somewhere in these charts are an allergy conflict, a dose that needs a calculation, a hold parameter, a daily maximum, a drug that’s wrong for the kidneys and a look-alike package. Your job is to find them before anything reaches a patient.',
     steps: [
       'Before you give anything, open each chart. Read the <b>allergies</b> in the banner, the night note, and the latest <b>Results</b>.',
-      'For every dose, do your checks on the <b>MAR</b>: right patient, drug, dose, route, time, reason and documentation. Scan the wristband and the package in the medication drawer.',
+      'For every dose, do your checks on the <b>MAR</b>: right patient, drug, dose, route, time, reason and documentation. Enter the barcodes from the wristband and the package label.',
       'Read the <b>stock</b> line on each order. If the package strength differs from the ordered dose, calculate how many tablets to give and record it in “Amount given”.',
       'Check hold parameters before you give: take a set of vital signs first (<b>Vitals &amp; I&amp;O</b>).',
       'If a dose should not be given, document it as <b>Not given</b> with a reason, then tell the prescriber with <b>SBAR &amp; messages</b>. Acknowledge any new orders that come back.',
@@ -1714,7 +1713,7 @@ defineScenario({
     situation: 'It’s 08:00 on 6 West Medicine. Two of your patients are getting packed red blood cells today. Frank’s first unit is on its way from the blood bank, and Joan’s will follow. Most transfusions are uneventful. These two may not be.',
     steps: [
       'Before the blood arrives, check each chart for <b>consent</b>, the transfusion order, a patent IV and a set of <b>baseline vital signs</b> (within 30 minutes of starting).',
-      'When a unit arrives, do the bedside check with a second nurse: <b>Interventions</b> → <b>Bedside blood check</b>. Then start it from the <b>MAR</b> (scan the wristband and the unit, and enter the second nurse’s name).',
+      'When a unit arrives, do the bedside check with a second nurse: <b>Interventions</b> → <b>Bedside blood check</b>. Then start it from the <b>MAR</b> (enter the wristband and unit barcodes, and the second nurse’s name).',
       'Start within <b>30 minutes</b> of the unit leaving the blood bank. Stay close for the first 15 minutes and take vital signs <b>15 minutes</b> after starting.',
       'If a reaction starts: <b>stop the transfusion first</b> (<b>Interventions</b> → <b>Stop the transfusion</b>), keep the vein open with saline, take vital signs, then call with <b>SBAR</b>.',
       'Follow the orders that come back: samples, return the unit to the blood bank, and anything else the prescriber asks for. If something went wrong in the process, file a safety report.',
@@ -3125,7 +3124,7 @@ defineScenario({
   dyn: { nf(p) { return { ...p.monitor }; }, lp(p) { return { ...p.monitor }; } },
   events: [
     { id: 'nf-daughter', at: T(8, 30), pid: 'nf', title: 'Phone call', text: 'Rm 461 Nora’s daughter Siobhan is on the phone asking how her mother is this morning', hint: 'Tell her about the fall honestly and plainly: what happened, how Nora is, and what is being done. Record it (Interventions → Update the family).' },
-    { id: 'lp-drawer', at: T(8, 5), pid: 'lp', title: 'Medication drawer', text: 'Rm 462 preparing Leonard’s 08:00 medications, you notice a package in his drawer that isn’t on his MAR', hint: 'Scan it from the medication window and read the label. Don’t give it. Report it as a near miss (Interventions → Safety report).' },
+    { id: 'lp-drawer', at: T(8, 5), pid: 'lp', title: 'Medication drawer', text: 'Rm 462 preparing Leonard’s 08:00 medications, you notice a package in his drawer that isn’t on his MAR', hint: 'Enter its barcode in the medication window and read the label. Don’t give it. Report it as a near miss (Interventions → Safety report).' },
     { id: 'lp-late', at: T(10), pid: 'lp', title: 'Missing entry', text: 'Rm 462 you realize you did Leonard’s 08:00 wound care but never charted it', hint: 'Notes tab: write a DAR note with the time of care set to 08:00. The system will mark it as a late entry written at 10:00. Also record the wound check on Lines & wounds.' },
     { id: 'nf-amend', at: T(10, 20), pid: 'nf', title: 'An error in your note', text: 'Rm 461 re-reading your note about the fall, you see you wrote “right hip”. The bruise and pain are on her LEFT hip', hint: 'Notes → Amend. Correct it and give the reason. The original stays visible, struck through.', fire(S) { return S.pts.nf.notes.some(n => n.student) ? undefined : 'Rm 461 you haven’t written a note about Nora’s fall yet. Write it now, with the facts you observed (left hip bruise, vital signs, who was told)'; } },
   ],
@@ -4366,10 +4365,9 @@ function tMAR(p) {
   const scanned = p.scan.band;
   return `
   <div class="card"><div class="scanrow">
-    <form class="scanform" data-act="scanSubmit" autocomplete="off"><label for="scanIn" class="sr">Scan or type a barcode</label><input class="input mono" id="scanIn" placeholder="Scan or type the wristband or medication barcode" spellcheck="false" autocapitalize="characters"><button class="btn sm" type="submit">Enter</button></form>
-    <button class="btn ghost sm" type="button" data-act="scanBand">Scan wristband</button>
-    <span class="pill ${scanned ? 'ok' : ''}">${scanned ? '✓ Patient verified' : 'Wristband not scanned'}</span>
-  </div><div class="body small muted">Select a due time to document a dose. You can scan packages from the patient’s medication drawer inside the documentation window.</div></div>
+    <form class="scanform" data-act="scanSubmit" autocomplete="off"><label for="scanIn" class="sr">Enter a wristband or medication barcode</label><input class="input mono" id="scanIn" placeholder="Enter the wristband or medication barcode" spellcheck="false" autocapitalize="characters"><button class="btn sm" type="submit">Enter</button></form>
+    <span class="pill ${scanned ? 'ok' : ''}">${scanned ? '✓ Patient verified' : 'Wristband not verified'}</span>
+  </div><div class="body small muted">Enter the barcode from the patient’s wristband first (or their MRN). Then select a due time to document a dose and enter the barcode from the medication package label.</div></div>
   <div class="card"><h3>Scheduled <span class="note">Today · select a time to document</span></h3><div class="scroll"><table class="mar"><tbody>
     ${sched.map(o => `<tr><td class="medc">${head(o)}</td><td class="times">${o.med.times.filter(x => x >= 0 && x < 1440).map(x => chip(o, x)).join('')}</td></tr>`).join('') || '<tr><td class="muted">None</td></tr>'}
   </tbody></table></div></div>
@@ -4928,10 +4926,11 @@ function drawDoc(keep = {}) {
   const body = `
     <div class="summary"><b>${esc(m.name)} ${esc(m.dose)}</b><span>${esc(m.route)} · ${esc(m.freq)}${m.prn ? ' · ' + esc(m.prnReason) : ''}</span>${m.hold ? `<span class="tx-amber">${esc(m.hold)}</span>` : ''}${m.scale ? `<span class="muted">${esc(m.scale)}</span>` : ''}
       <span class="muted">Stock: ${esc(m.stock)} · ${prn ? 'PRN dose' : 'Due ' + hm(ui.md.time)} · Now ${hm(now())}</span></div>
-    <div class="row-s"><span class="pill ${p.scan.band ? 'ok' : ''}">${p.scan.band ? '✓ Wristband scanned' : 'Wristband not scanned'}</span><span class="pill ${scannedMed ? 'ok' : ''}">${scannedMed ? '✓ Medication scanned' : 'Medication not scanned'}</span></div>
-    ${p.scan.band && scannedMed ? '' : `<div class="drawer"><div class="row-s">${p.scan.band ? '' : '<button class="btn ghost sm" type="button" data-act="mdScanCode" data-code="PT' + p.mrn + '">Scan wristband</button>'}<span class="small muted">Medication drawer — select a package to scan it:</span></div>
-      <div class="row-s">${drawerFor(p).map(d => `<button class="pkgbtn" type="button" data-act="mdScanCode" data-code="${d.code}"><span>${esc(d.label)}</span><span class="mono small">${d.code}</span></button>`).join('')}</div>
-      <form class="scanform" data-act="mdScanSubmit" autocomplete="off"><label for="mdScanIn" class="sr">Scan or type a barcode</label><input class="input mono" id="mdScanIn" placeholder="Or scan / type a barcode" spellcheck="false" autocapitalize="characters"><button class="btn sm" type="submit">Enter</button></form></div>`}
+    <div class="row-s"><span class="pill ${p.scan.band ? 'ok' : ''}">${p.scan.band ? '✓ Wristband verified' : 'Wristband not verified'}</span><span class="pill ${scannedMed ? 'ok' : ''}">${scannedMed ? '✓ Medication verified' : 'Medication not verified'}</span></div>
+    ${p.scan.band && scannedMed ? '' : `<div class="drawer">
+      <form class="scanform" data-act="mdScanSubmit" autocomplete="off"><label for="mdScanIn" class="sr">Enter a wristband or medication barcode</label><input class="input mono" id="mdScanIn" placeholder="${p.scan.band ? 'Enter the barcode from the medication label' : 'Enter the wristband barcode (or MRN), then the medication'}" spellcheck="false" autocapitalize="characters"><button class="btn sm" type="submit">Enter</button></form>
+      <span class="small muted">Medication drawer for ${esc(p.name)} — enter the barcode from the package label:</span>
+      <div class="row-s">${drawerFor(p).map(d => `<div class="pkg"><span>${esc(d.label)}</span>${LABELLED.has(d.code) ? '' : `<span class="mono small">${d.code}</span>`}</div>`).join('')}</div></div>`}
     ${ui.md.scanMsg ? `<div class="alertbox ${ui.md.scanMsg.cls}" role="alert">${ui.md.scanMsg.html}</div>` : ''}
     <div class="seg" role="group" aria-label="Result"><button type="button" data-act="mdGiven" data-v="1" aria-pressed="${g}">Given</button><button type="button" data-act="mdGiven" data-v="0" aria-pressed="${!g}">Not given</button></div>
     <div class="vform">
@@ -4956,8 +4955,8 @@ function keepDoc() { const k = {}; ['mdAmt', 'mdWhy', 'mdSite', 'mdBG', 'mdReaso
 function docWarnings(p, o, d) {
   const m = o.med, w = [], t = now();
   if (!S.settings.alerts || !d.given) return w;
-  if (!p.scan.band) w.push('Patient wristband has not been scanned.');
-  if (!p.scan.meds.includes(m.code)) w.push('This medication has not been scanned.');
+  if (!p.scan.band) w.push('Patient wristband has not been verified.');
+  if (!p.scan.meds.includes(m.code)) w.push('This medication has not been verified.');
   const al = allergyHit(p, m.name); if (al) w.push(`ALLERGY: ${p.name} is allergic to ${al.agent} (${al.reaction}).`);
   if (m.highAlert && !d.dc) w.push('High-alert medication: enter the name of the nurse who did the independent double check.');
   if (m.controlled && d.waste && !/^none|^0/i.test(d.waste) && !d.wit) w.push('Controlled substance waste needs a witness.');
@@ -5051,9 +5050,9 @@ const TOUR = [
   { h: 'Orders', pre: () => tourChart('orders'), sel: '#panel',
     b: `<p>Read the active orders at the start of the shift. New orders appear at the top and must be reviewed and acknowledged before you act on them.</p><p>If a prescriber gives an order by phone, enter it here and read it back.</p>` },
   { h: 'The MAR', pre: () => tourChart('mar'), sel: '#panel',
-    b: `<p>Scan the wristband first. Scheduled doses show as times: select a time to document that dose.</p><p>PRN medications have a <b>Give PRN</b> button and show when the next dose is allowed. Continuous infusions are documented here too.</p>` },
+    b: `<p>Enter the wristband barcode (or the patient’s MRN) first. Scheduled doses show as times: select a time to document that dose.</p><p>PRN medications have a <b>Give PRN</b> button and show when the next dose is allowed. Continuous infusions are documented here too.</p>` },
   { h: 'Documenting a dose', pre: () => tourChart('mar'), post: tourDose, sel: '#modalRoot .modal',
-    b: `<p>Scan the package from the medication drawer, choose <b>Given</b> or <b>Not given</b>, and fill in what the medication calls for, such as an injection site, a double check or a reason for holding.</p><p>In Learn mode you are warned before a wrong patient, an allergy or a hold parameter gets through. In Test yourself mode you are not.</p>` },
+    b: `<p>Enter the barcode from the medication package label, choose <b>Given</b> or <b>Not given</b>, and fill in what the medication calls for, such as an injection site, a double check or a reason for holding.</p><p>In Learn mode you are warned before a wrong patient, an allergy or a hold parameter gets through. In Test yourself mode you are not.</p>` },
   { h: 'Vital signs and intake/output', pre: () => tourChart('flow'), sel: '#panel',
     b: `<p>The bedside monitor shows live readings. <b>Fill from monitor and patient</b> copies them into the form, the NEWS2 score is calculated as you go, and <b>File vital signs</b> saves the set.</p><p>Intake and output are recorded on this page too.</p>` },
   { h: 'Assessment', pre: () => tourChart('assess'), sel: '#panel',
@@ -5191,7 +5190,7 @@ function viewGuide() {
 
     <div class="card"><h3>At a glance</h3><div class="body"><ul class="tips">
       <li><b>${list.length} scenarios</b> in four levels, each a short shift on a fictional hospital unit with one to several patients. They take about ${Math.min(...mins)} to ${Math.max(...mins)} minutes each.</li>
-      <li>Students chart in a working record: orders, MAR with barcode scanning, vital signs with NEWS2, assessments, interventions, notes, SBAR calls, handoff and medication reconciliation.</li>
+      <li>Students chart in a working record: orders, MAR with barcode entry (typed or with a handheld scanner), vital signs with NEWS2, assessments, interventions, notes, SBAR calls, handoff and medication reconciliation.</li>
       <li>The shift runs on a clock. Patients change, results come back and prescribers reply to SBAR calls with telephone orders.</li>
       <li>Each shift ends with a debrief scored against expected actions, and a shift report the student can submit.</li>
       <li>It runs in the browser with no accounts. All work is stored in that browser on that device, and nothing is sent anywhere.</li>
@@ -5280,8 +5279,6 @@ const ACT = {
   endAsk() { if (S.ended) { ui.view = 'debrief'; return render(); }
     modal('End the shift?', `<p>The clock stops and your debrief opens. You can still look back at the charts afterwards.</p><div class="alertbox warn small">Anything still undone counts as missed. Check your worklist first.</div>`, `<button class="btn ghost" type="button" data-act="closeModal">Keep working</button><button class="btn" type="button" data-act="endGo">End shift</button>`); },
   endGo() { S.ended = now(); setClock(S.ended, false); L(null, 'shift', 'Shift ended'); closeModal(); saveProgress(); ui.view = 'debrief'; render(); window.scrollTo({ top: 0 }); },
-  scanBand() { doScan('PT' + P().mrn, true); },
-  mdScanCode(el) { mdScan(el.dataset.code); },
   doAction(el) { const k = el.dataset.k, a = NURSING_ACTIONS[k]; ui.actKey = k;
     if (!a.ask) return recordAction(k, '');
     modal(esc(a.label), `<div class="small muted">${esc(a.desc)}</div><div class="field"><label for="actDetail">${esc(a.ask)}</label><input class="input" id="actDetail" autocomplete="off"></div>`, `<button class="btn ghost" type="button" data-act="closeModal">Cancel</button><button class="btn" type="button" data-act="actGo">Save</button>`); },
@@ -5533,8 +5530,15 @@ function liveCalc(kind) {
 }
 
 /* ---------------- scanning ---------------- */
+/* Codes printed on the Avery 5195 label sheet. These are never shown on screen: students enter them from the physical package. */
+const LABELS = {"RXACESUSP": "Acetaminophen 160 mg/5 mL", "RXACE325": "Acetaminophen 325 mg", "RXACE500": "Acetaminophen 500 mg", "RXAML5": "Amlodipine 5 mg", "RXAML10": "Amlodipine 10 mg", "RXAMOX500": "Amoxicillin 500 mg", "RXAMC875": "Amoxicillin-clavulanate 875/125 mg", "RXAPX25": "Apixaban 2.5 mg", "RXAPX5": "Apixaban 5 mg", "RXASA80": "ASA 80 mg", "RXASA81": "ASA 81 mg", "RXATOR40": "Atorvastatin 40 mg", "RXAZI250": "Azithromycin 250 mg", "RXCEPH500": "Cephalexin 500 mg", "RXCIPRO500": "Ciprofloxacin 500 mg", "RXCLIN150": "Clindamycin 150 mg", "RXDEX4": "Dexamethasone 4 mg", "RXDIG125": "Digoxin 0.125 mg", "RXDIPH25": "Diphenhydramine 25 mg", "RXDON5": "Donepezil 5 mg", "RXDON10": "Donepezil 10 mg", "RXFUR40": "Furosemide 40 mg", "RXHYDRAL25": "HydrALAZINE 25 mg", "RXHYD1": "Hydromorphone 1 mg", "RXHYD2": "Hydromorphone 2 mg", "RXHYDCR12": "Hydromorphone CR 12 mg", "RXHYDCR18": "Hydromorphone CR 18 mg", "RXHYDROX25": "HydrOXYzine 25 mg", "RXIBU200": "Ibuprofen 200 mg", "RXIBU400": "Ibuprofen 400 mg", "RXLEVOF750": "Levofloxacin 750 mg", "RXLEVO25": "Levothyroxine 25 mcg", "RXLEVO100": "Levothyroxine 100 mcg", "RXLOPER2": "Loperamide 2 mg", "RXLOR05": "Lorazepam 0.5 mg", "RXLOR1": "Lorazepam 1 mg", "RXMET500": "Metformin 500 mg", "RXMET25": "Metoprolol 25 mg", "RXMET50": "Metoprolol 50 mg", "RXNAP500": "Naproxen 500 mg", "RXOND4": "Ondansetron 4 mg", "RXPERC": "Oxycodone-acetaminophen 5/325 mg", "RXPANT40": "Pantoprazole EC 40 mg", "RXPANTGR": "Pantoprazole granules 40 mg", "RXPEG17": "PEG 3350 17 g", "RXPHENSUSP": "Phenytoin 125 mg/5 mL", "RXKCL20": "Potassium chloride ER 20 mmol", "RXPRED20": "Prednisone 20 mg", "RXRAM5": "Ramipril 5 mg", "RXRAM10": "Ramipril 10 mg", "RXSEN86": "Sennosides 8.6 mg", "RXSEV800": "Sevelamer 800 mg", "RXSMXTMP": "Sulfamethoxazole-trimethoprim 800/160 mg", "RXTAM04": "Tamsulosin 0.4 mg", "RXVANCPO": "Vancomycin 125 mg", "RXVITD": "Vitamin D3 1,000 units", "RXWARF5": "Warfarin 5 mg", "RXCARBO": "Carboprost 250 mcg/mL", "RXEPI1": "Epinephrine 1 mg/mL", "RXHYD2INJ": "Hydromorphone 2 mg/mL", "RXMOR2": "Morphine 2 mg/mL", "RXMOR10": "Morphine 10 mg/mL", "RXNALOX": "Naloxone 0.4 mg/mL", "RXDIPH50": "Diphenhydramine 50 mg/mL", "RXFURIV": "Furosemide 20 mg/2 mL", "RXFURIV4": "Furosemide 40 mg/4 mL", "RXGLYCO": "Glycopyrrolate 0.2 mg/mL", "RXIRONSUC": "Iron sucrose 20 mg/mL", "RXKETO30": "Ketorolac 30 mg/mL", "RXLORIV": "Lorazepam 4 mg/mL", "RXMPRED125": "Methylprednisolone 125 mg", "RXMETOCLO": "Metoclopramide 5 mg/mL", "RXMIDAZ": "Midazolam 1 mg/mL", "RXOND4IV": "Ondansetron 2 mg/mL", "RXTHIA": "Thiamine 100 mg/mL"};
+const LABELLED = new Set(Object.keys(LABELS));
+/* Any order in this scenario, then anything on the label sheet, so a wrong package from the cart is still recognized. */
+function knownMed(code) { const o = Object.values(S.pts).flatMap(x => x.orders).find(x => x.med?.code === code); if (o) return o; if (SC.extraCodes?.[code]) return { med: SC.extraCodes[code] }; return LABELS[code] ? { med: { name: LABELS[code], dose: '', stock: LABELS[code], code } } : null; }
+/* Normalize an entered code; a bare MRN (digits only) counts as that patient's wristband. */
+function normCode(raw) { const c = String(raw).toUpperCase().replace(/\s+/g, ''); return /^\d+$/.test(c) && Object.values(S.pts).some(x => x.mrn === c) ? 'PT' + c : c; }
 function mdScan(raw) {
-  const p = P(), o = p.orders.find(x => x.id === ui.md.orderId), code = String(raw).toUpperCase().replace(/\s+/g, ''), k = keepDoc(), on = S.settings.alerts;
+  const p = P(), o = p.orders.find(x => x.id === ui.md.orderId), code = normCode(raw), k = keepDoc(), on = S.settings.alerts;
   const msg = (cls, html) => { ui.md.scanMsg = { cls, html }; };
   ui.md.scanMsg = null;
   if (code.startsWith('PT')) {
@@ -5544,18 +5548,18 @@ function mdScan(raw) {
     else if (owner.id !== p.id) { if (on) msg('crit', `<b>Wrong patient.</b> This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are documenting for ${esc(p.name)}.`); }
     else p.scan.band = true;
   } else {
-    const any = Object.values(S.pts).flatMap(x => x.orders).find(x => x.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
+    const any = knownMed(code);
     L(p.id, 'scan', any ? `Scanned ${any.med.stock}` : 'Unrecognized barcode ' + raw);
     const al = any && allergyHit(p, any.med.name);
     if (!any) msg('warn', `“${esc(raw)}” is not a medication or wristband on this unit.`);
     else if (al && on) msg('crit', `<b>ALLERGY.</b> ${esc(p.name)} is allergic to ${esc(al.agent)} (${esc(al.reaction)}). Do not give ${esc(any.med.name)}.`);
-    else if (code !== o.med.code) { if (on) msg('crit', `<b>Wrong medication.</b> You scanned ${esc(any.med.stock)}. This dose is ${esc(o.med.name)} ${esc(o.med.dose)} (${esc(o.med.stock)}).`); }
-    else { if (!p.scan.meds.includes(code)) p.scan.meds.push(code); if (!p.scan.band && on) msg('warn', 'Medication scanned. Scan the patient’s wristband too.'); }
+    else if (code !== o.med.code) { if (on) msg('crit', `<b>Wrong medication.</b> You entered ${esc(any.med.stock)}. This dose is ${esc(o.med.name)} ${esc(o.med.dose)} (${esc(o.med.stock)}).`); }
+    else { if (!p.scan.meds.includes(code)) p.scan.meds.push(code); if (!p.scan.band && on) msg('warn', 'Medication verified. Enter the patient’s wristband barcode too.'); }
   }
   ui.md.warnings = null; drawDoc(k);
 }
 function doScan(raw, onscreen) {
-  const p = P(), code = String(raw).toUpperCase().replace(/\s+/g, ''), how = onscreen ? ' (on-screen)' : '';
+  const p = P(), code = normCode(raw), how = onscreen ? ' (on-screen)' : '';
   if (code.startsWith('PT')) {
     const owner = Object.values(S.pts).find(x => 'PT' + x.mrn === code);
     if (!owner) { L(p.id, 'scan', 'Unrecognized barcode ' + raw); render(); return info('Barcode not recognized', `“${esc(raw)}” is not a wristband or medication on this unit.`, 'warn'); }
@@ -5563,14 +5567,14 @@ function doScan(raw, onscreen) {
     if (owner.id !== p.id) { render(); return S.settings.alerts ? info('Wrong patient', `This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are charting on ${esc(p.name)}.`, 'crit') : toast('Wristband scanned'); }
     p.scan.band = true; render(); return toast('Patient verified: ' + p.name);
   }
-  const mine = medOrders(p).find(o => o.med.code === code), any = Object.values(S.pts).flatMap(x => x.orders).find(o => o.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
+  const mine = medOrders(p).find(o => o.med.code === code), any = knownMed(code);
   if (!any) { L(p.id, 'scan', 'Unrecognized barcode ' + raw); render(); return info('Barcode not recognized', `“${esc(raw)}” is not a medication or wristband on this unit.`, 'warn'); }
   if (!p.scan.meds.includes(code)) p.scan.meds.push(code);
   L(p.id, 'scan', `Scanned ${any.med.stock}${how}`); render();
   if (S.settings.alerts) {
     const al = allergyHit(p, any.med.name); if (al) return info('ALLERGY', `${esc(p.name)} is allergic to ${esc(al.agent)} (${esc(al.reaction)}). Do not give ${esc(any.med.name)}.`, 'crit');
     if (!mine) return info('Not ordered for this patient', `${esc(any.med.stock)} is not on ${esc(p.name)}'s MAR.`, 'crit');
-    if (!p.scan.band) return info('Scan the wristband first', 'Patient identity has not been confirmed for this medication pass.', 'warn');
+    if (!p.scan.band) return info('Enter the wristband first', 'Patient identity has not been confirmed for this medication pass.', 'warn');
   }
   toast('Scanned: ' + any.med.stock);
 }
