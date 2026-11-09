@@ -345,6 +345,32 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 .foot a{color:var(--brand-ink);font-weight:700}
 @media print{.appbar,#noticeBar,.homelink,.foot,.noprint,#modalRoot,.toast,body::before{display:none!important}body{background:#fff!important}.panel{padding:0}.wrap{padding:0}.rp{border:0!important;padding:0!important;max-width:none!important}}
 .rpwrap{overflow-x:auto}
+/* help: guided tour and instructor guide */
+#tourLayer{position:fixed;inset:0;z-index:50}
+.tourblock{position:absolute;inset:0}
+.tourblock.dim{background:rgba(11,20,24,.62)}
+.tourhole{position:absolute;border-radius:8px;border:2px solid #F4A287;box-shadow:0 0 0 9999px rgba(11,20,24,.62);pointer-events:none;transition:top .18s,left .18s,width .18s,height .18s}
+.tourpop{position:absolute;width:min(390px,calc(100vw - 16px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-top:4px solid var(--brand-red);border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,.45);padding:12px 16px 14px;display:grid;gap:8px}
+.tourtop{display:flex;align-items:center;gap:10px}
+.tourtop .eyebrow{margin:0}
+.tourpop h2{margin:0;font-family:var(--f-cond);font-size:20px;color:var(--accent);outline:0}
+#tourB{display:grid;gap:8px;font-size:14px}
+#tourB p{margin:0}
+.tournote{color:var(--brand-ink);font-weight:600;font-size:13px}
+.tourbar{height:4px;border-radius:999px;background:var(--sunk);overflow:hidden}
+.tourbar span{display:block;height:100%;background:var(--brand)}
+.tourfoot{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+body.touring .scrim{background:transparent}
+.card.tourcard{border-color:var(--brand);box-shadow:inset 4px 0 0 var(--brand)}
+.helpopt{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.helpopt:last-child{border-bottom:0}
+.helpopt > div{flex:1 1 240px;min-width:0;display:grid;gap:3px}
+.helpopt .pill{justify-self:start}
+.guide .lead{margin-top:6px;max-width:70ch}
+.guide table.simple td{font-size:13.5px}
+.guidesc{min-width:760px}
+.printonly{display:none}
+@media print{#tourLayer{display:none!important}.printonly{display:inline}.guide .card{box-shadow:none;break-inside:avoid}.guide .card:last-child{break-inside:auto}.guide .scroll{overflow:visible}.guidesc{min-width:0}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
@@ -357,6 +383,7 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
   <button class="barbtn hot" id="refreshBtn" type="button" data-act="refresh" hidden>New updates — refresh</button>
   <button class="barbtn inshift" id="pauseBtn" type="button" data-act="pauseToggle" hidden>Pause</button>
   <button class="barbtn inshift" type="button" data-act="skipAhead" hidden title="Jump to the next scheduled event">Skip ahead</button>
+  <button class="barbtn" id="helpBtn" type="button" data-act="helpMenu" title="Guided tour and instructor guide">Help</button>
   <button class="barbtn" id="pwaInstallBtn" type="button" hidden title="Install as an offline app">&#11015; Install app</button>
 </div></header>
 <div id="noticeBar" aria-live="polite"></div>
@@ -4019,7 +4046,7 @@ const hmClock = t => hm(((Math.floor(t) % 1440) + 1440) % 1440);
 let S = load();
 const ui = { view: S ? 'census' : 'start', briefId: null, pid: null, tab: 'summary', dirty: false, facTab: 'overview', noteType: 'DAR', facPid: 'ew', modal: null, startSel: ['ew', 'rs', 'gt', 'tb', 'ar'] };
 function load() { try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
+function save() { if (tour && tour.on) return; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
 const settingsDefault = () => ({ alerts: true, autoReply: true });
 
 /* ---------------- report verification ---------------- */
@@ -4211,8 +4238,8 @@ function render() {
   $('#clockState').hidden = !S || S.clock.running;
   renderNotices();
   const app = $('#app');
-  let v = ui.view; if (!S && !['start', 'brief', 'verify', 'gcdinfo'].includes(v)) v = 'start'; if (S && ['start', 'brief'].includes(v)) v = 'census';
-  app.innerHTML = ({ start: viewStart, brief: viewBrief, verify: viewVerify, gcdinfo: viewGcdInfo, census: viewCensus, chart: viewChart, report: viewReport, debrief: viewDebrief })[v]();
+  let v = ui.view; if (!S && !['start', 'brief', 'verify', 'gcdinfo', 'guide'].includes(v)) v = 'start'; if (S && ['start', 'brief'].includes(v)) v = 'census';
+  app.innerHTML = ({ start: viewStart, brief: viewBrief, verify: viewVerify, gcdinfo: viewGcdInfo, guide: viewGuide, census: viewCensus, chart: viewChart, report: viewReport, debrief: viewDebrief })[v]();
   if (v === 'chart') afterChart();
 }
 function renderNotices() {
@@ -4692,6 +4719,8 @@ function viewStart() {
   return `<section class="start wrap">
     <div class="hero"><p class="eyebrow">Open Resource Nursing</p><h1>EHR Simulator</h1>
       <p class="lead">Practise charting in an electronic health record with fictional patients. Each scenario is a short shift on a hospital unit that runs on a real clock. Patients change, results come back and prescribers reply to your calls. When you finish, a debrief shows what you caught and what you missed, step by step.</p></div>
+    <div class="card${tourSeen() ? '' : ' tourcard'}"><div class="body row between"><div><b>New to the simulator?</b> <span class="muted">Take the three-minute guided tour before your first shift. Nothing in it is saved or graded.</span></div>
+      <div class="row-s"><button class="btn${tourSeen() ? ' ghost' : ''}" type="button" data-act="tourStart">Take the tour</button><button class="btn ghost" type="button" data-act="showGuide">Instructor guide</button></div></div></div>
     <div class="card"><h3>Before you start</h3><div class="body stack">
       <div class="field" style="max-width:360px"><label for="stuName">Your name <span class="muted small">(shown on your shift report)</span></label><input class="input" id="stuName" autocomplete="off" placeholder="First and last name" value="${esc(ui.name || '')}"></div>
       <div class="optgrid">
@@ -4712,7 +4741,7 @@ function viewStart() {
       <li><b>Interventions</b> is where you do things that aren’t charting elsewhere: a bladder scan, calling the rapid response team, delegating a task.</li>
       <li><b>End shift and debrief</b> when you’re done. Your work is saved in this browser only; nothing is sent anywhere.</li>
     </ul></div></div>
-    <p class="small muted">All patients, prescribers and the hospital are fictional. For education only; not clinical guidance. Instructors: <button type="button" class="linkbtn" data-act="showVerify">verify a student’s report</button>.</p>
+    <p class="small muted">All patients, prescribers and the hospital are fictional. For education only; not clinical guidance. Instructors: <button type="button" class="linkbtn" data-act="showGuide">read the instructor guide</button> or <button type="button" class="linkbtn" data-act="showVerify">verify a student’s report</button>.</p>
   </section>`;
 }
 
@@ -4973,9 +5002,274 @@ function mdSave() {
   after(d.given ? 'Medication documented' : 'Documented as not given');
 }
 
-function saveProgress() { try { const all = debriefAll(), app = all.filter(r => r.r !== null), met = app.filter(r => r.r).length; const k = KEY + '-progress', cur = JSON.parse(localStorage.getItem(k) || '{}'), prev = cur[S.scenario]; if (!prev || met / Math.max(1, app.length) >= prev.met / Math.max(1, prev.total)) cur[S.scenario] = { met, total: app.length, mode: S.mode, role: S.role, when: Date.now() }; localStorage.setItem(k, JSON.stringify(cur)); } catch (e) { } }
+function saveProgress() { if (tour && tour.on) return; try { const all = debriefAll(), app = all.filter(r => r.r !== null), met = app.filter(r => r.r).length; const k = KEY + '-progress', cur = JSON.parse(localStorage.getItem(k) || '{}'), prev = cur[S.scenario]; if (!prev || met / Math.max(1, app.length) >= prev.met / Math.max(1, prev.total)) cur[S.scenario] = { met, total: app.length, mode: S.mode, role: S.role, when: Date.now() }; localStorage.setItem(k, JSON.stringify(cur)); } catch (e) { } }
 /* ---------------- action map ---------------- */
+/* =====================================================================
+   HELP — guided tour (students) and instructor guide
+   The tour runs on a practice copy of Scenario 1 that is never saved.
+   A shift already in progress is paused, set aside and restored after.
+   ===================================================================== */
+var tour = { on: false, i: 0, stash: null, sbx: null, timer: null };
+const TKEY = KEY + '-tour';
+const tourSeen = () => { try { return !!localStorage.getItem(TKEY); } catch (e) { return false; } };
+function tourClearModal() { ui.modal = false; ui.md = null; $('#modalRoot').innerHTML = ''; }
+function tourAtStart() { if (S) tour.sbx = S; S = null; ui.view = 'start'; ui.pid = null; }
+function tourShift(ended) {
+  if (!S) {
+    if (tour.sbx) { S = tour.sbx; useScenario(S.scenario); }
+    else { newShift(ui.name || 'Tour student', SCN.s1 ? 's1' : scList()[0].id, 'learn', ui.role || 'RN'); S.clock = { base: UNIT.shiftStart, anchor: Date.now(), running: false }; }
+    tour.sbx = S;
+  }
+  S.ended = ended ? now() : null;
+}
+function tourCensus() { tourShift(false); ui.view = 'census'; ui.pid = null; }
+function tourChart(tab) { tourShift(false); ui.view = 'chart'; ui.pid = S.assigned[0]; ui.tab = tab; }
+function tourNotice() {
+  tourCensus();
+  if (!S.notices.some(n => !n.seen)) {
+    const ev = EVENTS.filter(e => !S.fired.includes(e.id)).sort((a, b) => a.at - b.at)[0];
+    if (ev) { S.clock = { base: ev.at, anchor: Date.now(), running: false }; tick(); }
+  }
+}
+function tourDose() { const b = $('#panel button.due'); if (b) docMed(b.dataset.id, b.dataset.time); }
+
+const TOUR = [
+  { h: 'Welcome to the EHR Simulator', pre: tourAtStart,
+    b: () => `<p>This tour takes about three minutes. It walks through a practice shift so you know where everything is before you start.</p><p>Nothing here is saved or graded. Use <b>Next</b> and <b>Back</b>, or the arrow keys. Press <b>Esc</b> to leave at any time.</p>${tour.stash ? '<p class="tournote">Your shift in progress is paused and will be waiting when you finish.</p>' : ''}` },
+  { h: 'Enter your name', pre: tourAtStart, sel: '.start .field',
+    b: `<p>Type your first and last name before you choose a scenario. It is printed on your shift report, which is what you hand in if your instructor asks for one.</p>` },
+  { h: 'Pick a mode and a role', pre: tourAtStart, sel: '.optgrid',
+    b: `<p><b>Learn</b> turns on safety alerts (wrong patient, allergy, hold parameters) and gives a hint with each event. Use it the first time through a scenario. <b>Test yourself</b> turns both off.</p><p>Playing as a registered nurse or a practical nurse changes a few debrief items that depend on scope of practice.</p>` },
+  { h: 'Choose a scenario', pre: tourAtStart, sel: '.sccard',
+    b: `<p>Scenarios are grouped into four levels, from Novice to Proficient. Each card shows the unit, the start time, about how long it takes, your patients and what you will practise.</p><p>Select <b>Read the directions</b> to see the situation and your steps, then <b>Start the shift</b>. Scenario 1 is the best place to begin.</p>` },
+  { h: 'The shift clock', pre: tourCensus, sel: '.appbar', fixed: true,
+    b: `<p>Once a shift starts, the clock runs in real time. It is paused for this tour.</p><p><b>Pause</b> stops it when you need a break. <b>Skip ahead</b> jumps to the next scheduled event so you don’t have to wait. Skipping passes time, so finish your reassessments first: the debrief checks <i>when</i> you did things.</p>` },
+  { h: 'Your directions', pre: tourCensus, sel: '.card.brief',
+    b: `<p>The steps for the scenario stay at the top of the unit list. Hide them when you need the room, or select <b>Scenario directions</b> to read the full version again, including how to finish.</p>` },
+  { h: 'The unit list', pre: tourCensus, sel: 'table.census',
+    b: `<p>One row for each bed. For your patients you see the diagnosis, the goals of care designation (GCD), alerts such as allergies and falls risk, the latest NEWS2 score, tasks due or overdue, and anything new: orders, results or messages.</p><p>Select a row to open that patient’s chart.</p>` },
+  { h: 'My worklist', pre: tourCensus, sel: () => $('.wl')?.closest('.card'),
+    b: `<p>Everything due now or overdue for all your patients, in one place. Select a task to go straight to the right part of the chart.</p><p>Tasks appear as their time approaches, so check back here often.</p>` },
+  { h: 'The yellow banner', pre: tourNotice, sel: '#noticeBar .noticewrap', fixed: true,
+    b: `<p>Events are announced here: a change in a patient, a new result, a prescriber calling back. In Learn mode each one comes with a hint.</p><p>Select <b>Open</b> to go to that patient, or <b>×</b> to dismiss the message. Assess first, then act.</p>` },
+  { h: 'The patient banner', pre: () => tourChart('summary'), sel: '.banner',
+    b: `<p>This stays at the top of every chart section: name, room, MRN and date of birth, goals of care, allergies, isolation and fall risk.</p><p>Check it before you give anything. Select the goals of care code to see what it means.</p>` },
+  { h: 'The chart menu', pre: () => tourChart('summary'), sel: '.sidenav',
+    b: `<p>Every section of the chart is listed here. A number beside a section means something new is waiting, such as an unacknowledged order or an unread message.</p><p><b>Summary</b>, open now, shows this patient’s worklist, latest vital signs and admission details.</p>` },
+  { h: 'Orders', pre: () => tourChart('orders'), sel: '#panel',
+    b: `<p>Read the active orders at the start of the shift. New orders appear at the top and must be reviewed and acknowledged before you act on them.</p><p>If a prescriber gives an order by phone, enter it here and read it back.</p>` },
+  { h: 'The MAR', pre: () => tourChart('mar'), sel: '#panel',
+    b: `<p>Scan the wristband first. Scheduled doses show as times: select a time to document that dose.</p><p>PRN medications have a <b>Give PRN</b> button and show when the next dose is allowed. Continuous infusions are documented here too.</p>` },
+  { h: 'Documenting a dose', pre: () => tourChart('mar'), post: tourDose, sel: '#modalRoot .modal',
+    b: `<p>Scan the package from the medication drawer, choose <b>Given</b> or <b>Not given</b>, and fill in what the medication calls for, such as an injection site, a double check or a reason for holding.</p><p>In Learn mode you are warned before a wrong patient, an allergy or a hold parameter gets through. In Test yourself mode you are not.</p>` },
+  { h: 'Vital signs and intake/output', pre: () => tourChart('flow'), sel: '#panel',
+    b: `<p>The bedside monitor shows live readings. <b>Fill from monitor and patient</b> copies them into the form, the NEWS2 score is calculated as you go, and <b>File vital signs</b> saves the set.</p><p>Intake and output are recorded on this page too.</p>` },
+  { h: 'Assessment', pre: () => tourChart('assess'), sel: '#panel',
+    b: `<p>The head-to-toe assessment goes system by system: tick <b>Within defined limits</b> or record what you found.</p><p>Below it are the scored tools, including Braden, Morse, the Glasgow Coma Scale and neurovascular checks. Each one totals as you fill it in.</p>` },
+  { h: 'Interventions', pre: () => tourChart('actions'), sel: '#panel',
+    b: `<p>This is for things you do at the bedside that are not charted elsewhere: a bladder scan, coaching the incentive spirometer, calling for help or the rapid response team, delegating a task, updating the family.</p><p>Each action is recorded with the time you did it.</p>` },
+  { h: 'Nursing notes', pre: () => tourChart('notes'), sel: '#panel',
+    b: `<p>Write a Narrative, DAR or SOAP note, then select <b>Sign note</b>. The night nurse’s note is in the list below.</p><p>Set the time of care if you are charting after the fact. More than 30 minutes back is saved as a late entry. You can amend your own notes by giving a reason.</p>` },
+  { h: 'Calling the prescriber', pre: () => tourChart('comm'), sel: '#panel',
+    b: `<p>Write your call as SBAR and select <b>Send</b>. The prescriber answers about three minutes of shift time later, and the reply is announced in the yellow banner.</p><p>If the reply includes telephone orders, go to <b>Orders</b> to review them and read them back before you act.</p>` },
+  { h: 'The rest of the chart', pre: () => tourChart('handoff'), sel: '.sidenav',
+    b: `<p><b>Lines &amp; wounds</b>, <b>Care plan &amp; teaching</b>, <b>Results</b> and <b>Med rec</b> work the same way as the sections you have seen. Results that need follow-up must be acknowledged.</p><p><b>Handoff</b>, open now, drafts an end-of-shift report from the chart for you to edit and give.</p>` },
+  { h: 'Ending the shift', pre: tourCensus, sel: '[data-act="endAsk"]',
+    b: `<p>When the directions say you are finished, check your worklist, then select <b>End shift and debrief</b>.</p><p>The clock stops, and anything still undone counts as missed. You can still look back through the charts afterwards.</p>` },
+  { h: 'The debrief', pre: () => { tourShift(true); ui.view = 'debrief'; ui.pid = null; }, sel: () => $('.meter')?.closest('.card'),
+    b: `<p>Each expected action is marked met or missed, with the reason it matters. These six boxes sort your results by the steps of the clinical judgment model used in REx-PN and NCLEX-RN questions, so a low number shows where to focus.</p><p class="tournote">Nothing was charted during this tour, so the items below show as missed.</p>` },
+  { h: 'Your shift report', pre: () => { tourShift(true); ui.view = 'report'; ui.pid = null; }, sel: '.rp-ver',
+    b: `<p><b>My shift report</b> gathers everything you charted, plus the debrief once the shift has ended. Save it as a PDF or download it if your instructor asks you to hand it in.</p><p>This verification box at the bottom lets your instructor confirm that the report has not been edited.</p>` },
+  { h: 'You’re ready', pre: tourAtStart,
+    b: () => `<p>Start with <b>Scenario 1</b> in <b>Learn</b> mode. Read the directions, open each chart, and work through your worklist.</p><p>Your work is saved in this browser only, on this device. Nothing is sent anywhere.</p><p class="tournote">${tour.stash ? 'Your own shift is waiting where you left it. ' : ''}You can take this tour again from <b>Help</b> at any time.</p>` },
+];
+
+function tourEl() { const s = TOUR[tour.i].sel; if (!s) return null; const el = typeof s === 'function' ? s() : $(s); if (!el) return null; const r = el.getBoundingClientRect(); return r.width && r.height ? el : null; }
+function tourStart() {
+  if (tour.on) return;
+  if (S && ui.dirty) return toast('Save what you are typing first, then start the tour.');
+  const n = val('stuName'); if (n) ui.name = n;
+  tourClearModal();
+  tour.stash = null;
+  if (S) {
+    const run = S.clock.running && !S.ended;
+    if (run) { setClock(now(), false); L(null, 'clock', 'Clock paused for the guided tour'); save(); }
+    tour.stash = { S, run, view: ui.view, pid: ui.pid, tab: ui.tab };
+  }
+  S = null; tour.sbx = null; tour.on = true; tour.i = 0;
+  const layer = document.createElement('div'); layer.id = 'tourLayer';
+  layer.innerHTML = `<div class="tourblock"></div><div class="tourhole" hidden></div>
+    <div class="tourpop" role="dialog" aria-modal="true" aria-labelledby="tourH">
+      <div class="tourtop"><span class="eyebrow" id="tourStep"></span><button class="x" type="button" data-act="tourEnd" aria-label="Close the tour">×</button></div>
+      <h2 id="tourH" tabindex="-1"></h2><div id="tourB" aria-live="polite"></div>
+      <div class="tourbar" aria-hidden="true"><span id="tourBar"></span></div>
+      <div class="tourfoot"><button class="linkbtn" type="button" data-act="tourEnd" id="tourSkip">Skip the tour</button><span class="spacer"></span><button class="btn ghost sm" type="button" data-act="tourBack" id="tourBackBtn">Back</button><button class="btn sm" type="button" data-act="tourNext" id="tourNextBtn">Next</button></div>
+    </div>`;
+  document.body.appendChild(layer); document.body.classList.add('touring');
+  tour.timer = setInterval(tourPlace, 300);
+  tourShow();
+}
+function tourShow() {
+  const st = TOUR[tour.i], last = tour.i === TOUR.length - 1;
+  tourClearModal(); ui.dirty = false;
+  st.pre(); render(); if (st.post) st.post();
+  $('#tourStep').textContent = `Guided tour · ${tour.i + 1} of ${TOUR.length}`;
+  $('#tourH').textContent = st.h;
+  $('#tourB').innerHTML = typeof st.b === 'function' ? st.b() : st.b;
+  $('#tourBar').style.width = Math.round((tour.i + 1) / TOUR.length * 100) + '%';
+  $('#tourBackBtn').hidden = tour.i === 0; $('#tourSkip').hidden = last;
+  $('#tourNextBtn').textContent = last ? 'Finish' : tour.i === 0 ? 'Start the tour' : 'Next';
+  const el = tourEl();
+  if (!el || st.fixed) window.scrollTo(0, 0);
+  else {
+    const r = el.getBoundingClientRect(), vh = window.innerHeight, bar = ($('.appbar')?.offsetHeight || 60) + ($('#noticeBar')?.offsetHeight || 0);
+    window.scrollTo(0, Math.max(0, r.height > vh * 0.55 || window.innerWidth < 640 ? r.top + window.scrollY - bar - 14 : r.top + window.scrollY - (vh - r.height) / 2));
+  }
+  tourPlace();
+  setTimeout(() => { if (tour.on) $('#tourNextBtn')?.focus({ preventScroll: true }); }, 60);
+}
+function tourPlace() {
+  if (!tour.on) return;
+  const pop = $('#tourLayer .tourpop'), hole = $('#tourLayer .tourhole'), block = $('#tourLayer .tourblock'); if (!pop) return;
+  const vw = document.documentElement.clientWidth, vh = window.innerHeight, el = tourEl();
+  const pw = pop.offsetWidth, ph = pop.offsetHeight, clamp = (x, a, b) => Math.max(a, Math.min(x, Math.max(a, b)));
+  if (!el) { hole.hidden = true; block.classList.add('dim'); pop.style.left = Math.max(8, (vw - pw) / 2) + 'px'; pop.style.top = Math.max(8, (vh - ph) / 2) + 'px'; return; }
+  const r = el.getBoundingClientRect(), pad = 6;
+  const t = Math.max(4, r.top - pad), l = Math.max(4, r.left - pad), b = Math.min(vh - 4, r.bottom + pad), rt = Math.min(vw - 4, r.right + pad);
+  if (b - t < 8 || rt - l < 8) { hole.hidden = true; block.classList.add('dim'); }
+  else { hole.hidden = false; block.classList.remove('dim'); Object.assign(hole.style, { top: t + 'px', left: l + 'px', width: (rt - l) + 'px', height: (b - t) + 'px' }); }
+  let x, y; const gap = 12;
+  if (vw < 640) { x = Math.max(8, (vw - pw) / 2); y = vh - ph - 8; }
+  else if (b + gap + ph <= vh - 8) { y = b + gap; x = clamp(l, 8, vw - pw - 8); }
+  else if (t - gap - ph >= 8) { y = t - gap - ph; x = clamp(l, 8, vw - pw - 8); }
+  else if (rt + gap + pw <= vw - 8) { x = rt + gap; y = clamp(t, 8, vh - ph - 8); }
+  else if (l - gap - pw >= 8) { x = l - gap - pw; y = clamp(t, 8, vh - ph - 8); }
+  else { x = vw - pw - 20; y = vh - ph - 20; }
+  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+}
+function tourGo(d) {
+  const n = tour.i + d; if (n < 0) return;
+  if (n >= TOUR.length) return tourEnd(true);
+  tour.i = n; tourShow();
+}
+function tourEnd(done) {
+  if (!tour.on) return;
+  clearInterval(tour.timer); $('#tourLayer')?.remove(); document.body.classList.remove('touring');
+  tourClearModal(); ui.dirty = false;
+  const st = tour.stash; tour.on = false; tour.sbx = null; tour.stash = null; S = null;
+  if (st) {
+    S = st.S; useScenario(S.scenario);
+    if (st.run) { setClock(S.clock.base, true); L(null, 'clock', 'Clock resumed after the guided tour'); save(); }
+    ui.view = st.view; ui.pid = st.pid; ui.tab = st.tab;
+  } else { ui.view = 'start'; ui.pid = null; ui.tab = 'summary'; }
+  try { localStorage.setItem(TKEY, '1'); } catch (e) { }
+  render(); window.scrollTo(0, 0);
+  toast(st ? (st.run ? 'Tour closed — your shift has resumed' : 'Tour closed — back to your shift') : done === true ? 'Tour finished — choose a scenario to begin' : 'Tour closed');
+}
+document.addEventListener('keydown', e => {
+  if (!tour.on) return;
+  e.stopPropagation();
+  if (e.key === 'Escape') { e.preventDefault(); return tourEnd(); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); return tourGo(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); return tourGo(-1); }
+  if (e.key === 'Tab') {
+    const f = $$('#tourLayer button').filter(x => !x.hidden); if (!f.length) return;
+    e.preventDefault(); const i = f.indexOf(document.activeElement);
+    f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+  } else if (!e.target.closest || !e.target.closest('#tourLayer')) { if (e.key === 'Enter' || e.key === ' ') e.preventDefault(); }
+}, true);
+window.addEventListener('scroll', tourPlace, { passive: true });
+window.addEventListener('resize', tourPlace);
+
+/* ---- help menu ---- */
+function helpMenu() {
+  modal('Help', `<div class="helpopt"><div><b>Guided tour</b> <span class="pill">Students · about 3 min</span><div class="small muted">Walks through a practice shift: the unit list, the chart, giving a medication, calling the prescriber, the debrief and your shift report. Nothing is saved${S && !S.ended ? ', and your shift is paused while it runs' : ''}.</div></div><button class="btn" type="button" data-act="tourStart">Start the tour</button></div>
+    <div class="helpopt"><div><b>Instructor guide</b> <span class="pill">Staff</span><div class="small muted">Modes and levels, how the debrief scores, shift reports and how to verify them, running a session, and the full scenario list.</div></div><button class="btn ghost" type="button" data-act="showGuide">Open the guide</button></div>
+    ${S ? `<div class="helpopt"><div><b>Scenario directions</b><div class="small muted">The situation, your steps and how to finish this shift.</div></div><button class="btn ghost" type="button" data-act="showBrief">Open</button></div>` : ''}`,
+    `<button class="btn ghost" type="button" data-act="closeModal">Close</button>`);
+}
+
+/* ---- instructor guide ---- */
+function viewGuide() {
+  const list = scList(), mins = list.map(s => s.minutes), nPts = sc => sc.rooms.filter(r => r[1]).length;
+  return `<section class="wrap panel narrow guide">
+    <div class="row between noprint"><button type="button" class="linkbtn" data-act="${S ? 'census' : 'toStart'}">← Back</button><div class="row-s"><button class="btn ghost sm" type="button" data-act="tourStart">See the student tour</button><button class="btn ghost sm" type="button" data-act="printGuide">Print this guide</button></div></div>
+    <div><p class="eyebrow">For instructors and staff</p><h1 class="h1">EHR Simulator: instructor guide</h1>
+      <p class="lead">What the simulator does, how to run a session with it, how students are scored, and how to check the reports they hand in.</p></div>
+
+    <div class="card"><h3>At a glance</h3><div class="body"><ul class="tips">
+      <li><b>${list.length} scenarios</b> in four levels, each a short shift on a fictional hospital unit with one to several patients. They take about ${Math.min(...mins)} to ${Math.max(...mins)} minutes each.</li>
+      <li>Students chart in a working record: orders, MAR with barcode scanning, vital signs with NEWS2, assessments, interventions, notes, SBAR calls, handoff and medication reconciliation.</li>
+      <li>The shift runs on a clock. Patients change, results come back and prescribers reply to SBAR calls with telephone orders.</li>
+      <li>Each shift ends with a debrief scored against expected actions, and a shift report the student can submit.</li>
+      <li>It runs in the browser with no accounts. All work is stored in that browser on that device, and nothing is sent anywhere.</li>
+    </ul></div></div>
+
+    <div class="card"><h3>Running a session</h3><div class="body stack-s"><ol class="steps">
+      <li>Have students take the <b>guided tour</b> (Help → Guided tour, about three minutes). It uses a practice copy of Scenario 1 and saves nothing.</li>
+      <li>Assign a scenario and tell students which <b>mode</b> and <b>role</b> to choose. Scenario 1 in Learn mode suits a first session.</li>
+      <li>Students enter their name, read the directions and start the shift. They work until the finish point given in the directions, using <b>Skip ahead</b> between events.</li>
+      <li>They select <b>End shift and debrief</b>, review what they met and missed, and save <b>My shift report</b> as a PDF if you want it submitted.</li>
+      <li>Debrief as a group using the clinical judgment breakdown and the key points listed at the end of each scenario.</li>
+      <li>For a second pass, repeat the same scenario in <b>Test yourself</b> mode.</li>
+    </ol>
+    <div class="alertbox warn small"><b>Shared or lab computers.</b> A browser holds one shift at a time, and it stays there until the student erases it. Ask students to save their report and then select <b>Start a different scenario</b> on the unit list before they leave, or the next person will open their shift.</div></div></div>
+
+    <div class="card"><h3>Mode, role and level</h3><div class="body stack">
+      <div class="scroll"><table class="simple"><thead><tr><th>Setting</th><th>Choice</th><th>What it changes</th></tr></thead><tbody>
+        <tr><td rowspan="2"><b>Mode</b></td><td>Learn</td><td>Safety alerts are on (wrong patient, allergy, medication not ordered, hold parameters), and each event in the yellow banner comes with a hint. The directions include tips.</td></tr>
+        <tr><td>Test yourself</td><td>No alerts, hints or tips. The student has to catch problems unaided, and the debrief shows what was caught.</td></tr>
+        <tr><td rowspan="2"><b>Playing as</b></td><td>Registered nurse</td><td rowspan="2">Some debrief items apply to one role only, such as when a practical nurse should bring in an RN. The scenario itself is the same.</td></tr>
+        <tr><td>Practical nurse</td></tr>
+      </tbody></table></div>
+      <div><div class="eyebrow">Levels</div><ul class="tips">${LEVELS.map(([lv, d]) => `<li><b>${lv}.</b> ${d}</li>`).join('')}</ul></div>
+      <p class="small muted">${BENNER_NOTE}</p></div></div>
+
+    <div class="card"><h3>The clock</h3><div class="body"><ul class="tips">
+      <li>Shift time runs in real time from the scenario’s start time. Events fire at set shift times.</li>
+      <li><b>Pause</b> stops the clock. <b>Skip ahead</b> jumps to the next scheduled event, reply or result.</li>
+      <li>Timing is scored. Some expected actions have to happen within a window, for example a PRN reassessment or a response to a change. A student who skips ahead before reassessing will miss those items.</li>
+      <li>A prescriber replies about three minutes of shift time after an SBAR is sent. Telephone orders in the reply must be acknowledged with a read-back.</li>
+    </ul></div></div>
+
+    <div class="card"><h3>How the debrief scores</h3><div class="body"><ul class="tips">
+      <li>Each scenario has a list of expected actions per patient. Each is marked <b>met</b> (✓) or <b>missed</b> (✗), with a sentence on why it matters.</li>
+      <li>The headline is the number met out of the number that applied. Items tied to an event that had not happened when the student ended the shift are shown as not reached and are left out of the total, as are items that did not apply.</li>
+      <li>Every item is tagged with one of the six clinical judgment steps (${CJ.map(x => x.toLowerCase()).join(', ')}), and the debrief shows a score for each step.</li>
+      <li>The debrief also lists the scenario’s key points and a timeline of every action with its shift time.</li>
+      <li>The student’s best result for each scenario is kept in the browser and shown on the scenario card.</li>
+      <li>The score counts actions the simulator can detect. It does not judge the wording of notes or SBAR calls, so read those in the shift report.</li>
+    </ul></div></div>
+
+    <div class="card"><h3>Shift reports and verification</h3><div class="body stack-s"><ul class="tips">
+      <li><b>My shift report</b> lists everything the student charted, by patient, with a timeline. Once the shift has ended it also includes the debrief. Students can print it, save it as a PDF or download it.</li>
+      <li>The report ends with a <b>verification box</b>: student name, shift ID, start time, time generated, number of entries, a fingerprint of the entries and a code, plus the same details as one line and a QR code.</li>
+      <li>To check a report, open <button type="button" class="linkbtn noprint" data-act="showVerify">Verify a shift report</button><span class="printonly">Verify a shift report (link at the bottom of the start page)</span>, paste the line that starts with <span class="mono">ORN1|</span> or scan the QR code into the box, and select <b>Verify</b>.</li>
+      <li>A match means the name, times and entry count are as the simulator produced them. Then confirm the name is the submitting student’s.</li>
+      <li>The same shift ID or fingerprint on two students’ reports means both came from one shift.</li>
+    </ul>
+    <div class="alertbox small">The code is a check against casual editing, not a security system: the key that produces it is in the page source. If you host your own copy, change <span class="mono">VERIFY_KEY</span> in the file so that codes from other copies do not verify on yours.</div></div></div>
+
+    <div class="card"><h3>Practical notes</h3><div class="body"><ul class="tips">
+      <li>Work is saved automatically in the browser’s storage. Clearing browsing data, or using a private window, removes it. A shift cannot be moved to another device, so students should finish and save the report where they started.</li>
+      <li>Starting a different scenario erases the current shift. The simulator asks the student to type <span class="mono">clear</span> first.</li>
+      <li>Where the browser supports it, an <b>Install app</b> button appears in the header so the simulator can be installed and used offline.</li>
+      <li>Goals of care appear as designations such as R1, M1 and C1, following the Alberta Health Services framework. The start page links to an explanation for students used to other terms.</li>
+      <li>All patients, prescribers and the hospital are fictional. The simulator is for education and is not clinical guidance.</li>
+    </ul></div></div>
+
+    <div class="card"><h3>Scenarios <span class="note">${list.length} in total</span></h3><div class="scroll"><table class="simple guidesc"><thead><tr><th>#</th><th>Scenario</th><th>Level</th><th>Unit</th><th>Time</th><th>Patients</th><th>Students practise</th></tr></thead><tbody>
+      ${LEVELS.flatMap(([lv]) => list.filter(sc => (LEVEL[sc.id] || 'Foundations') === lv)).concat(list.filter(sc => !LEVELS.some(([lv]) => lv === LEVEL[sc.id]))).map(sc => `<tr><td class="mono">${sc.n}</td><td><b>${esc(sc.title)}</b></td><td>${LEVEL[sc.id] || '—'}</td><td>${esc(sc.unit.name)}</td><td class="nowrap">${sc.minutes} min</td><td>${nPts(sc)}</td><td class="small">${esc(sc.skills)}</td></tr>`).join('')}
+    </tbody></table></div></div>
+  </section>`;
+}
+
 const ACT = {
+  helpMenu() { if (!tour.on) helpMenu(); },
+  tourStart() { closeModal(); tourStart(); },
+  tourNext() { tourGo(1); }, tourBack() { tourGo(-1); }, tourEnd() { tourEnd(); },
+  showGuide() { ui.name = val('stuName') || ui.name; closeModal(); ui.view = 'guide'; render(); window.scrollTo({ top: 0 }); },
+  printGuide() { try { window.print(); } catch (e) { toast('Printing is not available here.'); } },
   closeModal, census() { ui.view = 'census'; ui.pid = null; render(); },
   setMode(el) { ui.name = val('stuName') || ui.name; ui.mode = el.dataset.v; render(); },
   setRole(el) { ui.name = val('stuName') || ui.name; ui.role = el.dataset.v; render(); },
