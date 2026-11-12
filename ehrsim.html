@@ -1176,7 +1176,7 @@ defineScenario({
       homeListSource: 'emergency list, from pharmacy record dated March',
       medrecHint: 'Her daughter is bringing the pill bottles from home (expected around 03:45). Compare every bottle with this list before you complete the reconciliation.',
       orders: [
-        med('em-m1', { name: 'Furosemide', dose: '40 mg', route: 'IV', freq: 'BID', times: [T(8), T(17)], indication: 'Heart failure (dose given in emergency at 23:00)', stock: 'Furosemide 10 mg/mL, 4 mL vial', code: 'RXFURIV' }, { t: Y(23), by: 'haddad' }),
+        med('em-m1', { name: 'Furosemide', dose: '40 mg', route: 'IV', freq: 'BID', times: [T(8), T(17)], indication: 'Heart failure (dose given in emergency at 23:00)', stock: 'Furosemide 10 mg/mL, 4 mL vial', code: 'RXFURIV4' }, { t: Y(23), by: 'haddad' }),
         med('em-m2', { name: 'Ramipril', dose: '5 mg', route: 'PO', freq: 'Daily', times: [T(9)], indication: 'Heart failure, hypertension', hold: 'Hold if SBP < 100', holdRule: { sbp: 100 }, stock: 'Ramipril 5 mg capsule', code: 'RXRAM5' }, { t: Y(23), by: 'haddad' }),
         med('em-m3', { name: 'Metoprolol', dose: '25 mg', route: 'PO', freq: 'BID', times: [T(9), T(21)], indication: 'Rate control, AF', hold: 'Hold if HR < 55 or SBP < 100', holdRule: { hr: 55, sbp: 100 }, stock: 'Metoprolol 25 mg tablet', code: 'RXMET25' }, { t: Y(23), by: 'haddad' }),
         med('em-m4', { name: 'Acetaminophen', dose: '650 mg', route: 'PO', freq: 'q6h PRN', prn: true, prnReason: 'Mild pain', times: [], indication: 'Knee pain', hold: 'Max 3 g/day', stock: 'Acetaminophen 325 mg tablet', code: 'RXACE325' }, { t: Y(23), by: 'haddad' }),
@@ -1951,7 +1951,7 @@ defineScenario({
           ord('lp-x2', 'nursing', 'HOLD enoxaparin tonight', { ...tel(t, 'roy'), dc: ['lp-m3'] }), ord('lp-x3', 'nursing', 'Vital signs q30min', { ...tel(t, 'roy'), vsFreq: 30 })] },
       { key: 'lp-bleed', when: (S, p, t, txt) => S.fired.includes('lp-bleed') && /bleed|blood|hr|heart rate|bp|pressure|8\d\/|dressing|drain|shock|soak/i.test(txt), by: 'roy',
         text: 'She’s bleeding. Ringer’s lactate 1 L bolus wide open, second large-bore IV, CBC and group and crossmatch for 2 units now, NPO. Hold the enoxaparin. Keep pressure on the dressing. I’m coming in and booking the OR. Vital signs every 15 minutes.',
-        orders: t => [med('lp-x4', { name: 'Ringer’s lactate bolus', dose: '1,000 mL', route: 'IV wide open', freq: 'Once — STAT', times: [t], indication: 'Hemorrhage', stock: 'Ringer’s lactate 1,000 mL bag', code: 'RXRL1000B', bolus: true }, tel(t, 'roy')),
+        orders: t => [med('lp-x4', { name: 'Ringer’s lactate bolus', dose: '1,000 mL', route: 'IV wide open', freq: 'Once — STAT', times: [t], indication: 'Hemorrhage', stock: 'Ringer’s lactate 1,000 mL bag', code: 'RXRL1000', bolus: true }, tel(t, 'roy')),
           ord('lp-x5', 'lab', 'CBC, group and crossmatch 2 units STAT', { ...tel(t, 'roy'), result: { delay: 30, r: { test: 'Hemoglobin', value: 84, unit: 'g/L', ref: '120–160', flag: 'L', needsAck: true, critical: true } } }),
           ord('lp-x6', 'nursing', 'Second large-bore IV (18 G)', { ...tel(t, 'roy'), task: 'act', key: 'secondIV', at: t, taskText: 'Second large-bore IV' }),
           ord('lp-x7', 'nursing', 'NPO for return to the OR; HOLD enoxaparin', { ...tel(t, 'roy'), dc: ['lp-m3'] }),
@@ -2016,7 +2016,7 @@ defineScenario({
   ],
   patients: {
     ag: {
-      id: 'ag', room: '431', name: 'Arthur Gill', pref: 'Art', mrn: '404311', dob: '1950-06-03', age: 76, sex: 'M', ht: 176, wt: 82,
+      id: 'ag', room: '431', name: 'Arthur Gill', pref: 'Art', mrn: '404312', dob: '1950-06-03', age: 76, sex: 'M', ht: 176, wt: 82,
       dx: 'Community-acquired pneumonia (improving)', hx: 'Atrial fibrillation (apixaban held for 2 days for a bronchoscopy yesterday), hypertension, type 2 diabetes',
       allergies: [], gcd: 'R1', fall: 'Moderate', attending: 'kaur',
       admitted: 'Admitted 4 days ago', diet: 'Diabetic', activity: 'As tolerated', vsFreq: 240,
@@ -3214,7 +3214,7 @@ defineScenario({
         orders: t => [ord('ad-x1', 'nursing', 'Oxytocin infusion: increase to 250 mL/h (20 units/L)', tel(t, 'dube')),
           med('ad-x2', { name: 'Tranexamic acid', dose: '1 g', route: 'IV over 10 min', freq: 'Once — STAT', times: [t], indication: 'Postpartum hemorrhage', stock: 'Tranexamic acid 100 mg/mL, 10 mL vial', code: 'RXTXA1' }, tel(t, 'dube')),
           med('ad-x3', { name: 'Carboprost', dose: '250 mcg', route: 'IM', freq: 'q15min PRN × 2', prn: true, prnReason: 'Uterine atony after massage', hold: 'Contraindicated in asthma', times: [], indication: 'Postpartum hemorrhage', stock: 'Carboprost 250 mcg/mL, 1 mL ampoule', code: 'RXCARBO' }, tel(t, 'dube')),
-          med('ad-x4', { name: 'Ringer’s lactate bolus', dose: '1,000 mL', route: 'IV wide open', freq: 'Once — STAT', times: [t], indication: 'Hypovolemia', stock: 'Ringer’s lactate 1,000 mL bag', code: 'RXRL1000B', bolus: true }, tel(t, 'dube')),
+          med('ad-x4', { name: 'Ringer’s lactate bolus', dose: '1,000 mL', route: 'IV wide open', freq: 'Once — STAT', times: [t], indication: 'Hypovolemia', stock: 'Ringer’s lactate 1,000 mL bag', code: 'RXRL1000', bolus: true }, tel(t, 'dube')),
           ord('ad-x5', 'nursing', 'Second large-bore IV; in-and-out catheter if not voided', { ...tel(t, 'dube'), task: 'act', key: 'secondIV', at: t, taskText: 'Second large-bore IV' }),
           ord('ad-x6', 'lab', 'CBC and crossmatch 2 units STAT', tel(t, 'dube')),
           ord('ad-x7', 'nursing', 'Vital signs and fundal check q15min until stable', { ...tel(t, 'dube'), vsFreq: 15 })] },
@@ -3784,7 +3784,7 @@ defineScenario({
   ],
   patients: {
     am: {
-      id: 'am', room: '471', name: 'Alfred Moreau', pref: 'Al', mrn: '404711', dob: '1942-10-10', age: 84, sex: 'M', ht: 172, wt: 70,
+      id: 'am', room: '471', name: 'Alfred Moreau', pref: 'Al', mrn: '404712', dob: '1942-10-10', age: 84, sex: 'M', ht: 172, wt: 70,
       dx: 'Community-acquired pneumonia (day 3)', hx: 'Atrial fibrillation on apixaban; hypertension; benign prostatic hyperplasia (nocturia); previous fall at home',
       allergies: [], gcd: 'M1', fall: 'High', attending: 'singh',
       admitted: 'Admitted 3 days ago', diet: 'Regular', activity: 'Walker with one assist', vsFreq: 240,
