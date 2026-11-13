@@ -1,10 +1,10 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="manifest.json">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#002A5C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Loyalist EHR">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%23EB1946%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%277%27 fill=%27%230071BB%27 stroke=%27white%27 stroke-width=%272%27/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="icon-192.png"><style>:root{color-scheme:light dark}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style><title>EHR Simulator · Loyalist College Hospital</title>
+<meta name="mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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"><style>:root{color-scheme:light dark}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style><title>EHR Simulator · Loyalist College Hospital</title>
 <meta name="description" content="Loyalist College Hospital: a simulated electronic health record for Loyalist College BScN and Practical Nursing students, built from the program’s simulation scenarios.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -394,6 +394,23 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo.lc-word{background:#FFFFFF;border-radius:6px;padding:4px 8px;border-right:0;margin-right:6px}}
 :root[data-theme="dark"] .logo.lc-word{background:#FFFFFF;border-radius:6px;padding:4px 8px;border-right:0;margin-right:6px}
 @media (max-width:600px){.logo.lc-word{height:22px;padding-right:10px}.ls-logo{width:160px;padding:10px 12px}.lobby-sign{flex-direction:column;align-items:flex-start;gap:12px}}
+
+/* ---- touch devices (iPad) ---- */
+.scanbig{padding:11px 18px;font-size:15px;white-space:nowrap}
+.scanform .input{min-width:120px}
+@media (pointer:coarse){
+  .btn,.btn.sm,.seg button,.sidenav button,.due,select.input,.x,.barbtn,button.gcd{min-height:44px}
+  .barbtn{padding-left:14px;padding-right:14px}
+  button.gcd{display:inline-flex;align-items:center}
+  .btn.sm{padding:9px 14px;font-size:14px}
+  .seg button{padding:10px 16px}
+  .x{min-width:44px;font-size:22px}
+  .due{padding:9px 12px;display:inline-flex;align-items:center}
+  .sidenav button{padding:11px 12px}
+  input,select,textarea,.input{font-size:16px}
+  input[type=checkbox],input[type=radio]{width:22px;height:22px}
+  .scanbig{min-height:52px;font-size:16px}
+}
 </style>
 
 <header class="appbar"><div class="wrap">
@@ -757,7 +774,7 @@ defineScenario({
   ],
   patients: {
     sb2: {
-      id: 'sb2', room: '402', name: 'Sidney Brenner', pref: 'Sidney', mrn: '410841', dob: '1952-08-08', age: 74, sex: 'M', ht: 182, wt: 88,
+      id: 'sb2', room: '402', name: 'Sidney Brenner', pref: 'Sidney', mrn: '410842', dob: '1952-08-08', age: 74, sex: 'M', ht: 182, wt: 88,
       dx: 'Left-hemisphere ischemic stroke 3 weeks ago, right-sided weakness (awaiting rehab)', hx: 'Hypertension. Retired librarian; lives with his wife Doris; no children.',
       allergies: [], gcd: 'R1', fall: 'High', attending: 'darnay',
       admitted: 'Admitted 3 weeks ago', diet: 'Pureed dysphagia diet', activity: 'Up in chair 30 minutes for each meal; walker with one assist; physiotherapy daily', vsFreq: 240,
@@ -1387,14 +1404,14 @@ NURSING_ACTIONS.epiPrep = { label: 'Get the anaphylaxis kit and epinephrine read
 /* ---------------- 4S-1: Acute ischemic stroke (NURS 3016) ---------------- */
 defineScenario({
   id: 's1', n: 8, units: ['4S'], level: 'Competent', title: 'Acute stroke: admission from emergency', minutes: 50,
-  source: 'Acute Stroke simulation, Sidney Grant (NURS 3016 / NURS 2005; Quinte Health stroke resource nurses review)',
+  source: 'Acute Stroke simulation, Sidney Smith (NURS 3016 / NURS 2005; Quinte Health stroke resource nurses review)',
   blurb: 'Sidney woke up with a right MCA stroke and was too late for tPA. After 12 hours in emergency, he arrives on 4 South with a high BP, a high sugar and a standard stroke order set that has a problem in it.',
   skills: 'Canadian Neurological Scale, stroke vital signs, permissive hypertension, dysphagia screening before anything by mouth, allergy checks on an order set, sliding-scale insulin for stress hyperglycemia, family questions, SBAR report',
   unit: { name: '4 South — Acute Medicine, Telemetry & Paediatrics', shiftStart: T(11, 55), shiftEnd: T(19, 30) },
   prescribers: { stroke: 'Dr. K. Koch (Stroke team)' },
   rooms: [['441', 'sm'], ['442', null], ['443', null], ['444', null]],
   brief: {
-    situation: 'It’s noon. You are receiving Sidney Grant, 74, from emergency with a right middle cerebral artery stroke. He woke up with symptoms, so he was not eligible for tPA. He has been in emergency for 12 hours. His CNS score in emergency was 5.5. He is on telemetry with a saline lock and normal saline at 75 mL/h. His partner is in the cafeteria.',
+    situation: 'It’s noon. You are receiving Sidney Smith, 74, from emergency with a right middle cerebral artery stroke. He woke up with symptoms, so he was not eligible for tPA. He has been in emergency for 12 hours. His CNS score in emergency was 5.5. He is on telemetry with a saline lock and normal saline at 75 mL/h. His partner is in the cafeteria.',
     steps: [
       'Read the ER report and the acute stroke order set. Check every order against his allergy list.',
       'Take vital signs and complete a <b>Canadian Neurological Scale</b> (<b>Assessment</b>). Compare it with the ER score of 5.5.',
@@ -1420,7 +1437,7 @@ defineScenario({
   ],
   patients: {
     sm: {
-      id: 'sm', room: '441', name: 'Sidney Grant', pref: 'Sidney', mrn: '441007', dob: '1952-08-05', age: 74, sex: 'M', ht: 175, wt: 92,
+      id: 'sm', room: '441', name: 'Sidney Smith', pref: 'Sidney', mrn: '441007', dob: '1952-08-05', age: 74, sex: 'M', ht: 175, wt: 92,
       dx: 'Acute right MCA ischemic stroke (woke with symptoms; no tPA)', hx: 'Long-standing hypertension, MI 2 years ago with CABG ×3, smoker 1 pack/day',
       allergies: [{ agent: 'ASA (acetylsalicylic acid)', reaction: 'Hives and wheeze', keys: ['asa', 'acetylsalicylic', 'aspirin', 'entrophen'] }, { agent: 'Penicillin', reaction: 'Rash', keys: ['penicillin', 'amoxicillin', 'piperacillin', 'ampicillin', 'cloxacillin'] }],
       gcd: 'R1', fall: 'High', attending: 'stroke',
@@ -2230,21 +2247,21 @@ defineScenario({
 /* ---------------- 4W-2: Fall in the room and a team morning (PN · PSW · BScN collaborative) ---------------- */
 defineScenario({
   id: 'w2', n: 16, units: ['4W'], level: 'Competent', title: 'Interprofessional morning: a fall and the 08:00 medications', minutes: 50,
-  source: 'PN · PSW · NURS collaborative simulation, John Smith and Sidney Harding (Loyalist Nursing Home, NURS 4007)',
+  source: 'PN · PSW · NURS collaborative simulation, John Smith and Sidney Brenner (Loyalist Nursing Home, NURS 4007)',
   blurb: 'Two frail older adults waiting for long-term care beds. The PSW finds Mr. Smith on the floor beside a spilled urinal. Lead the team: assess before moving, find the cause, and keep the 08:00 medications safe next door.',
   skills: 'leading a post-fall response, delegating to and collaborating with a PSW, head injury on an antiplatelet, looking for the cause of a fall, incident report, falls prevention, apical pulse before digoxin, prioritizing two patients',
   unit: { name: '4 West — Mental Health & Transitional Care', shiftStart: T(7, 25), shiftEnd: T(15, 30) },
   prescribers: { friction: 'Dr. S. Friction (Care of the Elderly)', chang: 'Dr. M. Chang (Care of the Elderly)' },
   rooms: [['466', 'jsm'], ['467', 'sbr'], ['468', null]],
   brief: {
-    situation: 'It’s 07:25 on 4 West transitional care. You are the nurse leading a small team with a PSW. John Smith, 81, had a stroke in 2010 (right-sided weakness), has type 2 diabetes, hypertension and BPH, and is waiting for a long-term care bed near his wife Florence. Sidney Harding, 78, has bowel cancer and heart failure and is also waiting for placement. Morning medications are at 08:00.',
+    situation: 'It’s 07:25 on 4 West transitional care. You are the nurse leading a small team with a PSW. John Smith, 81, had a stroke in 2010 (right-sided weakness), has type 2 diabetes, hypertension and BPH, and is waiting for a long-term care bed near his wife Florence. Sidney Brenner, 78, has bowel cancer and heart failure and is also waiting for placement. Morning medications are at 08:00.',
     steps: [
       'Read both charts quickly. Who is most at risk this morning, and why?',
       'When the PSW calls you: go. Do a post-fall assessment before he is moved. Ask the PSW to stay with him and help.',
       'Check vital signs and his glucose. Get him back to bed safely with help, then start neuro checks (he takes ASA).',
       'Notify the physician and his family, and complete a safety (incident) report.',
       'Make his room safer: urinal on the strong side, bed low, call bell in reach.',
-      'For Mr. Harding, count an apical pulse for a full minute before the digoxin.',
+      'For Mr. Brenner, count an apical pulse for a full minute before the digoxin.',
     ],
     finish: 'Work until about 09:00 shift time, then select <b>End shift and debrief</b>.',
     tips: [
@@ -2287,8 +2304,8 @@ defineScenario({
       nursingActions: ['postFall', 'neuroChecks', 'fallsPrecautions', 'gaitBelt', 'incidentReport', 'feedingCheck', 'delegate'],
     },
     sbr: {
-      id: 'sbr', room: '467', name: 'Sidney Harding', pref: 'Sidney', mrn: '467078', dob: '1948-07-30', age: 78, sex: 'M', ht: 176, wt: 64,
-      dx: 'Alternate level of care: bowel cancer and heart failure, awaiting long-term care', hx: 'Bowel cancer, heart failure (CHF). Next of kin: son Larry Harding and daughter Rita Cooke.',
+      id: 'sbr', room: '467', name: 'Sidney Brenner', pref: 'Sidney', mrn: '467078', dob: '1948-07-30', age: 78, sex: 'M', ht: 176, wt: 64,
+      dx: 'Alternate level of care: bowel cancer and heart failure, awaiting long-term care', hx: 'Bowel cancer, heart failure (CHF). Next of kin: son Larry Brenner and daughter Rita Cooke.',
       allergies: [], gcd: 'M1', fall: 'Moderate', attending: 'chang',
       admitted: 'Admitted 5 weeks ago; ALC', diet: 'As tolerated, no added salt', activity: 'Walker', vsFreq: 480,
       orders: [
@@ -2317,7 +2334,7 @@ defineScenario({
   },
   events: [
     { id: 'jsm-fall', at: T(7, 30), pid: 'jsm', title: 'Found on the floor', text: 'Rm 466 the PSW calls you: “Mr. Smith is on the floor beside his bed and the floor is wet!”', hint: 'Go now. Post-fall assessment before anyone moves him. Ask the PSW to stay and help.' },
-    { id: 'sbr-meds', at: T(7, 55), pid: 'sbr', title: '08:00 medications', text: 'Rm 467 Mr. Harding’s 08:00 medications are due: Fragmin, digoxin, Lasix and potassium', hint: 'Count the apical pulse for a full minute before the digoxin. What does the MAR say about a heart rate under 60?' },
+    { id: 'sbr-meds', at: T(7, 55), pid: 'sbr', title: '08:00 medications', text: 'Rm 467 Mr. Brenner’s 08:00 medications are due: Fragmin, digoxin, Lasix and potassium', hint: 'Count the apical pulse for a full minute before the digoxin. What does the MAR say about a heart rate under 60?' },
     { id: 'jsm-wife', at: T(8, 30), pid: 'jsm', title: 'Next of kin', text: 'Rm 466 Mr. Smith asks you not to “worry Florence” about the fall', hint: 'He is capable: respect his wish, but a fall is still reported. Who else is his contact?' },
   ],
   replies: {
@@ -2349,14 +2366,14 @@ defineScenario({
 /* ---------------- 5N-1: Nursing process — pain and pressure injury (PN 1) ---------------- */
 defineScenario({
   id: 'p1', n: 17, units: ['5N'], level: 'Novice', title: 'Nursing process: “I’m just really uncomfortable”', minutes: 40,
-  source: 'PN 1 Nursing Process simulation: pressure ulcer and pain focus, Sidney Gorman (PN Labs; RNAO pressure injury and pain BPGs)',
+  source: 'PN 1 Nursing Process simulation: pressure ulcer and pain focus, Sidney Brenner (PN Labs; RNAO pressure injury and pain BPGs)',
   blurb: 'Two weeks after a stroke, Sidney had a restless night and refused breakfast and care. Find out why: a full pain assessment, his skin, his bed, and a Braden score.',
   skills: 'nursing process, PQRST pain assessment, skin assessment over bony prominences, Braden scale, turning and positioning, heel offloading, incontinence care, SBAR to the RN, care plan',
   unit: { name: '5 North — Medicine', shiftStart: T(9, 25), shiftEnd: T(15, 30) },
   prescribers: { loy: 'Dr. J. R. Loyalist (Hospitalist)', rn: 'Team leader RN' },
   rooms: [['502', 'sbp'], ['501', null], ['503', null], ['504', null]],
   brief: {
-    situation: 'It’s 09:25 on 5 North. Sidney Gorman, 84, had a stroke 2 weeks ago that affects feeling and movement on his right side. He needs help with all his care. The night nurse says he was restless all night, refused breakfast and personal care, and said he is “just really uncomfortable.” His vital signs overnight were 37.0, 68, 10, BP 140/70.',
+    situation: 'It’s 09:25 on 5 North. Sidney Brenner, 84, had a stroke 2 weeks ago that affects feeling and movement on his right side. He needs help with all his care. The night nurse says he was restless all night, refused breakfast and personal care, and said he is “just really uncomfortable.” His vital signs overnight were 37.0, 68, 10, BP 140/70.',
     steps: [
       'Read the night note and his orders.',
       'Take vital signs and do a <b>PQRST</b> pain assessment: ask him where it hurts, what it feels like, and how bad it is.',
@@ -2382,7 +2399,7 @@ defineScenario({
   ],
   patients: {
     sbp: {
-      id: 'sbp', room: '502', name: 'Sidney Gorman', pref: 'Sidney', mrn: '502842', dob: '1942-08-08', age: 84, sex: 'M', ht: 182, wt: 84,
+      id: 'sbp', room: '502', name: 'Sidney Brenner', pref: 'Sidney', mrn: '502842', dob: '1942-08-08', age: 84, sex: 'M', ht: 182, wt: 84,
       dx: 'Left-hemisphere ischemic stroke 2 weeks ago, right-sided weakness and sensory loss', hx: 'Hypertension. Type 2 diabetes diagnosed in 2000. Married, lives at home, no children; retired librarian.',
       allergies: [], gcd: 'R1', fall: 'High', attending: 'loy',
       admitted: 'Admitted 2 weeks ago', diet: 'Pureed dysphagia diet', activity: 'Up in chair 30 minutes for each meal; physiotherapy daily', vsFreq: 240,
@@ -3648,10 +3665,9 @@ function tMAR(p) {
   const scanned = p.scan.band;
   return `
   <div class="card"><div class="scanrow">
-    <form class="scanform" data-act="scanSubmit" autocomplete="off"><label for="scanIn" class="sr">Scan or type a barcode</label><input class="input mono" id="scanIn" placeholder="Scan or type the wristband or medication barcode" spellcheck="false" autocapitalize="characters"><button class="btn sm ghost camscan" type="button" data-camscan="scanIn" aria-label="Scan QR code with camera">Camera</button><button class="btn sm" type="submit">Enter</button></form>
-    <button class="btn ghost sm" type="button" data-act="scanBand">Scan wristband</button>
+    <button class="btn scanbig camscan" type="button" data-camscan="scanIn">Scan QR code</button><form class="scanform" data-act="scanSubmit" autocomplete="off"><label for="scanIn" class="sr">Scanner input</label><input class="input mono" id="scanIn" placeholder="or use a handheld scanner here" spellcheck="false" autocapitalize="characters" inputmode="none"><button class="btn sm ghost" type="submit">Enter</button></form>
     <span class="pill ${scanned ? 'ok' : ''}">${scanned ? '✓ Patient verified' : 'Wristband not scanned'}</span>
-  </div><div class="body small muted">Select a due time to document a dose. You can scan packages from the patient’s medication drawer inside the documentation window.</div></div>
+  </div><div class="body small muted">Select <b>Scan QR code</b> to read the patient’s wristband with the camera. Then select a due time to document a dose and scan the medication label.</div></div>
   <div class="card"><h3>Scheduled <span class="note">Today · select a time to document</span></h3><div class="scroll"><table class="mar"><tbody>
     ${sched.map(o => `<tr><td class="medc">${head(o)}</td><td class="times">${o.med.times.filter(x => x >= 0 && x < 1440).map(x => chip(o, x)).join('')}</td></tr>`).join('') || '<tr><td class="muted">None</td></tr>'}
   </tbody></table></div></div>
@@ -4241,9 +4257,8 @@ function drawDoc(keep = {}) {
     <div class="summary"><b>${esc(m.name)} ${esc(m.dose)}</b><span>${esc(m.route)} · ${esc(m.freq)}${m.prn ? ' · ' + esc(m.prnReason) : ''}</span>${m.hold ? `<span class="tx-amber">${esc(m.hold)}</span>` : ''}${m.scale ? `<span class="muted">${esc(m.scale)}</span>` : ''}
       <span class="muted">Stock: ${esc(m.stock)} · ${prn ? 'PRN dose' : 'Due ' + hm(ui.md.time)} · Now ${hm(now())}</span></div>
     <div class="row-s"><span class="pill ${p.scan.band ? 'ok' : ''}">${p.scan.band ? '✓ Wristband scanned' : 'Wristband not scanned'}</span><span class="pill ${scannedMed ? 'ok' : ''}">${scannedMed ? '✓ Medication scanned' : 'Medication not scanned'}</span></div>
-    ${p.scan.band && scannedMed ? '' : `<div class="drawer"><div class="row-s">${p.scan.band ? '' : '<button class="btn ghost sm" type="button" data-act="mdScanCode" data-code="PT' + p.mrn + '">Scan wristband</button>'}<span class="small muted">Medication drawer — select a package to scan it:</span></div>
-      <div class="row-s">${drawerFor(p).map(d => `<button class="pkgbtn" type="button" data-act="mdScanCode" data-code="${d.code}"><span>${esc(d.label)}</span><span class="mono small">${d.code}</span></button>`).join('')}</div>
-      <form class="scanform" data-act="mdScanSubmit" autocomplete="off"><label for="mdScanIn" class="sr">Scan or type a barcode</label><input class="input mono" id="mdScanIn" placeholder="Or scan / type a barcode" spellcheck="false" autocapitalize="characters"><button class="btn sm ghost camscan" type="button" data-camscan="mdScanIn" aria-label="Scan QR code with camera">Camera</button><button class="btn sm" type="submit">Enter</button></form></div>`}
+    ${p.scan.band && scannedMed ? '' : `<div class="drawer"><div class="row-s"><span class="small muted">Scan the QR code on the ${p.scan.band ? 'medication label' : (scannedMed ? 'wristband' : 'wristband and on the medication label')} with a scanner or the camera.</span></div>
+      <div class="row-s"><button class="btn scanbig camscan" type="button" data-camscan="mdScanIn">Scan QR code</button><form class="scanform" data-act="mdScanSubmit" autocomplete="off"><label for="mdScanIn" class="sr">Scanner input</label><input class="input mono" id="mdScanIn" placeholder="or use a handheld scanner here" spellcheck="false" autocapitalize="characters" inputmode="none"><button class="btn sm ghost" type="submit">Enter</button></form></div></div>`}
     ${ui.md.scanMsg ? `<div class="alertbox ${ui.md.scanMsg.cls}" role="alert">${ui.md.scanMsg.html}</div>` : ''}
     <div class="seg" role="group" aria-label="Result"><button type="button" data-act="mdGiven" data-v="1" aria-pressed="${g}">Given</button><button type="button" data-act="mdGiven" data-v="0" aria-pressed="${!g}">Not given</button></div>
     <div class="vform">
@@ -4330,8 +4345,6 @@ const ACT = {
   endAsk() { if (S.ended) { ui.view = 'debrief'; return render(); }
     modal('End the shift?', `<p>The clock stops and your debrief opens. You can still look back at the charts afterwards.</p><div class="alertbox warn small">Anything still undone counts as missed. Check your worklist first.</div>`, `<button class="btn ghost" type="button" data-act="closeModal">Keep working</button><button class="btn" type="button" data-act="endGo">End shift</button>`); },
   endGo() { S.ended = now(); setClock(S.ended, false); L(null, 'shift', 'Shift ended'); closeModal(); saveProgress(); ui.view = 'debrief'; render(); window.scrollTo({ top: 0 }); },
-  scanBand() { doScan('PT' + P().mrn, true); },
-  mdScanCode(el) { mdScan(el.dataset.code); },
   doAction(el) { const k = el.dataset.k, a = NURSING_ACTIONS[k]; ui.actKey = k;
     if (!a.ask) return recordAction(k, '');
     modal(esc(a.label), `<div class="small muted">${esc(a.desc)}</div><div class="field"><label for="actDetail">${esc(a.ask)}</label><input class="input" id="actDetail" autocomplete="off"></div>`, `<button class="btn ghost" type="button" data-act="closeModal">Cancel</button><button class="btn" type="button" data-act="actGo">Save</button>`); },
@@ -4591,13 +4604,13 @@ function mdScan(raw) {
   ui.md.scanMsg = null;
   if (code.startsWith('PT')) {
     const owner = Object.values(S.pts).find(x => 'PT' + x.mrn === code);
-    L(p.id, 'scan', owner ? `Scanned wristband ${code}` : 'Unrecognized barcode ' + raw);
+    L(p.id, 'scan', owner ? `Scanned wristband ${code}` : 'Unrecognized code ' + raw);
     if (!owner) msg('warn', `“${esc(raw)}” is not a wristband or medication on this unit.`);
     else if (owner.id !== p.id) { if (on) msg('crit', `<b>Wrong patient.</b> This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are documenting for ${esc(p.name)}.`); }
     else p.scan.band = true;
   } else {
     const any = Object.values(S.pts).flatMap(x => x.orders).find(x => x.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
-    L(p.id, 'scan', any ? `Scanned ${any.med.stock}` : 'Unrecognized barcode ' + raw);
+    L(p.id, 'scan', any ? `Scanned ${any.med.stock}` : 'Unrecognized code ' + raw);
     const al = any && allergyHit(p, any.med.name);
     if (!any) msg('warn', `“${esc(raw)}” is not a medication or wristband on this unit.`);
     else if (al && on) msg('crit', `<b>ALLERGY.</b> ${esc(p.name)} is allergic to ${esc(al.agent)} (${esc(al.reaction)}). Do not give ${esc(any.med.name)}.`);
@@ -4610,13 +4623,13 @@ function doScan(raw, onscreen) {
   const p = P(), code = String(raw).toUpperCase().replace(/\s+/g, ''), how = onscreen ? ' (on-screen)' : '';
   if (code.startsWith('PT')) {
     const owner = Object.values(S.pts).find(x => 'PT' + x.mrn === code);
-    if (!owner) { L(p.id, 'scan', 'Unrecognized barcode ' + raw); render(); return info('Barcode not recognized', `“${esc(raw)}” is not a wristband or medication on this unit.`, 'warn'); }
+    if (!owner) { L(p.id, 'scan', 'Unrecognized code ' + raw); render(); return info('Code not recognized', `“${esc(raw)}” is not a wristband or medication on this unit.`, 'warn'); }
     L(p.id, 'scan', `Scanned wristband ${code}${how}`);
     if (owner.id !== p.id) { render(); return S.settings.alerts ? info('Wrong patient', `This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are charting on ${esc(p.name)}.`, 'crit') : toast('Wristband scanned'); }
     p.scan.band = true; render(); return toast('Patient verified: ' + p.name);
   }
   const mine = medOrders(p).find(o => o.med.code === code), any = Object.values(S.pts).flatMap(x => x.orders).find(o => o.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
-  if (!any) { L(p.id, 'scan', 'Unrecognized barcode ' + raw); render(); return info('Barcode not recognized', `“${esc(raw)}” is not a medication or wristband on this unit.`, 'warn'); }
+  if (!any) { L(p.id, 'scan', 'Unrecognized code ' + raw); render(); return info('Code not recognized', `“${esc(raw)}” is not a medication or wristband on this unit.`, 'warn'); }
   if (!p.scan.meds.includes(code)) p.scan.meds.push(code);
   L(p.id, 'scan', `Scanned ${any.med.stock}${how}`); render();
   if (S.settings.alerts) {
@@ -4646,6 +4659,30 @@ document.addEventListener('change', e => { if (e.target.id === 'fmPid') { ui.fac
 if (S && (!S.scenario || !useScenario(S.scenario))) { S = null; try { localStorage.removeItem(KEY); } catch (e) { } }
 if (S) { ui.view = S.ended ? 'debrief' : 'census'; } else ui.view = 'start';
 render(); setInterval(tick, 1000);
+/* what the camera should ask for next while a dose is being documented; null closes the camera */
+window.scanNext = function () {
+  try {
+    if (!S || !ui.md) return null;
+    const p = P(), o = p.orders.find(x => x.id === ui.md.orderId); if (!o) return null;
+    const m = ui.md.scanMsg; if (m && m.cls === 'crit') return null;            // an alert has to be read
+    const med = p.scan.meds.includes(o.med.code);
+    if (m && m.cls === 'warn' && !/wristband too/i.test(m.html)) return 'That code was not recognized. Try again.';
+    if (!p.scan.band && !med) return 'Scan the wristband, then the medication label.';
+    if (!p.scan.band) return 'Medication verified. Now scan the wristband.';
+    if (!med) return 'Wristband verified. Now scan the medication label.';
+    return null;
+  } catch (err) { return null; }
+};
+/* keep the screen awake while a shift is running, so the device does not sleep mid-scenario */
+let wakeSentinel = null;
+async function keepAwake() {
+  try {
+    const want = !!(S && S.clock && S.clock.running && document.visibilityState === 'visible');
+    if (want && !wakeSentinel && navigator.wakeLock) { wakeSentinel = await navigator.wakeLock.request('screen'); wakeSentinel.addEventListener('release', () => { wakeSentinel = null; }); }
+    else if (!want && wakeSentinel) { const w = wakeSentinel; wakeSentinel = null; await w.release(); }
+  } catch (err) { wakeSentinel = null; }
+}
+document.addEventListener('visibilitychange', keepAwake); setInterval(keepAwake, 5000); keepAwake();
 
 </script>
 
@@ -4750,7 +4787,7 @@ render(); setInterval(tick, 1000);
   var msg = root.querySelector('.cam-msg');
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d', { willReadFrequently: true });
-  var stream = null, raf = 0, targetId = null, busy = false, odd = false;
+  var stream = null, raf = 0, targetId = null, busy = false, odd = false, seen = {};
 
   function say(text, isErr) { msg.textContent = text; msg.classList.toggle('err', !!isErr); }
 
@@ -4763,7 +4800,7 @@ render(); setInterval(tick, 1000);
   }
 
   function start(id) {
-    targetId = id; busy = false;
+    targetId = id; busy = false; seen = {};
     root.hidden = false;
     say('Hold the QR code inside the square.');
     if (!window.isSecureContext) {
@@ -4798,7 +4835,7 @@ render(); setInterval(tick, 1000);
     if (canvas.height !== h) canvas.height = h;
     ctx.drawImage(video, 0, 0, w, h);
     var r = jsQR(ctx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'dontInvert' });
-    if (r && r.data && r.data.trim()) found(r.data.trim());
+    if (r && r.data && r.data.trim()) { var c = r.data.trim(); if (seen[c]) return; found(c); }
   }
 
   function found(code) {
@@ -4806,14 +4843,15 @@ render(); setInterval(tick, 1000);
     frame.classList.add('hit');
     say('Scanned ' + code);
     setTimeout(function () {
-      stop();
-      var input = document.getElementById(targetId);
-      if (!input) return;
+      var input = document.getElementById(targetId), form = input && input.closest('form');
+      if (!form) { stop(); return; }
       input.value = code;
-      var form = input.closest('form');
-      if (!form) return;
       if (form.requestSubmit) form.requestSubmit();
       else form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      var next = (targetId === 'mdScanIn' && window.scanNext) ? window.scanNext() : null;
+      if (!next) { stop(); return; }
+      seen[code] = true;                              // keep the camera open for the next code; ignore this one from now on
+      frame.classList.remove('hit'); say(next); busy = false;
     }, 250);
   }
 
