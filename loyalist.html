@@ -3625,7 +3625,6 @@ function viewCensus() {
   return `<section class="wrap panel">
     <div class="row between"><div><h1 class="h1">${esc(UNIT.name)}</h1><div class="muted">${esc(SC.title)} · ${S.assigned.length} patient${S.assigned.length > 1 ? 's' : ''} assigned to ${esc(S.student)} · ${S.mode === 'test' ? 'Test yourself' : 'Learn'} mode</div></div>
       <div class="row-s"><button class="btn ghost" type="button" data-act="showBrief">Scenario directions</button><button class="btn ghost" type="button" data-act="openReport">My shift report</button><button class="btn" type="button" data-act="endAsk">${S.ended ? 'View debrief' : 'End shift and debrief'}</button></div></div>
-    ${briefStrip()}
     <div class="card"><div class="scroll"><table class="census"><thead><tr><th>Room</th><th>Patient</th><th>Diagnosis</th><th>GCD</th><th>Alerts</th><th>NEWS2</th><th>Tasks</th><th>New</th></tr></thead><tbody>${rows}</tbody></table></div></div>
     <div class="card"><h3>My worklist</h3><div class="body">${S.assigned.map(id => { const p = P(id); const tk = tasks(p).filter(x => x.st !== 'upcoming'); return `<div class="wl"><div class="wlhead"><span class="room mono">${p.room}</span> <b>${esc(p.name)}</b></div>${tk.length ? `<ul class="tasklist">${tk.map(x => taskLi(x, id)).join('')}</ul>` : '<div class="muted small">Nothing due right now.</div>'}</div>`; }).join('')}</div></div>
     <div class="row end muted small">Shift ID <span class="mono">${esc(S.shiftId)}</span> · Done with this scenario? <button type="button" class="linkbtn" data-act="resetAsk">Start a different scenario</button></div>
@@ -4169,8 +4168,8 @@ function viewBrief() {
   </section>`;
 }
 function briefStrip() {
-  const done = S.flags.briefHidden;
-  return `<div class="card brief"><h3>Your directions <span class="spacer"></span><button type="button" class="linkbtn" data-act="toggleStrip">${done ? 'Show' : 'Hide'}</button></h3>${done ? '' : `<div class="body"><ol class="steps compact">${SC.brief.steps.map(s => `<li>${s}</li>`).join('')}</ol><div class="small muted">${SC.brief.finish}</div></div>`}</div>`;
+  const done = S.flags.briefHidden !== false;
+  return `<div class="card brief"><h3>Directions for this shift <span class="spacer"></span><button type="button" class="linkbtn" data-act="toggleStrip">${done ? 'Show' : 'Hide'}</button></h3>${done ? '' : `<div class="body"><ol class="steps compact">${SC.brief.steps.map(s => `<li>${s}</li>`).join('')}</ol><div class="small muted">${SC.brief.finish}</div></div>`}</div>`;
 }
 function viewGcdInfo() {
   return `<section class="wrap panel narrow"><button type="button" class="linkbtn" data-act="${S ? 'census' : 'toStart'}">← Back</button>
@@ -4388,10 +4387,9 @@ const ACT = {
   toUnit() { ui.name = $('#stuName') ? (val('stuName') || ui.name) : ui.name; ui.view = ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
   showGcdPage() { ui.view = 'gcdinfo'; render(); window.scrollTo({ top: 0 }); },
   showVerify() { ui.view = 'verify'; render(); window.scrollTo({ top: 0 }); },
-  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', ui.role || 'RN'); ui.view = 'census'; render(); window.scrollTo({ top: 0 });
-    modal(esc(SC.title), briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Start working</button>`, true); },
+  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', ui.role || 'RN'); ui.view = 'census'; render(); window.scrollTo({ top: 0 }); },
   showBrief() { modal(esc(SC.title) + ' — directions', briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
-  toggleStrip() { S.flags.briefHidden = !S.flags.briefHidden; save(); render(); },
+  toggleStrip() { S.flags.briefHidden = !(S.flags.briefHidden !== false); save(); render(); },
   gcdInfo(el) { const g = el.dataset.g; if (S && ui.view === 'chart' && ui.pid && S.flags[ui.pid + '-gcd'] == null) { S.flags[ui.pid + '-gcd'] = now(); L(ui.pid, 'view', 'Checked goals of care designation'); } modal(g ? `Goals of care: ${g}` : 'Goals of care not documented', `${g ? `<div class="alertbox"><b>${g} — ${GCD[g].approach} care.</b> ${esc(GCD[g].text)}</div>` : '<div class="alertbox warn">No goals of care designation has been ordered. Find out what the patient wants and make sure the prescriber has the conversation.</div>'}<p class="small">${GCD_INTRO}</p>${gcdTable(g)}<p class="small muted">${GCD_SOURCE}</p>`, `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
   pauseToggle() { if (!S) return; setClock(now(), !S.clock.running); L(null, 'clock', S.clock.running ? 'Clock resumed' : 'Clock paused'); render(); },
   skipAhead() { if (!S) return; const t = now(); const next = [...EVENTS.filter(e => !S.fired.includes(e.id)).map(e => e.at), ...S.pendingReplies.filter(r => !r.done).map(r => r.at), ...S.pendingResults.filter(r => !r.done).map(r => r.at)].filter(x => x > t).sort((a, b) => a - b)[0];
