@@ -757,7 +757,7 @@ defineScenario({
   ],
   patients: {
     sb2: {
-      id: 'sb2', room: '402', name: 'Sidney Brenner', pref: 'Sidney', mrn: '410842', dob: '1952-08-08', age: 74, sex: 'M', ht: 182, wt: 88,
+      id: 'sb2', room: '402', name: 'Sidney Brenner', pref: 'Sidney', mrn: '410841', dob: '1952-08-08', age: 74, sex: 'M', ht: 182, wt: 88,
       dx: 'Left-hemisphere ischemic stroke 3 weeks ago, right-sided weakness (awaiting rehab)', hx: 'Hypertension. Retired librarian; lives with his wife Doris; no children.',
       allergies: [], gcd: 'R1', fall: 'High', attending: 'darnay',
       admitted: 'Admitted 3 weeks ago', diet: 'Pureed dysphagia diet', activity: 'Up in chair 30 minutes for each meal; walker with one assist; physiotherapy daily', vsFreq: 240,
@@ -1387,14 +1387,14 @@ NURSING_ACTIONS.epiPrep = { label: 'Get the anaphylaxis kit and epinephrine read
 /* ---------------- 4S-1: Acute ischemic stroke (NURS 3016) ---------------- */
 defineScenario({
   id: 's1', n: 8, units: ['4S'], level: 'Competent', title: 'Acute stroke: admission from emergency', minutes: 50,
-  source: 'Acute Stroke simulation, Sidney Smith (NURS 3016 / NURS 2005; Quinte Health stroke resource nurses review)',
+  source: 'Acute Stroke simulation, Sidney Grant (NURS 3016 / NURS 2005; Quinte Health stroke resource nurses review)',
   blurb: 'Sidney woke up with a right MCA stroke and was too late for tPA. After 12 hours in emergency, he arrives on 4 South with a high BP, a high sugar and a standard stroke order set that has a problem in it.',
   skills: 'Canadian Neurological Scale, stroke vital signs, permissive hypertension, dysphagia screening before anything by mouth, allergy checks on an order set, sliding-scale insulin for stress hyperglycemia, family questions, SBAR report',
   unit: { name: '4 South — Acute Medicine, Telemetry & Paediatrics', shiftStart: T(11, 55), shiftEnd: T(19, 30) },
   prescribers: { stroke: 'Dr. K. Koch (Stroke team)' },
   rooms: [['441', 'sm'], ['442', null], ['443', null], ['444', null]],
   brief: {
-    situation: 'It’s noon. You are receiving Sidney Smith, 74, from emergency with a right middle cerebral artery stroke. He woke up with symptoms, so he was not eligible for tPA. He has been in emergency for 12 hours. His CNS score in emergency was 5.5. He is on telemetry with a saline lock and normal saline at 75 mL/h. His partner is in the cafeteria.',
+    situation: 'It’s noon. You are receiving Sidney Grant, 74, from emergency with a right middle cerebral artery stroke. He woke up with symptoms, so he was not eligible for tPA. He has been in emergency for 12 hours. His CNS score in emergency was 5.5. He is on telemetry with a saline lock and normal saline at 75 mL/h. His partner is in the cafeteria.',
     steps: [
       'Read the ER report and the acute stroke order set. Check every order against his allergy list.',
       'Take vital signs and complete a <b>Canadian Neurological Scale</b> (<b>Assessment</b>). Compare it with the ER score of 5.5.',
@@ -1420,7 +1420,7 @@ defineScenario({
   ],
   patients: {
     sm: {
-      id: 'sm', room: '441', name: 'Sidney Smith', pref: 'Sidney', mrn: '441007', dob: '1952-08-05', age: 74, sex: 'M', ht: 175, wt: 92,
+      id: 'sm', room: '441', name: 'Sidney Grant', pref: 'Sidney', mrn: '441007', dob: '1952-08-05', age: 74, sex: 'M', ht: 175, wt: 92,
       dx: 'Acute right MCA ischemic stroke (woke with symptoms; no tPA)', hx: 'Long-standing hypertension, MI 2 years ago with CABG ×3, smoker 1 pack/day',
       allergies: [{ agent: 'ASA (acetylsalicylic acid)', reaction: 'Hives and wheeze', keys: ['asa', 'acetylsalicylic', 'aspirin', 'entrophen'] }, { agent: 'Penicillin', reaction: 'Rash', keys: ['penicillin', 'amoxicillin', 'piperacillin', 'ampicillin', 'cloxacillin'] }],
       gcd: 'R1', fall: 'High', attending: 'stroke',
@@ -2230,21 +2230,21 @@ defineScenario({
 /* ---------------- 4W-2: Fall in the room and a team morning (PN · PSW · BScN collaborative) ---------------- */
 defineScenario({
   id: 'w2', n: 16, units: ['4W'], level: 'Competent', title: 'Interprofessional morning: a fall and the 08:00 medications', minutes: 50,
-  source: 'PN · PSW · NURS collaborative simulation, John Smith and Sidney Brenner (Loyalist Nursing Home, NURS 4007)',
+  source: 'PN · PSW · NURS collaborative simulation, John Smith and Sidney Harding (Loyalist Nursing Home, NURS 4007)',
   blurb: 'Two frail older adults waiting for long-term care beds. The PSW finds Mr. Smith on the floor beside a spilled urinal. Lead the team: assess before moving, find the cause, and keep the 08:00 medications safe next door.',
   skills: 'leading a post-fall response, delegating to and collaborating with a PSW, head injury on an antiplatelet, looking for the cause of a fall, incident report, falls prevention, apical pulse before digoxin, prioritizing two patients',
   unit: { name: '4 West — Mental Health & Transitional Care', shiftStart: T(7, 25), shiftEnd: T(15, 30) },
   prescribers: { friction: 'Dr. S. Friction (Care of the Elderly)', chang: 'Dr. M. Chang (Care of the Elderly)' },
   rooms: [['466', 'jsm'], ['467', 'sbr'], ['468', null]],
   brief: {
-    situation: 'It’s 07:25 on 4 West transitional care. You are the nurse leading a small team with a PSW. John Smith, 81, had a stroke in 2010 (right-sided weakness), has type 2 diabetes, hypertension and BPH, and is waiting for a long-term care bed near his wife Florence. Sidney Brenner, 78, has bowel cancer and heart failure and is also waiting for placement. Morning medications are at 08:00.',
+    situation: 'It’s 07:25 on 4 West transitional care. You are the nurse leading a small team with a PSW. John Smith, 81, had a stroke in 2010 (right-sided weakness), has type 2 diabetes, hypertension and BPH, and is waiting for a long-term care bed near his wife Florence. Sidney Harding, 78, has bowel cancer and heart failure and is also waiting for placement. Morning medications are at 08:00.',
     steps: [
       'Read both charts quickly. Who is most at risk this morning, and why?',
       'When the PSW calls you: go. Do a post-fall assessment before he is moved. Ask the PSW to stay with him and help.',
       'Check vital signs and his glucose. Get him back to bed safely with help, then start neuro checks (he takes ASA).',
       'Notify the physician and his family, and complete a safety (incident) report.',
       'Make his room safer: urinal on the strong side, bed low, call bell in reach.',
-      'For Mr. Brenner, count an apical pulse for a full minute before the digoxin.',
+      'For Mr. Harding, count an apical pulse for a full minute before the digoxin.',
     ],
     finish: 'Work until about 09:00 shift time, then select <b>End shift and debrief</b>.',
     tips: [
@@ -2287,8 +2287,8 @@ defineScenario({
       nursingActions: ['postFall', 'neuroChecks', 'fallsPrecautions', 'gaitBelt', 'incidentReport', 'feedingCheck', 'delegate'],
     },
     sbr: {
-      id: 'sbr', room: '467', name: 'Sidney Brenner', pref: 'Sidney', mrn: '467078', dob: '1948-07-30', age: 78, sex: 'M', ht: 176, wt: 64,
-      dx: 'Alternate level of care: bowel cancer and heart failure, awaiting long-term care', hx: 'Bowel cancer, heart failure (CHF). Next of kin: son Larry Brenner and daughter Rita Cooke.',
+      id: 'sbr', room: '467', name: 'Sidney Harding', pref: 'Sidney', mrn: '467078', dob: '1948-07-30', age: 78, sex: 'M', ht: 176, wt: 64,
+      dx: 'Alternate level of care: bowel cancer and heart failure, awaiting long-term care', hx: 'Bowel cancer, heart failure (CHF). Next of kin: son Larry Harding and daughter Rita Cooke.',
       allergies: [], gcd: 'M1', fall: 'Moderate', attending: 'chang',
       admitted: 'Admitted 5 weeks ago; ALC', diet: 'As tolerated, no added salt', activity: 'Walker', vsFreq: 480,
       orders: [
@@ -2317,7 +2317,7 @@ defineScenario({
   },
   events: [
     { id: 'jsm-fall', at: T(7, 30), pid: 'jsm', title: 'Found on the floor', text: 'Rm 466 the PSW calls you: “Mr. Smith is on the floor beside his bed and the floor is wet!”', hint: 'Go now. Post-fall assessment before anyone moves him. Ask the PSW to stay and help.' },
-    { id: 'sbr-meds', at: T(7, 55), pid: 'sbr', title: '08:00 medications', text: 'Rm 467 Mr. Brenner’s 08:00 medications are due: Fragmin, digoxin, Lasix and potassium', hint: 'Count the apical pulse for a full minute before the digoxin. What does the MAR say about a heart rate under 60?' },
+    { id: 'sbr-meds', at: T(7, 55), pid: 'sbr', title: '08:00 medications', text: 'Rm 467 Mr. Harding’s 08:00 medications are due: Fragmin, digoxin, Lasix and potassium', hint: 'Count the apical pulse for a full minute before the digoxin. What does the MAR say about a heart rate under 60?' },
     { id: 'jsm-wife', at: T(8, 30), pid: 'jsm', title: 'Next of kin', text: 'Rm 466 Mr. Smith asks you not to “worry Florence” about the fall', hint: 'He is capable: respect his wish, but a fall is still reported. Who else is his contact?' },
   ],
   replies: {
@@ -2349,14 +2349,14 @@ defineScenario({
 /* ---------------- 5N-1: Nursing process — pain and pressure injury (PN 1) ---------------- */
 defineScenario({
   id: 'p1', n: 17, units: ['5N'], level: 'Novice', title: 'Nursing process: “I’m just really uncomfortable”', minutes: 40,
-  source: 'PN 1 Nursing Process simulation: pressure ulcer and pain focus, Sidney Brenner (PN Labs; RNAO pressure injury and pain BPGs)',
+  source: 'PN 1 Nursing Process simulation: pressure ulcer and pain focus, Sidney Gorman (PN Labs; RNAO pressure injury and pain BPGs)',
   blurb: 'Two weeks after a stroke, Sidney had a restless night and refused breakfast and care. Find out why: a full pain assessment, his skin, his bed, and a Braden score.',
   skills: 'nursing process, PQRST pain assessment, skin assessment over bony prominences, Braden scale, turning and positioning, heel offloading, incontinence care, SBAR to the RN, care plan',
   unit: { name: '5 North — Medicine', shiftStart: T(9, 25), shiftEnd: T(15, 30) },
   prescribers: { loy: 'Dr. J. R. Loyalist (Hospitalist)', rn: 'Team leader RN' },
   rooms: [['502', 'sbp'], ['501', null], ['503', null], ['504', null]],
   brief: {
-    situation: 'It’s 09:25 on 5 North. Sidney Brenner, 84, had a stroke 2 weeks ago that affects feeling and movement on his right side. He needs help with all his care. The night nurse says he was restless all night, refused breakfast and personal care, and said he is “just really uncomfortable.” His vital signs overnight were 37.0, 68, 10, BP 140/70.',
+    situation: 'It’s 09:25 on 5 North. Sidney Gorman, 84, had a stroke 2 weeks ago that affects feeling and movement on his right side. He needs help with all his care. The night nurse says he was restless all night, refused breakfast and personal care, and said he is “just really uncomfortable.” His vital signs overnight were 37.0, 68, 10, BP 140/70.',
     steps: [
       'Read the night note and his orders.',
       'Take vital signs and do a <b>PQRST</b> pain assessment: ask him where it hurts, what it feels like, and how bad it is.',
@@ -2382,7 +2382,7 @@ defineScenario({
   ],
   patients: {
     sbp: {
-      id: 'sbp', room: '502', name: 'Sidney Brenner', pref: 'Sidney', mrn: '502842', dob: '1942-08-08', age: 84, sex: 'M', ht: 182, wt: 84,
+      id: 'sbp', room: '502', name: 'Sidney Gorman', pref: 'Sidney', mrn: '502842', dob: '1942-08-08', age: 84, sex: 'M', ht: 182, wt: 84,
       dx: 'Left-hemisphere ischemic stroke 2 weeks ago, right-sided weakness and sensory loss', hx: 'Hypertension. Type 2 diabetes diagnosed in 2000. Married, lives at home, no children; retired librarian.',
       allergies: [], gcd: 'R1', fall: 'High', attending: 'loy',
       admitted: 'Admitted 2 weeks ago', diet: 'Pureed dysphagia diet', activity: 'Up in chair 30 minutes for each meal; physiotherapy daily', vsFreq: 240,
