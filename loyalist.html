@@ -4080,10 +4080,9 @@ const GCD_SOURCE = `These designations follow the Alberta Health Services goals 
 const roleFor = id => { const sc = scList().find(x => x.id === id), u = UNITS[ui.unit] || UNITS[((sc || {}).units || [])[0]]; return u ? u.role : 'RN'; };
 const unitList = k => scList().filter(sc => (sc.units || []).includes(k));
 function unitTile(k) {
-  const u = UNITS[k], n = unitList(k).length, pl = (PLANNED[k] || []).length;
+  const u = UNITS[k];
   return `<button type="button" class="unittile wing-${u.wing.toLowerCase()}" data-act="openUnit" data-u="${k}">
-    <span class="ut-code">${u.code}</span><span class="ut-cohort">${esc(u.cohort)}</span><span class="ut-svc">${esc(u.service)}</span>
-    <span class="ut-count">${n} simulation${n === 1 ? '' : 's'}${pl ? ` · ${pl} coming` : ''}</span></button>`;
+    <span class="ut-code">${u.code}</span><span class="ut-cohort">${esc(u.cohort)}</span><span class="ut-svc">${esc(u.service)}</span></button>`;
 }
 function signInCard() {
   const mode = ui.mode || 'learn';
@@ -4114,13 +4113,12 @@ function viewStart() {
 }
 function viewUnit() {
   const k = ui.unit, u = UNITS[k]; if (!u) { ui.view = 'start'; return viewStart(); }
-  const list = unitList(k).map((sc, i) => (sc.ix = i + 1, sc)), pl = PLANNED[k] || [];
+  const list = unitList(k).map((sc, i) => (sc.ix = i + 1, sc));
   return `<section class="start wrap">
     <button type="button" class="linkbtn" data-act="toStart">← Floor directory</button>
     <div class="unithead wing-${u.wing.toLowerCase()}"><div class="uh-code">${u.code}</div><div><p class="eyebrow">${esc(u.cohort)} · Floor ${u.floor}, ${u.wing} wing</p><h1 class="h1">${esc(u.service)}</h1><p class="muted">${esc(u.blurb)}</p></div></div>
     ${signInCard()}
     <div class="scgrid">${list.map(sc => scCard(sc)).join('')}</div>
-    ${pl.length ? `<div class="card"><h3>Coming to ${u.code}</h3><div class="body"><p class="small muted">These simulations are in your program’s simulation files and are not in the EHR yet.</p><div class="flags">${pl.map(x => `<span class="ptchip soon">${esc(x)}</span>`).join('')}</div></div></div>` : ''}
   </section>`;
 }
 
