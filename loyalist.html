@@ -467,6 +467,12 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 .lobby h1{font-size:26px;margin:0}.lobby h1::after{display:none}.lobby .lc-dots{display:none}
 .lobby .ls-sub{margin:2px 0 0;font-size:14.5px}
 @media (max-width:699px){body{font-size:15px}}
+
+/* ---- tidy sign-in ---- */
+.signin{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:flex-end}
+.signin .signname{flex:1 1 240px;max-width:380px}
+.signin .signnote{flex-basis:100%;margin:0}
+.unithead + .card{margin-bottom:4px}
 </style>
 
 <header class="appbar"><div class="wrap">
@@ -637,12 +643,12 @@ const actionDetail = (p, key, re) => (p.actions || []).some(a => a.key === key &
 
 /* ---- the hospital: floors and units (each unit is a cohort) ---- */
 const UNITS = {
-  '5N': { code: '5 North', floor: 5, wing: 'North', cohort: 'Practical Nursing · Year 1', short: 'PN Year 1', role: 'PN', service: 'Medicine', blurb: 'Foundations of nursing practice: assessment, the nursing process, safe medications and a first rapid change in a stable patient.' },
-  '5S': { code: '5 South', floor: 5, wing: 'South', cohort: 'Practical Nursing · Year 2', short: 'PN Year 2', role: 'PN', service: 'Medicine & Surgery', blurb: 'Complex medical and surgical patients, more than one patient at a time, end-of-life care, and knowing when to bring in the RN.' },
-  '4N': { code: '4 North', floor: 4, wing: 'North', cohort: 'BScN · Year 1', short: 'BScN Year 1', role: 'RN', service: 'Medicine & Surgery', blurb: 'Foundations: initial assessment, oxygenation, mobility and teaching, the first post-op patient and a careful medication pass.' },
-  '4E': { code: '4 East', floor: 4, wing: 'East', cohort: 'BScN · Year 2', short: 'BScN Year 2', role: 'RN', service: 'Medicine, Cardiology & Family Birthing', blurb: 'Chronic illness and acute change: diabetes, cardiac admission, COPD and the postpartum family.' },
-  '4S': { code: '4 South', floor: 4, wing: 'South', cohort: 'BScN · Year 3', short: 'BScN Year 3', role: 'RN', service: 'Acute Medicine, Telemetry & Paediatrics', blurb: 'Acute health challenges (NURS 3016) and paediatrics (NURS 3014): stroke, transfusion reaction, pulmonary edema, hyperkalemia, sepsis and the post-op child.' },
-  '4W': { code: '4 West', floor: 4, wing: 'West', cohort: 'BScN · Year 4', short: 'BScN Year 4', role: 'RN', service: 'Mental Health & Transitional Care', blurb: 'Leadership and interprofessional practice (NURS 4007): a Code White on the mental health unit and team care for frail older adults awaiting long-term care.' },
+  '5N': { code: '5 North', floor: 5, wing: 'North', cohort: 'Practical Nursing · Year 1', short: 'PN Year 1', role: 'PN', service: 'Medicine', blurb: 'Foundations of practical nursing: assessment, the nursing process and care of medical patients.' },
+  '5S': { code: '5 South', floor: 5, wing: 'South', cohort: 'Practical Nursing · Year 2', short: 'PN Year 2', role: 'PN', service: 'Medicine & Surgery', blurb: 'Complex medical and surgical patients, often more than one at a time.' },
+  '4N': { code: '4 North', floor: 4, wing: 'North', cohort: 'BScN · Year 1', short: 'BScN Year 1', role: 'RN', service: 'Medicine & Surgery', blurb: 'Foundations of nursing: assessment, daily care, the post-operative patient and medication administration.' },
+  '4E': { code: '4 East', floor: 4, wing: 'East', cohort: 'BScN · Year 2', short: 'BScN Year 2', role: 'RN', service: 'Medicine, Cardiology & Family Birthing', blurb: 'Adults with chronic and acute illness, cardiac admissions and the postpartum family.' },
+  '4S': { code: '4 South', floor: 4, wing: 'South', cohort: 'BScN · Year 3', short: 'BScN Year 3', role: 'RN', service: 'Acute Medicine, Telemetry & Paediatrics', blurb: 'Acute health challenges (NURS 3016) and paediatrics (NURS 3014) on a monitored unit.' },
+  '4W': { code: '4 West', floor: 4, wing: 'West', cohort: 'BScN · Year 4', short: 'BScN Year 4', role: 'RN', service: 'Mental Health & Transitional Care', blurb: 'Leadership and interprofessional practice (NURS 4007) in mental health and transitional care.' },
 };
 /* sims in the Loyalist simulation files that are not yet built into the EHR (shown as "coming soon") */
 const PLANNED = {
@@ -1781,7 +1787,7 @@ defineScenario({
     { pid: 'sf', label: 'Vital signs and lung assessment during the distress', step: 'Recognize cues', why: 'Crackles throughout, wheeze, HR 130 and BP 188/88 confirm pulmonary edema.', ev: 'sf-pe', fn: p => vitalsBetween(p, T(16, 35), T(16, 50)).length > 0 && systemsDone(p, 'resp', T(16, 35)) },
     { pid: 'sf', label: 'CCRT called within 10 minutes', step: 'Take action', why: 'The physician can’t come; CCRT can.', ev: 'sf-pe', fn: p => did(p, 'callRRT', T(16, 35), T(16, 45)) || (firstSbarAfter(p, T(16, 35)) ?? 1e9) <= T(16, 45) },
     { pid: 'sf', label: 'IV furosemide given', step: 'Take action', why: 'IV loop diuretic works in minutes; the oral dose is too slow for this.', fn: p => Object.entries(p.mar).some(([k, d]) => k.startsWith('sf-x1@') && d.given) },
-    { pid: 'sf', label: 'Playing as an RPN: RN or charge nurse brought to the bedside before the IV push', step: 'Generate solutions', why: 'A patient this unstable is outside autonomous RPN practice, and IV push medications depend on employer policy. Your template has students call CCRT or the unit supervisor for the IV push.', fn: (p, S) => S.role === 'PN' ? did(p, 'callHelp', T(16, 35)) : null },
+    { pid: 'sf', label: 'RPN: RN or charge nurse brought to the bedside before the IV push', step: 'Generate solutions', why: 'A patient this unstable is outside autonomous RPN practice, and IV push medications depend on employer policy. Your template has students call CCRT or the unit supervisor for the IV push.', fn: (p, S) => S.role === 'PN' ? did(p, 'callHelp', T(16, 35)) : null },
     { pid: 'sf', label: 'BP checked before each nitroglycerin spray', step: 'Recognize cues', why: 'Nitro can drop the BP; the order says hold below 100.', fn: p => { const g = prnGiven(p, 'sf-x2'); return g.length ? g.every(d => vitalsBetween(p, d.t - 5, d.t).length > 0) : null; } },
     { pid: 'sf', label: 'RT paged for CPAP', step: 'Generate solutions', why: 'CPAP pushes fluid out of the alveoli and reduces the work of breathing.', fn: p => did(p, 'callRT') },
     { pid: 'sf', label: 'Lorazepam not given', step: 'Analyze cues', why: 'Her agitation is hypoxia. A benzodiazepine would depress her breathing.', ev: 'sf-agit', fn: p => prnGiven(p, 'sf-m6', T(16, 30)).length === 0 },
@@ -3458,7 +3464,7 @@ function newShift(student, scenarioId, mode, role) {
     p.orders.forEach(o => { if (!o.by) o.by = p.attending; });
     S.pts[id] = p;
   }
-  L(null, 'shift', `Shift started by ${student}: ${SC.title} (${mode === 'test' ? 'Test yourself' : 'Learn'} mode, playing as ${role === 'PN' ? 'a practical nurse' : 'an RN'}).`);
+  L(null, 'shift', `Shift started by ${student}: ${openTitle(SC)} (${mode === 'test' ? 'Test yourself' : 'Learn'} mode).`);
   save();
 }
 function now() { const c = S.clock; return Math.floor(c.base + (c.running ? (Date.now() - c.anchor) / 60000 : 0)); }
@@ -3623,7 +3629,7 @@ function viewCensus() {
     </tr>`;
   }).join('');
   return `<section class="wrap panel">
-    <div class="row between"><div><h1 class="h1">${esc(UNIT.name)}</h1><div class="muted">${esc(SC.title)} · ${S.assigned.length} patient${S.assigned.length > 1 ? 's' : ''} assigned to ${esc(S.student)} · ${S.mode === 'test' ? 'Test yourself' : 'Learn'} mode</div></div>
+    <div class="row between"><div><h1 class="h1">${esc(UNIT.name)}</h1><div class="muted">${esc(openTitle(SC))} · ${S.assigned.length} patient${S.assigned.length > 1 ? 's' : ''} assigned to ${esc(S.student)} · ${S.mode === 'test' ? 'Test yourself' : 'Learn'} mode</div></div>
       <div class="row-s"><button class="btn ghost" type="button" data-act="showBrief">Scenario directions</button><button class="btn ghost" type="button" data-act="openReport">My shift report</button><button class="btn" type="button" data-act="endAsk">${S.ended ? 'View debrief' : 'End shift and debrief'}</button></div></div>
     <div class="card"><div class="scroll"><table class="census"><thead><tr><th>Room</th><th>Patient</th><th>Diagnosis</th><th>GCD</th><th>Alerts</th><th>NEWS2</th><th>Tasks</th><th>New</th></tr></thead><tbody>${rows}</tbody></table></div></div>
     <div class="card"><h3>My worklist</h3><div class="body">${S.assigned.map(id => { const p = P(id); const tk = tasks(p).filter(x => x.st !== 'upcoming'); return `<div class="wl"><div class="wlhead"><span class="room mono">${p.room}</span> <b>${esc(p.name)}</b></div>${tk.length ? `<ul class="tasklist">${tk.map(x => taskLi(x, id)).join('')}</ul>` : '<div class="muted small">Nothing due right now.</div>'}</div>`; }).join('')}</div></div>
@@ -4071,6 +4077,7 @@ const GCD_INTRO = `Each patient has a goals of care designation (GCD) instead of
 const GCD_SOURCE = `These designations follow the Alberta Health Services goals of care framework. Other provinces use different terms, for example “Full code” and “DNR” in many Ontario hospitals. A nurse doesn’t set the GCD; the prescriber orders it after a conversation with the patient or their substitute decision-maker.`;
 
 /* ---- start: the hospital lobby and floor directory ---- */
+const roleFor = id => { const sc = scList().find(x => x.id === id), u = UNITS[ui.unit] || UNITS[((sc || {}).units || [])[0]]; return u ? u.role : 'RN'; };
 const unitList = k => scList().filter(sc => (sc.units || []).includes(k));
 function unitTile(k) {
   const u = UNITS[k], n = unitList(k).length, pl = (PLANNED[k] || []).length;
@@ -4079,15 +4086,12 @@ function unitTile(k) {
     <span class="ut-count">${n} simulation${n === 1 ? '' : 's'}${pl ? ` · ${pl} coming` : ''}</span></button>`;
 }
 function signInCard() {
-  const mode = ui.mode || 'learn', role = ui.role || 'RN';
-  return `<div class="card"><h3>Sign in to the unit</h3><div class="body stack">
-      <div class="field" style="max-width:360px"><label for="stuName">Your name <span class="muted small">(shown on your shift report)</span></label><input class="input" id="stuName" autocomplete="off" placeholder="First and last name" value="${esc(ui.name || '')}"></div>
-      <div class="optgrid">
-        <div class="stack-s"><div class="eyebrow">Mode</div><div class="seg" role="group" aria-label="Mode"><button type="button" data-act="setMode" data-v="learn" aria-pressed="${mode === 'learn'}">Learn</button><button type="button" data-act="setMode" data-v="test" aria-pressed="${mode === 'test'}">Test yourself</button></div>
-          <div class="small muted">${mode === 'learn' ? 'Safety alerts are on (wrong patient, allergies, hold parameters) and events come with hints. Best for your first try.' : 'No safety alerts and no hints. You have to catch problems yourself; the debrief shows what you caught.'}</div></div>
-        <div class="stack-s"><div class="eyebrow">Playing as</div><div class="seg" role="group" aria-label="Role"><button type="button" data-act="setRole" data-v="RN" aria-pressed="${role === 'RN'}">Registered nurse</button><button type="button" data-act="setRole" data-v="PN" aria-pressed="${role === 'PN'}">Registered practical nurse</button></div>
-          <div class="small muted">Some debrief items depend on scope of practice, such as when an RPN brings in the RN.</div></div>
-      </div></div></div>`;
+  const mode = ui.mode || 'learn';
+  return `<div class="card"><h3>Sign in to the unit</h3><div class="body signin">
+      <div class="field signname"><label for="stuName">Your name</label><input class="input" id="stuName" autocomplete="off" placeholder="First and last name" value="${esc(ui.name || '')}"></div>
+      <div class="field"><label id="modeLbl">Mode</label><div class="seg" role="group" aria-labelledby="modeLbl"><button type="button" data-act="setMode" data-v="learn" aria-pressed="${mode === 'learn'}">Learn</button><button type="button" data-act="setMode" data-v="test" aria-pressed="${mode === 'test'}">Test yourself</button></div></div>
+      <p class="small muted signnote">${mode === 'learn' ? 'Learn: safety alerts and hints are on.' : 'Test yourself: no safety alerts and no hints.'}</p>
+    </div></div>`;
 }
 function viewStart() {
   const floor = f => Object.keys(UNITS).filter(k => UNITS[k].floor === f);
@@ -4110,36 +4114,28 @@ function viewStart() {
 }
 function viewUnit() {
   const k = ui.unit, u = UNITS[k]; if (!u) { ui.view = 'start'; return viewStart(); }
-  const list = unitList(k).map((sc, i) => (sc.ix = i + 1, sc)), lv = LEVELS.map(([l]) => l), pl = PLANNED[k] || [];
-  const grouped = lv.map(l => [l, list.filter(sc => sc.level === l)]).filter(([, a]) => a.length);
+  const list = unitList(k).map((sc, i) => (sc.ix = i + 1, sc)), pl = PLANNED[k] || [];
   return `<section class="start wrap">
     <button type="button" class="linkbtn" data-act="toStart">← Floor directory</button>
     <div class="unithead wing-${u.wing.toLowerCase()}"><div class="uh-code">${u.code}</div><div><p class="eyebrow">${esc(u.cohort)} · Floor ${u.floor}, ${u.wing} wing</p><h1 class="h1">${esc(u.service)}</h1><p class="muted">${esc(u.blurb)}</p></div></div>
     ${signInCard()}
-    <div class="row between"><h2 class="h2">Simulations on ${u.code}</h2><span class="small muted">${list.length} ready</span></div>
-    <p class="small muted">${BENNER_NOTE}</p>
-    ${grouped.map(([l, a]) => `<div class="lvhead"><h3 class="h3">${l}</h3><span class="small muted">${LEVELS.find(x => x[0] === l)[1]}</span></div><div class="scgrid">${a.map(sc => scCard(sc)).join('')}</div>`).join('')}
+    <div class="scgrid">${list.map(sc => scCard(sc)).join('')}</div>
     ${pl.length ? `<div class="card"><h3>Coming to ${u.code}</h3><div class="body"><p class="small muted">These simulations are in your program’s simulation files and are not in the EHR yet.</p><div class="flags">${pl.map(x => `<span class="ptchip soon">${esc(x)}</span>`).join('')}</div></div></div>` : ''}
   </section>`;
 }
 
-const LEVELS = [
-  ['Novice', 'Benner stage 1. Rule-based practice: clear cues, one problem at a time, directions that say exactly what to do.'],
-  ['Advanced beginner', 'Benner stage 2. You recognize the recurring aspects of a situation (a rising heart rate, a wrong tray) but still need rules for what matters most.'],
-  ['Competent', 'Benner stage 3. Deliberate planning: several patients or a protocol that unfolds over hours, where you choose the order and manage time.'],
-  ['Proficient', 'Benner stage 4. Seeing the whole situation: a patient who is deteriorating, dying or reacting, and an order or plan that has to change. Try these in Test yourself mode.'],
-];
-const BENNER_NOTE = 'Simulations are grouped by the first four stages of Benner’s novice-to-expert model (<i>From Novice to Expert</i>, 1984). Try each one in Learn mode first, then repeat it in Test yourself mode.';
 function bestOf(id) { try { return (JSON.parse(localStorage.getItem(KEY + '-progress') || '{}'))[id] || null; } catch (e) { return null; } }
+const CARD = {"n1": ["Morning care: day 4 of pneumonia", "Sidney was admitted four days ago with pneumonia. Night shift reports a restless night, and he refused breakfast and his morning care."], "n2": ["Morning care: three weeks after a stroke", "Sidney had a stroke three weeks ago and is waiting for a rehab bed. He is learning to use a walker, and his wife is coming in this morning."], "n3": ["Back from recovery: open appendectomy", "Simon has just arrived from the recovery room after an open appendectomy for a perforated appendix. His wife is on her way up."], "n4": ["The 08:00 medication pass", "Two patients with pneumonia are going home today. Their 08:00 medications are due in about 20 minutes."], "e1": ["Morning rounds: five days after a stroke", "Sidney was admitted five days ago with a stroke and has had type 2 diabetes for 20 years. It is 08:25, his family is visiting and physiotherapy is at 10:00."], "e2": ["Cardiac admission from emergency", "Sidney is arriving from emergency with unstable angina. She needs a full admission to the unit."], "e3": ["Postpartum day 1: caesarean birth", "Michelle is a first-time mother, 24 hours after an elective caesarean birth. Her son spent the night in the nursery."], "s1": ["Acute stroke: admission from emergency", "Sidney woke up with a right MCA stroke and was not eligible for tPA. After 12 hours in emergency, he is arriving on the unit."], "s2": ["Admission: anemia after a GI bleed", "Sidney had an upper GI bleed last week and came to emergency today pale, hypotensive and short of breath. He is admitted to your monitored bed."], "s3": ["Heart failure: day 2 of admission", "Sidney was admitted yesterday with a heart failure exacerbation. You have just finished 16:30 rounds, and her daughter is on her way."], "s4": ["Two days after an anterior MI", "Joe was admitted two days ago with an anterior MI and is newly diagnosed with type 2 diabetes. It is late morning."], "s5": ["Transfer from emergency: found on the floor in a heat wave", "Otto was found on his kitchen floor this morning in a very hot house. Emergency has treated him, and he is coming to you with repeat bloodwork pending."], "s6": ["Afternoon rounds: admitted after a fall", "Sidney fell down her stairs last night and came to the floor this morning, dehydrated and bruised. It is almost 16:00, and her daughter is at the bedside."], "s7": ["Paediatrics: post-op day 2", "Jordan, 6, had surgery for a ruptured appendix two evenings ago. She is NPO with an NG tube to suction, and her father is at the bedside."], "w1": ["Afternoon on the mental health unit", "John was admitted three days ago with a manic episode of bipolar I disorder. It is just before 14:00 on the inpatient mental health unit."], "w2": ["Interprofessional morning: transitional care", "Two older adults are waiting for long-term care beds. You lead a small team with a PSW, and the 08:00 medications are coming up."], "p1": ["Morning care: two weeks after a stroke", "Sidney had a stroke two weeks ago and needs help with all his care. Night shift reports a restless night, and he refused breakfast and personal care."], "p2": ["COPD: the day before discharge", "Samuel is on day 5 after a COPD exacerbation and goes home tomorrow if he stays stable. His wife is at the bedside."], "q1": ["Post-op orientation: three patients and an 08:00 med pass", "You have three post-operative patients this morning. The morning labs are back and the 08:00 medications are due."], "q2": ["Upper GI bleed: the morning after admission", "Philip came to emergency overnight with epigastric pain and vomiting blood. He is booked for an endoscopy at 13:00."], "q3": ["Two patients on the acute care for elders beds", "Mrs. Appleby is two weeks after a stroke and waiting for a convalescent bed. Mr. Dufresne has Parkinson’s disease and was admitted after a fall at home."], "q4": ["Transfer back from ICU", "Mrs. Fox came back from ICU overnight after treatment for acute heart failure. Discharge is planned in 48 hours, and her morning medications are due."], "q5": ["Palliative care: Bert this morning", "Bert has end-stage dementia and metastatic lung cancer, and has declined sharply over two weeks. His family is at the bedside."], "q6": ["Laryngectomy: post-op day 3", "Tomas had a total laryngectomy three days ago. He breathes through a stoma, is fed by PEG tube, and communicates with paper, a whiteboard and gestures."]};
+const cardOf = sc => CARD[sc.sharedFrom || sc.id] || [sc.title, sc.blurb];
+const openTitle = sc => cardOf(sc)[0];
 function scCard(sc) {
   const b = bestOf(sc.id);
   return `<article class="sccard">
-      <div class="sctitle"><span class="scnum">${sc.ix || sc.n}</span><h3>${esc(sc.title)}</h3></div>
-      <div class="small muted"><span class="stage">${sc.level}</span> · ${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min · ${sc.rooms.filter(r => r[1]).length} patient${sc.rooms.filter(r => r[1]).length > 1 ? 's' : ''}</div>
-      <p>${esc(sc.blurb)}</p>
-      <div class="flags">${sc.rooms.filter(r => r[1]).map(([room, id]) => `<span class="ptchip">${room} ${esc(sc.patients[id].name.split(' ')[0])} ${gcdTag(sc.patients[id].gcd)}</span>`).join('')}${sc.source ? `<div class="small muted srcline">From: ${esc(sc.source)}</div>` : ''}</div>
-      <div class="small"><b>You will practise:</b> ${esc(sc.skills)}</div>
-      ${b ? `<div class="small best">Your best: <b>${b.met} of ${b.total}</b> (${b.mode === 'test' ? 'Test yourself' : 'Learn'}, ${b.role})</div>` : ''}
+      <div class="sctitle"><span class="scnum">${sc.ix || sc.n}</span><h3>${esc(openTitle(sc))}</h3></div>
+      <div class="small muted">${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min · ${sc.rooms.filter(r => r[1]).length} patient${sc.rooms.filter(r => r[1]).length > 1 ? 's' : ''}</div>
+      <p>${esc(cardOf(sc)[1])}</p>
+      <div class="flags">${sc.rooms.filter(r => r[1]).map(([room, id]) => `<span class="ptchip">${room} ${esc(sc.patients[id].name.split(' ')[0])} ${gcdTag(sc.patients[id].gcd)}</span>`).join('')}</div>
+      ${b ? `<div class="small best">Your best: <b>${b.met} of ${b.total}</b> (${b.mode === 'test' ? 'Test yourself' : 'Learn'})</div>` : ''}
       <div class="row-s"><button class="btn" type="button" data-act="openBrief" data-id="${sc.id}">Read the directions</button></div>
     </article>`;
 }
@@ -4161,9 +4157,9 @@ function viewBrief() {
   const sc = SCN[ui.briefId]; if (!sc) { ui.view = 'start'; return viewStart(); }
   return `<section class="wrap panel narrow">
     <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">← ${ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>
-    <div><p class="eyebrow">${sc.level} level · ${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min</p><h1 class="h1">${esc(sc.title)}</h1></div>
+    <div><p class="eyebrow">${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min</p><h1 class="h1">${esc(openTitle(sc))}</h1></div>
     <div class="card"><div class="body">${briefHTML(sc, false)}</div></div>
-    <div class="card"><div class="body row between"><div class="small muted">Mode: <b>${(ui.mode || 'learn') === 'test' ? 'Test yourself' : 'Learn'}</b> · Playing as <b>${(ui.role || 'RN') === 'PN' ? 'a registered practical nurse' : 'a registered nurse'}</b> · <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">change</button></div>
+    <div class="card"><div class="body row between"><div class="small muted">Mode: <b>${(ui.mode || 'learn') === 'test' ? 'Test yourself' : 'Learn'}</b> · <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">change</button></div>
       <button class="btn" type="button" data-act="startScenario" data-id="${sc.id}">Start the shift</button></div></div>
   </section>`;
 }
@@ -4220,7 +4216,7 @@ function viewDebrief() {
   const all = debriefAll(), app = all.filter(r => r.r !== null), met = app.filter(r => r.r).length;
   const pct = app.length ? Math.round(met / app.length * 100) : 0;
   return `<section class="wrap panel">
-    <div class="row between"><div><p class="eyebrow">Debrief · ${esc(SC.title)}</p><h1 class="h1">${met} of ${app.length} expected actions met</h1>
+    <div class="row between"><div><p class="eyebrow">Debrief · ${esc(SC.title)}</p>${SC.source ? `<p class="small muted" style="margin:0 0 4px">From: ${esc(SC.source)}</p>` : ''}<h1 class="h1">${met} of ${app.length} expected actions met</h1>
       <div class="muted">${esc(S.student)} · ${S.mode === 'test' ? 'Test yourself' : 'Learn'} mode · ${S.role === 'PN' ? 'practical nurse' : 'RN'} · shift ended at ${hm(S.ended)}</div></div>
       <div class="row-s"><button class="btn ghost" type="button" data-act="census">Back to the unit</button><button class="btn ghost" type="button" data-act="openReport">Shift report with debrief</button><button class="btn" type="button" data-act="resetAsk">Try another scenario</button></div></div>
     <div class="card"><div class="body stack-s"><div class="meter" role="img" aria-label="${pct}% met"><span style="width:${pct}%"></span></div>
@@ -4380,15 +4376,14 @@ function saveProgress() { try { const all = debriefAll(), app = all.filter(r => 
 const ACT = {
   closeModal, census() { ui.view = 'census'; ui.pid = null; render(); },
   setMode(el) { ui.name = val('stuName') || ui.name; ui.mode = el.dataset.v; render(); },
-  setRole(el) { ui.name = val('stuName') || ui.name; ui.role = el.dataset.v; ui.roleSet = true; render(); },
   openBrief(el) { const n = val('stuName'); if (!n) { $('#stuName').focus(); return toast('Enter your name first.'); } ui.name = n; ui.briefId = el.dataset.id; ui.view = 'brief'; render(); window.scrollTo({ top: 0 }); },
   toStart() { ui.view = 'start'; ui.unit = null; render(); window.scrollTo({ top: 0 }); },
-  openUnit(el) { ui.unit = el.dataset.u; if (!ui.roleSet) ui.role = UNITS[ui.unit].role; ui.view = 'unit'; render(); window.scrollTo({ top: 0 }); },
+  openUnit(el) { ui.unit = el.dataset.u; ui.role = UNITS[ui.unit].role; ui.view = 'unit'; render(); window.scrollTo({ top: 0 }); },
   toUnit() { ui.name = $('#stuName') ? (val('stuName') || ui.name) : ui.name; ui.view = ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
   showGcdPage() { ui.view = 'gcdinfo'; render(); window.scrollTo({ top: 0 }); },
   showVerify() { ui.view = 'verify'; render(); window.scrollTo({ top: 0 }); },
-  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', ui.role || 'RN'); ui.view = 'census'; render(); window.scrollTo({ top: 0 }); },
-  showBrief() { modal(esc(SC.title) + ' — directions', briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
+  startScenario(el) { newShift(ui.name || 'Student', el.dataset.id, ui.mode || 'learn', roleFor(el.dataset.id)); ui.view = 'census'; render(); window.scrollTo({ top: 0 }); },
+  showBrief() { modal(esc(openTitle(SC)) + ' — directions', briefHTML(SC, true), `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
   toggleStrip() { S.flags.briefHidden = !(S.flags.briefHidden !== false); save(); render(); },
   gcdInfo(el) { const g = el.dataset.g; if (S && ui.view === 'chart' && ui.pid && S.flags[ui.pid + '-gcd'] == null) { S.flags[ui.pid + '-gcd'] = now(); L(ui.pid, 'view', 'Checked goals of care designation'); } modal(g ? `Goals of care: ${g}` : 'Goals of care not documented', `${g ? `<div class="alertbox"><b>${g} — ${GCD[g].approach} care.</b> ${esc(GCD[g].text)}</div>` : '<div class="alertbox warn">No goals of care designation has been ordered. Find out what the patient wants and make sure the prescriber has the conversation.</div>'}<p class="small">${GCD_INTRO}</p>${gcdTable(g)}<p class="small muted">${GCD_SOURCE}</p>`, `<button class="btn" type="button" data-act="closeModal">Close</button>`, true); },
   pauseToggle() { if (!S) return; setClock(now(), !S.clock.running); L(null, 'clock', S.clock.running ? 'Clock resumed' : 'Clock paused'); render(); },
@@ -4602,7 +4597,7 @@ const ACT = {
   },
 
   resetAsk() {
-    modal('Start a different scenario?', `<div class="alertbox crit">This erases <b>this shift</b> from this browser: all charting, messages and your debrief for ${esc(SC.title)}. It cannot be undone.</div>
+    modal('Start a different scenario?', `<div class="alertbox crit">This erases <b>this shift</b> from this browser: all charting, messages and your debrief for ${esc(openTitle(SC))}. It cannot be undone.</div>
       <p class="small">If you need your work, open <b>My shift report</b> and save it as a PDF first.</p>
       <div class="field"><label for="resetWord">Type <b>clear</b> to confirm</label><input class="input mono" id="resetWord" autocomplete="off" autocapitalize="off" spellcheck="false"></div>`,
       `<button class="btn ghost" type="button" data-act="closeModal">Keep my work</button><button class="btn danger" type="button" id="resetGo" data-act="resetYes" disabled>Erase and choose again</button>`);
