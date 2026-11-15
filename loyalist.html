@@ -395,6 +395,34 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 :root[data-theme="dark"] .logo.lc-word{background:#FFFFFF;border-radius:6px;padding:4px 8px;border-right:0;margin-right:6px}
 @media (max-width:600px){.logo.lc-word{height:22px;padding-right:10px}.ls-logo{width:160px;padding:10px 12px}.lobby-sign{flex-direction:column;align-items:flex-start;gap:12px}}
 
+/* ---- wristbands and medication codes ---- */
+.bandlist{display:grid;gap:12px}
+.band{display:flex;align-items:center;gap:16px;border:2px solid var(--ink);border-radius:999px 14px 14px 999px;padding:10px 24px 10px 16px;background:#FFFFFF;color:#111111;max-width:580px;break-inside:avoid}
+.band svg,.medlabel svg{flex:none;background:#FFFFFF}
+.bandtxt{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;font-size:15px;min-width:0;overflow-wrap:anywhere}.bandtxt b{font-size:19px}
+.band small,.medlabel small{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#5A5A5A}
+.labeltools{margin-bottom:14px;align-items:center}
+.labeltools .input{flex:1 1 220px;max-width:340px}
+.labelgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.medlabel{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:8px;padding:10px;background:#FFFFFF;color:#111111;break-inside:avoid}
+.medlabel[hidden]{display:none}
+.medlabel > div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;min-width:0;flex:1 1 auto;overflow-wrap:anywhere}.medlabel b{font-size:15px;line-height:1.25}.medlabel span{font-size:13.5px;line-height:1.3;color:#444444}
+.sccard .sclabels{margin-top:8px}.sccard .sclabels::after{display:none}
+.briefgo{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+@media print{.labels .card{border:0;box-shadow:none}.labels .card > h3{border:0;padding-left:0}.labels .card .body{padding:6px 0}.labelgrid{grid-template-columns:repeat(3,1fr);gap:6px}.medlabel{padding:6px;gap:8px}.labels .h1{font-size:20px}}
+/* ---- links as buttons ---- */
+.linkbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:6px 14px;background:var(--surface);border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700;font-size:14.5px;line-height:1.25;text-decoration:none;text-align:center;justify-self:start;align-self:center;transition:background .15s,border-color .15s}
+.linkbtn:hover{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.linkbtn:active{transform:translateY(1px)}
+.panel > .linkbtn,.start > .linkbtn{justify-self:start;align-self:start}
+.task .linkbtn{justify-content:flex-start;text-align:left;font-weight:600;white-space:normal}
+.small .linkbtn,.card h3 .linkbtn,.noteitem .linkbtn,.notice .linkbtn{min-height:34px;padding:4px 12px;font-size:13.5px}
+.small .linkbtn{margin:2px 3px;vertical-align:middle}
+.card h3 .linkbtn{font-family:var(--f-ui)}
+.homelink{background:var(--bar);border:1.5px solid var(--bar-ink);color:var(--bar-ink);border-radius:6px;padding:5px 12px;font-size:14px;font-weight:700;text-decoration:none}
+.homelink:hover{background:var(--bar-ink);border-color:var(--bar-ink);color:var(--bar)}
+@media (pointer:coarse){.linkbtn,.small .linkbtn,.card h3 .linkbtn,.noteitem .linkbtn,.notice .linkbtn,.homelink{min-height:44px}.linkbtn{padding:8px 16px}.homelink{padding:5px 14px;display:inline-flex;align-items:center}}
+@media print{.linkbtn{display:none!important}}
 /* ---- touch devices (iPad) ---- */
 .scanbig{padding:11px 18px;font-size:15px;white-space:nowrap}
 .scanform .input{min-width:120px}
@@ -486,6 +514,21 @@ label.chk:has(input:focus-visible){outline:2px solid var(--accent);outline-offse
 select.input{-webkit-appearance:none;appearance:none;min-height:44px;padding:8px 38px 8px 12px;border:1.5px solid var(--line);border-radius:8px;background-color:var(--surface);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1.5 1.5 7 7l5.5-5.5' fill='none' stroke='%2334597F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;box-shadow:0 1px 0 rgba(31,58,61,.08);font-weight:600;color:var(--ink);cursor:pointer}
 select.input:hover{border-color:var(--accent)}
 select.input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+/* floor 1: information buttons, styled like the Go to buttons */
+.groundrow .gbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:10px 18px;font-size:15px;text-align:center;box-shadow:0 2px 0 rgba(31,58,61,.12);-webkit-tap-highlight-color:transparent}
+.groundrow .gbtn::after{content:"";flex:none;width:8px;height:8px;border-right:2.5px solid currentColor;border-top:2.5px solid currentColor;transform:rotate(45deg)}
+.groundrow .gbtn:active{transform:translateY(2px);box-shadow:none}
+.ground .groundrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:8px 10px;align-content:center}
+.ground .groundrow > span{grid-column:1/-1}
+.groundrow .gbtn{width:100%}
+/* floor 1: ICU (coming soon) above the information buttons */
+.floorunits.f1{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.unittile.soon{cursor:default;border-top-color:var(--line);border-top-style:solid;box-shadow:none;background:var(--sunk)}
+.unittile.soon .ut-code,.unittile.soon .ut-cohort,.unittile.soon .ut-svc{color:var(--muted)}
+.unittile.soon:hover{transform:none;box-shadow:none;border-left-color:var(--line);border-right-color:var(--line);border-bottom-color:var(--line)}
+.unittile.soon:active{transform:none}
+.unittile.soon .ut-go,.unittile.soon:hover .ut-go{background:transparent;border:1.5px dashed var(--muted);color:var(--muted);box-shadow:none}
+.unittile.soon .ut-go::after{display:none}
 /* mode toggle switch (Learn | Test yourself) */
 .modeswitch{display:flex;align-items:center;gap:4px;min-height:44px}
 .ms-lbl{background:none;border:0;padding:8px 6px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;min-height:44px;-webkit-tap-highlight-color:transparent;transition:color .15s}
@@ -3658,8 +3701,8 @@ function render() {
   $('#clockState').hidden = !S || S.clock.running;
   renderNotices();
   const app = $('#app');
-  let v = ui.view; if (!S && !['start', 'unit', 'brief', 'verify', 'gcdinfo'].includes(v)) v = 'start'; if (S && ['start', 'unit', 'brief'].includes(v)) v = 'census';
-  app.innerHTML = ({ start: viewStart, unit: viewUnit, brief: viewBrief, verify: viewVerify, gcdinfo: viewGcdInfo, census: viewCensus, chart: viewChart, report: viewReport, debrief: viewDebrief })[v]();
+  let v = ui.view; if (!S && !['start', 'unit', 'brief', 'labels', 'verify', 'gcdinfo'].includes(v)) v = 'start'; if (S && ['start', 'unit', 'brief'].includes(v)) v = 'census';
+  app.innerHTML = ({ start: viewStart, unit: viewUnit, brief: viewBrief, labels: viewLabels, verify: viewVerify, gcdinfo: viewGcdInfo, census: viewCensus, chart: viewChart, report: viewReport, debrief: viewDebrief })[v]();
   if (v === 'chart') afterChart();
 }
 function renderNotices() {
@@ -3689,7 +3732,7 @@ function viewCensus() {
   }).join('');
   return `<section class="wrap panel">
     <div class="row between"><div><h1 class="h1">${esc(UNIT.name)}</h1><div class="muted">${esc(openTitle(SC))} · ${S.assigned.length} patient${S.assigned.length > 1 ? 's' : ''} assigned to ${esc(S.student)} · ${S.mode === 'test' ? 'Test yourself' : 'Learn'} mode</div></div>
-      <div class="row-s"><button class="btn ghost" type="button" data-act="showBrief">Scenario directions</button><button class="btn ghost" type="button" data-act="openReport">My shift report</button><button class="btn" type="button" data-act="endAsk">${S.ended ? 'View debrief' : 'End shift and debrief'}</button></div></div>
+      <div class="row-s"><button class="btn ghost" type="button" data-act="showBrief">Scenario directions</button><button class="btn ghost" type="button" data-act="openLabels">Wristband and medication codes</button><button class="btn ghost" type="button" data-act="openReport">My shift report</button><button class="btn" type="button" data-act="endAsk">${S.ended ? 'View debrief' : 'End shift and debrief'}</button></div></div>
     <div class="card"><div class="scroll"><table class="census"><thead><tr><th>Room</th><th>Patient</th><th>Diagnosis</th><th>GCD</th><th>Alerts</th><th>NEWS2</th><th>Tasks</th><th>New</th></tr></thead><tbody>${rows}</tbody></table></div></div>
     <div class="card"><h3>My worklist</h3><div class="body">${S.assigned.map(id => { const p = P(id); const tk = tasks(p).filter(x => x.st !== 'upcoming'); return `<div class="wl"><div class="wlhead"><span class="room mono">${p.room}</span> <b>${esc(p.name)}</b></div>${tk.length ? `<ul class="tasklist">${tk.map(x => taskLi(x, id)).join('')}</ul>` : '<div class="muted small">Nothing due right now.</div>'}</div>`; }).join('')}</div></div>
     <div class="row end muted small">Shift ID <span class="mono">${esc(S.shiftId)}</span> · Done with this scenario? <button type="button" class="linkbtn" data-act="resetAsk">Start a different scenario</button></div>
@@ -4157,7 +4200,8 @@ function viewStart() {
     <div class="lobby"><div class="lobby-sign"><img class="ls-logo" src="data:image/png;base64,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" alt="Loyalist"><div><p class="eyebrow">Loyalist College · Nursing simulation</p><h1>College Hospital</h1><p class="ls-sub">Nursing simulation electronic health record · BScN and Practical Nursing</p><div class="lc-dots" aria-hidden="true"><i style="background:#EB1946"></i><i style="background:#0071BB"></i><i style="background:#FFFFFF"></i></div></div></div></div>
     <div class="directory" aria-label="Floor directory">
       ${[5, 4].map(f => `<div class="floor"><div class="floornum"><span>Floor</span><b>${f}</b></div><div class="floorunits f${f}">${floor(f).map(unitTile).join('')}</div></div>`).join('')}
-      <div class="floor ground"><div class="floornum"><span>Floor</span><b>1</b></div><div class="groundrow"><span>Main entrance · Information</span><button type="button" class="linkbtn" data-act="showGcdPage">What do R1, M1 and C1 mean? (goals of care)</button><button type="button" class="linkbtn" data-act="showVerify">Instructors: verify a student’s report</button></div></div>
+      <div class="floor icu"><div class="floornum"><span>Floor</span><b>1</b></div><div class="floorunits f1"><div class="unittile soon" aria-disabled="true"><span class="ut-code">ICU</span><span class="ut-cohort">Intensive Care Unit</span><span class="ut-svc">Critical care</span><span class="btn ut-go">Coming soon</span></div></div></div>
+      <div class="floor ground"><div class="floornum" aria-label="Main floor"><span>Main</span><b>M</b></div><div class="groundrow"><span>Main entrance · Information</span><button type="button" class="btn gbtn" data-act="showGcdPage">What do R1, M1 and C1 mean? (goals of care)</button><button type="button" class="btn gbtn" data-act="showVerify">Instructors: verify a student’s report</button></div></div>
     </div>
     <div class="card"><h3>How the simulator works</h3><div class="body"><p class="muted" style="margin:0 0 10px">Take the elevator to your unit. Each unit is staffed by one cohort and holds the simulations from your courses, rebuilt as short shifts in an electronic health record that runs on a real clock.</p><ul class="tips">
       <li><b>The clock runs in real time</b> from the start of the shift. Use <b>Pause</b> when you need to stop, and <b>Skip ahead</b> to jump to the next event instead of waiting for it. Skipping passes time: finish your reassessments first, because the debrief checks <i>when</i> you did things.</li>
@@ -4194,6 +4238,7 @@ function scCard(sc) {
       <div class="flags">${sc.rooms.filter(r => r[1]).map(([room, id]) => `<span class="ptchip">${room} ${esc(sc.patients[id].name.split(' ')[0])} ${gcdTag(sc.patients[id].gcd)}</span>`).join('')}</div>
       ${b ? `<div class="small best">Your best: <b>${b.met} of ${b.total}</b> (${b.mode === 'test' ? 'Test yourself' : 'Learn'})</div>` : ''}
       <div class="row-s"><button class="btn" type="button" data-act="openBrief" data-id="${sc.id}">Read the directions</button></div>
+      <button class="btn ghost sclabels" type="button" data-act="openLabels" data-id="${sc.id}">Wristband and medication codes</button>
     </article>`;
 }
 
@@ -4216,8 +4261,44 @@ function viewBrief() {
     <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">← ${ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>
     <div><p class="eyebrow">${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min</p><h1 class="h1">${esc(openTitle(sc))}</h1></div>
     <div class="card"><div class="body">${briefHTML(sc, false)}</div></div>
-    <div class="card"><div class="body row between"><div class="small muted">Mode: <b>${(ui.mode || 'learn') === 'test' ? 'Test yourself' : 'Learn'}</b> · <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">change</button></div>
-      <button class="btn" type="button" data-act="startScenario" data-id="${sc.id}">Start the shift</button></div></div>
+    <div class="card"><div class="body row between"><div class="small muted">Mode: <b>${(ui.mode || 'learn') === 'test' ? 'Test yourself' : 'Learn'}</b> · <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">Change</button></div>
+      <div class="briefgo"><button class="btn ghost" type="button" data-act="openLabels" data-id="${sc.id}">Wristband and medication codes</button><button class="btn" type="button" data-act="startScenario" data-id="${sc.id}">Start the shift</button></div></div></div>
+  </section>`;
+}
+/* ---- wristbands and medication codes: one page per simulation, to print or to scan from a second screen ---- */
+const scMeds = sc => {
+  const out = [], add = o => { if (o && o.med && o.med.code && o.med.stock) out.push(o.med); };
+  Object.values(sc.patients).forEach(p => p.orders.forEach(add));
+  Object.values(sc.replies || {}).forEach(rs => rs.forEach(r => { try { (typeof r.orders === 'function' ? r.orders(0) : r.orders || []).forEach(add); } catch (e) { } }));
+  Object.entries(sc.extraCodes || {}).forEach(([code, m]) => out.push({ ...m, code }));
+  return out;
+};
+const MEDROOM = {};
+/* every medication stocked anywhere in the hospital, by scan code */
+function medRoom() { if (!Object.keys(MEDROOM).length) scList().forEach(sc => scMeds(sc).forEach(m => { if (!MEDROOM[m.code]) MEDROOM[m.code] = { name: m.name, stock: m.stock, code: m.code }; })); return MEDROOM; }
+const qrFor = (text, px, label) => qrSVG(text, px).replace(/aria-label="[^"]*"/, `aria-label="${esc(label)}"`);
+function viewLabels() {
+  const sc = SCN[ui.labelsId]; if (!sc) { ui.view = S ? 'census' : 'start'; return S ? viewCensus() : viewStart(); }
+  const pts = sc.rooms.filter(r => r[1]).map(r => sc.patients[r[1]]);
+  const mine = new Set(scMeds(sc).map(m => m.code)), all = Object.values(medRoom()).sort((a, b) => (a.name + ' ' + a.stock).localeCompare(b.name + ' ' + b.stock, 'en', { sensitivity: 'base', numeric: true }));
+  const only = !!ui.labelsOnly, list = only ? all.filter(m => mine.has(m.code)) : all;
+  const back = S ? `<button type="button" class="linkbtn noprint" data-act="census">← Back to the unit</button>` : `<button type="button" class="linkbtn noprint" data-act="labelsBack">← ${ui.labelsFrom === 'brief' ? 'Directions' : ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>`;
+  return `<section class="wrap panel labels">
+    ${back}
+    <div class="row between"><div><p class="eyebrow">${esc(sc.unit.name)}</p><h1 class="h1">Wristbands and medication codes</h1><p class="muted">${esc(openTitle(sc))}</p></div>
+      <button class="btn noprint" type="button" data-act="printLabels">Print this page</button></div>
+    <div class="card noprint"><div class="body"><ul class="tips">
+      <li><b>On paper:</b> print this page and cut out the wristband and the labels you need.</li>
+      <li><b>On a second screen:</b> open this page on a phone or another tablet and hold it up to the camera of the device you are charting on.</li>
+      <li><b>To scan:</b> open the patient’s <b>MAR</b>, then select <b>Scan QR code</b> for the camera or use a handheld scanner.</li>
+    </ul></div></div>
+    <div class="card"><h3>Patient wristband${pts.length > 1 ? 's' : ''}</h3><div class="body bandlist">${pts.map(p => `<div class="band">${qrFor('PT' + p.mrn, 112, 'Wristband QR code for ' + p.name)}<div class="bandtxt"><b>${esc(p.name)}</b><span>Born ${esc(p.dob)} · ${p.age} y · ${esc(p.sex)}</span><span>MRN ${esc(p.mrn)} · Rm ${esc(p.room)}</span><span>Allergies: ${p.allergies.length ? esc(p.allergies.map(a => a.agent).join(', ')) : 'none known'}</span><small>Sim · training use only</small></div></div>`).join('')}</div></div>
+    <div class="card"><h3>Medication room <span class="note">${list.length} item${list.length === 1 ? '' : 's'}, A to Z</span></h3><div class="body">
+      <div class="row-s labeltools noprint"><div class="seg" role="group" aria-label="Which medications to show"><button type="button" data-act="setLabelsOnly" data-v="0" aria-pressed="${!only}">Whole medication room</button><button type="button" data-act="setLabelsOnly" data-v="1" aria-pressed="${only}">This simulation only</button></div>
+        <label for="labelFilter" class="sr">Find a medication</label><input class="input" id="labelFilter" type="search" autocomplete="off" placeholder="Find a medication"></div>
+      <p class="small muted noprint">${only ? 'For setting up props: this list includes medications that are only ordered partway through the simulation.' : 'Everything stocked in the hospital, so you have to pick the right drug and strength, as you would at a medication cart.'}</p>
+      ${list.length ? '' : '<p class="muted">No medications are ordered in this simulation.</p>'}<div class="labelgrid" id="labelGrid">${list.map(m => `<div class="medlabel" data-name="${esc((m.stock + ' ' + m.name).toLowerCase())}">${qrFor(m.code, 104, 'QR code for ' + m.stock)}<div><b>${esc(m.name)}</b><span>${esc(m.stock)}</span><small>Sim · training use only</small></div></div>`).join('')}</div>
+    </div></div>
   </section>`;
 }
 function briefStrip() {
@@ -4435,6 +4516,10 @@ const ACT = {
   setMode(el) { ui.name = val('stuName') || ui.name; ui.mode = el.dataset.v; render(); },
   openBrief(el) { const n = val('stuName'); if (!n) { $('#stuName').focus(); return toast('Enter your name first.'); } ui.name = n; ui.briefId = el.dataset.id; ui.view = 'brief'; render(); window.scrollTo({ top: 0 }); },
   toStart() { ui.view = 'start'; ui.unit = null; render(); window.scrollTo({ top: 0 }); },
+  openLabels(el) { if ($('#stuName')) ui.name = val('stuName') || ui.name; ui.labelsId = el.dataset.id || (S && S.scenario); ui.labelsFrom = ui.view; ui.view = 'labels'; render(); window.scrollTo({ top: 0 }); },
+  labelsBack() { ui.view = ui.labelsFrom === 'brief' ? 'brief' : ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
+  setLabelsOnly(el) { ui.labelsOnly = el.dataset.v === '1'; render(); },
+  printLabels() { window.print(); },
   openUnit(el) { ui.unit = el.dataset.u; ui.role = UNITS[ui.unit].role; ui.view = 'unit'; render(); window.scrollTo({ top: 0 }); },
   toUnit() { ui.name = $('#stuName') ? (val('stuName') || ui.name) : ui.name; ui.view = ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
   showGcdPage() { ui.view = 'gcdinfo'; render(); window.scrollTo({ top: 0 }); },
@@ -4714,7 +4799,7 @@ function mdScan(raw) {
     else if (owner.id !== p.id) { if (on) msg('crit', `<b>Wrong patient.</b> This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are documenting for ${esc(p.name)}.`); }
     else p.scan.band = true;
   } else {
-    const any = Object.values(S.pts).flatMap(x => x.orders).find(x => x.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
+    const any = Object.values(S.pts).flatMap(x => x.orders).find(x => x.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null) || (medRoom()[code] ? { med: medRoom()[code] } : null);
     L(p.id, 'scan', any ? `Scanned ${any.med.stock}` : 'Unrecognized code ' + raw);
     const al = any && allergyHit(p, any.med.name);
     if (!any) msg('warn', `“${esc(raw)}” is not a medication or wristband on this unit.`);
@@ -4733,7 +4818,7 @@ function doScan(raw, onscreen) {
     if (owner.id !== p.id) { render(); return S.settings.alerts ? info('Wrong patient', `This wristband belongs to ${esc(owner.name)} (Rm ${owner.room}). You are charting on ${esc(p.name)}.`, 'crit') : toast('Wristband scanned'); }
     p.scan.band = true; render(); return toast('Patient verified: ' + p.name);
   }
-  const mine = medOrders(p).find(o => o.med.code === code), any = Object.values(S.pts).flatMap(x => x.orders).find(o => o.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null);
+  const mine = medOrders(p).find(o => o.med.code === code), any = Object.values(S.pts).flatMap(x => x.orders).find(o => o.med?.code === code) || (SC.extraCodes?.[code] ? { med: SC.extraCodes[code] } : null) || (medRoom()[code] ? { med: medRoom()[code] } : null);
   if (!any) { L(p.id, 'scan', 'Unrecognized code ' + raw); render(); return info('Code not recognized', `“${esc(raw)}” is not a medication or wristband on this unit.`, 'warn'); }
   if (!p.scan.meds.includes(code)) p.scan.meds.push(code);
   L(p.id, 'scan', `Scanned ${any.med.stock}${how}`); render();
@@ -4749,6 +4834,9 @@ function doScan(raw, onscreen) {
 document.addEventListener('click', e => {
   const el = e.target.closest('[data-act]'); if (!el || el.tagName === 'FORM') return;
   const fn = ACT[el.dataset.act]; if (fn) { e.preventDefault(); fn(el, e); }
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'labelFilter') { const q = e.target.value.trim().toLowerCase(); $$('#labelGrid .medlabel').forEach(el => { el.hidden = !!q && !el.dataset.name.includes(q); }); }
 });
 document.addEventListener('submit', e => {
   if (e.target.closest('[data-act="scanSubmit"]')) { e.preventDefault(); const v = val('scanIn'); if (v) doScan(v, false); }
