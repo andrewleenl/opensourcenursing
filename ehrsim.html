@@ -2574,6 +2574,98 @@ const MEDROOM = {};
 /* every medication stocked anywhere in the hospital, by scan code */
 function medRoom() { if (!Object.keys(MEDROOM).length) scList().forEach(sc => scMeds(sc).forEach(m => { if (!MEDROOM[m.code]) MEDROOM[m.code] = { name: m.name, stock: m.stock, code: m.code }; })); return MEDROOM; }
 const qrFor = (text, px, label) => qrSVG(text, px).replace(/aria-label="[^"]*"/, `aria-label="${esc(label)}"`);
+/* ---- labels as a PDF: on an iPad or iPhone a web app often cannot open the print dialog, so the labels are handed to the share sheet as a PDF ---- */
+const PDF_H = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
+const PDF_HB = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
+const PDF_MAP = { 0x2019: 0x92, 0x2018: 0x91, 0x201C: 0x93, 0x201D: 0x94, 0x2013: 0x96, 0x2014: 0x97, 0x2022: 0x95, 0x2026: 0x85, 0x20AC: 0x80, 0x2122: 0x99, 0x03BC: 0xB5 };
+/* text -> WinAnsi character codes (the encoding of the PDF's built-in Helvetica) */
+function pdfCodes(str) {
+  const out = [];
+  for (const ch of String(str == null ? '' : str).replace(/[₀-₉]/g, d => String(d.charCodeAt(0) - 0x2080)).replace(/[⁰⁴-⁹]/g, d => String(d.charCodeAt(0) - 0x2070)).replace(/≥/g, '>=').replace(/≤/g, '<=').replace(/→/g, '->').replace(/[   \s]+/g, ' ')) { const c = ch.codePointAt(0); out.push(c >= 32 && c < 256 ? c : PDF_MAP[c] || 63); }
+  return out;
+}
+const pdfWidth = (codes, size, bold) => codes.reduce((w, c) => w + (c >= 32 && c <= 126 ? (bold ? PDF_HB : PDF_H)[c - 32] : 556), 0) * size / 1000;
+function pdfWrap(str, size, bold, maxW, maxLines) {
+  const words = String(str == null ? '' : str).split(/[   \s]+/).filter(Boolean).map(pdfCodes), lines = []; let cur = [];
+  for (let w of words) {
+    while (pdfWidth(w, size, bold) > maxW) { let k = w.length; while (k > 1 && pdfWidth(w.slice(0, k), size, bold) > maxW) k--; if (cur.length) { lines.push(cur); cur = []; } lines.push(w.slice(0, k)); w = w.slice(k); }
+    const t = cur.length ? cur.concat([32], w) : w;
+    if (pdfWidth(t, size, bold) <= maxW) cur = t; else { lines.push(cur); cur = w; }
+  }
+  if (cur.length) lines.push(cur);
+  if (lines.length > maxLines) { const last = lines[maxLines - 1]; while (last.length && pdfWidth(last.concat([0x85]), size, bold) > maxW) last.pop(); last.push(0x85); lines.length = maxLines; }
+  return lines;
+}
+const pdfN = v => String(Math.round(v * 100) / 100);
+const pdfText = (codes, x, y, size, bold, grey) => `BT ${grey == null ? 0 : grey} g /F${bold ? 2 : 1} ${size} Tf ${pdfN(x)} ${pdfN(792 - y)} Td <${codes.map(c => c.toString(16).padStart(2, '0')).join('')}> Tj ET\n`;
+function pdfQR(text, x, y, size) {
+  const q = qrcode(0, 'M'); q.addData(text); q.make(); const n = q.getModuleCount(), u = size / n; let s = `q ${pdfN(u)} 0 0 ${pdfN(-u)} ${pdfN(x)} ${pdfN(792 - y)} cm 0 g\n`;
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) { if (!q.isDark(r, c)) continue; let e = c; while (e < n && q.isDark(r, e)) e++; s += `${c} ${r} ${pdfN(e - c + .04)} 1.04 re\n`; c = e; }
+  return s + 'f Q\n';
+}
+/* builds the PDF; returns { bytes, pages, codes } */
+function buildLabelsPDF(sc, only, filter) {
+  const M = 36, W = 612 - M * 2, pages = []; let s = '', y = M; const codes = [];
+  const newPage = () => { if (s) pages.push(s); s = ''; y = M; }, need = h => { if (y + h > 792 - M - 14) newPage(); };
+  const line = (str, size, bold, grey, x, gap) => { s += pdfText(pdfCodes(str), x == null ? M : x, y + size, size, bold, grey); y += size + (gap == null ? 4 : gap); };
+  const pts = sc.rooms.filter(r => r[1]).map(r => sc.patients[r[1]]);
+  const mine = new Set(scMeds(sc).map(m => m.code)), q = String(filter || '').trim().toLowerCase();
+  const meds = Object.values(medRoom()).sort((a, b) => (a.name + ' ' + a.stock).localeCompare(b.name + ' ' + b.stock, 'en', { sensitivity: 'base', numeric: true }))
+    .filter(m => (!only || mine.has(m.code)) && (!q || (m.stock + ' ' + m.name).toLowerCase().includes(q)));
+  line(String(sc.unit.name).toUpperCase(), 8, true, .4, M, 6); line('Wristbands and medication codes', 17, true, 0, M, 6); pdfWrap(openTitle(sc), 10.5, false, W, 2).forEach(l => { s += pdfText(l, M, y + 10.5, 10.5, false, .25); y += 14; }); y += 10;
+  line(pts.length > 1 ? 'Patient wristbands' : 'Patient wristband', 11.5, true, 0, M, 8);
+  pts.forEach(p => {
+    const bw = 430, bh = 104; need(bh + 10); s += `0.2 G 1.2 w ${M} ${pdfN(792 - y - bh)} ${bw} ${bh} re S\n` + pdfQR('PT' + p.mrn, M + 12, y + 12, 80); codes.push('PT' + p.mrn);
+    const tx = M + 108, tw = bw - 108 - 12; let ty = y + 14;
+    const put = (str, size, bold, grey, max) => pdfWrap(str, size, bold, tw, max || 1).forEach(l => { s += pdfText(l, tx, ty + size, size, bold, grey); ty += size + 4; });
+    put(p.name, 14, true, 0); ty += 2; put(`Born ${p.dob} · ${p.age} y · ${p.sex}`, 9.5, false, 0); put(`MRN ${p.mrn} · Rm ${p.room}`, 9.5, false, 0);
+    put('Allergies: ' + (p.allergies.length ? p.allergies.map(a => a.agent).join(', ') : 'none known'), 9.5, false, 0, 2); s += pdfText(pdfCodes('SIM · TRAINING USE ONLY'), tx, y + bh - 9, 6.5, false, .4); y += bh + 10;
+  });
+  y += 8; need(11.5 + 8 + 74);
+  line(`${only ? 'Medications in this simulation' : 'Medication room'}  –  ${meds.length} item${meds.length === 1 ? '' : 's'}, A to Z`, 11.5, true, 0, M, 8);
+  if (!meds.length) line(q ? 'No medications match the search.' : 'No medications are ordered in this simulation.', 10, false, .3);
+  const cols = 3, gap = 8, cw = (W - gap * (cols - 1)) / cols, ch = 74;
+  meds.forEach((m, i) => {
+    const col = i % cols; if (col === 0) need(ch + gap);
+    const x = M + col * (cw + gap), tx = x + 70, tw = cw - 70 - 6; let ty = y + 9;
+    s += `0.6 G 0.6 w ${pdfN(x)} ${pdfN(792 - y - ch)} ${pdfN(cw)} ${ch} re S\n` + pdfQR(m.code, x + 8, y + 9, 56); codes.push(m.code);
+    pdfWrap(m.name, 8.5, true, tw, 2).forEach(l => { s += pdfText(l, tx, ty + 8.5, 8.5, true, 0); ty += 10.5; });
+    pdfWrap(m.stock, 7.5, false, tw, 3).forEach(l => { s += pdfText(l, tx, ty + 7.5, 7.5, false, .2); ty += 9.5; });
+    s += pdfText(pdfCodes('SIM · TRAINING USE ONLY'), tx, y + ch - 6, 5.5, false, .45);
+    if (col === cols - 1 || i === meds.length - 1) y += ch + gap;
+  });
+  newPage();
+  const objs = ['<< /Type /Catalog /Pages 2 0 R >>', '', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'], kids = [];
+  pages.forEach((c, i) => {
+    c += pdfText(pdfCodes(`EHR Simulator · simulation props for training, not for clinical use · Page ${i + 1} of ${pages.length}`), M, 792 - M + 8, 7, false, .45);
+    objs.push(`<< /Length ${c.length} >>\nstream\n${c}\nendstream`); const cid = objs.length;
+    objs.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${cid} 0 R >>`); kids.push(objs.length + ' 0 R');
+  });
+  objs[1] = `<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${kids.length} >>`;
+  let out = '%PDF-1.4\n'; const offs = [];
+  objs.forEach((o, i) => { offs.push(out.length); out += `${i + 1} 0 obj\n${o}\nendobj\n`; });
+  const xref = out.length;
+  out += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n${offs.map(o => String(o).padStart(10, '0') + ' 00000 n \n').join('')}trailer\n<< /Size ${objs.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  const bytes = new Uint8Array(out.length); for (let i = 0; i < out.length; i++) bytes[i] = out.charCodeAt(i) & 255;
+  return { bytes, pages: pages.length, codes };
+}
+const ON_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+/* hands the labels PDF to the share sheet (Print, Save to Files, AirDrop), or downloads it where there is no share sheet */
+async function labelsPDF() {
+  const sc = SCN[ui.labelsId]; if (!sc) return;
+  let pdf; try { pdf = buildLabelsPDF(sc, !!ui.labelsOnly, $('#labelFilter') ? $('#labelFilter').value : ''); } catch (e) { toast('The labels PDF could not be made.'); return; }
+  const name = `Labels - ${String(sc.unit.name).split(' — ')[0]} - ${openTitle(sc)}`.replace(/[^\w\s.-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 90) + '.pdf';
+  const file = new File([pdf.bytes], name, { type: 'application/pdf' });
+  const download = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); toast('Labels PDF downloaded'); };
+  try {
+    if (inViewer()) { const dl = await window.claude.use('downloads'); if (dl) { await dl.save({ filename: name, data: file }); return; } }
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: name }); return; }
+    download();
+  } catch (e) {
+    if (e && (e.name === 'AbortError' || e.code === 'declined')) return;
+    try { download(); } catch (e2) { toast('Saving is not available here. Open the simulator in Safari.'); }
+  }
+}
 function viewLabels() {
   const sc = SCN[ui.labelsId]; if (!sc) { ui.view = S ? 'census' : 'start'; return S ? viewCensus() : viewStart(); }
   const pts = sc.rooms.filter(r => r[1]).map(r => sc.patients[r[1]]);
@@ -2583,9 +2675,10 @@ function viewLabels() {
   return `<section class="wrap panel labels">
     ${back}
     <div class="row between"><div><p class="eyebrow">${esc(sc.unit.name)}</p><h1 class="h1">Wristbands and medication codes</h1><p class="muted">${esc(openTitle(sc))}</p></div>
-      <button class="btn noprint" type="button" data-act="printLabels">Print this page</button></div>
+      <div class="row-s noprint"><button class="btn ghost" type="button" data-act="saveLabelsPdf">Save as PDF</button><button class="btn" type="button" data-act="printLabels">Print this page</button></div></div>
     <div class="card noprint"><div class="body"><ul class="tips">
       <li><b>On paper:</b> print this page and cut out the wristband and the labels you need.</li>
+      <li><b>On an iPad or iPhone:</b> <b>Print this page</b> opens the share sheet with the labels as a PDF. Choose <b>Print</b>, or save it to Files.</li>
       <li><b>On a second screen:</b> open this page on a phone or another tablet and hold it up to the camera of the device you are charting on.</li>
       <li><b>To scan:</b> open the patient’s <b>MAR</b>, then select <b>Scan QR code</b> for the camera or use a handheld scanner.</li>
     </ul></div></div>
@@ -2817,7 +2910,8 @@ const ACT = {
   openLabels(el) { if ($('#stuName')) ui.name = val('stuName') || ui.name; ui.labelsId = el.dataset.id || (S && S.scenario); ui.labelsFrom = ui.view; ui.view = 'labels'; render(); window.scrollTo({ top: 0 }); },
   labelsBack() { ui.view = ui.labelsFrom === 'brief' ? 'brief' : ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
   setLabelsOnly(el) { ui.labelsOnly = el.dataset.v === '1'; render(); },
-  printLabels() { window.print(); },
+  printLabels() { if (ON_IOS || inViewer()) return labelsPDF(); try { window.print(); } catch (e) { labelsPDF(); } },
+  saveLabelsPdf() { labelsPDF(); },
   openUnit(el) { ui.unit = el.dataset.u; if (!ui.role) ui.role = 'RN'; ui.view = 'unit'; render(); window.scrollTo({ top: 0 }); },
   toUnit() { ui.name = $('#stuName') ? (val('stuName') || ui.name) : ui.name; ui.view = ui.unit ? 'unit' : 'start'; render(); window.scrollTo({ top: 0 }); },
   showGcdPage() { ui.view = 'gcdinfo'; render(); window.scrollTo({ top: 0 }); },
