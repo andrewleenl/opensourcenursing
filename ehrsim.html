@@ -394,8 +394,9 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 
 /* ---- wristbands and medication codes ---- */
 .bandlist{display:grid;gap:12px}
-.band{display:flex;align-items:center;gap:16px;border:2px solid var(--ink);border-radius:999px 14px 14px 999px;padding:10px 24px 10px 16px;background:#FFFFFF;color:#111111;max-width:580px;break-inside:avoid}
+.band{display:flex;align-items:center;gap:16px;border:2px solid var(--ink);border-radius:999px 14px 14px 999px;padding:12px 28px 12px 52px;background:#FFFFFF;color:#111111;max-width:580px;break-inside:avoid}
 .band svg,.medlabel svg{flex:none;background:#FFFFFF}
+@media (max-width:520px){.band{border-radius:44px 14px 14px 44px;padding:12px 16px 12px 26px;gap:12px}}
 .bandtxt{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;font-size:15px;min-width:0;overflow-wrap:anywhere}.bandtxt b{font-size:19px}
 .band small,.medlabel small{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#5A5A5A}
 .labeltools{margin-bottom:14px;align-items:center}
