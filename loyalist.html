@@ -434,6 +434,9 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 #pwaInstallBtn .lbl{display:none}
 #pwaInstallBtn{min-width:44px;padding-left:10px;padding-right:10px;font-size:17px;line-height:1}
 }
+/* ---- room for the iPhone status bar, so the pinned top bar does not cover the top of the page ---- */
+body{padding-top:env(safe-area-inset-top,0px)}
+@media print{body{padding-top:0}}
 /* ---- touch devices (iPad) ---- */
 .scanbig{padding:11px 18px;font-size:15px;white-space:nowrap}
 .scanform .input{min-width:120px}
