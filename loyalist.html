@@ -435,6 +435,8 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 /* ---- room for the iPhone status bar, so the pinned top bar does not cover the top of the page ---- */
 body{padding-top:env(safe-area-inset-top,0px)}
 @media print{body{padding-top:0}}
+/* ---- back chevron: the forward chevron, mirrored ---- */
+.linkbtn.bk::before{content:"";flex:none;width:8px;height:8px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(45deg);margin:0 2px 0 3px}
 /* ---- touch devices (iPad) ---- */
 .scanbig{padding:11px 18px;font-size:15px;white-space:nowrap}
 .scanform .input{min-width:120px}
@@ -3759,7 +3761,7 @@ function viewChart() {
   const bmi = (p.wt / ((p.ht / 100) ** 2)).toFixed(1);
   return `
   <section class="banner"><div class="wrap bannerin">
-    <button type="button" class="linkbtn back" data-act="census">← Unit</button>
+    <button type="button" class="linkbtn bk back" data-act="census">Unit</button>
     <div class="pname">${esc(p.name)} <span class="pref">“${esc(p.pref)}”</span><span class="sub">${p.age} ${p.sex} · Rm ${p.room} · MRN <span class="mono">${p.mrn}</span> · DOB <span class="mono">${p.dob}</span></span></div>
     <div class="kv"><span class="k">Goals of care</span><span class="v">${gcdPill(p, true)}</span></div>
     <div class="kv"><span class="k">Ht / Wt / BMI</span><span class="v">${p.ht} cm · ${p.wt} kg · ${bmi}</span></div>
@@ -4228,7 +4230,7 @@ function viewUnit() {
   const k = ui.unit, u = UNITS[k]; if (!u) { ui.view = 'start'; return viewStart(); }
   const list = unitList(k).map((sc, i) => (sc.ix = i + 1, sc));
   return `<section class="start wrap">
-    <button type="button" class="linkbtn" data-act="toStart">← Floor directory</button>
+    <button type="button" class="linkbtn bk" data-act="toStart">Floor directory</button>
     <div class="unithead wing-${u.wing.toLowerCase()}"><div class="uh-code">${u.code}</div><div><p class="eyebrow">${esc(u.cohort)} · Floor ${u.floor}, ${u.wing} wing</p><h1 class="h1">${esc(u.service)}</h1><p class="muted">${esc(u.blurb)}</p></div></div>
     ${signInCard()}
     <div class="scgrid">${list.map(sc => scCard(sc)).join('')}</div>
@@ -4268,7 +4270,7 @@ function briefHTML(sc, inShift) {
 function viewBrief() {
   const sc = SCN[ui.briefId]; if (!sc) { ui.view = 'start'; return viewStart(); }
   return `<section class="wrap panel narrow">
-    <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">← ${ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>
+    <button type="button" class="linkbtn bk" data-act="${ui.unit ? 'toUnit' : 'toStart'}">${ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>
     <div><p class="eyebrow">${esc(sc.unit.name)} · starts ${hmClock(sc.unit.shiftStart)} · about ${sc.minutes} min</p><h1 class="h1">${esc(openTitle(sc))}</h1></div>
     <div class="card"><div class="body">${briefHTML(sc, false)}</div></div>
     <div class="card"><div class="body row between"><div class="small muted">Mode: <b>${(ui.mode || 'learn') === 'test' ? 'Test yourself' : 'Learn'}</b> · <button type="button" class="linkbtn" data-act="${ui.unit ? 'toUnit' : 'toStart'}">Change</button></div>
@@ -4384,7 +4386,7 @@ function viewLabels() {
   const pts = sc.rooms.filter(r => r[1]).map(r => sc.patients[r[1]]);
   const mine = new Set(scMeds(sc).map(m => m.code)), all = Object.values(medRoom()).sort((a, b) => (a.name + ' ' + a.stock).localeCompare(b.name + ' ' + b.stock, 'en', { sensitivity: 'base', numeric: true }));
   const only = !!ui.labelsOnly, list = only ? all.filter(m => mine.has(m.code)) : all;
-  const back = S ? `<button type="button" class="linkbtn noprint" data-act="census">← Back to the unit</button>` : `<button type="button" class="linkbtn noprint" data-act="labelsBack">← ${ui.labelsFrom === 'brief' ? 'Directions' : ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>`;
+  const back = S ? `<button type="button" class="linkbtn bk noprint" data-act="census">Back to the unit</button>` : `<button type="button" class="linkbtn bk noprint" data-act="labelsBack">${ui.labelsFrom === 'brief' ? 'Directions' : ui.unit ? UNITS[ui.unit].code : 'Floor directory'}</button>`;
   return `<section class="wrap panel labels">
     ${back}
     <div class="row between"><div><p class="eyebrow">${esc(sc.unit.name)}</p><h1 class="h1">Wristbands and medication codes</h1><p class="muted">${esc(openTitle(sc))}</p></div>
@@ -4409,7 +4411,7 @@ function briefStrip() {
   return `<div class="card brief"><h3>Directions for this shift <span class="spacer"></span><button type="button" class="linkbtn" data-act="toggleStrip">${done ? 'Show' : 'Hide'}</button></h3>${done ? '' : `<div class="body"><ol class="steps compact">${SC.brief.steps.map(s => `<li>${s}</li>`).join('')}</ol><div class="small muted">${SC.brief.finish}</div></div>`}</div>`;
 }
 function viewGcdInfo() {
-  return `<section class="wrap panel narrow"><button type="button" class="linkbtn" data-act="${S ? 'census' : 'toStart'}">← Back</button>
+  return `<section class="wrap panel narrow"><button type="button" class="linkbtn bk" data-act="${S ? 'census' : 'toStart'}">Back</button>
     <h1 class="h1">Goals of care designations</h1><div class="card"><div class="body stack"><p>${GCD_INTRO}</p>${gcdTable()}<p class="small muted">${GCD_SOURCE}</p></div></div></section>`;
 }
 
@@ -4481,7 +4483,7 @@ function debriefReportHTML() {
 function viewVerify() {
   const r = ui.verify, f = r?.f;
   const rows = f ? [['Student', esc(f.name)], ['Shift ID', `<span class="mono">${esc(f.shift)}</span>`], ['Shift started', esc(f.started)], ['Report generated', esc(f.generated)], ['Entries', esc(f.entries)], ['Fingerprint', `<span class="mono">${esc(f.fp)}</span>`], ['Code', `<span class="mono">${esc(f.seal)}</span>`]] : [];
-  return `<section class="wrap panel narrow"><button type="button" class="linkbtn" data-act="${S ? 'census' : 'toStart'}">← Back</button>
+  return `<section class="wrap panel narrow"><button type="button" class="linkbtn bk" data-act="${S ? 'census' : 'toStart'}">Back</button>
     <h1 class="h1">Verify a shift report</h1>
     <div class="card"><div class="body stack">
     <p class="small">Copy the verification line from the bottom of the student’s report (it starts with <span class="mono">ORN1|</span>), or scan its QR code into this box, then select <b>Verify</b>.</p>

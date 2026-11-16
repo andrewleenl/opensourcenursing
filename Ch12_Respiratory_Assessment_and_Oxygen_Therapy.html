@@ -243,6 +243,11 @@ details > summary{width:-moz-fit-content;width:fit-content;max-width:100%;border
 details > summary:hover{background:rgba(127,127,127,.16);background:color-mix(in srgb,currentColor 14%,transparent)}
 @media (pointer:coarse){details > summary{min-height:44px;display:flex;align-items:center;gap:.5rem}details > summary::before{content:"\25B8";flex:none}details[open] > summary::before{content:"\25BE"}details > summary::-webkit-details-marker{display:none}}
 @media print{body a:not([class]):not(:where(nav,header,.toc,#toc,.side,#side,.pager,.portal-nav-row,.cards,.home-grid,.grid-list,.grid-links,.hometiles) *):not(.grid > a),body a.xref,body a.mail{border:0;padding:0;font-weight:inherit;text-decoration:underline}}
+
+/* ==== One arrow: left and right arrows on buttons and links are drawn as the simulator's chevron ==== */
+@font-face{font-family:"OSN Chevron";src:url(data:font/ttf;base64,AAEAAAAKAIAAAwAgT1MvMmpXZ74AAAEoAAAAYGNtYXAhpiHrAAABkAAAADxnbHlm85wkMwAAAdQAAABMaGVhZC+zZ04AAACsAAAANmhoZWEGNgFoAAAA5AAAACRobXR4AqIARgAAAYgAAAAIbG9jYQATACYAAAHMAAAACG1heHAABQAIAAABCAAAACBuYW1lmzjXrgAAAiAAAABscG9zdDkvwRoAAAKMAAAAPQABAAAAAQAAjE08UF8PPPUAAwPoAAAAAOcgEekAAAAA5yAR6QBG/+wCFgKwAAAAAwACAAAAAAAAAAEAAAPY/sQAAAJcAEYARgIWAAEAAAAAAAAAAAAAAAAAAAABAAEAAAADAAYAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAwJcAZAABQAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAPz8/PwAAIZAhkgPY/sQAAAPYATwAAAAAAAAAAAHwApwAAAAgAAACXAAAAEYARgAAAAIAAAADAAAAFAADAAEAAAAUAAQAKAAAAAYABAABAAIhkCGS//8AACGQIZL//95x3nAAAQAAAAAAAAAAAAAAEwAmAAEARv/sAhYCsAAFAAABBxcHAQECFvPzbv6eAWICQfPzbwFiAWIAAQBG/+wCFgKwAAUAABMBASc3J7QBYv6ebvPzArD+nv6eb/PzAAAAAAQANgABAAAAAAABAAsAAAABAAAAAAACAAcACwADAAEECQABABYAEgADAAEECQACAA4AKE9TTiBDaGV2cm9uUmVndWxhcgBPAFMATgAgAEMAaABlAHYAcgBvAG4AUgBlAGcAdQBsAGEAcgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAECAQMJYXJyb3dsZWZ0CmFycm93cmlnaHQAAAA=) format("truetype");font-weight:100 900;font-style:normal;unicode-range:U+2190,U+2192}
+a,button,summary,[role=button]{font-family:"OSN Chevron",var(--osn-font,"Atkinson Hyperlegible Next"),-apple-system,"Segoe UI",Roboto,sans-serif!important}
+.pager a b,.pager a strong{font-family:inherit!important}
 </style>
 </head>
 <body>
