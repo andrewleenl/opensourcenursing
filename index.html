@@ -743,9 +743,6 @@ details > summary:hover{background:rgba(127,127,127,.16);background:color-mix(in
         <span class="sub">Canadian Open Educational Resources for Nursing Education &bull; CC BY-NC-SA 4.0</span>
       </div>
     </button>
-    <div class="main-nav">
-      <button type="button" class="btn outline sm" id="pwaInstallBtn" hidden>&#11015; Install App</button>
-    </div>
   </div>
 </header>
 
@@ -1244,27 +1241,6 @@ details > summary:hover{background:rgba(127,127,127,.16);background:color-mix(in
       navigator.serviceWorker.register('./sw.js').catch(function () {});
     });
   }
-  var deferredPrompt = null;
-  var installBtn = document.getElementById('pwaInstallBtn');
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) installBtn.hidden = false;
-  });
-  if (installBtn) {
-    installBtn.addEventListener('click', function () {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function () {
-        deferredPrompt = null;
-        installBtn.hidden = true;
-      });
-    });
-  }
-  window.addEventListener('appinstalled', function () {
-    deferredPrompt = null;
-    if (installBtn) installBtn.hidden = true;
-  });
 })();
 </script>
 </body>

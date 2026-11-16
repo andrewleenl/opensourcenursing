@@ -431,8 +431,6 @@ table.gcdtab tr.hi td{background:var(--accent-soft);font-weight:600}
 .lobbybar .brandtxt{min-width:0}
 .lobbybar .brandtxt b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lobbybar .barbtn{flex:none}
-#pwaInstallBtn .lbl{display:none}
-#pwaInstallBtn{min-width:44px;padding-left:10px;padding-right:10px;font-size:17px;line-height:1}
 }
 /* ---- room for the iPhone status bar, so the pinned top bar does not cover the top of the page ---- */
 body{padding-top:env(safe-area-inset-top,0px)}
@@ -599,7 +597,6 @@ input::placeholder{font-family:var(--f-ui);letter-spacing:0}
   <button class="barbtn hot" id="refreshBtn" type="button" data-act="refresh" hidden>New updates — refresh</button>
   <button class="barbtn inshift" id="pauseBtn" type="button" data-act="pauseToggle" hidden>Pause</button>
   <button class="barbtn inshift" type="button" data-act="skipAhead" hidden title="Jump to the next scheduled event">Skip ahead</button>
-  <button class="barbtn" id="pwaInstallBtn" type="button" hidden title="Install as an offline app" aria-label="Install app">&#11015;<span class="lbl"> Install app</span></button>
 </div></header>
 <div id="noticeBar" aria-live="polite"></div>
 <main id="app"></main>
@@ -4994,54 +4991,6 @@ document.addEventListener('visibilitychange', keepAwake); setInterval(keepAwake,
       navigator.serviceWorker.register('./sw.js').catch(function () {});
     });
   }
-  var deferredPrompt = null;
-  var installBtn = document.getElementById('pwaInstallBtn');
-  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                     window.navigator.standalone === true;
-
-  if (isIOS && !isStandalone && installBtn) {
-    installBtn.hidden = false;
-  }
-
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn && !isStandalone) installBtn.hidden = false;
-  });
-
-  if (installBtn) {
-    installBtn.addEventListener('click', function () {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function () {
-          deferredPrompt = null;
-          installBtn.hidden = true;
-        });
-      } else if (isIOS) {
-        if (typeof modal === 'function') {
-          modal(
-            'Install on iPhone or iPad',
-            '<div style="font-size:14.5px;line-height:1.6">' +
-  '<p style="margin:0 0 12px">Apple iOS and iPadOS require manual installation from your browser toolbar:</p>' +
-  '<ol style="margin:0 0 14px;padding-left:22px">' +
-    '<li style="margin-bottom:8px">Tap the <strong>Share</strong> button <span style="display:inline-block;padding:1px 6px;border:1px solid #CBD6D2;border-radius:4px;font-family:monospace">&#9113;</span> (the square with an upward arrow) at the bottom of Safari on iPhone or top-right on iPad.</li>' +
-    '<li style="margin-bottom:8px">Scroll down the share menu and tap <strong>Add to Home Screen</strong>.</li>' +
-    '<li>Tap <strong>Add</strong> in the top-right corner to install <strong>OpenNursing</strong> as a full-screen offline app.</li>' +
-  '</ol>' +
-'</div>',
-            '<button class="btn" type="button" data-act="closeModal">Got it</button>'
-          );
-        }
-      }
-    });
-  }
-
-  window.addEventListener('appinstalled', function () {
-    deferredPrompt = null;
-    if (installBtn) installBtn.hidden = true;
-  });
 })();
 </script>
 <style>
