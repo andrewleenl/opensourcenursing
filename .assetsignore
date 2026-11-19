@@ -1,13 +1,12 @@
-# wrangler files
-.wrangler
-.dev.vars*
-!.dev.vars.example
-.env*
-!.env.example
-/_worker.js
-/_routes.json
-/functions
+# Files in this folder that are NOT published on the website
+.assetsignore
+.gitignore
+wrangler.jsonc
+wrangler.toml
+package.json
+package-lock.json
 node_modules
-.git
-.DS_Store
-.npmrc
+.env*
+.dev.vars*
+*.py
+chapter_backup_*
