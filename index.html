@@ -1303,7 +1303,7 @@ a,button,summary,[role=button]{font-family:"OSN Chevron",var(--osn-font,"Atkinso
   });
 
   function syncFromHash() {
-    if (window.location.hash === '#medsurg') state.view = 'medsurg';
+    if (window.location.hash === '#medsurg' || window.location.hash === '#patho') state.view = 'medsurg';   /* #patho = old chapter links */
     else if (window.location.hash === '#labs') state.view = 'labs';
     else if (window.location.hash === '#home') state.view = 'home';
     render();

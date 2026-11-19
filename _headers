@@ -1,0 +1,8 @@
+# Security headers for every page on OpenSourceNursing.ca (Cloudflare reads this file automatically).
+# Camera is allowed for this site only, because the EHR simulator scans QR codes.
+# Pages can still be embedded in Canvas or other course sites.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: camera=(self), microphone=(), geolocation=(), payment=()
