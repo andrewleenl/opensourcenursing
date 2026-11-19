@@ -10,3 +10,7 @@ node_modules
 .dev.vars*
 *.py
 chapter_backup_*
+.git
+.github
+.wrangler
+.DS_Store
