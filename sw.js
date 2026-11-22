@@ -36,6 +36,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // The game in /psssp/ is about 45 MB; let the browser handle it without filling the offline cache
+  if (url.pathname.startsWith('/psssp/')) {
+    return;
+  }
+
   // Network-first for HTML pages and local assets, falling back to cache when offline
   event.respondWith(
     fetch(req)
