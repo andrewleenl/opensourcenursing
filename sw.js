@@ -41,6 +41,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // The hospital game in /hospital/ is about 40 MB, for the same reason
+  if (url.pathname.startsWith('/hospital/')) {
+    return;
+  }
+
   // Network-first for HTML pages and local assets, falling back to cache when offline
   event.respondWith(
     fetch(req)
