@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<meta name="description" content="Psssp Psssp! — A cozy social-stealth game about surviving a house party and befriending a very shy cat.">
+		<meta name="theme-color" content="#100d1c">
 		<title>Psssp Psssp!</title>
 		<style>
 html, body, #canvas {
@@ -12,10 +14,11 @@ html, body, #canvas {
 }
 
 body {
-	color: white;
-	background-color: black;
+	color: #f0ecf8;
+	background-color: #0b0914;
 	overflow: hidden;
 	touch-action: none;
+	font-family: ui-monospace, 'Cascadia Mono', 'Courier New', monospace;
 }
 
 #canvas {
@@ -26,44 +29,48 @@ body {
 	outline: none;
 }
 
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
 #status {
-	background-color: #242424;
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at 50% 42%, #1d1730 0%, #0d0b16 75%);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 18px;
 	visibility: hidden;
+	z-index: 10;
+}
+
+#status-title {
+	font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	color: #ffd98c;
+	text-shadow: 0 4px 0 #3a1f18;
+	margin: 0;
+}
+
+#status-sub {
+	font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+	color: #a8a4be;
+	margin: -8px 1rem 4px 1rem;
+	text-align: center;
 }
 
 #status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
+	width: min(84vw, 640px);
+	max-height: 52vh;
+	aspect-ratio: 16 / 9;
+	object-fit: contain;
+	image-rendering: pixelated;
+	border: 4px solid #352d4d;
+	border-radius: 6px;
+	box-shadow: 0 18px 48px rgba(0, 0, 0, 0.65);
 }
 
 #status-splash.show-image--false {
 	display: none;
-}
-
-#status-splash.fullsize--true {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-}
-
-#status-splash.use-filter--false {
-	image-rendering: pixelated;
 }
 
 #status-progress, #status-notice {
@@ -71,21 +78,46 @@ body {
 }
 
 #status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
+	width: min(72vw, 420px);
+	height: 14px;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: #1c182b;
+	border: 2px solid #453b63;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+#status-progress::-webkit-progress-bar {
+	background-color: #1c182b;
+}
+
+#status-progress::-webkit-progress-value {
+	background: linear-gradient(90deg, #f39c42, #ffd98c);
+	transition: width 0.12s ease-out;
+}
+
+#status-progress::-moz-progress-bar {
+	background: linear-gradient(90deg, #f39c42, #ffd98c);
+}
+
+#status-caption {
+	font-size: 0.82rem;
+	color: #8f8aa8;
+	letter-spacing: 0.05em;
+	min-height: 1.2em;
 }
 
 #status-notice {
-	background-color: #5b3943;
+	background-color: #4b2b36;
 	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
+	border: 2px solid #9b4757;
+	color: #f4e8ec;
+	line-height: 1.4;
 	margin: 0 2rem;
+	max-width: 520px;
 	overflow: hidden;
-	padding: 1rem;
+	padding: 1rem 1.25rem;
 	text-align: center;
 	z-index: 1;
 }
@@ -104,8 +136,11 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
+			<h1 id="status-title">Psssp Psssp!</h1>
+			<p id="status-sub">Sneaking past the party to find the cat...</p>
+			<img id="status-splash" class="show-image--true fullsize--false use-filter--false" src="index.png" alt="Pickle the cat curled up on a cushion at night">
 			<progress id="status-progress"></progress>
+			<div id="status-caption">Loading house party...</div>
 			<div id="status-notice"></div>
 		</div>
 
@@ -152,7 +187,7 @@ body {
 </script>
 <script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":3168656,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":6274864,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -160,6 +195,18 @@ const engine = new Engine(GODOT_CONFIG);
 	const statusOverlay = document.getElementById('status');
 	const statusProgress = document.getElementById('status-progress');
 	const statusNotice = document.getElementById('status-notice');
+	const gameCanvas = document.getElementById('canvas');
+
+	if (gameCanvas) {
+		gameCanvas.setAttribute('tabindex', '0');
+		const refocus = () => { if (!initializing) gameCanvas.focus({ preventScroll: true }); };
+		window.addEventListener('pointerdown', refocus, { passive: true });
+		window.addEventListener('keydown', (ev) => {
+			if (!initializing && ['Tab', 'Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(ev.code)) {
+				ev.preventDefault();
+			}
+		}, { capture: false });
+	}
 
 	let initializing = true;
 	let statusMode = '';
@@ -242,9 +289,14 @@ const engine = new Engine(GODOT_CONFIG);
 		setStatusMode('progress');
 		engine.startGame({
 			'onProgress': function (current, total) {
+				const cap = document.getElementById('status-caption');
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
 					statusProgress.max = total;
+					if (cap) {
+						const pct = Math.min(100, Math.round((current / total) * 100));
+						cap.textContent = pct < 95 ? ('Loading house party... ' + pct + '%') : 'Waking up Pickle...';
+					}
 				} else {
 					statusProgress.removeAttribute('value');
 					statusProgress.removeAttribute('max');

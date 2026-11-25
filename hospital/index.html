@@ -2,42 +2,175 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-<title>Open Resource General</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#353C47">
+<meta name="description" content="Open Resource General — a browser-based clinical nursing shift game built with OpenSourceNursing.ca.">
+<meta property="og:title" content="Open Resource General — Clinical Nursing Shift Game">
+<meta property="og:description" content="Pick a hospital unit, take shift report, assess patients, scan medications, and practise clinical judgment.">
+<meta property="og:image" content="https://opensourcenursing.ca/og-image.png">
+<title>Open Resource General — Nursing Shift Game</title>
 <style>
-:root { --charcoal: #353C47; --ink: #1C2B2D; --muted: #526568; --terracotta: #C2623B; --terracotta-ink: #9C4A28; --bg: #F7F8F7; --line: #CBD6D2; }
-html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: "Segoe UI", Calibri, Arial, sans-serif; }
-#canvas { display: block; width: 100%; height: 100%; outline: none; }
-#cover { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--bg); padding: 16px; box-sizing: border-box; }
-.card { max-width: 560px; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 28px; box-shadow: 0 4px 18px rgba(0,0,0,.06); }
-h1 { margin: 0 0 6px; color: var(--charcoal); font-size: 26px; }
+:root {
+  --charcoal: #353C47;
+  --charcoal-deep: #262B34;
+  --ink: #1C2B2D;
+  --muted: #5F5A52;
+  --terracotta: #C2623B;
+  --terracotta-ink: #9C4A28;
+  --parchment: #F3EBDD;
+  --surface: #FFFBF4;
+  --sunk: #F0E7D8;
+  --line: #D8CBB5;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: "Segoe UI", Calibri, system-ui, -apple-system, Arial, sans-serif;
+}
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+#cover {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 35%, #F8F2E7 0%, var(--parchment) 75%);
+  padding: 18px;
+  z-index: 10;
+  transition: opacity 0.22s ease;
+}
+.card {
+  max-width: 580px;
+  width: 100%;
+  background: var(--surface);
+  border: 2px solid var(--charcoal);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(28, 43, 45, 0.14);
+}
+.card-band {
+  background: var(--charcoal);
+  border-bottom: 3px solid var(--terracotta);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.crest {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #3B6C9C;
+  border: 2px solid #FFF6E8;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.crest::before, .crest::after {
+  content: "";
+  position: absolute;
+  background: #FFF6E8;
+  border-radius: 1px;
+}
+.crest::before { width: 18px; height: 6px; }
+.crest::after { width: 6px; height: 18px; }
+.card-band h1 {
+  margin: 0;
+  color: #FFF6E8;
+  font-size: 23px;
+  letter-spacing: -0.01em;
+}
+.card-band .eyebrow {
+  display: block;
+  font-size: 12px;
+  color: #E6D8C3;
+  margin-top: 2px;
+}
+.card-body {
+  padding: 22px 26px 24px;
+}
 p { line-height: 1.5; color: var(--muted); margin: 8px 0; }
-.bar { height: 12px; background: #EDF1EE; border-radius: 6px; overflow: hidden; margin: 18px 0 8px; }
-.fill { height: 100%; width: 0; background: var(--terracotta); transition: width .2s; }
-#status { font-size: 15px; color: var(--terracotta-ink); }
-.btn { display: inline-block; margin-top: 14px; padding: 10px 16px; border-radius: 8px; background: var(--charcoal); color: #fff; text-decoration: none; font-weight: 600; border: 0; font-size: 16px; cursor: pointer; }
+.bar {
+  height: 14px;
+  background: var(--sunk);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  overflow: hidden;
+  margin: 16px 0 8px;
+}
+.fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--terracotta) 0%, #D97A52 100%);
+  transition: width 0.18s ease;
+}
+#status {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--terracotta-ink);
+}
+.tip-box {
+  margin-top: 14px;
+  padding: 10px 13px;
+  background: var(--sunk);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 5px;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 7px;
+  background: var(--charcoal);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
+}
 .small { font-size: 13px; }
+.small a { color: var(--terracotta-ink); font-weight: 600; }
 </style>
 <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
 </head>
 <body>
-<canvas id="canvas">Your browser cannot show this game.</canvas>
+<canvas id="canvas" tabindex="0">Your browser cannot show this game.</canvas>
 <div id="cover">
   <div class="card">
-    <h1>Open Resource General</h1>
-    <p>A nursing shift as a game. Every patient, family member and prescriber is fictional.</p>
-    <div class="bar"><div class="fill" id="fill"></div></div>
-    <div id="status" role="status" aria-live="polite">Loading the hospital…</div>
-    <p class="small">The download is about 12 MB the first time; after that your browser keeps it.</p>
-    <p class="small">Prefer a screen reader or a keyboard-first page? The same shifts are in the
-      <a href="https://opensourcenursing.ca/ehrsim.html">EHR simulator</a>.</p>
+    <div class="card-band">
+      <div class="crest" aria-hidden="true"></div>
+      <div>
+        <h1>Open Resource General</h1>
+        <span class="eyebrow">Clinical Nursing Shift Simulation · OpenSourceNursing.ca</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Pick a hospital unit, take shift report, assess your patients and practise safe clinical care. Every patient, family member and prescriber is fictional.</p>
+      <div class="bar"><div class="fill" id="fill"></div></div>
+      <div id="status" role="status" aria-live="polite">Loading the hospital…</div>
+      <div class="tip-box" id="tip">Tip: The shift clock pauses whenever a chart, bedside or medication screen is open — take your time to read and think.</div>
+      <p class="small">First load is about 12 MB; your browser caches it afterwards. Prefer a screen reader or keyboard-only table view? Open the <a href="../ehrsim.html">EHR simulator</a>.</p>
+    </div>
   </div>
 </div>
 <script>
-// The engine is published in parts (Cloudflare's 25 MiB file limit); this
-// hands Godot one continuous download made of the parts in order.
 (function () {
 	const parts = ["index.wasm.part1.bin", "index.wasm.part2.bin"];
 	const realFetch = window.fetch.bind(window);
@@ -78,36 +211,56 @@ p { line-height: 1.5; color: var(--muted); margin: 8px 0; }
 </script>
 <script src="index.js"></script>
 <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2061572,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2187996,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const engine = new Engine(GODOT_CONFIG);
 const cover = document.getElementById('cover');
 const fill = document.getElementById('fill');
 const status = document.getElementById('status');
+const tip = document.getElementById('tip');
+const canvas = document.getElementById('canvas');
+const tips = [
+  "Tip: The shift clock pauses whenever a chart, bedside or medication screen is open — take your time to read and think.",
+  "Tip: Click directly on any patient bed, workstation, or medication cabinet to walk right there and open it.",
+  "Tip: Always scan both the patient's wristband and the medication barcode before documenting a dose.",
+  "Tip: Press 1–6 during a shift to walk straight to a room or station, or M to mute sound."
+];
+let tipIdx = 0;
+const tipTimer = setInterval(function () {
+  tipIdx = (tipIdx + 1) % tips.length;
+  if (tip) tip.textContent = tips[tipIdx];
+}, 3600);
 function fail(html) {
+  clearInterval(tipTimer);
   fill.parentElement.style.display = 'none';
   status.innerHTML = html;
 }
 if (!Engine.isWebGLAvailable(2)) {
   fail('This browser or device cannot run the game (it needs WebGL 2).<br>' +
-    '<a class="btn" href="https://opensourcenursing.ca/ehrsim.html">Open the EHR simulator instead &gt;</a>');
+    '<a class="btn" href="../ehrsim.html">Open the EHR simulator instead &gt;</a>');
 } else {
   engine.startGame({
     onProgress: function (current, total) {
       if (total > 0) {
-        fill.style.width = Math.round(100 * current / total) + '%';
-        status.textContent = 'Loading the hospital… ' + Math.round(100 * current / total) + '%';
+        const pct = Math.min(100, Math.round(100 * current / total));
+        fill.style.width = pct + '%';
+        status.textContent = 'Loading the hospital… ' + pct + '%';
       } else {
         status.textContent = 'Loading the hospital… ' + Math.round(current / 1048576) + ' MB';
       }
     },
   }).then(function () {
+    clearInterval(tipTimer);
     cover.style.display = 'none';
+    canvas.focus();
   }, function (err) {
     fail('The game could not start: ' + String(err && err.message ? err.message : err) + '<br>' +
-      '<a class="btn" href="https://opensourcenursing.ca/ehrsim.html">Open the EHR simulator instead &gt;</a>');
+      '<a class="btn" href="../ehrsim.html">Open the EHR simulator instead &gt;</a>');
   });
 }
+canvas.addEventListener('pointerdown', function () { canvas.focus(); });
+document.addEventListener('visibilitychange', function () {
+  if (!document.hidden && cover.style.display === 'none') canvas.focus();
+});
 </script>
 </body>
 </html>
-
