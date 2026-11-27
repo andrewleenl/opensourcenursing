@@ -18,7 +18,7 @@ html,body{margin:0;padding:0;height:100%;background:#0B1017;overflow:hidden;over
 body{touch-action:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;font-family:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;color:#E8EEF5}
 #canvas{display:block;position:fixed;inset:0;width:100%;height:100%;outline:none}
 #safe{position:fixed;left:0;top:0;width:0;height:0;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);pointer-events:none;visibility:hidden}
-#boot{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+#boot{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding-bottom:16vh;box-sizing:border-box;
   background:radial-gradient(1200px 700px at 20% 10%,rgba(226,119,79,.16),transparent 60%),radial-gradient(900px 600px at 85% 90%,rgba(76,201,240,.12),transparent 60%),#0B1017;transition:opacity .5s ease}
 #boot.done{opacity:0;pointer-events:none}
 .mark{width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg,#2A3442,#151B24);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06) inset,0 0 60px rgba(226,119,79,.25);display:grid;place-items:center;animation:float 3.2s ease-in-out infinite}
@@ -33,6 +33,15 @@ body{touch-action:none;-webkit-tap-highlight-color:transparent;-webkit-user-sele
 .bar i{display:block;height:100%;width:2%;border-radius:6px;background:linear-gradient(90deg,#E2774F,#F29A6E);box-shadow:0 0 14px rgba(242,154,110,.8);transition:width .2s ease}
 #msg{font-size:15px;color:#9AA8B8;min-height:1.3em;text-align:center;max-width:80vw}
 #msg.err{color:#FF8A8A}
+/* the hospital at night behind the loader: its windows light up as the sim downloads */
+#city,#sky{position:absolute;left:0;width:100%;pointer-events:none}
+#city{bottom:0;height:34vh}
+#sky{top:0;height:56vh}
+#boot>.mark,#boot>.name,#boot>.ecg,#boot>.bar,#boot>#msg{position:relative;z-index:1}
+#city .hw{transition:opacity .6s ease,fill .6s ease}
+#sky circle{animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){#sky circle,.mark,.ecg path{animation:none}}
 /* Godot's hidden text field for the on-screen keyboard: 16px or iOS Safari zooms the page */
 input,textarea{font-size:16px!important}
 </style>
@@ -45,6 +54,8 @@ input,textarea{font-size:16px!important}
 <div id="safe"></div>
 <noscript>This simulator needs JavaScript.</noscript>
 <div id="boot" role="status" aria-live="polite">
+  <svg id="sky" aria-hidden="true"></svg>
+  <svg id="city" aria-hidden="true"></svg>
   <div class="mark"><svg viewBox="0 0 128 128" width="62" height="62" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F29A6E"/><stop offset="1" stop-color="#D2603A"/></linearGradient></defs><path d="M36 28h18v27h20V28h18v72H74V72H54v28H36z" fill="url(#hg)"/></svg></div>
   <div class="name"><small>Open Resource Nursing · Simulation</small><b>Open Resource General Hospital</b></div>
   <svg class="ecg" viewBox="0 0 420 70" aria-hidden="true"><path d="M0 40 H70 l8 -6 l8 6 H112 l6 6 l10 -40 l10 52 l8 -18 H190 q14 -14 28 0 H260 l8 -6 l8 6 H302 l6 6 l10 -40 l10 52 l8 -18 H380 q14 -14 28 0 H420"/></svg>
@@ -52,6 +63,53 @@ input,textarea{font-size:16px!important}
   <div id="msg">Opening the hospital…</div>
 </div>
 <script>
+/* Night skyline and the hospital, drawn once; setP lights its windows in a scattered order */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg', c = document.getElementById('city'), sky = document.getElementById('sky');
+  var W = 1600, H = 420, seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  function el(p, n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; }
+  c.setAttribute('viewBox', '0 0 ' + W + ' ' + H); c.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+  sky.setAttribute('viewBox', '0 0 ' + W + ' 500'); sky.setAttribute('preserveAspectRatio', 'xMidYMin slice');
+  var d = el(c, 'defs', {}), g = el(d, 'linearGradient', { id: 'fade', x1: 0, y1: 0, x2: 0, y2: 1 });
+  el(g, 'stop', { offset: 0, 'stop-color': '#0B1017', 'stop-opacity': 0 }); el(g, 'stop', { offset: 1, 'stop-color': '#0B1017', 'stop-opacity': 1 });
+  var hg = el(d, 'radialGradient', { id: 'haze', cx: .5, cy: 1, r: .7 });
+  el(hg, 'stop', { offset: 0, 'stop-color': '#E2774F', 'stop-opacity': .22 }); el(hg, 'stop', { offset: 1, 'stop-color': '#E2774F', 'stop-opacity': 0 });
+  el(c, 'rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#haze)' });
+  function skyline(base, wr, hr, fill, lit, dens) {
+    for (var x = -20; x < W + 20;) {
+      var w = wr[0] + rnd() * (wr[1] - wr[0]), h = hr[0] + rnd() * (hr[1] - hr[0]);
+      el(c, 'rect', { x: x.toFixed(0), y: (base - h).toFixed(0), width: w.toFixed(0), height: (h + 60).toFixed(0), fill: fill });
+      for (var wx = x + 6; wx < x + w - 6; wx += 9) for (var wy = base - h + 8; wy < base; wy += 11)
+        if (rnd() < dens) el(c, 'rect', { x: wx.toFixed(0), y: wy.toFixed(0), width: 3, height: 4, fill: rnd() < .7 ? '#FFD59A' : '#B4DDFF', opacity: lit * (.4 + rnd() * .6) });
+      x += w + 4 + rnd() * 20;
+    }
+  }
+  skyline(H - 70, [40, 110], [80, 210], '#0F1724', .35, .10);
+  skyline(H - 40, [60, 140], [50, 130], '#0B111B', .5, .14);
+  var bx = W / 2 - 230, bw = 460, by = H - 290;
+  el(c, 'rect', { x: bx + 30, y: by - 22, width: bw - 60, height: 24, fill: '#19212D' });
+  el(c, 'rect', { x: bx, y: by, width: bw, height: 290, fill: '#1A2230' });
+  el(c, 'rect', { x: bx, y: by, width: 2, height: 290, fill: '#3A4860' });
+  var wins = [];
+  for (var row = 0; row < 6; row++) for (var col = 0; col < 16; col++) {
+    var sec = Math.floor(col / 4), wx2 = bx + 22 + sec * 106 + (col % 4) * 24, wy2 = by + 18 + row * 42;
+    wins.push(el(c, 'rect', { 'class': 'hw', x: wx2, y: wy2, width: 16, height: 28, rx: 1.5, fill: rnd() < .62 ? '#FFD59A' : '#B4DDFF', opacity: .07 }));
+  }
+  for (var k = 0; k < 6; k++) el(c, 'rect', { x: bx, y: by + 50 + k * 42, width: bw, height: 3, fill: '#263142' });
+  el(c, 'rect', { x: 0, y: H - 40, width: W, height: 40, fill: '#0A0F17' });
+  el(c, 'rect', { x: 0, y: H - 160, width: W, height: 160, fill: 'url(#fade)' });
+  var order = wins.map(function (_, i) { return i; }).sort(function () { return rnd() - .5; }), shown = 0;
+  window.__cityLight = function (f) {
+    var n = Math.round(Math.max(0, Math.min(1, f)) * wins.length);
+    for (; shown < n; shown++) wins[order[shown]].setAttribute('opacity', (.55 + rnd() * .45).toFixed(2));
+  };
+  for (var i = 0; i < 90; i++) {
+    var st = el(sky, 'circle', { cx: (rnd() * W).toFixed(0), cy: (rnd() * 460).toFixed(0), r: (.6 + rnd() * 1.2).toFixed(1), fill: '#fff', opacity: (.3 + rnd() * .6).toFixed(2) });
+    st.style.animationDelay = (rnd() * 3).toFixed(2) + 's';
+  }
+})();
+
 /* Safe-area insets (iPhone notch, Home Screen web app), read by the engine */
 window.__safeArea = function () {
   var s = getComputedStyle(document.getElementById('safe'));
@@ -65,7 +123,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load', function () { 
    for browsers without DecompressionStream. */
 (function () {
   var prog = document.getElementById('prog'), msg = document.getElementById('msg');
-  var setP = function (f) { prog.style.width = Math.max(2, Math.min(100, f * 100)).toFixed(1) + '%'; };
+  var setP = function (f) { prog.style.width = Math.max(2, Math.min(100, f * 100)).toFixed(1) + '%'; if (window.__cityLight) window.__cityLight(f); };
   window.__boot = { setP: setP, msg: msg };
   function inflateGz(src) {
     var p = 10, flg = src[3];
@@ -136,7 +194,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load', function () { 
 </script>
 <script src="index.js"></script>
 <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2604312,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2605640,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const engine = new Engine(GODOT_CONFIG);
 (function () {
   var boot = document.getElementById('boot');
