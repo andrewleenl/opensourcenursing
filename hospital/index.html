@@ -2,265 +2,157 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#353C47">
-<meta name="description" content="Open Resource General — a browser-based clinical nursing shift game built with OpenSourceNursing.ca.">
-<meta property="og:title" content="Open Resource General — Clinical Nursing Shift Game">
-<meta property="og:description" content="Pick a hospital unit, take shift report, assess patients, scan medications, and practise clinical judgment.">
-<meta property="og:image" content="https://opensourcenursing.ca/og-image.png">
-<title>Open Resource General — Nursing Shift Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0B1017">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hospital EHR">
+<meta name="description" content="Open Resource General Hospital: a simulated electronic health record for nursing students. Pick a unit, take a short shift with fictional patients, and get a clinical-judgment debrief.">
+<title>EHR Simulator · Open Resource General Hospital</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyQTM0NDIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNTFCMjQiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0YyOUE2RSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QyNjAzQSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiByeD0iMjgiIGZpbGw9InVybCgjZykiLz48cGF0aCBkPSJNMzYgMjhoMTh2MjdoMjBWMjhoMTh2NzJINzRWNzJINTR2MjhIMzZ6IiBmaWxsPSJ1cmwoI2gpIi8+PC9zdmc+">
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png">
 <style>
-:root {
-  --charcoal: #353C47;
-  --charcoal-deep: #262B34;
-  --ink: #1C2B2D;
-  --muted: #5F5A52;
-  --terracotta: #C2623B;
-  --terracotta-ink: #9C4A28;
-  --parchment: #F3EBDD;
-  --surface: #FFFBF4;
-  --sunk: #F0E7D8;
-  --line: #D8CBB5;
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  touch-action: none;
-  background: var(--parchment);
-  color: var(--ink);
-  font-family: "Segoe UI", Calibri, system-ui, -apple-system, Arial, sans-serif;
-}
-#canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  outline: none;
-}
-#cover {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at 50% 35%, #F8F2E7 0%, var(--parchment) 75%);
-  padding: 18px;
-  z-index: 10;
-  transition: opacity 0.22s ease;
-}
-.card {
-  max-width: 580px;
-  width: 100%;
-  background: var(--surface);
-  border: 2px solid var(--charcoal);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(28, 43, 45, 0.14);
-}
-.card-band {
-  background: var(--charcoal);
-  border-bottom: 3px solid var(--terracotta);
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.crest {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: #3B6C9C;
-  border: 2px solid #FFF6E8;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.crest::before, .crest::after {
-  content: "";
-  position: absolute;
-  background: #FFF6E8;
-  border-radius: 1px;
-}
-.crest::before { width: 18px; height: 6px; }
-.crest::after { width: 6px; height: 18px; }
-.card-band h1 {
-  margin: 0;
-  color: #FFF6E8;
-  font-size: 23px;
-  letter-spacing: -0.01em;
-}
-.card-band .eyebrow {
-  display: block;
-  font-size: 12px;
-  color: #E6D8C3;
-  margin-top: 2px;
-}
-.card-body {
-  padding: 22px 26px 24px;
-}
-p { line-height: 1.5; color: var(--muted); margin: 8px 0; }
-.bar {
-  height: 14px;
-  background: var(--sunk);
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  overflow: hidden;
-  margin: 16px 0 8px;
-}
-.fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--terracotta) 0%, #D97A52 100%);
-  transition: width 0.18s ease;
-}
-#status {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--terracotta-ink);
-}
-.tip-box {
-  margin-top: 14px;
-  padding: 10px 13px;
-  background: var(--sunk);
-  border-left: 3px solid var(--terracotta);
-  border-radius: 5px;
-  font-size: 13.5px;
-  color: var(--ink);
-}
-.btn {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 10px 16px;
-  border-radius: 7px;
-  background: var(--charcoal);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  border: 0;
-  font-size: 15px;
-  cursor: pointer;
-}
-.small { font-size: 13px; }
-.small a { color: var(--terracotta-ink); font-weight: 600; }
+html,body{margin:0;padding:0;height:100%;background:#0B1017;overflow:hidden;overscroll-behavior:none}
+body{touch-action:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;font-family:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;color:#E8EEF5}
+#canvas{display:block;position:fixed;inset:0;width:100%;height:100%;outline:none}
+#safe{position:fixed;left:0;top:0;width:0;height:0;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);pointer-events:none;visibility:hidden}
+#boot{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  background:radial-gradient(1200px 700px at 20% 10%,rgba(226,119,79,.16),transparent 60%),radial-gradient(900px 600px at 85% 90%,rgba(76,201,240,.12),transparent 60%),#0B1017;transition:opacity .5s ease}
+#boot.done{opacity:0;pointer-events:none}
+.mark{width:88px;height:88px;border-radius:24px;background:linear-gradient(145deg,#2A3442,#151B24);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06) inset,0 0 60px rgba(226,119,79,.25);display:grid;place-items:center;animation:float 3.2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
+.name{text-align:center}
+.name small{display:block;letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:#9AA8B8;margin-bottom:6px}
+.name b{font-size:26px;font-weight:700;letter-spacing:.01em}
+.ecg{width:min(420px,78vw);height:70px}
+.ecg path{fill:none;stroke:#3DFF8A;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(61,255,138,.8));stroke-dasharray:900;stroke-dashoffset:900;animation:trace 1.8s linear infinite}
+@keyframes trace{to{stroke-dashoffset:0}}
+.bar{width:min(360px,70vw);height:6px;border-radius:6px;background:#1C2733;overflow:hidden;box-shadow:0 0 0 1px #2A3747 inset}
+.bar i{display:block;height:100%;width:2%;border-radius:6px;background:linear-gradient(90deg,#E2774F,#F29A6E);box-shadow:0 0 14px rgba(242,154,110,.8);transition:width .2s ease}
+#msg{font-size:15px;color:#9AA8B8;min-height:1.3em;text-align:center;max-width:80vw}
+#msg.err{color:#FF8A8A}
+/* Godot's hidden text field for the on-screen keyboard: 16px or iOS Safari zooms the page */
+input,textarea{font-size:16px!important}
 </style>
 <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+
 </head>
 <body>
-<canvas id="canvas" tabindex="0">Your browser cannot show this game.</canvas>
-<div id="cover">
-  <div class="card">
-    <div class="card-band">
-      <div class="crest" aria-hidden="true"></div>
-      <div>
-        <h1>Open Resource General</h1>
-        <span class="eyebrow">Clinical Nursing Shift Simulation · OpenSourceNursing.ca</span>
-      </div>
-    </div>
-    <div class="card-body">
-      <p>Pick a hospital unit, take shift report, assess your patients and practise safe clinical care. Every patient, family member and prescriber is fictional.</p>
-      <div class="bar"><div class="fill" id="fill"></div></div>
-      <div id="status" role="status" aria-live="polite">Loading the hospital…</div>
-      <div class="tip-box" id="tip">Tip: The shift clock pauses whenever a chart, bedside or medication screen is open — take your time to read and think.</div>
-      <p class="small">First load is about 12 MB; your browser caches it afterwards. Prefer a screen reader or keyboard-only table view? Open the <a href="../ehrsim.html">EHR simulator</a>.</p>
-    </div>
-  </div>
+<canvas id="canvas" tabindex="0">Your browser does not support the canvas tag.</canvas>
+<div id="safe"></div>
+<noscript>This simulator needs JavaScript.</noscript>
+<div id="boot" role="status" aria-live="polite">
+  <div class="mark"><svg viewBox="0 0 128 128" width="62" height="62" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F29A6E"/><stop offset="1" stop-color="#D2603A"/></linearGradient></defs><path d="M36 28h18v27h20V28h18v72H74V72H54v28H36z" fill="url(#hg)"/></svg></div>
+  <div class="name"><small>Open Resource Nursing · Simulation</small><b>Open Resource General Hospital</b></div>
+  <svg class="ecg" viewBox="0 0 420 70" aria-hidden="true"><path d="M0 40 H70 l8 -6 l8 6 H112 l6 6 l10 -40 l10 52 l8 -18 H190 q14 -14 28 0 H260 l8 -6 l8 6 H302 l6 6 l10 -40 l10 52 l8 -18 H380 q14 -14 28 0 H420"/></svg>
+  <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+  <div id="msg">Opening the hospital…</div>
 </div>
 <script>
+/* Safe-area insets (iPhone notch, Home Screen web app), read by the engine */
+window.__safeArea = function () {
+  var s = getComputedStyle(document.getElementById('safe'));
+  return [parseFloat(s.paddingTop) || 0, parseFloat(s.paddingRight) || 0, parseFloat(s.paddingBottom) || 0, parseFloat(s.paddingLeft) || 0].join(',');
+};
+/* Keep the service worker so the sim still opens without a connection */
+if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); });
+
+/* The engine binary is served gzip-compressed (index.wasm.gz) so every file stays
+   under the host's per-file limit. It is unpacked here, with a pure-JS fallback
+   for browsers without DecompressionStream. */
 (function () {
-	const parts = ["index.wasm.part1.bin", "index.wasm.part2.bin"];
-	const realFetch = window.fetch.bind(window);
-	window.fetch = function (input, init) {
-		const url = String(typeof input === 'string' ? input : input.url).split('?')[0];
-		if (!url.endsWith('index.wasm')) {
-			return realFetch(input, init);
-		}
-		return Promise.all(parts.map((p) => realFetch(p))).then((responses) => {
-			const bad = responses.find((r) => !r.ok);
-			if (bad) {
-				return bad;
-			}
-			let i = 0;
-			let reader = responses[0].body.getReader();
-			const stream = new ReadableStream({
-				pull(controller) {
-					function step(result) {
-						if (!result.done) {
-							controller.enqueue(result.value);
-							return undefined;
-						}
-						i += 1;
-						if (i >= responses.length) {
-							controller.close();
-							return undefined;
-						}
-						reader = responses[i].body.getReader();
-						return reader.read().then(step);
-					}
-					return reader.read().then(step);
-				},
-			});
-			return new Response(stream, { status: 200, headers: { 'Content-Type': 'application/wasm' } });
-		});
-	};
-}());
+  var prog = document.getElementById('prog'), msg = document.getElementById('msg');
+  var setP = function (f) { prog.style.width = Math.max(2, Math.min(100, f * 100)).toFixed(1) + '%'; };
+  window.__boot = { setP: setP, msg: msg };
+  function inflateGz(src) {
+    var p = 10, flg = src[3];
+    if (flg & 4) { p += 2 + (src[p] | src[p + 1] << 8); }
+    if (flg & 8) { while (src[p++]); }
+    if (flg & 16) { while (src[p++]); }
+    if (flg & 2) p += 2;
+    var n = src.length, outSize = (src[n - 4] | src[n - 3] << 8 | src[n - 2] << 16 | src[n - 1] << 24) >>> 0;
+    var out = new Uint8Array(outSize), op = 0, pos = p, bb = 0, bc = 0;
+    function bits(k) { while (bc < k) { bb |= src[pos++] << bc; bc += 8; } var v = bb & ((1 << k) - 1); bb >>>= k; bc -= k; return v; }
+    function build(len, cnt) { var c = new Uint16Array(16), o = new Uint16Array(16), s = new Uint16Array(cnt), i;
+      for (i = 0; i < cnt; i++) c[len[i]]++; c[0] = 0; for (i = 1; i < 16; i++) o[i] = o[i - 1] + c[i - 1];
+      for (i = 0; i < cnt; i++) if (len[i]) s[o[len[i]]++] = i; return { c: c, s: s }; }
+    function dec(t) { var code = 0, first = 0, idx = 0; for (var l = 1; l < 16; l++) { code |= bits(1); var c = t.c[l]; if (code - c < first) return t.s[idx + (code - first)]; idx += c; first += c; first <<= 1; code <<= 1; } throw new Error('bad deflate data'); }
+    var LB = [3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,67,83,99,115,131,163,195,227,258], LE = [0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0];
+    var DB = [1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,257,385,513,769,1025,1537,2049,3073,4097,6145,8193,12289,16385,24577], DE = [0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13];
+    var fl = new Uint8Array(288), fd = new Uint8Array(30), i;
+    for (i = 0; i < 144; i++) fl[i] = 8; for (; i < 256; i++) fl[i] = 9; for (; i < 280; i++) fl[i] = 7; for (; i < 288; i++) fl[i] = 8; for (i = 0; i < 30; i++) fd[i] = 5;
+    var FL = build(fl, 288), FD = build(fd, 30), ORD = [16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15], last;
+    do {
+      last = bits(1); var type = bits(2);
+      if (type === 0) { bb = 0; bc = 0; var len = src[pos] | src[pos + 1] << 8; pos += 4; out.set(src.subarray(pos, pos + len), op); pos += len; op += len; continue; }
+      var lt = FL, dt = FD;
+      if (type === 2) {
+        var hl = bits(5) + 257, hd = bits(5) + 1, hc = bits(4) + 4, cl = new Uint8Array(19);
+        for (i = 0; i < hc; i++) cl[ORD[i]] = bits(3);
+        var ct = build(cl, 19), lens = new Uint8Array(hl + hd), k = 0;
+        while (k < hl + hd) { var sym = dec(ct);
+          if (sym < 16) lens[k++] = sym;
+          else if (sym === 16) { var pv = lens[k - 1], r = 3 + bits(2); while (r--) lens[k++] = pv; }
+          else if (sym === 17) { r = 3 + bits(3); while (r--) lens[k++] = 0; }
+          else { r = 11 + bits(7); while (r--) lens[k++] = 0; } }
+        lt = build(lens.subarray(0, hl), hl); dt = build(lens.subarray(hl), hd);
+      }
+      for (;;) { var s2 = dec(lt);
+        if (s2 < 256) out[op++] = s2;
+        else if (s2 === 256) break;
+        else { s2 -= 257; var L = LB[s2] + bits(LE[s2]), ds = dec(dt), D = DB[ds] + bits(DE[ds]); for (var j = 0; j < L; j++, op++) out[op] = out[op - D]; } }
+    } while (!last);
+    return out;
+  }
+  async function readAll(resp, base, span) {
+    var total = +resp.headers.get('content-length') || 0, reader = resp.body && resp.body.getReader ? resp.body.getReader() : null;
+    if (!reader) return new Uint8Array(await resp.arrayBuffer());
+    var chunks = [], got = 0;
+    for (;;) { var r = await reader.read(); if (r.done) break; chunks.push(r.value); got += r.value.length; if (total) setP(base + span * got / total); }
+    var buf = new Uint8Array(got), o = 0; chunks.forEach(function (c) { buf.set(c, o); o += c.length; }); return buf;
+  }
+  var origFetch = window.fetch.bind(window);
+  window.fetch = async function (input, init) {
+    var url = typeof input === 'string' ? input : (input && input.url) || '';
+    if (/\.wasm(\?|$)/.test(url)) {
+      var gz = url.replace(/\.wasm(\?|$)/, '.wasm.gz$1'), r = await origFetch(gz, init);
+      if (r.ok) {
+        var raw = await readAll(r, 0.02, 0.88), bytes = raw;
+        if (raw[0] === 0x1f && raw[1] === 0x8b) {
+          msg.textContent = 'Unpacking…';
+          if (typeof DecompressionStream === 'function') bytes = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
+          else bytes = inflateGz(raw);
+        }
+        setP(0.95); msg.textContent = 'Starting the simulator…';
+        return new Response(bytes, { status: 200, headers: { 'Content-Type': 'application/wasm', 'Content-Length': String(bytes.length) } });
+      }
+    }
+    return origFetch(input, init);
+  };
+})();
 </script>
 <script src="index.js"></script>
 <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2187996,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":2521104,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const engine = new Engine(GODOT_CONFIG);
-const cover = document.getElementById('cover');
-const fill = document.getElementById('fill');
-const status = document.getElementById('status');
-const tip = document.getElementById('tip');
-const canvas = document.getElementById('canvas');
-const tips = [
-  "Tip: The shift clock pauses whenever a chart, bedside or medication screen is open — take your time to read and think.",
-  "Tip: Click directly on any patient bed, workstation, or medication cabinet to walk right there and open it.",
-  "Tip: Always scan both the patient's wristband and the medication barcode before documenting a dose.",
-  "Tip: Press 1–6 during a shift to walk straight to a room or station, or M to mute sound."
-];
-let tipIdx = 0;
-const tipTimer = setInterval(function () {
-  tipIdx = (tipIdx + 1) % tips.length;
-  if (tip) tip.textContent = tips[tipIdx];
-}, 3600);
-function fail(html) {
-  clearInterval(tipTimer);
-  fill.parentElement.style.display = 'none';
-  status.innerHTML = html;
-}
-if (!Engine.isWebGLAvailable(2)) {
-  fail('This browser or device cannot run the game (it needs WebGL 2).<br>' +
-    '<a class="btn" href="../ehrsim.html">Open the EHR simulator instead &gt;</a>');
-} else {
-  engine.startGame({
-    onProgress: function (current, total) {
-      if (total > 0) {
-        const pct = Math.min(100, Math.round(100 * current / total));
-        fill.style.width = pct + '%';
-        status.textContent = 'Loading the hospital… ' + pct + '%';
-      } else {
-        status.textContent = 'Loading the hospital… ' + Math.round(current / 1048576) + ' MB';
-      }
-    },
-  }).then(function () {
-    clearInterval(tipTimer);
-    cover.style.display = 'none';
-    canvas.focus();
-  }, function (err) {
-    fail('The game could not start: ' + String(err && err.message ? err.message : err) + '<br>' +
-      '<a class="btn" href="../ehrsim.html">Open the EHR simulator instead &gt;</a>');
-  });
-}
-canvas.addEventListener('pointerdown', function () { canvas.focus(); });
-document.addEventListener('visibilitychange', function () {
-  if (!document.hidden && cover.style.display === 'none') canvas.focus();
-});
+(function () {
+  var boot = document.getElementById('boot');
+  var missing = Engine.getMissingFeatures({ threads: false });
+  if (missing.length) {
+    __boot.msg.className = 'err';
+    __boot.msg.textContent = 'This browser cannot run the simulator (' + missing.join(', ') + '). Try an up-to-date Safari, Chrome, Edge or Firefox.';
+    return;
+  }
+  window.__bootDone = function () { boot.classList.add('done'); setTimeout(function () { boot.remove(); }, 600); };
+  engine.startGame({ onProgress: function () {} }).then(function () {
+    __boot.setP(1);
+    setTimeout(function () { if (window.__bootDone) window.__bootDone(); }, 4000);
+  }, function (err) { console.error(err); __boot.msg.className = 'err'; __boot.msg.textContent = 'The simulator could not start: ' + (err && err.message || err); });
+}());
 </script>
 </body>
 </html>
+
